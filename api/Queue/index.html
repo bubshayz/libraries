@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="Docusaurus v2.0.0-beta.9">
+<title data-react-helmet="true">Queue | Roblox-Modules</title><meta data-react-helmet="true" property="og:title" content="Queue | Roblox-Modules"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="description" content=" 
+
+A simple queue class. A queue in layman&#x27;s term, is simply an to which you can append callbacks to, which
+will run based on when they&#x27;re added, i.e they **follow** the *FIFO (First In, First Out) pattern* .
+ 
+```lua
+local Queue = require(...)
+
+local queue = Queue.new()
+
+for i = 1, 3 do 
+	queue:Append(function(deltaTime)
+		warn((&quot;completed task (%d) in %s seconds.&quot;):format(task.wait(i), deltaTime))
+	end)
+end
+
+--&gt; &quot;completed task (1)&quot; 
+--&gt; &quot;completed task (2)&quot;
+--&gt; &quot;completed task (3)&quot;
+```"><meta data-react-helmet="true" property="og:description" content=" 
+
+A simple queue class. A queue in layman&#x27;s term, is simply an to which you can append callbacks to, which
+will run based on when they&#x27;re added, i.e they **follow** the *FIFO (First In, First Out) pattern* .
+ 
+```lua
+local Queue = require(...)
+
+local queue = Queue.new()
+
+for i = 1, 3 do 
+	queue:Append(function(deltaTime)
+		warn((&quot;completed task (%d) in %s seconds.&quot;):format(task.wait(i), deltaTime))
+	end)
+end
+
+--&gt; &quot;completed task (1)&quot; 
+--&gt; &quot;completed task (2)&quot;
+--&gt; &quot;completed task (3)&quot;
+```"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/Queue"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/Queue"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/Queue" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/Queue" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.fa0c3768.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.58a36f8e.js" as="script">
+</head>
+<body>
+<script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
+<div><a href="#" class="skipToContent_1oUP">Skip to main content</a></div><nav class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Navigation bar toggle" class="navbar__toggle clean-btn" type="button" tabindex="0"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Roblox-Modules/"><b class="navbar__title">Roblox-Modules</b></a><a class="navbar__item navbar__link" href="/Roblox-Modules/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Roblox-Modules/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/bubshayz/Roblox-Modules" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link"><span>GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_3J9K"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></span></a><div class="toggle_71bT toggle_3Zt9 toggleDisabled_3cF-"><div class="toggleTrack_32Fl" role="button" tabindex="-1"><div class="toggleTrackCheck_3lV7"><span class="toggleIcon_O4iE">🌜</span></div><div class="toggleTrackX_S2yS"><span class="toggleIcon_O4iE">🌞</span></div><div class="toggleTrackThumb_xI_Z"></div></div><input type="checkbox" class="toggleScreenReader_28Tw" aria-label="Switch between dark and light mode"></div><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input type="search" id="search_input_react" placeholder="Press S to Search..." aria-label="Search" class="navbar__search-input search-bar"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div class="main-wrapper docPageContainer_2Kz0"><div class="docPage_1bdk"><div class="docSidebarContainer_1ykS"><div class="sidebar_15mo"><nav class="menu thin-scrollbar menu_Bmed"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><a class="menu__link menu__link--sublist" href="#">EnumList</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><a class="menu__link menu__link--sublist" href="#">Network</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/MatrixUtil">​Matrix​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/NumberUtil">​Number​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/Property">​Property</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/Roblox-Modules/api/Queue">​Queue</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/WindLines">​Wind​Lines</a></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_1CGd"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_3E-R"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div><main class="docMainContainer_28N5"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_3WPG"><div class="docItemContainer_3XDu"><article><div class="member_qHIL markdown"><div class="tocCollapsible_1PrD theme-doc-toc-mobile tocMobile_3ryM"><button type="button" class="clean-btn tocCollapsibleButton_2O1e">On this page</button></div><header><h1 class="docTitle_1ddc" style="text-decoration:none"><span style="display:inline-block">Queue</span></h1><div class="luaClassTags_2Zrs"></div><div>
+<p>
+  A simple queue class. A queue in layman's term, is simply an to which you can append callbacks to, which
+  will run based on when they're added, i.e they <strong>follow</strong> the <em>FIFO (First In, First Out) pattern</em> .
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Queue <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> queue <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token keyword">do</span> 
+	queue<span class="token punctuation">:</span><span class="token function">Append</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>deltaTime<span class="token punctuation">)</span>
+		<span class="token function">warn</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"completed task (%d) in %s seconds."</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">format</span><span class="token punctuation">(</span>task<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> deltaTime<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">end</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+<span class="token comment">--> "completed task (1)" </span>
+<span class="token comment">--> "completed task (2)"</span>
+<span class="token comment">--> "completed task (3)"</span>
+</code></pre>
+</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Progressed"><code style="text-decoration:none">Progressed</code><a aria-hidden="true" class="hash-link" href="#Progressed" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Queue Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Queue/init.lua#L34"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Queue<!-- -->.<!-- -->Progressed<!-- -->:<!-- --> </code> <code class="blue_2Afy">Signal</code><code class="op_1JtD">&lt;</code><code class="purple__nFc">(</code><div class="inset_2cJr"><code>callbackProgressed<!-- -->: </code><code class="green_3LnD">(</code><code class="green_3LnD">)</code><code class="green_3LnD"> → </code><code class="green_3LnD">(</code><code class="green_3LnD">)</code><code class="purple__nFc">,</code></div><div class="inset_2cJr"><code>deltaTime<!-- -->: </code><code class="blue_2Afy">number</code></div><code class="purple__nFc">)</code><code class="purple__nFc"> → </code><code class="purple__nFc">(</code><code class="purple__nFc">)</code><code class="op_1JtD">&gt;</code></div><div>
+<p>
+  A <a href="https://sleitnick.github.io/RbxUtil/api/Signal/" target="_blank">signal</a> which is fired whenever the queue is progressed, i.e an appended callback is called. The callback called
+  is passed as the first argument, and a second argument, <code>deltaTime</code> is also passed (which is basically how long (in seconds) it was before <code>callbackProgressed</code> was called
+  ever since it was appended).
+</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Queue"><code style="text-decoration:none">Queue</code><a aria-hidden="true" class="hash-link" href="#Queue" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Luau Type</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Queue/init.lua#L49"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Queue<!-- -->.<!-- -->Queue<!-- -->:<!-- --> </code> <code class="blue_2Afy">Type</code></div><div>
+<p>An exported Luau type of a queue object.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Queue <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> queue<span class="token punctuation">:</span> Queue<span class="token punctuation">.</span>Queue <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span> 
+</code></pre>
+</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Queue/init.lua#L62"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Queue<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/Queue">Queue</a></code></div><div>
+<p>A constructor method which creates a new queue object.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsA"><code style="text-decoration:none">IsA</code><a aria-hidden="true" class="hash-link" href="#IsA" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Queue/init.lua#L73"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Queue<!-- -->.</code><code class="green_3LnD">IsA</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+<p>A method which returns a boolean indicating if <code>self</code> is a queue or not.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="EmptyQueue"><code style="text-decoration:none">EmptyQueue</code><a aria-hidden="true" class="hash-link" href="#EmptyQueue" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Queue Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Queue/init.lua#L98"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Queue<!-- -->:</code><code class="green_3LnD">EmptyQueue</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Empties the queue, i.e all appended callbacks that are waiting to be resumed will never be resumed</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Queue <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> queue <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> promise1 <span class="token operator">=</span> queue<span class="token punctuation">:</span><span class="token function">Append</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	task<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">"called"</span><span class="token punctuation">)</span> <span class="token comment">--> this never works, because the promise is cancelled as the queue is emptied! </span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>promise1<span class="token punctuation">:</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> "Running" (the promise is running)</span>
+queue<span class="token punctuation">:</span><span class="token function">EmptyQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token function">print</span><span class="token punctuation">(</span>promise1<span class="token punctuation">:</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> "Cancelled"  (the promise has been cancelled now)</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Append"><code style="text-decoration:none">Append</code><a aria-hidden="true" class="hash-link" href="#Append" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Queue Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Queue/init.lua#L143"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Queue<!-- -->:</code><code class="green_3LnD">Append</code><code>(</code><code>callback<!-- -->: </code><code class="purple__nFc">(</code><code>deltaTime<!-- -->: </code><code class="blue_2Afy">number</code><code class="purple__nFc">)</code><code class="purple__nFc"> → </code><code class="purple__nFc">(</code><code class="purple__nFc">)</code><code>) → </code><code class="blue_2Afy">Promise</code></div><div>
+<p>
+  Appends <code>callback</code> to the queue so that it'll be called once the previous callbacks appended to the queue
+  have <em>finished</em> running (or the promises associated to them have been cancelled). <code>callback</code> upon being called is passed
+  a number as the only argument (the time it took for it to be called ever since it was appended).
+</p>
+<p>
+  The method also returns a promise, which too resolves with a number (the time it took for <code>callback</code>
+  to run ever since it was appended), once <code>callback</code> is called.
+</p>
+<div class="admonition admonition-tip alert alert--success">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path>
+        </svg></span>tip</h5>
+  </div>
+  <div class="admonition-content">
+    <p>
+      The promise returned will be cancelled if <code>EmptyQueue</code> is called on the queue, but you can also manually
+      just cancel the promise to effectively remove the added callback from the queue.
+    </p>
+  </div>
+</div>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Queue <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> queue <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> promise1 <span class="token operator">=</span> queue<span class="token punctuation">:</span><span class="token function">Append</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>deltaTime<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>deltaTime<span class="token punctuation">)</span> <span class="token comment">--> 5.00003807246685e-07 </span>
+	task<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> promise2 <span class="token operator">=</span> queue<span class="token punctuation">:</span><span class="token function">Append</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>deltaTime<span class="token punctuation">)</span> 
+	<span class="token function">print</span><span class="token punctuation">(</span>deltaTime<span class="token punctuation">)</span> <span class="token comment">--> 5.0113310999877285</span>
+	task<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> promise2 <span class="token operator">=</span> queue<span class="token punctuation">:</span><span class="token function">Append</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>deltaTime<span class="token punctuation">)</span> 
+	<span class="token function">print</span><span class="token punctuation">(</span>deltaTime<span class="token punctuation">)</span> <span class="token comment">--> 6.012134199991124 </span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Destroy"><code style="text-decoration:none">Destroy</code><a aria-hidden="true" class="hash-link" href="#Destroy" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Queue Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Queue/init.lua#L176"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Queue<!-- -->:</code><code class="green_3LnD">Destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Calls <a href="/Roblox-Modules/api/Queue#EmptyQueue">Queue:EmptyQueue</a> and renders the queue unusable.</p>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;new&quot;,
+            &quot;desc&quot;: &quot;A constructor method which creates a new queue object.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Queue&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 62,
+                &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;IsA&quot;,
+            &quot;desc&quot;: &quot;A method which returns a boolean indicating if `self` is a queue or not.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;self&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 73,
+                &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;EmptyQueue&quot;,
+            &quot;desc&quot;: &quot;Empties the queue, i.e all appended callbacks that are waiting to be resumed will never be resumed\n\n```lua\nlocal Queue = require(...)\n\nlocal queue = Queue.new()\n\nlocal promise1 = queue:Append(function()\n\ttask.wait(1)\n\twarn(\&quot;called\&quot;) --&gt; this never works, because the promise is cancelled as the queue is emptied! \nend)\n\nprint(promise1:getStatus()) --&gt; \&quot;Running\&quot; (the promise is running)\nqueue:EmptyQueue() \nprint(promise1:getStatus()) --&gt; \&quot;Cancelled\&quot;  (the promise has been cancelled now)\n```&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;Queue Instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 98,
+                &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Append&quot;,
+            &quot;desc&quot;: &quot;Appends `callback` to the queue so that it&#x27;ll be called once the previous callbacks appended to the queue\nhave *finished* running (or the promises associated to them have been cancelled). `callback` upon being called is passed \na number as the only argument (the time it took for it to be called ever since it was appended). \n\nThe method also returns a promise, which too resolves with a number (the time it took for `callback` \nto run ever since it was appended), once `callback` is called.\n\n:::tip\nThe promise returned will be cancelled if `EmptyQueue` is called on the queue, but you can also manually \njust cancel the promise to effectively remove the added callback from the queue.\n:::\n\n```lua\nlocal Queue = require(...)\n\nlocal queue = Queue.new()\n\nlocal promise1 = queue:Append(function(deltaTime)\n\tprint(deltaTime) --&gt; 5.00003807246685e-07 \n\ttask.wait(5)\nend)\n\nlocal promise2 = queue:Append(function(deltaTime) \n\tprint(deltaTime) --&gt; 5.0113310999877285\n\ttask.wait(1)\nend)\n\nlocal promise2 = queue:Append(function(deltaTime) \n\tprint(deltaTime) --&gt; 6.012134199991124 \nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;callback&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;(deltaTime: number) -&gt; ()&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Promise&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;Queue Instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 143,
+                &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Destroy&quot;,
+            &quot;desc&quot;: &quot;Calls [Queue:EmptyQueue] and renders the queue unusable.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;Queue Instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 176,
+                &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [
+        {
+            &quot;name&quot;: &quot;Progressed&quot;,
+            &quot;desc&quot;: &quot; \n\nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the queue is progressed, i.e an appended callback is called. The callback called\nis passed as the first argument, and a second argument, `deltaTime` is also passed (which is basically how long (in seconds) it was before `callbackProgressed` was called\never since it was appended).&quot;,
+            &quot;lua_type&quot;: &quot;Signal &lt;(callbackProgressed: () -&gt; (), deltaTime: number) -&gt; ()&gt;&quot;,
+            &quot;tags&quot;: [
+                &quot;Signal&quot;,
+                &quot;Queue Instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 34,
+                &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Queue&quot;,
+            &quot;desc&quot;: &quot; \n\nAn exported Luau type of a queue object.\n\n```lua\nlocal Queue = require(...)\n\nlocal queue: Queue.Queue = Queue.new(...) \n```&quot;,
+            &quot;lua_type&quot;: &quot;Type&quot;,
+            &quot;tags&quot;: [
+                &quot;Luau Type&quot;
+            ],
+            &quot;readonly&quot;: true,
+            &quot;source&quot;: {
+                &quot;line&quot;: 49,
+                &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+            }
+        }
+    ],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;Queue&quot;,
+    &quot;desc&quot;: &quot; \n\nA simple queue class. A queue in layman&#x27;s term, is simply an to which you can append callbacks to, which\nwill run based on when they&#x27;re added, i.e they **follow** the *FIFO (First In, First Out) pattern* .\n \n```lua\nlocal Queue = require(...)\n\nlocal queue = Queue.new()\n\nfor i = 1, 3 do \n\tqueue:Append(function(deltaTime)\n\t\twarn((\&quot;completed task (%d) in %s seconds.\&quot;):format(task.wait(i), deltaTime))\n\tend)\nend\n\n--&gt; \&quot;completed task (1)\&quot; \n--&gt; \&quot;completed task (2)\&quot;\n--&gt; \&quot;completed task (3)\&quot;\n```&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 23,
+        &quot;path&quot;: &quot;src/Queue/init.lua&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#Progressed" class="table-of-contents__link toc-highlight">Progressed</a></li><li><a href="#Queue" class="table-of-contents__link toc-highlight">Queue</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#Append" class="table-of-contents__link toc-highlight">:Append</a></li><li><a href="#Destroy" class="table-of-contents__link toc-highlight">:Destroy</a></li><li><a href="#EmptyQueue" class="table-of-contents__link toc-highlight">:EmptyQueue</a></li><li><a href="#IsA" class="table-of-contents__link toc-highlight">.IsA</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/Roblox-Modules/assets/js/runtime~main.fa0c3768.js"></script>
+<script src="/Roblox-Modules/assets/js/main.58a36f8e.js"></script>
+</body>
+</html>

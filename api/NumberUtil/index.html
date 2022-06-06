@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="Docusaurus v2.0.0-beta.9">
+<title data-react-helmet="true">NumberUtil | Roblox-Modules</title><meta data-react-helmet="true" property="og:title" content="NumberUtil | Roblox-Modules"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="description" content=" 
+
+A utility module for working with numbers.
+ 
+```lua
+local NumberUtil = require(...)
+
+print(NumberUtil.e) --&gt; 2.7182818284590
+print(NumberUtil.IsNaN(3)) --&gt; false
+```"><meta data-react-helmet="true" property="og:description" content=" 
+
+A utility module for working with numbers.
+ 
+```lua
+local NumberUtil = require(...)
+
+print(NumberUtil.e) --&gt; 2.7182818284590
+print(NumberUtil.IsNaN(3)) --&gt; false
+```"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/NumberUtil"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/NumberUtil"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/NumberUtil" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/NumberUtil" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.fa0c3768.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.58a36f8e.js" as="script">
+</head>
+<body>
+<script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
+<div><a href="#" class="skipToContent_1oUP">Skip to main content</a></div><nav class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Navigation bar toggle" class="navbar__toggle clean-btn" type="button" tabindex="0"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Roblox-Modules/"><b class="navbar__title">Roblox-Modules</b></a><a class="navbar__item navbar__link" href="/Roblox-Modules/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Roblox-Modules/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/bubshayz/Roblox-Modules" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link"><span>GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_3J9K"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></span></a><div class="toggle_71bT toggle_3Zt9 toggleDisabled_3cF-"><div class="toggleTrack_32Fl" role="button" tabindex="-1"><div class="toggleTrackCheck_3lV7"><span class="toggleIcon_O4iE">🌜</span></div><div class="toggleTrackX_S2yS"><span class="toggleIcon_O4iE">🌞</span></div><div class="toggleTrackThumb_xI_Z"></div></div><input type="checkbox" class="toggleScreenReader_28Tw" aria-label="Switch between dark and light mode"></div><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input type="search" id="search_input_react" placeholder="Press S to Search..." aria-label="Search" class="navbar__search-input search-bar"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div class="main-wrapper docPageContainer_2Kz0"><div class="docPage_1bdk"><div class="docSidebarContainer_1ykS"><div class="sidebar_15mo"><nav class="menu thin-scrollbar menu_Bmed"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><a class="menu__link menu__link--sublist" href="#">EnumList</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><a class="menu__link menu__link--sublist" href="#">Network</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/MatrixUtil">​Matrix​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/Roblox-Modules/api/NumberUtil">​Number​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/Property">​Property</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/Queue">​Queue</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/WindLines">​Wind​Lines</a></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_1CGd"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_3E-R"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div><main class="docMainContainer_28N5"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_3WPG"><div class="docItemContainer_3XDu"><article><div class="member_qHIL markdown"><div class="tocCollapsible_1PrD theme-doc-toc-mobile tocMobile_3ryM"><button type="button" class="clean-btn tocCollapsibleButton_2O1e">On this page</button></div><header><h1 class="docTitle_1ddc" style="text-decoration:none"><span style="display:inline-block">Number</span><span style="display:inline-block">Util</span></h1><div class="luaClassTags_2Zrs"></div><div>
+<p>A utility module for working with numbers.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span>e<span class="token punctuation">)</span> <span class="token comment">--> 2.7182818284590</span>
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">IsNaN</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> false</span>
+</code></pre>
+</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="e"><code style="text-decoration:none">e</code><a aria-hidden="true" class="hash-link" href="#e" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L21"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.<!-- -->e<!-- -->:<!-- --> </code> <code class="blue_2Afy">number</code></div><div>
+<p>Also known as Euler's number. This is a mathematical constant approximately equal to approximately <code>2.7182818284590</code>.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Phi"><code style="text-decoration:none">Phi</code><a aria-hidden="true" class="hash-link" href="#Phi" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L29"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.<!-- -->Phi<!-- -->:<!-- --> </code> <code class="blue_2Afy">number</code></div><div>
+<p>Also known as the golden ratio, equal to approximately <code>1.618033988749895</code>.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Tau"><code style="text-decoration:none">Tau</code><a aria-hidden="true" class="hash-link" href="#Tau" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L37"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.<!-- -->Tau<!-- -->:<!-- --> </code> <code class="blue_2Afy">number</code></div><div>
+<p>It is the circle constant representing the ratio between circumference and radius and is equal to (2 times pi), so approximately <code>6.28</code>.</p>
+</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Lerp"><code style="text-decoration:none">Lerp</code><a aria-hidden="true" class="hash-link" href="#Lerp" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L60"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">Lerp</code><code>(</code><div class="inset_2cJr"><div><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>goal<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>alpha<!-- -->: </code><code class="blue_2Afy">number</code></div></div><code>) → </code><code class="blue_2Afy">number</code></div><div>
+<p>Interpolates <code>number</code> to <code>goal</code>, with <code>alpha</code> being the multiplier.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> num <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">local</span> goal <span class="token operator">=</span> <span class="token number">5</span>
+
+num <span class="token operator">=</span> NumberUtil<span class="token punctuation">.</span><span class="token function">Lerp</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> goal<span class="token punctuation">,</span> <span class="token number">0.7</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token comment">--> 4.1</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="QuadraticLerp"><code style="text-decoration:none">QuadraticLerp</code><a aria-hidden="true" class="hash-link" href="#QuadraticLerp" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L78"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">QuadraticLerp</code><code>(</code><div class="inset_2cJr"><div><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>goal<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>alpha<!-- -->: </code><code class="blue_2Afy">number</code></div></div><code>) → </code><code class="blue_2Afy">number</code></div><div>
+<p>Quadraticly interpolates <code>number</code> to <code>goal</code>, with <code>alpha</code> being the multiplier.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> num <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">local</span> goal <span class="token operator">=</span> <span class="token number">5</span>
+
+num <span class="token operator">=</span> NumberUtil<span class="token punctuation">.</span><span class="token function">QuadraticLerp</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> goal<span class="token punctuation">,</span> <span class="token number">0.7</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token comment">--> 4.1</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="InverseLerp"><code style="text-decoration:none">InverseLerp</code><a aria-hidden="true" class="hash-link" href="#InverseLerp" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L97"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">InverseLerp</code><code>(</code><div class="inset_2cJr"><div><code>min<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>max<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>alpha<!-- -->: </code><code class="blue_2Afy">number</code></div></div><code>) → </code><code class="blue_2Afy">number</code></div><div>
+<p>
+  Inverse Lerp is the inverse operation of the Lerp Node. It can be used to determine what the input to a Lerp was
+  based on its output. For e.g, the value of a Lerp between <code>0</code> and <code>2</code> with <code>alpha</code> being <code>1</code> is <code>0.5</code>. Therefore the value of an Inverse Lerp between <code>0</code> and <code>2</code> with <code>alpha</code> being <code>0.5</code> is <code>1</code>.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> num <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">local</span> goal <span class="token operator">=</span> <span class="token number">5</span>
+
+num <span class="token operator">=</span> NumberUtil<span class="token punctuation">.</span><span class="token function">InverseLerp</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> goal<span class="token punctuation">,</span> <span class="token number">0.7</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token comment">--> -0.43333333333333335</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Map"><code style="text-decoration:none">Map</code><a aria-hidden="true" class="hash-link" href="#Map" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L111"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">Map</code><code>(</code><div class="inset_2cJr"><div><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>inMin<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>inMax<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>outMin<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>outMax<!-- -->: </code><code class="blue_2Afy">number</code></div></div><code>) → </code><code class="blue_2Afy">number</code></div><div>
+<p>Maps <code>number</code> between <code>inMin</code> and <code>inMax</code>, and <code>outMin</code> and <code>outMax</code>.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">Map</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 3</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsNaN"><code style="text-decoration:none">IsNaN</code><a aria-hidden="true" class="hash-link" href="#IsNaN" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L125"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">IsNaN</code><code>(</code><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+<p>Returns a boolean indicating if <code>number</code> is NaN (Not A Number).</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">IsNan</span><span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">/</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> true</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="AreClose"><code style="text-decoration:none">AreClose</code><a aria-hidden="true" class="hash-link" href="#AreClose" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L144"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">AreClose</code><code>(</code><div class="inset_2cJr"><div><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>to<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>eplison<!-- -->: </code><code class="blue_2Afy">number?</code></div></div><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+<p>Returns a boolean indicating if the difference between <code>number</code> and <code>to</code> is lower than or equal to <code>eplsion</code>.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">AreClose</span><span class="token punctuation">(</span><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> true</span>
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">AreClose</span><span class="token punctuation">(</span><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> false</span>
+</code></pre>
+<ul>
+  <li>If <code>eplison</code> is not specified, then it will default to <code>1e-5</code>.</li>
+</ul>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Root"><code style="text-decoration:none">Root</code><a aria-hidden="true" class="hash-link" href="#Root" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L159"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">Root</code><code>(</code><div class="inset_2cJr"><div><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>root<!-- -->: </code><code class="blue_2Afy">number</code></div></div><code>) → </code><code class="blue_2Afy">number</code></div><div>
+<p>Returns the <code>root</code> of <code>number</code>.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">Root</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 1.2599210498948732 (same as cube root of 2)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">Root</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 1.4142135623730951 (same as square root of 2)</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Factorial"><code style="text-decoration:none">Factorial</code><a aria-hidden="true" class="hash-link" href="#Factorial" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L173"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">Factorial</code><code>(</code><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>) → </code><code class="blue_2Afy">number</code></div><div>
+<p>Returns the factorial of <code>number</code>.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">Factorial</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 6</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Factors"><code style="text-decoration:none">Factors</code><a aria-hidden="true" class="hash-link" href="#Factors" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L191"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">Factors</code><code>(</code><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>) → </code><code class="purple__nFc">{</code><code class="blue_2Afy">number</code><code class="purple__nFc">}</code></div><div>
+<p>Returns an array of all factors of <code>number</code>.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">Factors</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> {1, 2}</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsInfinite"><code style="text-decoration:none">IsInfinite</code><a aria-hidden="true" class="hash-link" href="#IsInfinite" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L217"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">IsInfinite</code><code>(</code><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+<p>Returns a boolean indicating if <code>number</code> is infinite.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">IsInfinite</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span>huge<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> true</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="ClampTo"><code style="text-decoration:none">ClampTo</code><a aria-hidden="true" class="hash-link" href="#ClampTo" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/NumberUtil/init.lua#L231"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NumberUtil<!-- -->.</code><code class="green_3LnD">ClampTo</code><code>(</code><div class="inset_2cJr"><div><code>number<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>min<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>max<!-- -->: </code><code class="blue_2Afy">number</code><code>,</code></div><div><code>clamp<!-- -->: </code><code class="blue_2Afy">number</code></div></div><code>) → </code><code class="blue_2Afy">number</code></div><div>
+<p>Clamps <code>number</code> to <code>clamp</code>, if <code>number</code> is greater than <code>max</code> or lower than <code>min</code>.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> NumberUtil <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>NumberUtil<span class="token punctuation">.</span><span class="token function">ClampTo</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 150</span>
+</code></pre>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;Lerp&quot;,
+            &quot;desc&quot;: &quot;Interpolates `number` to `goal`, with `alpha` being the multiplier.\n\n```lua\nlocal NumberUtil = require(...)\n\nlocal num = 2\nlocal goal = 5\n\nnum = NumberUtil.Lerp(num, goal, 0.7)\nprint(num) --&gt; 4.1\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;goal&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;alpha&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 60,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;QuadraticLerp&quot;,
+            &quot;desc&quot;: &quot;Quadraticly interpolates `number` to `goal`, with `alpha` being the multiplier.\n\n```lua\nlocal NumberUtil = require(...)\n\nlocal num = 2\nlocal goal = 5\n\nnum = NumberUtil.QuadraticLerp(num, goal, 0.7)\nprint(num) --&gt; 4.1\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;goal&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;alpha&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 78,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;InverseLerp&quot;,
+            &quot;desc&quot;: &quot;Inverse Lerp is the inverse operation of the Lerp Node. It can be used to determine what the input to a Lerp was \nbased on its output. For e.g, the value of a Lerp between `0` and `2` with `alpha` being `1` is `0.5`. Therefore the value of an Inverse Lerp between `0` and `2` with `alpha` being `0.5` is `1`.\n\n```lua\nlocal NumberUtil = require(...)\n\nlocal num = 2\nlocal goal = 5\n\nnum = NumberUtil.InverseLerp(num, goal, 0.7)\nprint(num) --&gt; -0.43333333333333335\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;min&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;max&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;alpha&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 97,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Map&quot;,
+            &quot;desc&quot;: &quot;Maps `number` between `inMin` and `inMax`, and `outMin` and `outMax`.\n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.Map(1,2,3,4,5)) --&gt; 3\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;inMin&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;inMax&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;outMin&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;outMax&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 111,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;IsNaN&quot;,
+            &quot;desc&quot;: &quot;Returns a boolean indicating if `number` is NaN (Not A Number). \n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.IsNan(0 / 0)) --&gt; true\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 125,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;AreClose&quot;,
+            &quot;desc&quot;: &quot;Returns a boolean indicating if the difference between `number` and `to` is lower than or equal to `eplsion`.\n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.AreClose(0.1 + 0.2, 0.3)) --&gt; true\nprint(NumberUtil.AreClose(0.1 + 0.2, 0.3, 0)) --&gt; false\n```\n\n- If `eplison` is not specified, then it will default to `1e-5`.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;to&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;eplison&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 144,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Root&quot;,
+            &quot;desc&quot;: &quot;Returns the `root` of `number`.\n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.Root(2, 3)) --&gt; 1.2599210498948732 (same as cube root of 2)\nprint(NumberUtil.Root(2, 2)) --&gt; 1.4142135623730951 (same as square root of 2)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;root&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 159,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Factorial&quot;,
+            &quot;desc&quot;: &quot;Returns the factorial of `number`.\n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.Factorial(3)) --&gt; 6\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 173,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Factors&quot;,
+            &quot;desc&quot;: &quot;Returns an array of all factors of `number`.\n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.Factors(2)) --&gt; {1, 2}\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ number }\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 191,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;IsInfinite&quot;,
+            &quot;desc&quot;: &quot;Returns a boolean indicating if `number` is infinite. \n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.IsInfinite(math.huge)) --&gt; true\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 217,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;ClampTo&quot;,
+            &quot;desc&quot;: &quot;Clamps `number` to `clamp`, if `number` is greater than `max` or lower than `min`.\n\n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.ClampTo(1, 2, 5, 150)) --&gt; 150\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;min&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;max&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;clamp&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 231,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [
+        {
+            &quot;name&quot;: &quot;e&quot;,
+            &quot;desc&quot;: &quot; \n\nAlso known as Euler&#x27;s number. This is a mathematical constant approximately equal to approximately `2.7182818284590`.&quot;,
+            &quot;lua_type&quot;: &quot;number&quot;,
+            &quot;readonly&quot;: true,
+            &quot;source&quot;: {
+                &quot;line&quot;: 21,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Phi&quot;,
+            &quot;desc&quot;: &quot; \n\nAlso known as the golden ratio, equal to approximately `1.618033988749895`.&quot;,
+            &quot;lua_type&quot;: &quot;number&quot;,
+            &quot;readonly&quot;: true,
+            &quot;source&quot;: {
+                &quot;line&quot;: 29,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Tau&quot;,
+            &quot;desc&quot;: &quot; \n\nIt is the circle constant representing the ratio between circumference and radius and is equal to (2 times pi), so approximately `6.28`.&quot;,
+            &quot;lua_type&quot;: &quot;number&quot;,
+            &quot;readonly&quot;: true,
+            &quot;source&quot;: {
+                &quot;line&quot;: 37,
+                &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+            }
+        }
+    ],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;NumberUtil&quot;,
+    &quot;desc&quot;: &quot; \n\nA utility module for working with numbers.\n \n```lua\nlocal NumberUtil = require(...)\n\nprint(NumberUtil.e) --&gt; 2.7182818284590\nprint(NumberUtil.IsNaN(3)) --&gt; false\n```&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 13,
+        &quot;path&quot;: &quot;src/NumberUtil/init.lua&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#e" class="table-of-contents__link toc-highlight">e</a></li><li><a href="#Phi" class="table-of-contents__link toc-highlight">Phi</a></li><li><a href="#Tau" class="table-of-contents__link toc-highlight">Tau</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#AreClose" class="table-of-contents__link toc-highlight">.AreClose</a></li><li><a href="#ClampTo" class="table-of-contents__link toc-highlight">.ClampTo</a></li><li><a href="#Factorial" class="table-of-contents__link toc-highlight">.Factorial</a></li><li><a href="#Factors" class="table-of-contents__link toc-highlight">.Factors</a></li><li><a href="#InverseLerp" class="table-of-contents__link toc-highlight">.InverseLerp</a></li><li><a href="#IsInfinite" class="table-of-contents__link toc-highlight">.IsInfinite</a></li><li><a href="#IsNaN" class="table-of-contents__link toc-highlight">.IsNaN</a></li><li><a href="#Lerp" class="table-of-contents__link toc-highlight">.Lerp</a></li><li><a href="#Map" class="table-of-contents__link toc-highlight">.Map</a></li><li><a href="#QuadraticLerp" class="table-of-contents__link toc-highlight">.QuadraticLerp</a></li><li><a href="#Root" class="table-of-contents__link toc-highlight">.Root</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/Roblox-Modules/assets/js/runtime~main.fa0c3768.js"></script>
+<script src="/Roblox-Modules/assets/js/main.58a36f8e.js"></script>
+</body>
+</html>

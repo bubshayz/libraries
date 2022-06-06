@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="Docusaurus v2.0.0-beta.9">
+<title data-react-helmet="true">NetworkServer | Roblox-Modules</title><meta data-react-helmet="true" property="og:title" content="NetworkServer | Roblox-Modules"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="description" content="The server counterpart of the Network module."><meta data-react-helmet="true" property="og:description" content="The server counterpart of the Network module."><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/NetworkServer"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/NetworkServer"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/NetworkServer" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/NetworkServer" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.fa0c3768.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.58a36f8e.js" as="script">
+</head>
+<body>
+<script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
+<div><a href="#" class="skipToContent_1oUP">Skip to main content</a></div><nav class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Navigation bar toggle" class="navbar__toggle clean-btn" type="button" tabindex="0"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Roblox-Modules/"><b class="navbar__title">Roblox-Modules</b></a><a class="navbar__item navbar__link" href="/Roblox-Modules/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Roblox-Modules/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/bubshayz/Roblox-Modules" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link"><span>GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_3J9K"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></span></a><div class="toggle_71bT toggle_3Zt9 toggleDisabled_3cF-"><div class="toggleTrack_32Fl" role="button" tabindex="-1"><div class="toggleTrackCheck_3lV7"><span class="toggleIcon_O4iE">🌜</span></div><div class="toggleTrackX_S2yS"><span class="toggleIcon_O4iE">🌞</span></div><div class="toggleTrackThumb_xI_Z"></div></div><input type="checkbox" class="toggleScreenReader_28Tw" aria-label="Switch between dark and light mode"></div><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input type="search" id="search_input_react" placeholder="Press S to Search..." aria-label="Search" class="navbar__search-input search-bar"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div class="main-wrapper docPageContainer_2Kz0"><div class="docPage_1bdk"><div class="docSidebarContainer_1ykS"><div class="sidebar_15mo"><nav class="menu thin-scrollbar menu_Bmed"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><a class="menu__link menu__link--sublist" href="#">EnumList</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><a class="menu__link menu__link--sublist menu__link--active" href="#">Network</a><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Roblox-Modules/api/Network">​Network</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/Roblox-Modules/api/NetworkServer">​Network​Server</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Roblox-Modules/api/NetworkClient">​Network​Client</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Roblox-Modules/api/RemoteProperty">​Remote​Property</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Roblox-Modules/api/RemoteSignal">​Remote​Signal</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Roblox-Modules/api/ClientRemoteProperty">​Client​Remote​Property</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Roblox-Modules/api/ClientRemoteSignal">​Client​Remote​Signal</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/MatrixUtil">​Matrix​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/NumberUtil">​Number​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/Property">​Property</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/Queue">​Queue</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/WindLines">​Wind​Lines</a></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_1CGd"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_3E-R"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div><main class="docMainContainer_28N5"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_3WPG"><div class="docItemContainer_3XDu"><article><div class="member_qHIL markdown"><div class="tocCollapsible_1PrD theme-doc-toc-mobile tocMobile_3ryM"><button type="button" class="clean-btn tocCollapsibleButton_2O1e">On this page</button></div><header><h1 class="docTitle_1ddc" style="text-decoration:none"><span style="display:inline-block">Network</span><span style="display:inline-block">Server</span></h1><div class="luaClassTags_2Zrs"></div><div>
+<p>The server counterpart of the Network module.</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="types">Types<a aria-hidden="true" class="hash-link" href="#types" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Middleware"><code style="text-decoration:none">Middleware</code><a aria-hidden="true" class="hash-link" href="#Middleware" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/init.lua#L62"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code class="purple__nFc">interface</code> <code>Middleware<!-- --> <!-- -->{</code><div class="inset_2cJr"><div><code>Inbound<!-- -->: </code><code class="purple__nFc">{</code><code class="green_3LnD">(</code><code>args<!-- -->: </code><code class="yellow_1WGw">{</code><code class="blue_2Afy">...any</code><code class="yellow_1WGw">}</code><code class="green_3LnD">)</code><code class="green_3LnD"> → </code><code class="green_3LnD">(</code><code class="green_3LnD">)</code><code class="purple__nFc">}</code><code class="blue_2Afy">?</code></div><div><code>Outbound<!-- -->: </code><code class="purple__nFc">{</code><code class="green_3LnD">(</code><code>args<!-- -->: </code><code class="yellow_1WGw">{</code><code class="blue_2Afy">...any</code><code class="yellow_1WGw">}</code><code class="green_3LnD">)</code><code class="green_3LnD"> → </code><code class="green_3LnD">(</code><code class="green_3LnD">)</code><code class="purple__nFc">}</code><code class="blue_2Afy">?</code></div></div><code>}</code></div><div>
+<p>
+  Both <code>Inbound</code> and <code>Outbound</code> should be array of callbacks (if specified). Callbacks in <code>Inbound</code> are
+  known as "inbound callbacks" and are called whenever a client tries to call a serverside method
+  (exposed through the network object). The arguments sent by the client (to the method which they called)
+  are packed into an array, which is then passed to each callback as the only argument.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> inboundCallbacks <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token keyword">function</span> <span class="token punctuation">(</span>arguments<span class="token punctuation">)</span>
+		<span class="token function">print</span><span class="token punctuation">(</span>arguments<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">IsA</span><span class="token punctuation">(</span><span class="token string">"Player"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> true (first argument is always the client)</span>
+		arguments<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"booooo"</span> <span class="token comment">--> You can modify the arguments !</span>
+	<span class="token keyword">end</span>
+<span class="token punctuation">}</span>
+<span class="token comment">---</span>
+</code></pre>
+<div class="admonition admonition-tip alert alert--success">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path>
+        </svg></span>Automatic method call rejection</h5>
+  </div>
+  <div class="admonition-content">
+    <p>
+      If any inbound callback returns an <strong>explicit</strong> false value, then the method (which the client tried to call) will <em>not</em> be
+      called. This is good, e.g for implementing queues via middlewares!
+    </p>
+  </div>
+</div>
+<p>
+  Callbacks in <code>Outbound</code> are known as "outbound callbacks" and are called whenever a serverside method
+  (exposed through the network object) is called by the client, and has <strong>finished</strong>. The arguments sent
+  by the client (to the method which they called) are packed into an array, which is then passed
+  to each callback as the only argument.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> outboundCallbacks <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token keyword">function</span> <span class="token punctuation">(</span>arguments<span class="token punctuation">)</span>
+		<span class="token function">print</span><span class="token punctuation">(</span>arguments<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token function">IsA</span><span class="token punctuation">(</span><span class="token string">"Player"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> true (first argument is always the client)</span>
+	<span class="token keyword">end</span>
+<span class="token punctuation">}</span>
+<span class="token comment">---</span>
+</code></pre>
+<div class="admonition admonition-tip alert alert--success">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path>
+        </svg></span>Easy modification of the response sent to the client</h5>
+  </div>
+  <div class="admonition-content">
+    <p>
+      For outbound callbacks, an additional member in the arguments array, i.e <code>MethodResponse</code> is injected automatically, which is
+      the response of the serverside method. This means you may feel free to modify the response of the serverside method
+      before it is returned back to the client, e.g:
+    </p>
+    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> outboundCallbacks <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token keyword">function</span> <span class="token punctuation">(</span>arguments<span class="token punctuation">)</span>
+		arguments<span class="token punctuation">.</span>MethodResponse <span class="token operator">=</span> <span class="token string">"oops modified"</span> 
+	<span class="token keyword">end</span>
+<span class="token punctuation">}</span>
+<span class="token comment">---</span>
+</code></pre>
+  </div>
+</div>
+</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/init.lua#L95"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NetworkServer<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><div class="inset_2cJr"><div><code>name<!-- -->: </code><code class="blue_2Afy">string</code><code>,</code></div><div><code>middleware<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/NetworkServer#Middleware">Middleware?</a></code></div></div><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/NetworkServer">NetworkServer</a></code></div><div>
+<p>
+  Creates and returns a new network object of the name i.e <code>name</code>. Internally, a folder is created for each newly created
+  network object, which too is named to <code>name</code>, but the folder it self initially is parented to <code>nil</code> so
+  the network object isn't available to clients - call <a href="/Roblox-Modules/api/NetworkServer#Dispatch">NetworkServer:Dispatch</a> so that the folder
+  can be parented to some instance and thus render the network object accessible to clients.
+</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsA"><code style="text-decoration:none">IsA</code><a aria-hidden="true" class="hash-link" href="#IsA" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/init.lua#L124"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NetworkServer<!-- -->.</code><code class="green_3LnD">IsA</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+<p>Returns a boolean indicating if <code>self</code> is a network object or not.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsDispatchedToClient"><code style="text-decoration:none">IsDispatchedToClient</code><a aria-hidden="true" class="hash-link" href="#IsDispatchedToClient" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/init.lua#L136"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NetworkServer<!-- -->:</code><code class="green_3LnD">IsDispatchedToClient</code><code>(</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+<p>Returns a boolean indicating if the network object is dispatched to the client or not.</p>
+<div class="admonition admonition-note alert alert--secondary">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16">
+          <path d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path>
+        </svg></span>note</h5>
+  </div>
+  <div class="admonition-content">
+    <p>This method will always return false if the network object is destroyed.</p>
+  </div>
+</div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Append"><code style="text-decoration:none">Append</code><a aria-hidden="true" class="hash-link" href="#Append" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/init.lua#L158"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NetworkServer<!-- -->:</code><code class="green_3LnD">Append</code><code>(</code><div class="inset_2cJr"><div><code>key<!-- -->: </code><code class="blue_2Afy">string</code><code>,</code></div><div><code>value<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/RemoteProperty">RemoteProperty</a></code><code class="op_1JtD"> | </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/RemoteSignal">RemoteSignal</a></code><code class="op_1JtD"> | </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Appends a key value pair i.e <code>key</code> and <code>value</code> to the network object, so that it is available to the client
+  once the network object is dispatched.
+</p>
+<div class="admonition admonition-note alert alert--secondary">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16">
+          <path d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path>
+        </svg></span>note</h5>
+  </div>
+  <div class="admonition-content">
+    <p>
+      <a href="https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes" target="_blank">Argument limitations</a>
+      do apply since remote functions are internally used to replicate the appended key value pairs to the client.
+    </p>
+  </div>
+</div>
+<div class="admonition admonition-warning alert alert--danger">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path>
+        </svg></span>warning</h5>
+  </div>
+  <div class="admonition-content">
+    <p>
+      This method will error if the network object is dispatched to the client. Always make sure to append keys and values
+      <em>before</em> you dispatch the network object. You can check if a network object is dispatched to the client or not through
+      <a href="/Roblox-Modules/api/NetworkServer#IsDispatchedToClient">NetworkServer:IsDispatchedToClient</a>.
+    </p>
+  </div>
+</div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Dispatch"><code style="text-decoration:none">Dispatch</code><a aria-hidden="true" class="hash-link" href="#Dispatch" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/init.lua#L178"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NetworkServer<!-- -->:</code><code class="green_3LnD">Dispatch</code><code>(</code><code>parent<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Dispatches the network folder of the network object to <code>parent</code>, rendering the network object accessible
+  to the client now.
+</p>
+<div class="admonition admonition-warning alert alert--danger">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path>
+        </svg></span>warning</h5>
+  </div>
+  <div class="admonition-content">
+    <p>
+      If another network object of the same name as this network object, is already dispatched to <code>parent</code>, then this
+      method will error - you can't have more than 1 network object of the same name dispatched to the same instance!
+    </p>
+  </div>
+</div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Destroy"><code style="text-decoration:none">Destroy</code><a aria-hidden="true" class="hash-link" href="#Destroy" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/init.lua#L192"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>NetworkServer<!-- -->:</code><code class="green_3LnD">Destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Destroys the network object and all appended remote properties / remote signals within the network object, and renders
+  the network object useless.
+</p>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;new&quot;,
+            &quot;desc&quot;: &quot;Creates and returns a new network object of the name i.e `name`. Internally, a folder is created for each newly created\nnetwork object, which too is named to `name`, but the folder it self initially is parented to `nil` so \nthe network object isn&#x27;t available to clients - call [NetworkServer:Dispatch] so that the folder \ncan be parented to some instance and thus render the network object accessible to clients.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;name&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;middleware&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Middleware?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;NetworkServer&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 95,
+                &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;IsA&quot;,
+            &quot;desc&quot;: &quot;Returns a boolean indicating if `self` is a network object or not.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;self&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 124,
+                &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;IsDispatchedToClient&quot;,
+            &quot;desc&quot;: &quot;Returns a boolean indicating if the network object is dispatched to the client or not. \n\n:::note\nThis method will always return false if the network object is destroyed.\n:::&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 136,
+                &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Append&quot;,
+            &quot;desc&quot;: &quot;Appends a key value pair i.e `key` and `value` to the network object, so that it is available to the client\nonce the network object is dispatched. \n\t\n:::note\n[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)\ndo apply since remote functions are internally used to replicate the appended key value pairs to the client.\n:::\n\n:::warning\nThis method will error if the network object is dispatched to the client. Always make sure to append keys and values\n*before* you dispatch the network object. You can check if a network object is dispatched to the client or not through\n[NetworkServer:IsDispatchedToClient].\n:::&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;key&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;RemoteProperty | RemoteSignal | any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 158,
+                &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Dispatch&quot;,
+            &quot;desc&quot;: &quot;Dispatches the network folder of the network object to `parent`, rendering the network object accessible\nto the client now.\n\n:::warning\nIf another network object of the same name as this network object, is already dispatched to `parent`, then this\nmethod will error - you can&#x27;t have more than 1 network object of the same name dispatched to the same instance!\n:::&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;parent&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 178,
+                &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Destroy&quot;,
+            &quot;desc&quot;: &quot;Destroys the network object and all appended remote properties / remote signals within the network object, and renders\nthe network object useless. &quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 192,
+                &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [
+        {
+            &quot;name&quot;: &quot;Middleware&quot;,
+            &quot;desc&quot;: &quot;Both `Inbound` and `Outbound` should be array of callbacks (if specified). Callbacks in `Inbound` are\nknown as \&quot;inbound callbacks\&quot; and are called whenever a client tries to call a serverside method \n(exposed through the network object). The arguments sent by the client (to the method which they called)\nare packed into an array, which is then passed to each callback as the only argument. \n\n```lua\nlocal inboundCallbacks = {\n\tfunction (arguments)\n\t\tprint(arguments[1]:IsA(\&quot;Player\&quot;)) --&gt; true (first argument is always the client)\n\t\targuments[2] = \&quot;booooo\&quot; --&gt; You can modify the arguments !\n\tend\n}\n---\n```\n\n:::tip Automatic method call rejection\nIf any inbound callback returns an **explicit** false value, then the method (which the client tried to call) will *not* be\ncalled. This is good, e.g for implementing queues via middlewares!\n:::\n\nCallbacks in `Outbound` are known as \&quot;outbound callbacks\&quot; and are called whenever a serverside method \n(exposed through the network object) is called by the client, and has **finished**. The arguments sent \nby the client (to the method which they called) are packed into an array, which is then passed \nto each callback as the only argument. \n\n```lua\nlocal outboundCallbacks = {\n\tfunction (arguments)\n\t\tprint(arguments[1]:IsA(\&quot;Player\&quot;)) --&gt; true (first argument is always the client)\n\tend\n}\n---\n```\n\n:::tip Easy modification of the response sent to the client\nFor outbound callbacks, an additional member in the arguments array, i.e `MethodResponse` is injected automatically, which is \nthe response of the serverside method. This means you may feel free to modify the response of the serverside method\nbefore it is returned back to the client, e.g:\n\n```lua\nlocal outboundCallbacks = {\n\tfunction (arguments)\n\t\targuments.MethodResponse = \&quot;oops modified\&quot; \n\tend\n}\n---\n```\n:::&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;Inbound&quot;,
+                    &quot;lua_type&quot;: &quot;{(args: {...any}) -&gt; ()}?&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Outbound&quot;,
+                    &quot;lua_type&quot;: &quot;{(args: {...any}) -&gt; ()}?&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 62,
+                &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+            }
+        }
+    ],
+    &quot;name&quot;: &quot;NetworkServer&quot;,
+    &quot;desc&quot;: &quot;The server counterpart of the Network module.&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 6,
+        &quot;path&quot;: &quot;src/Network/Server/init.lua&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#Middleware" class="table-of-contents__link toc-highlight">Middleware</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#Append" class="table-of-contents__link toc-highlight">:Append</a></li><li><a href="#Destroy" class="table-of-contents__link toc-highlight">:Destroy</a></li><li><a href="#Dispatch" class="table-of-contents__link toc-highlight">:Dispatch</a></li><li><a href="#IsDispatchedToClient" class="table-of-contents__link toc-highlight">:IsDispatchedToClient</a></li><li><a href="#IsA" class="table-of-contents__link toc-highlight">.IsA</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/Roblox-Modules/assets/js/runtime~main.fa0c3768.js"></script>
+<script src="/Roblox-Modules/assets/js/main.58a36f8e.js"></script>
+</body>
+</html>
