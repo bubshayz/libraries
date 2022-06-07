@@ -19,8 +19,8 @@ listens to data dispatched to it self by a client (through a client remote signa
 [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
 do apply since remote events are internally used by remote signals to dispatch data to clients.
 :::"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/RemoteSignal"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="shortcut icon" href="/Roblox-Modules/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/RemoteSignal"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/RemoteSignal" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/RemoteSignal" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
-<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.3c9a57ec.js" as="script">
-<link rel="preload" href="/Roblox-Modules/assets/js/main.e458e224.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.2e04d16c.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.b3316377.js" as="script">
 </head>
 <body>
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -47,25 +47,25 @@ do apply since remote events are internally used by remote signals to dispatch d
 <p>Creates and returns a new remote signal.</p>
 </div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsA"><code style="text-decoration:none">IsA</code><a aria-hidden="true" class="hash-link" href="#IsA" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L50"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->.</code><code class="green_3LnD">IsA</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
 <p>Returns a boolean indicating if <code>self</code> is a remote signal or not.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="ConnectOnce"><code style="text-decoration:none">ConnectOnce</code><a aria-hidden="true" class="hash-link" href="#ConnectOnce" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L61"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">ConnectOnce</code><code>(</code><code>callback<!-- -->: </code><code class="purple__nFc">(</code><code class="blue_2Afy">...any</code><code class="purple__nFc">)</code><code class="purple__nFc"> → </code><code class="purple__nFc">(</code><code class="purple__nFc">)</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/RemoteSignal#SignalConnection">SignalConnection</a></code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="ConnectOnce"><code style="text-decoration:none">ConnectOnce</code><a aria-hidden="true" class="hash-link" href="#ConnectOnce" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L62"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">ConnectOnce</code><code>(</code><code>callback<!-- -->: </code><code class="purple__nFc">(</code><code class="blue_2Afy">...any</code><code class="purple__nFc">)</code><code class="purple__nFc"> → </code><code class="purple__nFc">(</code><code class="purple__nFc">)</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/RemoteSignal#SignalConnection">SignalConnection</a></code></div><div>
 <p>
   Works almost exactly the same as <a href="/Roblox-Modules/api/RemoteSignal#ConnectOnce">RemoteSignal:ConnectOnce</a>, except the connection returned
   is disconnected automaticaly once <code>callback</code> is called.
 </p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Connect"><code style="text-decoration:none">Connect</code><a aria-hidden="true" class="hash-link" href="#Connect" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L72"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">Connect</code><code>(</code><code>callback<!-- -->: </code><code class="purple__nFc">(</code><code class="blue_2Afy">...any</code><code class="purple__nFc">)</code><code class="purple__nFc"> → </code><code class="purple__nFc">(</code><code class="purple__nFc">)</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/RemoteSignal#SignalConnection">SignalConnection</a></code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Connect"><code style="text-decoration:none">Connect</code><a aria-hidden="true" class="hash-link" href="#Connect" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L74"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">Connect</code><code>(</code><code>callback<!-- -->: </code><code class="purple__nFc">(</code><code class="blue_2Afy">...any</code><code class="purple__nFc">)</code><code class="purple__nFc"> → </code><code class="purple__nFc">(</code><code class="purple__nFc">)</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/RemoteSignal#SignalConnection">SignalConnection</a></code></div><div>
 <p>
   Connects <code>callback</code> to the remote signal so that it is called whenever the client
   fires the remote signal, and <code>callback</code> will be passed arguments sent by the client.
 </p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="FireForSpecificPlayers"><code style="text-decoration:none">FireForSpecificPlayers</code><a aria-hidden="true" class="hash-link" href="#FireForSpecificPlayers" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L80"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">FireForSpecificPlayers</code><code>(</code><div class="inset_2cJr"><div><code>players<!-- -->: </code><code class="purple__nFc">{</code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple__nFc">}</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="FireForSpecificPlayers"><code style="text-decoration:none">FireForSpecificPlayers</code><a aria-hidden="true" class="hash-link" href="#FireForSpecificPlayers" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L84"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">FireForSpecificPlayers</code><code>(</code><div class="inset_2cJr"><div><code>players<!-- -->: </code><code class="purple__nFc">{</code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple__nFc">}</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Fires the arguments <code>...</code> to every player in the <code>players</code> table only.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="FireForPlayer"><code style="text-decoration:none">FireForPlayer</code><a aria-hidden="true" class="hash-link" href="#FireForPlayer" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L90"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">FireForPlayer</code><code>(</code><div class="inset_2cJr"><div><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="FireForPlayer"><code style="text-decoration:none">FireForPlayer</code><a aria-hidden="true" class="hash-link" href="#FireForPlayer" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L96"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">FireForPlayer</code><code>(</code><div class="inset_2cJr"><div><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Fires the arguments <code>...</code> to <code>player</code>.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="FireForAll"><code style="text-decoration:none">FireForAll</code><a aria-hidden="true" class="hash-link" href="#FireForAll" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L98"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">FireForAll</code><code>(</code><code>...<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="FireForAll"><code style="text-decoration:none">FireForAll</code><a aria-hidden="true" class="hash-link" href="#FireForAll" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L106"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">FireForAll</code><code>(</code><code>...<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Fires the arguments <code>...</code> to every player in the game.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="DisconnectAll"><code style="text-decoration:none">DisconnectAll</code><a aria-hidden="true" class="hash-link" href="#DisconnectAll" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L106"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">DisconnectAll</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="DisconnectAll"><code style="text-decoration:none">DisconnectAll</code><a aria-hidden="true" class="hash-link" href="#DisconnectAll" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L116"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">DisconnectAll</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Disconnects all connections connected via <a href="/Roblox-Modules/api/RemoteSignal#Connect">RemoteSignal:Connect</a> or <a href="/Roblox-Modules/api/RemoteSignal#ConnectOnce">RemoteSignal:ConnectOnce</a>.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Destroy"><code style="text-decoration:none">Destroy</code><a aria-hidden="true" class="hash-link" href="#Destroy" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L114"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">Destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Destroy"><code style="text-decoration:none">Destroy</code><a aria-hidden="true" class="hash-link" href="#Destroy" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteSignal.lua#L126"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteSignal<!-- -->:</code><code class="green_3LnD">Destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Destroys the remote signal and renders it unusable.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
@@ -124,8 +124,11 @@ do apply since remote events are internally used by remote signals to dispatch d
                 }
             ],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 61,
+                &quot;line&quot;: 62,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -146,8 +149,11 @@ do apply since remote events are internally used by remote signals to dispatch d
                 }
             ],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 72,
+                &quot;line&quot;: 74,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -168,8 +174,11 @@ do apply since remote events are internally used by remote signals to dispatch d
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 80,
+                &quot;line&quot;: 84,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -190,8 +199,11 @@ do apply since remote events are internally used by remote signals to dispatch d
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 90,
+                &quot;line&quot;: 96,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -207,8 +219,11 @@ do apply since remote events are internally used by remote signals to dispatch d
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 98,
+                &quot;line&quot;: 106,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -218,8 +233,11 @@ do apply since remote events are internally used by remote signals to dispatch d
             &quot;params&quot;: [],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 106,
+                &quot;line&quot;: 116,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -229,8 +247,11 @@ do apply since remote events are internally used by remote signals to dispatch d
             &quot;params&quot;: [],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 114,
+                &quot;line&quot;: 126,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -253,7 +274,7 @@ do apply since remote events are internally used by remote signals to dispatch d
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;private&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 122,
+                &quot;line&quot;: 134,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
             }
         }
@@ -288,7 +309,7 @@ do apply since remote events are internally used by remote signals to dispatch d
         &quot;path&quot;: &quot;src/Network/Server/RemoteSignal.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#SignalConnection" class="table-of-contents__link toc-highlight">SignalConnection</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#Connect" class="table-of-contents__link toc-highlight">:Connect</a></li><li><a href="#ConnectOnce" class="table-of-contents__link toc-highlight">:ConnectOnce</a></li><li><a href="#Destroy" class="table-of-contents__link toc-highlight">:Destroy</a></li><li><a href="#DisconnectAll" class="table-of-contents__link toc-highlight">:DisconnectAll</a></li><li><a href="#FireForAll" class="table-of-contents__link toc-highlight">:FireForAll</a></li><li><a href="#FireForPlayer" class="table-of-contents__link toc-highlight">:FireForPlayer</a></li><li><a href="#FireForSpecificPlayers" class="table-of-contents__link toc-highlight">:FireForSpecificPlayers</a></li><li><a href="#IsA" class="table-of-contents__link toc-highlight">.IsA</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/Roblox-Modules/assets/js/runtime~main.3c9a57ec.js"></script>
-<script src="/Roblox-Modules/assets/js/main.e458e224.js"></script>
+<script src="/Roblox-Modules/assets/js/runtime~main.2e04d16c.js"></script>
+<script src="/Roblox-Modules/assets/js/main.b3316377.js"></script>
 </body>
 </html>

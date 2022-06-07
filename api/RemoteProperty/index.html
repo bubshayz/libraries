@@ -19,8 +19,8 @@ all players as well as store in values specific to players.
 do apply since remote functions are internally used by remote properties to store in values and replicate them to clients
 (which they can access through client remote properties)  respectively.
 :::"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/RemoteProperty"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="shortcut icon" href="/Roblox-Modules/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/RemoteProperty"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/RemoteProperty" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/RemoteProperty" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
-<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.3c9a57ec.js" as="script">
-<link rel="preload" href="/Roblox-Modules/assets/js/main.e458e224.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.2e04d16c.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.b3316377.js" as="script">
 </head>
 <body>
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -58,22 +58,22 @@ do apply since remote functions are internally used by remote properties to stor
 <p>Creates and returns a new remote property of the value <code>initialValue</code>.</p>
 </div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsA"><code style="text-decoration:none">IsA</code><a aria-hidden="true" class="hash-link" href="#IsA" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L85"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->.</code><code class="green_3LnD">IsA</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
 <p>Returns a boolean indicating if <code>self</code> is a remote property or not.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Get"><code style="text-decoration:none">Get</code><a aria-hidden="true" class="hash-link" href="#Get" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L93"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">Get</code><code>(</code><code>) → </code><code class="blue_2Afy">any</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Get"><code style="text-decoration:none">Get</code><a aria-hidden="true" class="hash-link" href="#Get" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#70cc00;color:#70cc00">RemoteProperty instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L95"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">Get</code><code>(</code><code>) → </code><code class="blue_2Afy">any</code></div><div>
 <p>Returns the current value set for the remote property.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="SetForPlayer"><code style="text-decoration:none">SetForPlayer</code><a aria-hidden="true" class="hash-link" href="#SetForPlayer" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L101"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">SetForPlayer</code><code>(</code><div class="inset_2cJr"><div><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>value<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="SetForPlayer"><code style="text-decoration:none">SetForPlayer</code><a aria-hidden="true" class="hash-link" href="#SetForPlayer" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#70cc00;color:#70cc00">RemoteProperty instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L105"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">SetForPlayer</code><code>(</code><div class="inset_2cJr"><div><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>value<!-- -->: </code><code class="blue_2Afy">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets a value of the remote property for <code>player</code> <strong>specifically</strong>, to <code>value</code>.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="RemoveForPlayer"><code style="text-decoration:none">RemoveForPlayer</code><a aria-hidden="true" class="hash-link" href="#RemoveForPlayer" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L115"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">RemoveForPlayer</code><code>(</code><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="RemoveForPlayer"><code style="text-decoration:none">RemoveForPlayer</code><a aria-hidden="true" class="hash-link" href="#RemoveForPlayer" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#70cc00;color:#70cc00">RemoteProperty instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L121"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">RemoveForPlayer</code><code>(</code><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Removes the value stored for <code>player</code> <strong>specifically</strong> in the the remote property.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="HasPlayerSpecificValueSet"><code style="text-decoration:none">HasPlayerSpecificValueSet</code><a aria-hidden="true" class="hash-link" href="#HasPlayerSpecificValueSet" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L136"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">HasPlayerSpecificValueSet</code><code>(</code><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="HasPlayerSpecificValueSet"><code style="text-decoration:none">HasPlayerSpecificValueSet</code><a aria-hidden="true" class="hash-link" href="#HasPlayerSpecificValueSet" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#70cc00;color:#70cc00">RemoteProperty instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L144"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">HasPlayerSpecificValueSet</code><code>(</code><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
 <p>Returns a boolean indicating if there is a specific value stored for <code>player</code> in the remote property.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="GetForPlayer"><code style="text-decoration:none">GetForPlayer</code><a aria-hidden="true" class="hash-link" href="#GetForPlayer" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L154"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">GetForPlayer</code><code>(</code><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_2Afy">any</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="GetForPlayer"><code style="text-decoration:none">GetForPlayer</code><a aria-hidden="true" class="hash-link" href="#GetForPlayer" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#70cc00;color:#70cc00">RemoteProperty instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L164"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">GetForPlayer</code><code>(</code><code>player<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_2Afy">any</code></div><div>
 <p>Returns the value stored <em>specifically</em> for <code>player</code> in the remote property.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Set"><code style="text-decoration:none">Set</code><a aria-hidden="true" class="hash-link" href="#Set" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L169"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">Set</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Set"><code style="text-decoration:none">Set</code><a aria-hidden="true" class="hash-link" href="#Set" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#70cc00;color:#70cc00">RemoteProperty instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L181"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">Set</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Sets the value of the remote property to <code>value</code>, and so for all other clients (who can access this value through a
   client remote property), who don't have a specific value for them stored in the remote property.
 </p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Destroy"><code style="text-decoration:none">Destroy</code><a aria-hidden="true" class="hash-link" href="#Destroy" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L177"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">Destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Destroy"><code style="text-decoration:none">Destroy</code><a aria-hidden="true" class="hash-link" href="#Destroy" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#70cc00;color:#70cc00">RemoteProperty instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Network/Server/RemoteProperty.lua#L191"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>RemoteProperty<!-- -->:</code><code class="green_3LnD">Destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Destroys the remote property and renders it unusable.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
@@ -132,8 +132,11 @@ do apply since remote functions are internally used by remote properties to stor
                 }
             ],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteProperty instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 93,
+                &quot;line&quot;: 95,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         },
@@ -154,8 +157,11 @@ do apply since remote functions are internally used by remote properties to stor
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteProperty instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 101,
+                &quot;line&quot;: 105,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         },
@@ -171,8 +177,11 @@ do apply since remote functions are internally used by remote properties to stor
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteProperty instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 115,
+                &quot;line&quot;: 121,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         },
@@ -193,8 +202,11 @@ do apply since remote functions are internally used by remote properties to stor
                 }
             ],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteProperty instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 136,
+                &quot;line&quot;: 144,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         },
@@ -215,8 +227,11 @@ do apply since remote functions are internally used by remote properties to stor
                 }
             ],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteProperty instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 154,
+                &quot;line&quot;: 164,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         },
@@ -232,8 +247,11 @@ do apply since remote functions are internally used by remote properties to stor
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteProperty instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 169,
+                &quot;line&quot;: 181,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         },
@@ -243,8 +261,11 @@ do apply since remote functions are internally used by remote properties to stor
             &quot;params&quot;: [],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteProperty instance&quot;
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 177,
+                &quot;line&quot;: 191,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         },
@@ -267,7 +288,7 @@ do apply since remote functions are internally used by remote properties to stor
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;private&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 185,
+                &quot;line&quot;: 199,
                 &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
             }
         }
@@ -310,7 +331,7 @@ do apply since remote functions are internally used by remote properties to stor
         &quot;path&quot;: &quot;src/Network/Server/RemoteProperty.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#PlayerValueUpdated" class="table-of-contents__link toc-highlight">PlayerValueUpdated</a></li><li><a href="#Updated" class="table-of-contents__link toc-highlight">Updated</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#Destroy" class="table-of-contents__link toc-highlight">:Destroy</a></li><li><a href="#Get" class="table-of-contents__link toc-highlight">:Get</a></li><li><a href="#GetForPlayer" class="table-of-contents__link toc-highlight">:GetForPlayer</a></li><li><a href="#HasPlayerSpecificValueSet" class="table-of-contents__link toc-highlight">:HasPlayerSpecificValueSet</a></li><li><a href="#RemoveForPlayer" class="table-of-contents__link toc-highlight">:RemoveForPlayer</a></li><li><a href="#Set" class="table-of-contents__link toc-highlight">:Set</a></li><li><a href="#SetForPlayer" class="table-of-contents__link toc-highlight">:SetForPlayer</a></li><li><a href="#IsA" class="table-of-contents__link toc-highlight">.IsA</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/Roblox-Modules/assets/js/runtime~main.3c9a57ec.js"></script>
-<script src="/Roblox-Modules/assets/js/main.e458e224.js"></script>
+<script src="/Roblox-Modules/assets/js/runtime~main.2e04d16c.js"></script>
+<script src="/Roblox-Modules/assets/js/main.b3316377.js"></script>
 </body>
 </html>
