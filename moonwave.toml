@@ -1,0 +1,31 @@
+[home]
+enabled = true
+includeReadme = true
+gitSourceBranch = "main"
+
+[docusaurus]
+favicon = "/favicon.ico"
+
+[footer]
+style = "dark"
+copyright = "Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus"
+
+[[classOrder]]
+section = "EnumList"
+classes = ["EnumList", "CustomEnum"]
+
+[[classOrder]]
+section = "Network"
+classes = ["Network", "NetworkServer", "NetworkClient", "RemoteProperty", "RemoteSignal", "ClientRemoteProperty", "ClientRemoteSignal"]
+
+[[home.features]]
+title = "Easy to learn & easy to use"
+description = "Each module is very easy to use, and you aren't required to 'learn' them - just go to their respective docs for their API and start working!"
+
+[[home.features]]
+title = "Active maintenance"
+description = "Each module is actively maintained - you don't have to worry about any lack of updates or bug fixes, instead focus on writing code peacefully."
+
+[[home.features]]
+title = "Reusuability & Efficiency"
+description = "Don't waste time writing down systems which have been already created and are actively maintained. Intead, use them and be an efficient programmer!"

@@ -1,0 +1,7 @@
+[package]
+name = "bubshayz/instanceutil"
+description = "Utility module for working with instances."
+authors = ["bubshayz"]
+version = "1.0.8"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
