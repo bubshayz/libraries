@@ -79,4 +79,4 @@ export type CustomEnum = typeof(setmetatable({} :: {
 	_enumItems: { [string]: any },
 }, CustomEnum))
 
-return CustomEnum
+return table.freeze(CustomEnum)
