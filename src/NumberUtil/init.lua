@@ -239,4 +239,4 @@ function NumberUtil.ClampTo(number: number, min: number, max: number, clamp: num
 	return number
 end
 
-return NumberUtil
+return table.freeze(NumberUtil)

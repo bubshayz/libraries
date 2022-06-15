@@ -102,4 +102,4 @@ export type ClientRemoteProperty = typeof(setmetatable(
 	ClientRemoteProperty
 ))
 
-return ClientRemoteProperty
+return table.freeze(ClientRemoteProperty)

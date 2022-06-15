@@ -131,4 +131,4 @@ end
 
 NetworkClient._init()
 
-return NetworkClient
+return table.freeze(NetworkClient)

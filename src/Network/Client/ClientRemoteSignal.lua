@@ -130,4 +130,4 @@ export type ClientRemoteSignal = typeof(setmetatable(
 	ClientRemoteSignal
 ))
 
-return ClientRemoteSignal
+return table.freeze(ClientRemoteSignal)

@@ -197,4 +197,4 @@ export type Queue = typeof(setmetatable({} :: {
 	Progressed: any,
 }, Queue))
 
-return Queue
+return table.freeze(Queue)

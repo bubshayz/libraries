@@ -1,14 +1,14 @@
 [package]
 name = "bubshayz/network"
-description = "Advanced network module for easy server-client communication."
+description = "An advanced network module for easy server-client communication."
 authors = ["bubshayz"]
-version = "1.3.8"
+version = "1.3.9"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
 [dependencies]
 Signal = "sleitnick/signal@1.2.0"
-EnumList = "bubshayz/enumlist@1.2.0"
-Property = "bubshayz/property@1.1.0"
+EnumList = "bubshayz/enumlist@1.2.1"
+Property = "bubshayz/property@1.1.1"
 Promise = "evaera/promise@4"
 Janitor = "howmanysmall/janitor@1.14.1"

@@ -29,10 +29,13 @@ local CustomEnum = { __prototype = {} }
 ]=]
 
 function CustomEnum.new(name: string, enumItems: { [string]: any }): CustomEnum
-	return setmetatable({
+	local self = setmetatable({
 		_name = name,
 		_enumItems = enumItems,
 	}, CustomEnum)
+
+	self:_init()
+	return self
 end
 
 --[=[
@@ -56,6 +59,9 @@ end
 ]=]
 function CustomEnum.__prototype:GetEnumItems(): { [string]: any }
 	return self._enumItems
+end
+function CustomEnum.__prototype:_init()
+	table.freeze(self)
 end
 
 function CustomEnum:__index(key)

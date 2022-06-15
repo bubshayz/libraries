@@ -118,7 +118,7 @@ function WindLines.SetConfig(newConfig: Types.WindLinesConfig)
 	assert(typeof(newConfig) == "table", INVALID_ARGUMENT_TYPE:format(1, "WindLines.SetConfig", "table", typeof(newConfig)))
 	assert(next(newConfig), "Config table must not be empty!")
 
-	local currentConfigCopy = table.clone(WindLines._config)
+	local currentConfig = WindLines._config
 
 	for key, value in newConfig do
 		local expectedType = CONFIG_TEMPLATE[key]
@@ -128,10 +128,8 @@ function WindLines.SetConfig(newConfig: Types.WindLinesConfig)
 			('Config must have member "%s" of type %s. Instead is of type %s.'):format(key, expectedType, typeof(value))
 		)
 
-		currentConfigCopy[key] = value
+		currentConfig[key] = value
 	end
-
-	WindLines._config = table.freeze(currentConfigCopy)
 end
 
 --[=[
@@ -246,4 +244,4 @@ function WindLines._startHeartbeatUpdate()
 	end)
 end
 
-return WindLines
+return table.freeze(WindLines)

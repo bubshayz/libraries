@@ -3,9 +3,9 @@ local RunService = game:GetService("RunService")
 --[=[
 	@class Network
 
-	The Network module it self consists of a [NetworkServer] and a [NetworkClient] module, so
-	whenever you require the Network module it self, in return one of these 2 modules are required and returned,
-	based off of the environment (server / client).
+	An advanced network module for easy server-client communication. The network module it self consists of a [NetworkServer] and 
+	a [NetworkClient] module, so whenever you require the Network module it self, in return one of these 2 modules are required 
+	and returned, based off of the environment (server / client).
 
 	```lua
 	-- Server

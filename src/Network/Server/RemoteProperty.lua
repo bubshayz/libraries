@@ -286,4 +286,4 @@ export type RemoteProperty = typeof(setmetatable(
 	RemoteProperty
 ))
 
-return RemoteProperty
+return table.freeze(RemoteProperty)

@@ -121,6 +121,7 @@ function EnumList.__prototype:_init()
 	end
 
 	table.insert(EnumList._enumLists, self)
+	table.freeze(self)
 end
 
 function EnumList:__iter()
@@ -142,4 +143,4 @@ export type EnumList = typeof(setmetatable({} :: {
 	_enums: { [string]: { [string]: any } },
 }, EnumList))
 
-return EnumList
+return table.freeze(EnumList)

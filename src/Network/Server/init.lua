@@ -315,4 +315,4 @@ export type NetworkServer = typeof(setmetatable(
 	NetworkServer
 ))
 
-return NetworkServer
+return table.freeze(NetworkServer)

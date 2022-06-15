@@ -277,4 +277,4 @@ function InstanceUtil._isInstanceInWater(instance: BasePart): boolean
 	)[1][1][1] == Enum.Material.Water
 end
 
-return InstanceUtil
+return table.freeze(InstanceUtil)

@@ -178,4 +178,4 @@ export type Property = typeof(setmetatable({} :: {
 	_value: any,
 }, Property))
 
-return Property
+return table.freeze(Property)

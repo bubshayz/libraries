@@ -179,4 +179,4 @@ function MatrixUtil.GetMatchingColumnsValue(matrix: { { any } }, depth: number?)
 	return nil
 end
 
-return MatrixUtil
+return table.freeze(MatrixUtil)
