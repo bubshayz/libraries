@@ -41,7 +41,7 @@ local ClientRemoteProperty = { __index = {} }
 function ClientRemoteProperty.new(remoteFunction: RemoteFunction): ClientRemoteProperty
 	local property = Property.new()
 	local self = setmetatable({
-		updated = property.Updated,
+		updated = property.updated,
 		_property = property,
 		_janitor = Janitor.new(),
 		_remoteFunction = remoteFunction,
@@ -67,7 +67,7 @@ end
 ]=]
 
 function ClientRemoteProperty.__index:get(): any
-	return self._property:Get()
+	return self._property:get()
 end
 
 --[=[
@@ -84,18 +84,18 @@ function ClientRemoteProperty.__index:_init()
 	local remoteFunction = self._remoteFunction
 
 	function remoteFunction.OnClientInvoke(newValue)
-		self._property:Set(newValue)
+		self._property:set(newValue)
 	end
 
 	local newValue = self._remoteFunction:InvokeServer()
 
 	-- Incase a new value was set while we were retrieving the initial value, don't
 	-- update the value of the property to avoid unexpected behavior!
-	if self._property:Get() == nil then
-		self._property:Set(newValue)
+	if self:get() == nil then
+		self._property:set(newValue)
 	end
 
-	self._janitor:Add(self._property)
+	self._janitor:Add(self._property, "destroy")
 	self._janitor:Add(function()
 		self._remoteFunction.OnClientInvoke = nil
 		setmetatable(self, nil)

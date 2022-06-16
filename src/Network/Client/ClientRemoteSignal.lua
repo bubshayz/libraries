@@ -62,7 +62,7 @@ end
 	with the data dispatched to the client remote signal.
 ]=]
 
-function ClientRemoteSignal.__index:connect(callback: (...any) -> any)
+function ClientRemoteSignal.__index:connect(callback: (...any) -> ())
 	return self._signal:Connect(callback)
 end
 
@@ -74,7 +74,7 @@ end
 	connection returned is  disconnected immediately upon `callback` being called.
 ]=]
 
-function ClientRemoteSignal.__index:connectOnce(callback: (...any) -> any)
+function ClientRemoteSignal.__index:connectOnce(callback: (...any) -> ())
 	return self._signal:ConnectOnce(callback)
 end
 
@@ -96,7 +96,7 @@ end
 	remote signal is connected to).
 ]=]
 
-function ClientRemoteSignal.__index:fire(...: any)
+function ClientRemoteSignal.__index:fireServer(...: any)
 	self._remoteEvent:FireServer(...)
 end
 

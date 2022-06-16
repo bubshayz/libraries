@@ -165,7 +165,7 @@ function RemoteSignal:__tostring()
 	return ("[RemoteSignal]: (%s)"):format(self._remoteEvent.Name)
 end
 
-export type remoteSignal = typeof(setmetatable(
+export type RemoteSignal = typeof(setmetatable(
 	{} :: {
 		_signal: any,
 		_janitor: any,

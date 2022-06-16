@@ -10,14 +10,15 @@
 	.Inbound {(args: {...any}) -> ()}?
 	.Outbound {(args: {...any}) -> ()}?
 
-	Both `Inbound` and `Outbound` should be array of callbacks (if specified). Callbacks in `Inbound` are
-	known as "inbound callbacks" and are called whenever a client tries to call a serverside method 
-	(exposed through the network object). The arguments sent by the client (to the method which they called)
-	are packed into an array, which is then passed to each callback as the only argument. 
+	Both `Inbound` and `Outbound` should be array of callbacks (if specified, none of them are required). 
+	Callbacks in `Inbound` are known as "inbound callbacks" and are called whenever a client tries to call 
+	a serverside method  (exposed through the network object). The first argument passed to each inbound 
+	callback is the name of the method (the client called), and the arguments sent by the client (to that method)
+	are packed into an array, which is then passed as the second argument. 
 	
 	```lua
 	local inboundCallbacks = {
-		function (arguments)
+		function (methodName, arguments)
 			print(arguments[1]:IsA("Player")) --> true (first argument is always the client)
 			arguments[2] = "booooo" --> You can modify the arguments !
 		end
@@ -31,22 +32,22 @@
 	:::
 
 	Callbacks in `Outbound` are known as "outbound callbacks" and are called whenever a serverside method 
-	(exposed through the network object) is called by the client, and has **finished**. The arguments sent 
-	by the client (to the method which they called) are packed into an array, which is then passed 
-	to each callback as the only argument. 
+	(exposed through the network object) is called by the client, and has **finished**. The first argument passed to 
+	each inbound callback is the name of the method (the client called), and the arguments sent by the client (to that method)
+	are packed into an array, which is then passed as the second argument. 
 
 	```lua
 	local outboundCallbacks = {
-		function (arguments)
+		function (methodName, arguments)
 			print(arguments[1]:IsA("Player")) --> true (first argument is always the client)
 		end
 	}
 	---
 	```
 
-	:::tip Easy modification of the response sent to the client
-	For outbound callbacks, an additional member in the arguments array, i.e `MethodResponse` is injected automatically, which is 
-	the response of the serverside method. This means you may feel free to modify the response of the serverside method
+	:::tip 
+	For outbound callbacks, an additional member in the arguments array, i.e `response` is injected automatically, which is 
+	the response of the serverside method (which the client called). This means you can modify the response of the serverside method
 	before it is returned back to the client, e.g:
 
 	```lua
@@ -55,28 +56,30 @@
 
 	local middleware = {
 		{
-			function (arguments)
-				arguments.MethodResponse = "oops modified" 
+			function (methodName, arguments)
+				arguments.response = "oops modified" 
 			end
 		}
 	}
 	local networkObject = Network.new("test", middleware)
-	networkObject:Dispatch(workspace)
+	networkObject:append("SomeMethod", function()
+		return "this"
+	end)
+	networkObject:dispatch(workspace)
 
 	-- Client:
 	local Network = require(...)
 
 	local networkObject = Network.FromName("test", workspace):expect()
-	print(networkObject.SomeMethod()) --> "oops modified"
+	print(networkObject.SomeMethod()) --> "oops modified" (ought to print "this")
 	```
 	:::
 ]=]
 
-local packages = script.Parent.Parent
-local ancestor = script.Parent
+local Packages = script.Parent.Parent
 
-local Janitor = require(packages.Janitor)
-local SharedConstants = require(ancestor.SharedConstants)
+local Janitor = require(Packages.Janitor)
+local SharedConstants = require(script.Parent.SharedConstants)
 local RemoteSignal = require(script.RemoteSignal)
 local RemoteProperty = require(script.RemoteProperty)
 
@@ -84,24 +87,41 @@ local NetworkServer = { __index = {} }
 
 local function validateMiddleware(middleware)
 	if not middleware then
-		return { Inbound = {}, Outbound = {} }
+		return table.freeze({ inbound = {}, outbound = {} })
 	end
 
-	if middleware.Inbound ~= nil then
-		assert(typeof(middleware.Inbound) == "table", '"Inbound" member specified in middleware must be a table.')
+	if middleware.inbound ~= nil then
+		assert(typeof(middleware.inbound) == "table", '"inbound" member specified in middleware must be a table.')
+
+		for _, callback in middleware.inbound do
+			assert(
+				typeof(callback) == "function",
+				("Inbound table must be an array of functions only. Instead got value of type %s."):format(
+					typeof(callback)
+				)
+			)
+		end
+	else
+		middleware.inbound = {}
 	end
 
-	if middleware.Outbound ~= nil then
-		assert(typeof(middleware.Outbound) == "table", '"Outbound" member specified in middleware must be a table.')
+	if middleware.outbound ~= nil then
+		assert(typeof(middleware.outbound) == "table", '"outbound" member specified in middleware must be a table.')
+
+		for _, callback in middleware.outbound do
+			assert(
+				typeof(callback) == "function",
+				("Outbound table must be an array of functions only. Instead got value of type %s."):format(
+					typeof(callback)
+				)
+			)
+		end
+	else
+		middleware.outbound = {}
 	end
 
-	for _, callback in middleware.Inbound do
-		assert(typeof(callback) == "function", "Inbound table must be an array of functions only.")
-	end
-
-	for _, callback in middleware.Outbound do
-		assert(typeof(callback) == "function", "Outbound table must be an array of functions only.")
-	end
+	assert(middleware.inbound or middleware.outbound, 'Middleware must have at least an "inbound" or "outbound" table')
+	return table.freeze(middleware)
 end
 
 --[=[
@@ -118,7 +138,7 @@ end
 
 function NetworkServer.new(
 	name: string,
-	middleware: { Outbound: { () -> any? }, Inbound: { () -> any? } }?
+	middleware: { outbound: { () -> () }, inbound: { () -> boolean } }?
 ): NetworkServer
 	assert(
 		typeof(name) == "string",
@@ -156,7 +176,7 @@ end
 	:::
 ]=]
 
-function NetworkServer.__index:isDispatchedToClient(): boolean
+function NetworkServer.__index:dispatched(): boolean
 	return self._networkFolder.Parent ~= nil
 end
 
@@ -199,10 +219,7 @@ function NetworkServer.__index:append(
 	key: string,
 	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
 )
-	assert(
-		not self:IsDispatchedToClient(),
-		"Cannot append key value pair as network object is dispatched to the client!"
-	)
+	assert(not self:dispatched(), "Cannot append key value pair as network object is dispatched to the client!")
 	assert(
 		typeof(key) == "string",
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Server:append", "string", typeof(key))
@@ -228,10 +245,10 @@ function NetworkServer.__index:dispatch(parent: Instance)
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network:dispatch", "Instance", typeof(parent))
 	)
 
-	for _, child in NetworkServer.parent:GetChildren() do
+	for _, child in parent:GetChildren() do
 		assert(
 			child.Name ~= self._name,
-			('A network object "%s" is already dispatched to parent %s'):format(child.Name, parent:GetFullName())
+			('A network object "%s" is already dispatched to parent [%s]'):format(child.Name, parent:GetFullName())
 		)
 	end
 
@@ -252,8 +269,8 @@ function NetworkServer.__index:_setup(
 	key: string,
 	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
 )
-	if RemoteSignal.IsA(value) or RemoteProperty.IsA(value) then
-		value:Dispatch(key, self._networkFolder)
+	if RemoteSignal.is(value) or RemoteProperty.is(value) then
+		value:dispatch(key, self._networkFolder)
 
 		self._janitor:Add(function()
 			-- Destroy the remote property or remote signal if it already
@@ -277,13 +294,13 @@ function NetworkServer.__index:_setup(
 		if typeof(value) == "function" then
 			local args = { ... }
 
-			if self:_getInboundMiddlewareResponse(args) == false then
+			if self:_getInboundMiddlewareResponse(key, args) == false then
 				return nil
 			end
 
-			args.MethodResponse = value(table.unpack(args))
-			self:_runOutboundMiddlewareCallbacks(args)
-			return args.MethodResponse
+			args.response = value(table.unpack(args))
+			self:_runOutboundMiddlewareCallbacks(key, args)
+			return args.response
 		else
 			return value
 		end
@@ -296,17 +313,19 @@ function NetworkServer.__index:_setup(
 end
 
 function NetworkServer.__index:_runOutboundMiddlewareCallbacks(...)
-	for _, outBoundCallback in self._middleware.Outbound do
+	for _, outBoundCallback in self._middleware.outbound do
 		outBoundCallback(...)
 	end
 end
 
 function NetworkServer.__index:_getInboundMiddlewareResponse(...)
-	for _, inBoundCallback in self._middleware.Inbound do
+	for _, inBoundCallback in self._middleware.inbound do
 		if inBoundCallback(...) == false then
 			return false
 		end
 	end
+
+	return true
 end
 
 function NetworkServer.__index:_init()
