@@ -75,7 +75,7 @@ local CustomEnum = require(script.CustomEnum)
 local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %s instead."
 local INVALID_ENUM_LIST_MEMBER = '"%s" is not a valid Enum of EnumList "%s"!'
 local INVALID_ENUM = 'Enum "%s" in EnumList "%s" must point to a table. Instead points to a %s!'
-local INVALID_ENUM_NAME = 'Enum names in EnumList "%s" must be a string only!'
+local INVALID_ENUM_NAME = 'Enum names in EnumList "%s" must be strings only!'
 
 local EnumList = {
 	_enumLists = {},
