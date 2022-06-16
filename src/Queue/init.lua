@@ -90,7 +90,7 @@ end
 	end)
 
 	print(promise1:getStatus()) --> "Running" (the promise is running)
-	queue:EmptyQueue() 
+	queue:emptyQueue() 
 	print(promise1:getStatus()) --> "Cancelled"  (the promise has been cancelled)
 	```
 ]=]
