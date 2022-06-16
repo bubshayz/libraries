@@ -176,6 +176,10 @@ function Property.__index:destroy()
 	setmetatable(self, nil)
 end
 
+function Property:__tostring()
+	return ("[Property]: (%s)"):format(tostring(self._value))
+end
+
 export type Property = typeof(setmetatable({} :: {
 	updated: any,
 	_value: any,

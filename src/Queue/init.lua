@@ -198,6 +198,10 @@ function Queue.__index:destroy()
 	setmetatable(self, nil)
 end
 
+function Queue:__tostring()
+	return ("[Queue]: (%d)"):format(#self._promises)
+end
+
 export type Queue = typeof(setmetatable({} :: {
 	progressed: any,
 	_promises: { any },

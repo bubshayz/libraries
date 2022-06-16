@@ -102,6 +102,10 @@ function ClientRemoteProperty.__index:_init()
 	end)
 end
 
+function ClientRemoteProperty:__tostring()
+	return ("[ClientRemoteProperty]: (%s)"):format(self._remoteFunction.Name)
+end
+
 export type clientRemoteProperty = typeof(setmetatable(
 	{} :: {
 		updated: any,

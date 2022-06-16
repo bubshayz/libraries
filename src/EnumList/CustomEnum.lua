@@ -1,6 +1,6 @@
 --[=[ 
 	@class CustomEnum
-	@__index __prototype
+	@__index _prototype
 
 	A custom enum is simply just an enum in an enum list, except that it is transformed to an instance
 	of this class.
@@ -22,7 +22,7 @@
 
 local INVALID_ENUM_MEMBER = '"%s" is not a valid EnumItem of Enum "%s"!'
 
-local CustomEnum = { __prototype = {} }
+local CustomEnum = { _prototype = {} }
 
 --[=[
 	@private
@@ -57,21 +57,26 @@ end
 	print(enumItems.BabaBoey) --> 123
 	```
 ]=]
-function CustomEnum.__prototype:getEnumItems(): { [string]: any }
+function CustomEnum._prototype:getEnumItems(): { [string]: any }
 	return self._enumItems
 end
-function CustomEnum.__prototype:_init()
+
+function CustomEnum._prototype:_init()
 	table.freeze(self)
 end
 
 function CustomEnum:__index(key)
-	local enumItem = CustomEnum.__prototype[key] or self._enumItems[key]
+	local enumItem = CustomEnum._prototype[key] or self._enumItems[key]
 
 	if enumItem == nil then
 		error(INVALID_ENUM_MEMBER:format(tostring(key), self._name))
 	end
 
 	return enumItem
+end
+
+function CustomEnum:__tostring()
+	return ("[CustomEnum]: (%s)"):format(self._name)
 end
 
 export type CustomEnum = typeof(setmetatable({} :: {

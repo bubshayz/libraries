@@ -161,6 +161,10 @@ function RemoteSignal.__index:_init()
 	end)
 end
 
+function RemoteSignal:__tostring()
+	return ("[RemoteSignal]: (%s)"):format(self._remoteEvent.Name)
+end
+
 export type remoteSignal = typeof(setmetatable(
 	{} :: {
 		_signal: any,

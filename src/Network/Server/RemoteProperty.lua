@@ -330,6 +330,10 @@ function RemoteProperty.__index:_init()
 	end)
 end
 
+function RemoteProperty:__tostring()
+	return ("[RemoteProperty]: (%s)"):format(self._valueDispatcherRemoteFunction.Name)
+end
+
 function RemoteProperty._startTrackingPlayers()
 	RemoteProperty._players = Players:GetPlayers()
 

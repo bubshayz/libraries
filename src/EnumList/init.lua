@@ -1,6 +1,6 @@
 --[=[ 
 	@class EnumList
-	@__index __prototype
+	@__index _prototype
 
 	A class for creating enum lists. An enum list in layman's terms is simply an object
 	used to store *custom* enums inside.
@@ -79,7 +79,7 @@ local INVALID_ENUM_NAME = 'Enum names in EnumList "%s" must be a string only!'
 
 local EnumList = {
 	_enumLists = {},
-	__prototype = {},
+	_prototype = {},
 }
 
 --[=[
@@ -125,7 +125,7 @@ end
 	Returns the name of the enum list.
 ]=]
 
-function EnumList.__prototype:getName(): string
+function EnumList._prototype:getName(): string
 	return self._name
 end
 
@@ -136,11 +136,11 @@ end
 	Returns the enums of the enum list.
 ]=]
 
-function EnumList.__prototype:getEnums(): { [string]: { [string]: any } }
+function EnumList._prototype:getEnums(): { [string]: { [string]: any } }
 	return self._enums
 end
 
-function EnumList.__prototype:_init()
+function EnumList._prototype:_init()
 	for enumName, enum in self._enums do
 		assert(typeof(enumName) == "string", INVALID_ENUM_NAME:format(self._name))
 		assert(typeof(enum) == "table", INVALID_ENUM:format(enumName, self._name, typeof(enum)))
@@ -156,13 +156,17 @@ function EnumList:__iter()
 end
 
 function EnumList:__index(key)
-	local value = EnumList.__prototype[key] or self._enums[key]
+	local value = EnumList._prototype[key] or self._enums[key]
 
 	if value == nil then
 		error(INVALID_ENUM_LIST_MEMBER:format(tostring(key), self._name))
 	end
 
 	return value
+end
+
+function EnumList:__tostring()
+	return ("[EnumList]: (%s)"):format(self._name)
 end
 
 export type EnumList = typeof(setmetatable({} :: {
