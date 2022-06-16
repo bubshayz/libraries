@@ -186,8 +186,8 @@ function InstanceUtil.getInstanceCorners(instance: Instance): { top: { Vector3 }
 end
 
 --[=[
-	Returns the material the instance is lying on. If `instance` is under water, then [Enum.Material.Water]() will be returned, elseif
-	`instance` is in air, then [Enum.Material.Air]() will be returned.
+	Returns the material the instance is lying on. If `instance` is under water, then `Enum.Material.Water` will be returned, elseif
+	`instance` is in air, then `Enum.Material.Air` will be returned.
 	
 	- The 2nd argument can be passed as a [RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) object,
 	which will be used in determining the material of `instance` through ray casting.
