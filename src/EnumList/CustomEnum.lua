@@ -57,8 +57,19 @@ end
 	print(enumItems.BabaBoey) --> 123
 	```
 ]=]
+
 function CustomEnum._prototype:getEnumItems(): { [string]: any }
 	return self._enumItems
+end
+
+--[=[
+	@tag CustomEnum instance
+
+	Returns the name of the custom enum.
+]=]
+
+function CustomEnum._prototype:getName(): string
+	return self._name
 end
 
 function CustomEnum._prototype:_init()
