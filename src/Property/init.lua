@@ -105,7 +105,7 @@ end
 
 	local property = Property.new()
 
-	property.Updated:Connect(function(newVal)
+	property.updated:Connect(function(newVal)
 		warn(newVal) --> {1}
 	end)
 
@@ -172,7 +172,7 @@ end
 ]=]
 
 function Property.__index:destroy()
-	self.Updated:Destroy()
+	self.updated:Destroy()
 	setmetatable(self, nil)
 end
 
