@@ -68,7 +68,7 @@ end
 --[=[
 	@return RemoteProperty
 
-	Creates and returns a new remote property of the value `initialValue`.
+	Creates and returns a new remote property with the value of `initialValue`.
 ]=]
 
 function RemoteProperty.new(initialValue: any)
@@ -204,12 +204,12 @@ end
 	in the remote property.
 ]=]
 
-function RemoteProperty.__index:hasClientSet(client: Player): boolean
+function RemoteProperty.__index:clientHasValueSet(client: Player): boolean
 	assert(
 		isPlayer(client),
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(
 			1,
-			"RemoteProperty:hasClientSet",
+			"RemoteProperty:clientHasValueSet",
 			"Player",
 			typeof(client)
 		)
@@ -272,13 +272,13 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 	valueDispatcherRemoteFunction.Parent = parent
 
 	function valueDispatcherRemoteFunction.OnServerInvoke(client)
-		return if self:hasClientSet(client) then self:getForClient(client) else self:get()
+		return if self:clientHasValueSet(client) then self:getForClient(client) else self:get()
 	end
 
 	-- Send off the new value to the current players in game:
 	self._property.updated:Connect(function(newValue)
 		for _, client in RemoteProperty._clients do
-			if self:hasClientSet(client) then
+			if self:clientHasValueSet(client) then
 				-- We must not send this new value to this player as it is not needed.
 				continue
 			end
