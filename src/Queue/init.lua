@@ -42,12 +42,6 @@
 	@readonly
 
 	An exported Luau type of a queue object.
-
-	```lua
-	local Queue = require(...)
-
-	local queue: Queue.queue = Queue.new(...) 
-	```
 ]=]
 
 local Promise = require(script.Parent.Promise)
@@ -163,7 +157,10 @@ end
 ]=]
 
 function Queue.__index:append(callback: (deltaTime: number) -> ())
-	assert(typeof(callback) == "function", INVALID_ARGUMENT_TYPE:format(1, "Queue:Append", "function", typeof(callback)))
+	assert(
+		typeof(callback) == "function",
+		INVALID_ARGUMENT_TYPE:format(1, "Queue:Append", "function", typeof(callback))
+	)
 
 	local promise
 	promise = Promise.defer(function(resolve, _, onCancel)

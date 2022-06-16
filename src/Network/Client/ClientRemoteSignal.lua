@@ -13,10 +13,19 @@
 	.Connected boolean
 ]=]
 
-local packages = script.Parent.Parent.Parent
+--[=[ 
+	@prop ClientRemoteSignal Type 
+	@within ClientRemoteSignal
+	@tag Luau Type
+	@readonly
 
-local Signal = require(packages.Signal)
-local Janitor = require(packages.Janitor)
+	An exported Luau type of a client remote signal object.
+]=]
+
+local Packages = script.Parent.Parent.Parent
+
+local Signal = require(Packages.Signal)
+local Janitor = require(Packages.Janitor)
 
 local ClientRemoteSignal = { __index = {} }
 
@@ -61,7 +70,7 @@ end
 	@return SignalConnection
 	@tag ClientRemoteSignal instance
 
-	Works almost exactly the same as [ClientRemoteSignal:Connect], except the 
+	Works almost exactly the same as [ClientRemoteSignal:connect], except the 
 	connection returned is  disconnected immediately upon `callback` being called.
 ]=]
 
@@ -72,8 +81,8 @@ end
 --[=[
 	@tag ClientRemoteSignal instance
 
-	Disconnects all connections connected via [ClientRemoteSignal:Connect] 
-	or [ClientRemoteSignal:ConnectOnce].
+	Disconnects all connections connected via [ClientRemoteSignal:connect] 
+	or [ClientRemoteSignal:connectOnce].
 ]=]
 
 function ClientRemoteSignal.__index:disconnectAll()
@@ -125,7 +134,7 @@ function ClientRemoteSignal.__index:_init()
 	end))
 end
 
-export type ClientRemoteSignal = typeof(setmetatable(
+export type clientRemoteSignal = typeof(setmetatable(
 	{} :: {
 		_remoteEvent: RemoteEvent,
 		_signal: any,

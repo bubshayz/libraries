@@ -12,7 +12,7 @@
 ]=]
 
 --[=[ 
-	@prop Updated Signal <newValue: any>
+	@prop updated Signal <newValue: any>
 	@within RemoteProperty
 	@readonly
 	@tag Signal
@@ -23,7 +23,7 @@
 ]=]
 
 --[=[ 
-	@prop PlayerValueUpdated Signal <player: Player, newValue: any>
+	@prop playerValueUpdated Signal <player: Player, newValue: any>
 	@within RemoteProperty
 	@readonly
 	@tag Signal
@@ -34,26 +34,32 @@
 	as the first argument, and the new specific value of `player` set in the remote property as the second argument. 
 ]=]
 
+--[=[ 
+	@prop RemoteProperty Type 
+	@within RemoteProperty
+	@tag Luau Type
+	@readonly
+
+	An exported Luau type of a remote property object.
+]=]
+
 local Players = game:GetService("Players")
 
-local packages = script.Parent.Parent.Parent
-local ancestor = script.Parent.Parent
+local Packages = script.Parent.Parent.Parent
+local Network = script.Parent.Parent
 
-local SharedConstants = require(ancestor.SharedConstants)
-local Janitor = require(packages.Janitor)
-local Signal = require(packages.Signal)
-local Property = require(packages.Property)
+local SharedConstants = require(Network.SharedConstants)
+local Janitor = require(Packages.Janitor)
+local Signal = require(Packages.Signal)
+local Property = require(Packages.Property)
 
 local RemoteProperty = { __index = {} }
 
-local function SafeInvokeClient(remoteFunction: RemoteFunction, player: Player, value: any)
-	--[[
-		From the Developer Hub:
-		
-		If a client disconnects or leaves the game while it is being invoked from the server, the InvokeClient function will error. 
-		It is therefore recommended to wrap this function in a pcall so it doesn’t stop the execution of other code.
-	]]
+local function isPlayer(player)
+	return typeof(player) == "Instance" and player:IsA("Player")
+end
 
+local function safeInvokeClient(remoteFunction: RemoteFunction, player: Player, value: any)
 	task.spawn(function()
 		pcall(remoteFunction.InvokeClient, remoteFunction, player, value)
 	end)
@@ -100,78 +106,139 @@ end
 --[=[
 	@tag RemoteProperty instance
 
-	Sets a value of the remote property for `player` **specifically**, to `value`. 
+	Sets a value of the remote property for every client in `clients` table, *specifically*, to `value`. 
 ]=]
 
-function RemoteProperty.__index:setForPlayer(player: Player, value: any)
+function RemoteProperty.__index:setForClients(clients: { Player }, value: any)
 	assert(
-		typeof(player) == "Instance" and player:IsA("Player"),
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "RemoteProperty:SetForPlayer", "Player", typeof(player))
-	)
-
-	local playerProperty = self:_getPlayerProperty(player)
-	playerProperty:Set(value)
-end
-
---[=[
-	@tag RemoteProperty instance
-
-	Removes the value stored for `player` **specifically** in the the remote property.
-]=]
-
-function RemoteProperty.__index:removeForPlayer(player: Player)
-	assert(
-		typeof(player) == "Instance" and player:IsA("Player"),
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "RemoteProperty:RemoveForPlayer", "Player", typeof(player))
-	)
-
-	if not self._playerProperties[player] then
-		return
-	end
-
-	self._playerProperties[player]:Destroy()
-	self._playerProperties[player] = nil
-
-	-- Send the current value of the remote property back to the client so that
-	-- the client can recieve the update of their new value:
-	SafeInvokeClient(self._valueDispatcherRemoteFunction, player, self:Get())
-end
-
---[=[
-	@tag RemoteProperty instance
-
-	Returns a boolean indicating if there is a specific value stored for `player` 
-	in the remote property.
-]=]
-
-function RemoteProperty.__index:hasPlayerSpecificValueSet(player: Player): boolean
-	assert(
-		typeof(player) == "Instance" and player:IsA("Player"),
+		typeof(clients) == "table",
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(
 			1,
-			"RemoteProperty:HasPlayerSpecificValueSet",
-			"Player",
-			typeof(player)
+			"RemoteProperty:setForClients",
+			"table",
+			typeof(clients)
 		)
 	)
 
-	return self._playerProperties[player] ~= nil
+	for _, client in clients do
+		assert(isPlayer(client), ("Client expected in table, got %s instead."):format(typeof(client)))
+		local clientProperty = self:_getPlayerProperty(client)
+		clientProperty:Set(value)
+	end
 end
 
 --[=[
 	@tag RemoteProperty instance
 
-	Returns the value stored *specifically* for `player` in the remote property. 
+	Sets a value of the remote property for `client` *specifically*, to `value`. 
 ]=]
 
-function RemoteProperty.__index:GetForPlayer(player: Player): any
+function RemoteProperty.__index:setForClient(client: Player, value: any)
 	assert(
-		typeof(player) == "Instance" and player:IsA("Player"),
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "RemoteProperty:GetForPlayer", "Player", typeof(player))
+		typeof(client) == "Instance" and client:IsA("Player"),
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(
+			1,
+			"RemoteProperty:setForClient",
+			"Player",
+			typeof(client)
+		)
 	)
 
-	local playerProperty = self._playerProperties[player]
-	return if playerProperty then playerProperty:Get() else nil
+	local clientProperty = self:_getPlayerProperty(client)
+	clientProperty:Set(value)
+end
+
+--[=[
+	@tag RemoteProperty instance
+
+	Removes the value stored for `client` *specifically* in the the remote property.
+]=]
+
+function RemoteProperty.__index:removeForClient(client: Player)
+	assert(
+		typeof(client) == "Instance" and client:IsA("Player"),
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(
+			1,
+			"RemoteProperty:removeForPlayer",
+			"Player",
+			typeof(client)
+		)
+	)
+
+	if not self._playerProperties[client] then
+		return
+	end
+
+	self._playerProperties[client]:Destroy()
+	self._playerProperties[client] = nil
+
+	-- Send the current value of the remote property back to the client so that
+	-- the client can recieve the update of their new value:
+	safeInvokeClient(self._valueDispatcherRemoteFunction, client, self:Get())
+end
+
+--[=[
+	@tag RemoteProperty instance
+
+	Removes the value of the remote property stored *specifically* for every client in `clients` table.
+]=]
+
+function RemoteProperty.__index:removeForClients(clients: { Player })
+	assert(
+		typeof(clients) == "table",
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(
+			1,
+			"RemoteProperty:removeForClients",
+			"table",
+			typeof(clients)
+		)
+	)
+
+	for _, client in clients do
+		self:removeForClient(client)
+	end
+end
+
+--[=[
+	@tag RemoteProperty instance
+
+	Returns a boolean indicating if there is a specific value stored for `client` 
+	in the remote property.
+]=]
+
+function RemoteProperty.__index:hasClientSpecificValueSet(client: Player): boolean
+	assert(
+		typeof(client) == "Instance" and client:IsA("Player"),
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(
+			1,
+			"RemoteProperty:hasPlayerSpecificValueSet",
+			"Player",
+			typeof(client)
+		)
+	)
+
+	return self._playerProperties[client] ~= nil
+end
+
+--[=[
+	@tag RemoteProperty instance
+
+	Returns the value stored *specifically* for `client` in the remote property. 
+]=]
+
+function RemoteProperty.__index:getForClient(client: Player): any
+	assert(
+		typeof(client) == "Instance" and client:IsA("Player"),
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(
+			1,
+			"RemoteProperty:GetForPlayer",
+			"Player",
+			typeof(client)
+		)
+	)
+
+	local clientProperty = self._playerProperties[client]
+	return if clientProperty then clientProperty:Get() else nil
 end
 
 --[=[
@@ -182,7 +249,7 @@ end
 	who don't have a specific value for them stored in the remote property.
 ]=]
 
-function RemoteProperty.__index:Set(value: any)
+function RemoteProperty.__index:set(value: any)
 	self._property:Set(value)
 end
 
@@ -218,7 +285,7 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 				continue
 			end
 
-			SafeInvokeClient(self._valueDispatcherRemoteFunction, player, newValue)
+			safeInvokeClient(self._valueDispatcherRemoteFunction, player, newValue)
 		end
 	end)
 
@@ -244,7 +311,7 @@ function RemoteProperty.__index:_getPlayerProperty(player: Player): Property.Pro
 			return
 		end
 
-		SafeInvokeClient(self._valueDispatcherRemoteFunction, player, newValue)
+		safeInvokeClient(self._valueDispatcherRemoteFunction, player, newValue)
 	end)
 
 	self._playerProperties[player] = property
@@ -252,7 +319,7 @@ function RemoteProperty.__index:_getPlayerProperty(player: Player): Property.Pro
 end
 
 function RemoteProperty.__index:_init()
-	self._janitor:Add(self.PlayerValueUpdated)
+	self._janitor:Add(self.playerValueUpdated)
 	self._janitor:Add(self._property)
 	self._janitor:Add(function()
 		for _, property in self._playerProperties do

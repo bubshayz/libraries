@@ -11,6 +11,15 @@
 	:::
 ]=]
 
+--[=[ 
+	@prop RemoteSignal Type 
+	@within RemoteSignal
+	@tag Luau Type
+	@readonly
+
+	An exported Luau type of a remote signal object.
+]=]
+
 --[=[
 	@interface SignalConnection 
 	@within RemoteSignal	
@@ -19,12 +28,12 @@
 	.Connected boolean
 ]=]
 
-local packages = script.Parent.Parent.Parent
-local ancestor = script.Parent.Parent
+local Packages = script.Parent.Parent.Parent
+local Network = script.Parent.Parent
 
-local SharedConstants = require(ancestor.SharedConstants)
-local Signal = require(packages.Signal)
-local Janitor = require(packages.Janitor)
+local SharedConstants = require(Network.SharedConstants)
+local Signal = require(Packages.Signal)
+local Janitor = require(Packages.Janitor)
 
 local RemoteSignal = { __index = {} }
 
@@ -56,7 +65,7 @@ end
 	@tag RemoteSignal instance
 	@return SignalConnection
 
-	Works almost exactly the same as [RemoteSignal:ConnectOnce], except the connection returned 
+	Works almost exactly the same as [RemoteSignal:connectOnce], except the connection returned 
 	is disconnected automaticaly once `callback` is called.
 ]=]
 
@@ -79,29 +88,29 @@ end
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to every player in the `players` table only.
+	Fires the arguments `...` to every client in the `clients` table only.
 ]=]
 
-function RemoteSignal.__index:fireForClients(players: { Player }, ...: any)
-	for _, player in players do
-		self._remoteEvent:FireClient(player, ...)
+function RemoteSignal.__index:fireForClients(clients: { Player }, ...: any)
+	for _, client in clients do
+		self._remoteEvent:FireClient(client, ...)
 	end
 end
 
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to  `player`.
+	Fires the arguments `...` to `client`.
 ]=]
 
-function RemoteSignal.__index:fireClient(player: Player, ...: any)
-	self._remoteEvent:FireClient(player, ...)
+function RemoteSignal.__index:fireClient(client: Player, ...: any)
+	self._remoteEvent:FireClient(client, ...)
 end
 
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to every player in the game.
+	Fires the arguments `...` to every client in the game.
 ]=]
 
 function RemoteSignal.__index:fireAllClients(...: any)
@@ -111,7 +120,7 @@ end
 --[=[
 	@tag RemoteSignal instance
 
-	Disconnects all connections connected via [RemoteSignal:Connect] or [RemoteSignal:ConnectOnce].
+	Disconnects all connections connected via [RemoteSignal:connect] or [RemoteSignal:connectOnce].
 ]=]
 
 function RemoteSignal.__index:disconnectAll()
@@ -152,7 +161,7 @@ function RemoteSignal.__index:_init()
 	end)
 end
 
-export type RemoteSignal = typeof(setmetatable(
+export type remoteSignal = typeof(setmetatable(
 	{} :: {
 		_signal: any,
 		_janitor: any,

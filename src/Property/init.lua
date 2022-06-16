@@ -29,18 +29,12 @@
 ]=]
 
 --[=[ 
-	@prop property Type 
+	@prop Property Type 
 	@within Property
 	@tag Luau Type
 	@readonly
 
 	An exported Luau type of a property object.
-
-	```lua
-	local Property = require(...)
-
-	local property: Property.property = Property.new(...) 
-	```
 ]=]
 
 local Signal = require(script.Parent.Signal)
@@ -182,7 +176,7 @@ function Property.__index:destroy()
 	setmetatable(self, nil)
 end
 
-export type property = typeof(setmetatable({} :: {
+export type Property = typeof(setmetatable({} :: {
 	updated: any,
 	_value: any,
 }, Property))

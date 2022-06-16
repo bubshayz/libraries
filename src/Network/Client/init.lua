@@ -4,11 +4,10 @@
 	The client counterpart of the Network module.
 ]=]
 
-local packages = script.Parent.Parent
-local ancestor = script.Parent
+local Packages = script.Parent.Parent
 
-local SharedConstants = require(ancestor.SharedConstants)
-local Promise = require(packages.Promise)
+local Promise = require(Packages.Promise)
+local SharedConstants = require(script.Parent.SharedConstants)
 local ClientRemoteSignal = require(script.ClientRemoteSignal)
 local ClientRemoteProperty = require(script.ClientRemoteProperty)
 
@@ -46,7 +45,7 @@ end
 	-- Client
 	local Network = require(...) 
 
-	for _, networkObject in Network.allFromParnet(workspace) do
+	for _, networkObject in Network.allFromParent(workspace) do
 		print(networkObject.status) 
 	end
 
@@ -55,12 +54,7 @@ end
 	```
 ]=]
 
-function NetworkClient.allFromParnet(parent: Instance): { [string]: { [string]: any } }
-	assert(
-		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.allFromParnet", "Instance", typeof(parent))
-	)
-
+function NetworkClient.allFromParent(parent: Instance): { [string]: { [string]: any } }
 	local networks = {}
 
 	for _, networkFolder in getNetworkFoldersFromParent(parent) do

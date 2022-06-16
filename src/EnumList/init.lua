@@ -55,6 +55,21 @@
 	:::
 ]=]
 
+--[=[ 
+	@prop EnumList Type 
+	@within EnumList
+	@tag Luau Type
+	@readonly
+
+	An exported Luau type of an EnumList object.
+
+	```lua
+	local EnumList = require(...)
+
+	local MyEnumList : EnumList.EnumList = EnumList.new(...) 
+	```
+]=]
+
 local CustomEnum = require(script.CustomEnum)
 
 local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %s instead."

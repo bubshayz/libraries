@@ -6,7 +6,7 @@
 ]=]
 
 --[=[ 
-	@prop Updated Signal <newValue: any>
+	@prop updated Signal <newValue: any>
 	@within ClientRemoteProperty
 	@readonly
 	@tag Signal
@@ -18,10 +18,19 @@
 	The signal is only passed the new updated value as the only argument.
 ]=]
 
-local packages = script.Parent.Parent.Parent
+--[=[ 
+	@prop ClientRemoteProperty Type 
+	@within ClientRemoteProperty
+	@tag Luau Type
+	@readonly
 
-local Property = require(packages.Property)
-local Janitor = require(packages.Janitor)
+	An exported Luau type of a client remote property object.
+]=]
+
+local Packages = script.Parent.Parent.Parent
+
+local Property = require(Packages.Property)
+local Janitor = require(Packages.Janitor)
 
 local ClientRemoteProperty = { __index = {} }
 
@@ -93,7 +102,7 @@ function ClientRemoteProperty.__index:_init()
 	end)
 end
 
-export type ClientRemoteProperty = typeof(setmetatable(
+export type clientRemoteProperty = typeof(setmetatable(
 	{} :: {
 		updated: any,
 		_property: any,
