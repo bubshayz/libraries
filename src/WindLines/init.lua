@@ -1,3 +1,5 @@
+-- ORIGINAL AUTHOR: BOAT BOMBER
+
 --[=[
 	@interface WindLinesConfig  
 	@within WindLines	
