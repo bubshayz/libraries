@@ -146,7 +146,7 @@ end
 --[=[
 	Starts up the wind lines effect.
 
-	:::note
+	:::tip
 	If the player is standing under a roof, then the wind lines effect will be 
 	stopped for realism purposes and this behavior cannot be toggled. However, 
 	you can adjust this behavior through [WindLines:SetConfig] through the 
