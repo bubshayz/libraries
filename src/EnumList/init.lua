@@ -119,7 +119,6 @@ function EnumList.is(self: any): boolean
 end
 
 --[=[
-	@return string
 	@tag EnumList instance
 
 	Returns the name of the enum list.
