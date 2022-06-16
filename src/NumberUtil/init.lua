@@ -96,7 +96,7 @@ end
 ]=]
 
 function NumberUtil.inverseLerp(min: number, max: number, alpha: number): number
-	return ((alpha - min) / (max - min))
+	return (alpha - min) / (max - min)
 end
 
 --[=[
@@ -110,7 +110,7 @@ end
 ]=]
 
 function NumberUtil.map(number: number, inMin: number, inMax: number, outMin: number, outMax: number): number
-	return (outMin + ((outMax - outMin) * ((number - inMin) / (inMax - inMin))))
+	return outMin + ((outMax - outMin) * ((number - inMin) / (inMax - inMin)))
 end
 
 --[=[
