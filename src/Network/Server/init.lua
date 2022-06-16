@@ -7,8 +7,8 @@
 --[=[
 	@interface Middleware
 	@within NetworkServer
-	.Inbound {(args: {...any}) -> ()}?
-	.Outbound {(args: {...any}) -> ()}?
+	.inbound {(args: {...any}) -> ()}?
+	.outbound {(args: {...any}) -> ()}?
 
 	Both `Inbound` and `Outbound` should be array of callbacks (if specified, none of them are required). 
 	Callbacks in `Inbound` are known as "inbound callbacks" and are called whenever a client tries to call 
@@ -211,7 +211,7 @@ end
 	This method will error if the network object is dispatched to the client. 
 	Always make sure to append keys and values *before* you dispatch the 
 	network object. You can check if a network object is dispatched to the 
-	client or not through [NetworkServer:IsDispatchedToClient].
+	client or not through [NetworkServer:dispatched].
 	:::
 ]=]
 
