@@ -16,7 +16,7 @@
 		}
 	})
 
-	print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --> 123
+	print(enumList.PhoneNumber:getEnumItems().BabaBoey) --> 123
 	```
 ]=]
 
@@ -52,12 +52,12 @@ end
 		}
 	})
 
-	local enumItems = enumList.PhoneNumber:GetEnumItems()
+	local enumItems = enumList.PhoneNumber:getEnumItems()
 	print(enumItems == enumList.PhoneNumber) --> true
 	print(enumItems.BabaBoey) --> 123
 	```
 ]=]
-function CustomEnum.__prototype:GetEnumItems(): { [string]: any }
+function CustomEnum.__prototype:getEnumItems(): { [string]: any }
 	return self._enumItems
 end
 function CustomEnum.__prototype:_init()

@@ -48,7 +48,7 @@ end
 	Returns a boolean indicating if `self` is a remote signal or not.
 ]=]
 
-function RemoteSignal.IsA(self: any): boolean
+function RemoteSignal.is(self: any): boolean
 	return getmetatable(self) == RemoteSignal
 end
 
@@ -60,7 +60,7 @@ end
 	is disconnected automaticaly once `callback` is called.
 ]=]
 
-function RemoteSignal.__index:ConnectOnce(callback: (...any) -> ())
+function RemoteSignal.__index:connectOnce(callback: (...any) -> ())
 	return self._signal:ConnectOnce(callback)
 end
 
@@ -72,7 +72,7 @@ end
 	fires the remote signal, and `callback` will be passed arguments sent by the client.
 ]=]
 
-function RemoteSignal.__index:Connect(callback: (...any) -> ())
+function RemoteSignal.__index:connect(callback: (...any) -> ())
 	return self._signal:Connect(callback)
 end
 
@@ -82,7 +82,7 @@ end
 	Fires the arguments `...` to every player in the `players` table only.
 ]=]
 
-function RemoteSignal.__index:FireForSpecificPlayers(players: { Player }, ...: any)
+function RemoteSignal.__index:fireForClients(players: { Player }, ...: any)
 	for _, player in players do
 		self._remoteEvent:FireClient(player, ...)
 	end
@@ -94,7 +94,7 @@ end
 	Fires the arguments `...` to  `player`.
 ]=]
 
-function RemoteSignal.__index:FireForPlayer(player: Player, ...: any)
+function RemoteSignal.__index:fireClient(player: Player, ...: any)
 	self._remoteEvent:FireClient(player, ...)
 end
 
@@ -104,7 +104,7 @@ end
 	Fires the arguments `...` to every player in the game.
 ]=]
 
-function RemoteSignal.__index:FireForAll(...: any)
+function RemoteSignal.__index:fireAllClients(...: any)
 	self._remoteEvent:FireAllClients(...)
 end
 
@@ -114,7 +114,7 @@ end
 	Disconnects all connections connected via [RemoteSignal:Connect] or [RemoteSignal:ConnectOnce].
 ]=]
 
-function RemoteSignal.__index:DisconnectAll()
+function RemoteSignal.__index:disconnectAll()
 	self._signal:DisconnectAll()
 end
 
@@ -124,7 +124,7 @@ end
 	Destroys the remote signal and renders it unusable.
 ]=]
 
-function RemoteSignal.__index:Destroy()
+function RemoteSignal.__index:destroy()
 	self._janitor:Destroy()
 end
 
@@ -132,7 +132,7 @@ end
 	@private
 ]=]
 
-function RemoteSignal.__index:Dispatch(name: string, parent: Instance)
+function RemoteSignal.__index:dispatch(name: string, parent: Instance)
 	local remoteEvent = self._janitor:Add(Instance.new("RemoteEvent"))
 	remoteEvent.Name = name
 	remoteEvent:SetAttribute(SharedConstants.Attribute.BoundToRemoteSignal, true)

@@ -82,7 +82,7 @@ local RemoteProperty = require(script.RemoteProperty)
 
 local NetworkServer = { __index = {} }
 
-local function ValidateMiddleware(middleware)
+local function validateMiddleware(middleware)
 	if not middleware then
 		return { Inbound = {}, Outbound = {} }
 	end
@@ -110,12 +110,16 @@ end
 
 	Creates and returns a new network object of the name i.e `name`. 
 	
-	Internally, a folder is created for each newly created network object, which too is named to `name`, 
-	but the folder it self is initially parented to `nil` so the network object isn't available to the
-	client - call [NetworkServer:Dispatch] in order to render the network object accessible to the client.
+	Internally, a folder is created for each newly created network object, which
+	too is named to `name`, but the folder it self is initially parented to `nil` 
+	so the network object isn't available to the client - call [NetworkServer:Dispatch] 
+	in order to render the network object accessible to the client.
 ]=]
 
-function NetworkServer.new(name: string, middleware: { Outbound: { () -> any? }, Inbound: { () -> any? } }?): NetworkServer
+function NetworkServer.new(
+	name: string,
+	middleware: { Outbound: { () -> any? }, Inbound: { () -> any? } }?
+): NetworkServer
 	assert(
 		typeof(name) == "string",
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.new", "string", typeof(name))
@@ -128,7 +132,7 @@ function NetworkServer.new(name: string, middleware: { Outbound: { () -> any? },
 	local self = setmetatable({
 		_name = name,
 		_janitor = Janitor.new(),
-		_middleware = ValidateMiddleware(middleware),
+		_middleware = validateMiddleware(middleware),
 	}, NetworkServer)
 
 	self:_init()
@@ -139,102 +143,126 @@ end
 	Returns a boolean indicating if `self` is a network object or not.
 ]=]
 
-function NetworkServer.IsA(self: any): boolean
+function NetworkServer.is(self: any): boolean
 	return getmetatable(self) == NetworkServer
 end
 
 --[=[
-	Returns a boolean indicating if the network object is dispatched to the client or not. 
+	Returns a boolean indicating if the network object is dispatched to the 
+	client or not. 
 
 	:::note
 	This method will always return false if the network object is destroyed.
 	:::
 ]=]
 
-function NetworkServer.__index:IsDispatchedToClient(): boolean
+function NetworkServer.__index:isDispatchedToClient(): boolean
 	return self._networkFolder.Parent ~= nil
 end
 
 --[=[
 	@param value RemoteProperty | RemoteSignal | any
 
-	Appends a key value pair, `key` and `value`, to the network object, so that it is available to the client
-	once the network object is dispatched. E.g:
+	Appends a key value pair, `key` and `value`, to the network object, so that
+	it is available to the client once the network object is dispatched. 
+	
+	E.g:
 
 	```lua
 	-- Server
 	local Network = require(...)
 
 	local networkObject = Network.new("test")
-	networkObject:Append("key", "the value!")
-	networkObject:Dispatch(workspace)
+	networkObject:append("key", "the value!")
+	networkObject:dispatch(workspace)
 
 	-- Client
-	local networkObject = Network.FromServer("test", workspace):expect()
+	local networkObject = Network.fromServer("test", workspace):expect()
 	print(networkObject.key) --> "the value!"
 	```
 		
 	:::note
 	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	do apply since remote functions are internally used to replicate the appended key value pairs to the client.
+	do apply since remote functions are internally used to replicate the appended
+	key value pairs to the client.
 	:::
 
 	:::warning
-	This method will error if the network object is dispatched to the client. Always make sure to append keys and values
-	*before* you dispatch the network object. You can check if a network object is dispatched to the client or not through
-	[NetworkServer:IsDispatchedToClient].
+	This method will error if the network object is dispatched to the client. 
+	Always make sure to append keys and values *before* you dispatch the 
+	network object. You can check if a network object is dispatched to the 
+	client or not through [NetworkServer:IsDispatchedToClient].
 	:::
 ]=]
 
-function NetworkServer.__index:Append(key: string, value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any)
-	assert(not self:IsDispatchedToClient(), "Cannot append key value pair as network object is dispatched to the client!")
+function NetworkServer.__index:append(
+	key: string,
+	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
+)
+	assert(
+		not self:IsDispatchedToClient(),
+		"Cannot append key value pair as network object is dispatched to the client!"
+	)
 	assert(
 		typeof(key) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Server:Append", "string", typeof(key))
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Server:append", "string", typeof(key))
 	)
 
 	self:_setup(key, value)
 end
 
 --[=[
-	Dispatches the network folder of the network object to `parent`, rendering the network object accessible
-	to the client now.
+	Dispatches the network folder of the network object to `parent`, rendering
+	the network object accessible to the client now.
 
 	:::warning
-	If another network object of the same name as this network object, is already dispatched to `parent`, then this
-	method will error - you can't have more than 1 network object of the same name dispatched to the same instance!
+	If another network object of the same name as this network object, is already
+	dispatched to `parent`, then this method will error - you can't have more than 
+	1 network object of the same name dispatched to the same instance!
 	:::
 ]=]
 
-function NetworkServer.__index:Dispatch(parent: Instance)
+function NetworkServer.__index:dispatch(parent: Instance)
 	assert(
 		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network:Dispatch", "Instance", typeof(parent))
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network:dispatch", "Instance", typeof(parent))
 	)
+
+	for _, child in NetworkServer.parent:GetChildren() do
+		assert(
+			child.Name ~= self._name,
+			('A network object "%s" is already dispatched to parent %s'):format(child.Name, parent:GetFullName())
+		)
+	end
 
 	self._networkFolder.Parent = parent
 end
 
 --[=[
-	Destroys the network object and all appended remote properties / remote signals within the network object, and renders
-	the network object useless. 
+	Destroys the network object and all appended remote properties / 
+	remote signals within the network object, and renders the network 
+	object useless. 
 ]=]
 
-function NetworkServer.__index:Destroy()
+function NetworkServer.__index:destroy()
 	self._janitor:Destroy()
 end
 
-function NetworkServer.__index:_setup(key: string, value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any)
+function NetworkServer.__index:_setup(
+	key: string,
+	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
+)
 	if RemoteSignal.IsA(value) or RemoteProperty.IsA(value) then
 		value:Dispatch(key, self._networkFolder)
 
 		self._janitor:Add(function()
-			-- Destroy the remote property or remote signal if it already isn't destroyed yet:
-			if not (RemoteSignal.IsA(value) or RemoteProperty.IsA(value)) then
+			-- Destroy the remote property or remote signal if it already
+			-- isn't destroyed yet,  to prevent memory leaks:
+			if not (RemoteSignal.is(value) or RemoteProperty.is(value)) then
 				return
 			end
 
-			value:Destroy()
+			value:destroy()
 		end)
 
 		return

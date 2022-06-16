@@ -14,7 +14,7 @@ local ClientRemoteProperty = require(script.ClientRemoteProperty)
 
 local NetworkClient = {}
 
-local function GetNetworkFoldersFromParent(parent: Instance): { Folder }
+local function getNetworkFoldersFromParent(parent: Instance): { Folder }
 	local networkFolders = {}
 
 	for _, networkFolder in parent:GetChildren() do
@@ -36,17 +36,17 @@ end
 	local Network = require(...) 
 
 	local networkObject1 = Network.new("Test1", workspace)
-	networkObject:Append("status", "not good mate")
-	networkObject:Dispatch()
+	networkObject:append("status", "not good mate")
+	networkObject:dispatch()
 
 	local networkObject2 = Network.new("Test2", workspace)
-	networkObject:Append("status", "good mate!")
-	networkObject:Dispatch()
+	networkObject:append("status", "good mate!")
+	networkObject:dispatch()
 
 	-- Client
 	local Network = require(...) 
 
-	for _, networkObject in Network.AllFromParent(workspace) do
+	for _, networkObject in Network.allFromParnet(workspace) do
 		print(networkObject.status) 
 	end
 
@@ -55,15 +55,15 @@ end
 	```
 ]=]
 
-function NetworkClient.AllFromParent(parent: Instance): { [string]: { [string]: any } }
+function NetworkClient.allFromParnet(parent: Instance): { [string]: { [string]: any } }
 	assert(
 		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.AllFromParent", "Instance", typeof(parent))
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.allFromParnet", "Instance", typeof(parent))
 	)
 
 	local networks = {}
 
-	for _, networkFolder in GetNetworkFoldersFromParent(parent) do
+	for _, networkFolder in getNetworkFoldersFromParent(parent) do
 		networks[networkFolder.Name] = NetworkClient._getAbstractOfNetworkFolder(networkFolder)
 	end
 
@@ -73,18 +73,19 @@ end
 --[=[
 	@return Promise<DispatchedNetworkObject: {[string]: any}>
 
-	Returns a [promise](https://eryn.io/roblox-lua-promise/) which is resolved (with the network object) 
-	once a network object of name i.e `name`, is found in `parent`.
+	Returns a [promise](https://eryn.io/roblox-lua-promise/) which is resolved 
+	(with the network object)  once a network object of name i.e `name`, is 
+	found in `parent`.
 ]=]
 
-function NetworkClient.FromName(name: string, parent: Instance): any
+function NetworkClient.fromParent(name: string, parent: Instance): any
 	assert(
 		typeof(name) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.FromName", "string", typeof(name))
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.fromParent", "string", typeof(name))
 	)
 	assert(
 		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(2, "Network.FromName", "Instance", typeof(parent))
+		SharedConstants.ErrorMessage.InvalidArgumentType:format(2, "Network.fromParent", "Instance", typeof(parent))
 	)
 
 	return Promise.new(function(resolve)

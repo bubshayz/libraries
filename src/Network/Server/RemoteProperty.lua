@@ -68,8 +68,8 @@ end
 function RemoteProperty.new(initialValue: any)
 	local property = Property.new(initialValue)
 	local self = setmetatable({
-		Updated = property.Updated,
-		PlayerValueUpdated = Signal.new(),
+		updated = property.Updated,
+		playerValueUpdated = Signal.new(),
 		_property = property,
 		_playerProperties = {},
 		_janitor = Janitor.new(),
@@ -83,7 +83,7 @@ end
 	Returns a boolean indicating if `self` is a remote property or not.
 ]=]
 
-function RemoteProperty.IsA(self: any): boolean
+function RemoteProperty.is(self: any): boolean
 	return getmetatable(self) == RemoteProperty
 end
 
@@ -93,7 +93,7 @@ end
 	Returns the current value set for the remote property.
 ]=]
 
-function RemoteProperty.__index:Get(): any
+function RemoteProperty.__index:get(): any
 	return self._property:Get()
 end
 
@@ -103,7 +103,7 @@ end
 	Sets a value of the remote property for `player` **specifically**, to `value`. 
 ]=]
 
-function RemoteProperty.__index:SetForPlayer(player: Player, value: any)
+function RemoteProperty.__index:setForPlayer(player: Player, value: any)
 	assert(
 		typeof(player) == "Instance" and player:IsA("Player"),
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "RemoteProperty:SetForPlayer", "Player", typeof(player))
@@ -119,7 +119,7 @@ end
 	Removes the value stored for `player` **specifically** in the the remote property.
 ]=]
 
-function RemoteProperty.__index:RemoveForPlayer(player: Player)
+function RemoteProperty.__index:removeForPlayer(player: Player)
 	assert(
 		typeof(player) == "Instance" and player:IsA("Player"),
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "RemoteProperty:RemoveForPlayer", "Player", typeof(player))
@@ -132,17 +132,19 @@ function RemoteProperty.__index:RemoveForPlayer(player: Player)
 	self._playerProperties[player]:Destroy()
 	self._playerProperties[player] = nil
 
-	-- Send the current value back to the client so the client can recieve updates of their new value:
+	-- Send the current value of the remote property back to the client so that
+	-- the client can recieve the update of their new value:
 	SafeInvokeClient(self._valueDispatcherRemoteFunction, player, self:Get())
 end
 
 --[=[
 	@tag RemoteProperty instance
 
-	Returns a boolean indicating if there is a specific value stored for `player` in the remote property.
+	Returns a boolean indicating if there is a specific value stored for `player` 
+	in the remote property.
 ]=]
 
-function RemoteProperty.__index:HasPlayerSpecificValueSet(player: Player): boolean
+function RemoteProperty.__index:hasPlayerSpecificValueSet(player: Player): boolean
 	assert(
 		typeof(player) == "Instance" and player:IsA("Player"),
 		SharedConstants.ErrorMessage.InvalidArgumentType:format(
@@ -175,8 +177,9 @@ end
 --[=[
 	@tag RemoteProperty instance
 
-	Sets the value of the remote property to `value`, and so for all other clients (who can access this value through a 
-	client remote property), who don't have a specific value for them stored in the remote property.
+	Sets the value of the remote property to `value`, and so for all other 
+	clients (who can access this value through a  client remote property), 
+	who don't have a specific value for them stored in the remote property.
 ]=]
 
 function RemoteProperty.__index:Set(value: any)
@@ -189,7 +192,7 @@ end
 	Destroys the remote property and renders it unusable.
 ]=]
 
-function RemoteProperty.__index:Destroy()
+function RemoteProperty.__index:destroy()
 	self._janitor:Destroy()
 end
 
@@ -197,7 +200,7 @@ end
 	@private
 ]=]
 
-function RemoteProperty.__index:Dispatch(name: string, parent: Instance)
+function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 	local valueDispatcherRemoteFunction = Instance.new("RemoteFunction")
 	valueDispatcherRemoteFunction.Name = name
 	valueDispatcherRemoteFunction:SetAttribute(SharedConstants.Attribute.BoundToRemoteProperty, true)
@@ -208,7 +211,7 @@ function RemoteProperty.__index:Dispatch(name: string, parent: Instance)
 	end
 
 	-- Send off the new value to the current players in game:
-	self._property.Updated:Connect(function(newValue)
+	self._property.updated:Connect(function(newValue)
 		for _, player in RemoteProperty._players do
 			if self:HasPlayerSpecificValueSet(player) then
 				-- We must not send this new value to this player as it is not needed.
@@ -234,8 +237,8 @@ function RemoteProperty.__index:_getPlayerProperty(player: Player): Property.Pro
 
 	local property = Property.new()
 
-	property.Updated:Connect(function(newValue)
-		self.PlayerValueUpdated:Fire(player, newValue)
+	property.updated:Connect(function(newValue)
+		self.playerValueUpdated:Fire(player, newValue)
 
 		if not player:IsDescendantOf(Players) then
 			return
@@ -260,7 +263,7 @@ function RemoteProperty.__index:_init()
 	end)
 end
 
-function RemoteProperty._init()
+function RemoteProperty._startTrackingPlayers()
 	RemoteProperty._players = Players:GetPlayers()
 
 	Players.PlayerAdded:Connect(function(player)
@@ -272,12 +275,12 @@ function RemoteProperty._init()
 	end)
 end
 
-RemoteProperty._init()
+RemoteProperty._startTrackingPlayers()
 
 export type RemoteProperty = typeof(setmetatable(
 	{} :: {
-		Updated: any,
-		PlayerValueUpdated: any,
+		updated: any,
+		playerValueUpdated: any,
 		_property: Property.Property,
 		_valueDispatcherRemoteFunction: RemoteFunction?,
 		_playerProperties: {},

@@ -1,8 +1,8 @@
 --[=[
 	@class ClientRemoteProperty
 
-	The clientside counterpart of [RemoteProperty]. A client remote property in layman's terms is just an object 
-	connected to a serverside remote property.
+	The clientside counterpart of [RemoteProperty]. A client remote property 
+	in layman's terms is just an object connected to a serverside remote property.
 ]=]
 
 --[=[ 
@@ -12,8 +12,9 @@
 	@tag Signal
 	@tag ClientRemoteProperty instance
 
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value 
-	of the client in the serverside remote property (to which the client remote property is connected to) is updated. 
+	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired 
+	whenever the value  of the client in the serverside remote property 
+	(to which the client remote property is connected to) is updated. 
 	The signal is only passed the new updated value as the only argument.
 ]=]
 
@@ -31,7 +32,7 @@ local ClientRemoteProperty = { __index = {} }
 function ClientRemoteProperty.new(remoteFunction: RemoteFunction): ClientRemoteProperty
 	local property = Property.new()
 	local self = setmetatable({
-		Updated = property.Updated,
+		updated = property.Updated,
 		_property = property,
 		_janitor = Janitor.new(),
 		_remoteFunction = remoteFunction,
@@ -45,18 +46,18 @@ end
 	Returns a boolean indicating if `self` is a client remote property or not.
 ]=]
 
-function ClientRemoteProperty.IsA(self: any): boolean
+function ClientRemoteProperty.is(self: any): boolean
 	return getmetatable(self) == ClientRemoteProperty
 end
 
 --[=[
 	@tag ClientRemoteProperty instance
 
-	Returns the value of the client stored in the serverside remote property (to which the client remote property
-	is connected to).
+	Returns the value of the client stored in the serverside remote property (
+	to which the client remote property is connected to).
 ]=]
 
-function ClientRemoteProperty.__index:Get(): any
+function ClientRemoteProperty.__index:get(): any
 	return self._property:Get()
 end
 
@@ -66,7 +67,7 @@ end
 	Destroys the client remote property and renders it unusable.
 ]=]
 
-function ClientRemoteProperty.__index:Destroy()
+function ClientRemoteProperty.__index:destroy()
 	self._janitor:Destroy()
 end
 
@@ -94,7 +95,7 @@ end
 
 export type ClientRemoteProperty = typeof(setmetatable(
 	{} :: {
-		Updated: any,
+		updated: any,
 		_property: any,
 		_janitor: any,
 		_remoteFunction: RemoteFunction,

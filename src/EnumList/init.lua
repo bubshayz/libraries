@@ -6,13 +6,13 @@
 	used to store *custom* enums inside.
  
 	```lua
-	local enumList = EnumList.new("EnumList", {
+	local MyEnumList = EnumList.new("EnumList", {
 		PhoneNumber = {
 			BabaBoey = 123,
 		}
 	})
 
-	print(enumList.PhoneNumber.BabaBoey) --> 123
+	print(MyEnumList.PhoneNumber.BabaBoey) --> 123
 	```
 
 	:::tip Generalization iteration!
@@ -20,11 +20,11 @@
 	EnumLists are iterable, e.g:
 
 	```lua
-	local enumList = EnumList.new("EnumList", {
+	local MyEnumList = EnumList.new("EnumList", {
 		Test = {Alphabet = "A"}
 	})
 
-	for enumName, enum in enumList do
+	for enumName, enum in MyEnumList do
 		print(enumName, enum.Alphabet)
 	end
 
@@ -38,7 +38,7 @@
 	```lua
 	local EnumList = require(...)
 
-	local enumList = EnumList.new("EnumList", {
+	local MyEnumList = EnumList.new("MyEnumList", {
 		Enum = {
 			Deep = {
 				MoreDeep = {
@@ -48,9 +48,9 @@
 		}
 	})
 
-	print(enumList.Enum.Deep.MoreDeep.none) --> nil, but won't error..
-	print(enumList.Enum.Deep.lo) --> nil, but won't error..
-	print(enumList.Enum.b) --> will error (not a deep chain!)
+	print(MyEnumList.Enum.Deep.MoreDeep.none) --> nil, but won't error..
+	print(MyEnumList.Enum.Deep.lo) --> nil, but won't error..
+	print(MyEnumList.Enum.b) --> will error (not a deep chain!)
 	``` 
 	:::
 ]=]
@@ -70,14 +70,15 @@ local EnumList = {
 --[=[
 	@return EnumList
 
-	A constructor method which creates a new enum list out of `enumItems`, and with name `name`.
+	A constructor method which creates a new enum list out of `enumItems`, 
+	with the name of `name`.
 
 	```lua
 	local EnumList = require(...)
 
-	local enumList = EnumList.new("Enums", {Test = 123})
+	local MyEnumList = EnumList.new("Enums", {Test = 123})
 
-	print(enumList.Test) --> 123
+	print(MyEnumList.Test) --> 123
 	```
 ]=]
 
@@ -98,8 +99,19 @@ end
 	A method which returns a boolean indicating if `self` is a enumlist or not.
 ]=]
 
-function EnumList.IsA(self: any): boolean
+function EnumList.is(self: any): boolean
 	return getmetatable(self) == EnumList
+end
+
+--[=[
+	@return string
+	@tag EnumList instance
+
+	Returns the name of the enum list.
+]=]
+
+function EnumList.__prototype:getName(): string
+	return self._name
 end
 
 --[=[
@@ -109,7 +121,7 @@ end
 	Returns the enums of the enum list.
 ]=]
 
-function EnumList.__prototype:GetEnums(): { [string]: { [string]: any } }
+function EnumList.__prototype:getEnums(): { [string]: { [string]: any } }
 	return self._enums
 end
 
@@ -139,7 +151,7 @@ function EnumList:__index(key)
 end
 
 export type EnumList = typeof(setmetatable({} :: {
-	_name: string,
+	name: string,
 	_enums: { [string]: { [string]: any } },
 }, EnumList))
 

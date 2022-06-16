@@ -6,7 +6,7 @@
 	```lua
 	local InstanceUtil = require(...)
 
-	InstanceUtil.SetInstanceAttributes(workspace.Baseplate, {IsCool = true})
+	InstanceUtil.setInstanceAttributes(workspace.Baseplate, {IsCool = true})
 	print(workspace.Baseplate:GetAttributes()) --> {IsCool = true}
 	```
 ]=]
@@ -27,12 +27,12 @@ local InstanceUtil = {}
 	```lua
 	local InstanceUtil = require(...)
 
-	InstanceUtil.SetInstanceProperties(workspace.Baseplate, {Transparency = 1})
+	InstanceUtil.setInstanceProperties(workspace.Baseplate, {Transparency = 1})
 	print(workspace.Baseplate.Transparency) --> 1
 	```
 ]=]
 
-function InstanceUtil.SetInstanceProperties(instance: Instance, properties: { [string]: any })
+function InstanceUtil.setInstanceProperties(instance: Instance, properties: { [string]: any })
 	for property, value in properties do
 		instance[property] = value
 	end
@@ -44,12 +44,12 @@ end
 	```lua
 	local InstanceUtil = require(...)
 
-	InstanceUtil.SetInstanceAttributes(workspace.Baseplate, {IsMayoSauce = true})
+	InstanceUtil.setInstanceAttributes(workspace.Baseplate, {IsMayoSauce = true})
 	print(workspace.Baseplate:GetAttribute("IsMayoSauce")) --> true
 	```
 ]=]
 
-function InstanceUtil.SetInstanceAttributes(instance: Instance, attributes: { [string]: any })
+function InstanceUtil.setInstanceAttributes(instance: Instance, attributes: { [string]: any })
 	for attribute, value in attributes do
 		instance:SetAttribute(attribute, value)
 	end
@@ -60,7 +60,7 @@ end
 	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their collision group set to `collisionGroup`.
 ]=]
 
-function InstanceUtil.SetInstancePhysicsCollisionGroup(instance: Instance, collisionGroup: string)
+function InstanceUtil.setInstancePhysicsCollisionGroup(instance: Instance, collisionGroup: string)
 	if instance:IsA("BasePart") then
 		PhysicsService:SetPartCollisionGroup(instance, collisionGroup)
 	else
@@ -79,7 +79,7 @@ end
 	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their collision group set to `"Default"`.
 ]=]
 
-function InstanceUtil.ResetInstancePhysicsCollisionGroup(instance: Instance)
+function InstanceUtil.resetInstancePhysicsCollisionGroup(instance: Instance)
 	if instance:IsA("BasePart") then
 		PhysicsService:SetPartCollisionGroup(instance, DEFAULT_PHYSICS_COLLISION_GROUP)
 	else
@@ -98,15 +98,13 @@ end
 	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to match the `physicalProperties` table
 
 	```lua
-	local physicalProperties = {
-		Density = 1
-	}
+	local physicalProperties = {Density = 1}
 
-	InstanceUtil.SetInstancePhysicalProperties(workspace.Baseplate, physicalProperties)
+	InstanceUtil.setInstancePhysicalProperties(workspace.Baseplate, physicalProperties)
 	```
 ]=]
 
-function InstanceUtil.SetInstancePhysicalProperties(
+function InstanceUtil.setInstancePhysicalProperties(
 	instance: Instance,
 	physicalProperties: {
 		Density: number?,
@@ -142,7 +140,7 @@ end
 	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to the default.
 ]=]
 
-function InstanceUtil.ResetInstancePhysicalProperties(instance: Instance)
+function InstanceUtil.resetInstancePhysicalProperties(instance: Instance)
 	if instance:IsA("BasePart") then
 		instance.CustomPhysicalProperties = DEFAULT_INSTANCE_PHYSICAL_PROPERTIES
 	else
@@ -160,7 +158,7 @@ end
 	Returns a read only dictionary of all corners of `instance`, top and bottom.
 ]=]
 
-function InstanceUtil.GetInstanceCorners(instance: Instance): { Top: { Vector3 }, Bottom: { Vector3 } }
+function InstanceUtil.getInstanceCorners(instance: Instance): { Top: { Vector3 }, Bottom: { Vector3 } }
 	local size = instance.Size
 
 	local frontFaceCenter = (instance.CFrame + instance.CFrame.LookVector * size.Z / 2)
@@ -200,7 +198,11 @@ end
 	register properly. If this argument isn't specified, then it will default to `0.01`.
 ]=]
 
-function InstanceUtil.GetInstanceFloorMaterial(instance: BasePart, raycastParams: RaycastParams?, depth: number?): EnumItem
+function InstanceUtil.getInstanceFloorMaterial(
+	instance: BasePart,
+	raycastParams: RaycastParams?,
+	depth: number?
+): EnumItem
 	depth = depth or DEFAULT_DEPTH
 
 	if InstanceUtil._isInstanceInWater(instance) then
@@ -226,7 +228,7 @@ end
 	::: 
 ]=]
 
-function InstanceUtil.SetInstanceNetworkOwner(instance: BasePart, networkOwner: Player?)
+function InstanceUtil.setInstanceNetworkOwner(instance: BasePart, networkOwner: Player?)
 	if not instance:CanSetNetworkOwnership() then
 		return
 	end
@@ -244,7 +246,7 @@ end
 	::: 
 ]=]
 
-function InstanceUtil.GetInstanceNetworkOwner(instance: BasePart): Player?
+function InstanceUtil.getInstanceNetworkOwner(instance: BasePart): Player?
 	if instance:IsGrounded() then
 		return nil
 	end
@@ -252,13 +254,21 @@ function InstanceUtil.GetInstanceNetworkOwner(instance: BasePart): Player?
 	return instance:GetNetworkOwner()
 end
 
-function InstanceUtil._getGroundInstanceMaterial(instance: Instance, raycastParams: RaycastParams?, depth: number): EnumItem?
+function InstanceUtil._getGroundInstanceMaterial(
+	instance: Instance,
+	raycastParams: RaycastParams?,
+	depth: number
+): EnumItem?
 	local corners = InstanceUtil.GetInstanceCorners(instance)
 	local depthVector = Vector3.new(0, depth, 0)
 
 	for index, cornerPosition in corners.Top do
 		local bottomCornerPosition = corners.Bottom[index]
-		local ray = Workspace:Raycast(cornerPosition, (bottomCornerPosition - cornerPosition) - depthVector, raycastParams)
+		local ray = Workspace:Raycast(
+			cornerPosition,
+			(bottomCornerPosition - cornerPosition) - depthVector,
+			raycastParams
+		)
 
 		if ray then
 			return ray.Material

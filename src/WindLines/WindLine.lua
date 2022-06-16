@@ -30,11 +30,11 @@ function WindLine.new(currentConfig: Types.WindLinesConfig, updateQueue: { any }
 	return self
 end
 
-function WindLine.IsA(self: any): boolean
+function WindLine.is(self: any): boolean
 	return getmetatable(self) == WindLine
 end
 
-function WindLine.__index:Destroy()
+function WindLine.__index:destroy()
 	table.remove(self._updateQueue, table.find(self._updateQueue, self))
 
 	self.Attachment0:Destroy()
