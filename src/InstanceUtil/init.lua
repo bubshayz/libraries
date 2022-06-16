@@ -57,7 +57,7 @@ end
 
 --[=[
 	Sets the collision group of `instance` to `collisionGroup`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their collision group set to `collisionGroup`.
+	(BaseParts') will have their collision group set to `collisionGroup`.
 ]=]
 
 function InstanceUtil.setInstancePhysicsCollisionGroup(instance: Instance, collisionGroup: string)
@@ -76,7 +76,7 @@ end
 
 --[=[
 	Sets the collision group of `instance` to the default collision group i.e `"Default"`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their collision group set to `"Default"`.
+	(BaseParts') will have their collision group set to `"Default"`.
 ]=]
 
 function InstanceUtil.resetInstancePhysicsCollisionGroup(instance: Instance)
@@ -95,10 +95,10 @@ end
 
 --[=[
 	Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to match the `physicalProperties` table, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to match the `physicalProperties` table
+	(BaseParts') will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to match the `physicalProperties` table
 
 	```lua
-	local physicalProperties = {Density = 1}
+	local physicalProperties = {density = 1}
 
 	InstanceUtil.setInstancePhysicalProperties(workspace.Baseplate, physicalProperties)
 	```
@@ -107,19 +107,19 @@ end
 function InstanceUtil.setInstancePhysicalProperties(
 	instance: Instance,
 	physicalProperties: {
-		Density: number?,
-		Friction: number?,
-		Elasticity: number?,
-		FrictionWeight: number?,
-		ElasticityWeight: number?,
+		density: number?,
+		friction: number?,
+		elasticity: number?,
+		frictionWeight: number?,
+		elasticityWeight: number?,
 	}
 )
 	local customPhysicalProperties = PhysicalProperties.new(
-		physicalProperties.Density or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Density,
-		physicalProperties.Friction or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Friction,
-		physicalProperties.Elasticity or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Elasticity,
-		physicalProperties.FrictionWeight or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.FrictionWeight,
-		physicalProperties.ElasticityWeight or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.ElasticityWeight
+		physicalProperties.density or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Density,
+		physicalProperties.friction or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Friction,
+		physicalProperties.elasticity or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Elasticity,
+		physicalProperties.frictionWeight or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.FrictionWeight,
+		physicalProperties.elasticityWeight or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.ElasticityWeight
 	)
 
 	if instance:IsA("BasePart") then
@@ -137,7 +137,7 @@ end
 
 --[=[
 	Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to the default, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	([BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart)'s) will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to the default.
+	(BaseParts') will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to the default.
 ]=]
 
 function InstanceUtil.resetInstancePhysicalProperties(instance: Instance)
@@ -158,7 +158,7 @@ end
 	Returns a read only dictionary of all corners of `instance`, top and bottom.
 ]=]
 
-function InstanceUtil.getInstanceCorners(instance: Instance): { Top: { Vector3 }, Bottom: { Vector3 } }
+function InstanceUtil.getInstanceCorners(instance: Instance): { top: { Vector3 }, bottom: { Vector3 } }
 	local size = instance.Size
 
 	local frontFaceCenter = (instance.CFrame + instance.CFrame.LookVector * size.Z / 2)
@@ -169,14 +169,14 @@ function InstanceUtil.getInstanceCorners(instance: Instance): { Top: { Vector3 }
 	local bottomBackEdgeCenter = backFaceCenter - backFaceCenter.UpVector * size.Y / 2
 
 	return table.freeze({
-		Bottom = table.freeze({
+		bottom = table.freeze({
 			(bottomBackEdgeCenter + bottomBackEdgeCenter.RightVector * size.X / 2).Position,
 			(bottomBackEdgeCenter - bottomBackEdgeCenter.RightVector * size.X / 2).Position,
 			(bottomFrontEdgeCenter + bottomFrontEdgeCenter.RightVector * size.X / 2).Position,
 			(bottomFrontEdgeCenter - bottomFrontEdgeCenter.RightVector * size.X / 2).Position,
 		}),
 
-		Top = table.freeze({
+		top = table.freeze({
 			(topBackEdgeCenter + topBackEdgeCenter.RightVector * size.X / 2).Position,
 			(topBackEdgeCenter - topBackEdgeCenter.RightVector * size.X / 2).Position,
 			(topFrontEdgeCenter + topFrontEdgeCenter.RightVector * size.X / 2).Position,
@@ -186,7 +186,8 @@ function InstanceUtil.getInstanceCorners(instance: Instance): { Top: { Vector3 }
 end
 
 --[=[
-	Returns the material the instance is lying on. 
+	Returns the material the instance is lying on. If `instance` is under water, then [Enum.Material.Water]() will be returned, elseif
+	`instance` is in air, then [Enum.Material.Air]() will be returned.
 	
 	- The 2nd argument can be passed as a [RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) object,
 	which will be used in determining the material of `instance` through ray casting.
@@ -219,12 +220,12 @@ function InstanceUtil.getInstanceFloorMaterial(
 end
 
 --[=[
-	Sets the network owner of `instance` to `networkOwner` **safely**.
+	Sets the network owner of `instance` to `networkOwner` *safely*.
 
 	:::tip
-	This method will safely return `nil` instead of erroring, if the network ownership API can't be used on `instance`. Hence this
-	method should be preferred over directly setting the network owner of `instance` 
-	via [SetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#SetNetworkOwner),
+	This method should be preferred over directly setting the network owner of `instance` 
+	via [SetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#SetNetworkOwner), as
+	it won't error in cases where the network ownership API cannot be used on `instance`.
 	::: 
 ]=]
 
@@ -237,12 +238,12 @@ function InstanceUtil.setInstanceNetworkOwner(instance: BasePart, networkOwner: 
 end
 
 --[=[
-	Returns the network owner of `instance` **safely**.
+	Returns the network owner of `instance` *safely*.
 	
 	:::tip
-	This method will safely return `nil` instead of erroring, if the network ownership API can't be used on `instance` . Hence this
-	method should be preferred over directly getting the network owner of `instance` 
-	via [GetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#GetNetworkOwner).
+	This method should be preferred over directly getting the network owner of `instance` 
+	via [GetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#GetNetworkOwner), as
+	it will safely return `nil` in cases where the network ownership API cannot be used on `instance`.
 	::: 
 ]=]
 
