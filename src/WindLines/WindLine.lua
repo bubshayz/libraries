@@ -18,10 +18,10 @@ local WindLine = { __index = {} }
 
 function WindLine.new(currentConfig: Types.WindLinesConfig, updateQueue: { any }): WindLine
 	local self = setmetatable({
-		Lifetime = currentConfig.Lifetime + (math.random(-10, 10) * 0.1),
-		Speed = currentConfig.Speed + (math.random(-10, 10) * 0.1),
-		StartClock = os.clock(),
-		Seed = math.random(1, 1000) * 0.1,
+		lifetime = currentConfig.lifetime + (math.random(-10, 10) * 0.1),
+		speed = currentConfig.speed + (math.random(-10, 10) * 0.1),
+		startClock = os.clock(),
+		seed = math.random(1, 1000) * 0.1,
 		_updateQueue = updateQueue,
 		_currentConfig = currentConfig,
 	}, WindLine)
@@ -30,16 +30,16 @@ function WindLine.new(currentConfig: Types.WindLinesConfig, updateQueue: { any }
 	return self
 end
 
-function WindLine.IsA(self: any): boolean
+function WindLine.is(self: any): boolean
 	return getmetatable(self) == WindLine
 end
 
-function WindLine.__index:Destroy()
+function WindLine.__index:destroy()
 	table.remove(self._updateQueue, table.find(self._updateQueue, self))
 
-	self.Attachment0:Destroy()
-	self.Trail:Destroy()
-	self.Attachment1:Destroy()
+	self.attachment0:Destroy()
+	self.trail:Destroy()
+	self.attachment1:Destroy()
 end
 
 function WindLine.__index:_init()
@@ -62,21 +62,21 @@ function WindLine.__index:_init()
 	attachment0.Parent = terrain
 	attachment1.Parent = terrain
 
-	self.Attachment0 = attachment0
-	self.Attachment1 = attachment1
-	self.Trail = trail
-	self.Position = position
-	self.Direction = position
+	self.attachment0 = attachment0
+	self.attachment1 = attachment1
+	self.trail = trail
+	self.position = position
+	self.direction = position
 
 	table.insert(self._updateQueue, self)
 end
 
 export type WindLine = typeof(setmetatable(
 	{} :: {
-		Lifetime: string,
-		Speed: number,
-		StartClock: number,
-		Seed: number,
+		lifetime: string,
+		speed: number,
+		startClock: number,
+		seed: number,
 		_updateQueue: { WindLine },
 		_currentConfig: Types.WindLinesConfig,
 	},

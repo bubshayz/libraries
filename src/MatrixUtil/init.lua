@@ -1,7 +1,8 @@
 --[=[
 	@class MatrixUtil
 
-	A utility module for working with matrixes. A matrix is simply an array consisting of arrays, e.g:
+	A utility module for working with matrixes. A matrix is simply an array 
+	consisting of arrays, e.g:
 
 	```lua
 	local matrix = {
@@ -15,7 +16,8 @@
 local MatrixUtil = {}
 
 --[=[
-	Searches `matrix` row wise, and returns a value in a row which matches with the rest of the values of that row. E.g:
+	Searches `matrix` row wise, and returns a value in a row which matches with
+	the rest of the values of that row. E.g:
 
 	```lua
 	local matrix = {
@@ -24,10 +26,11 @@ local MatrixUtil = {}
 		{0, 0, 2},
 	}
 
-	print(MatrixUtil.GetMatchingRowsValue(matrix)) --> 1 (The first row is equally matched (all 1s))
+	print(MatrixUtil.getMatchingRowsValue(matrix)) --> 1 (The first row is equally matched (all 1s))
 	```
 
-	Additionally, you can specify `depth` if you want to control how far the method should check each row. For e.g: 
+	Additionally, you can specify `depth` if you want to control how far the 
+	method should check each row. For e.g: 
 
 	```lua
 	local matrix = {
@@ -36,12 +39,12 @@ local MatrixUtil = {}
 		{1, 1, 1, 0}, 
 	}
 
-	print(MatrixUtil.GetMatchingRowsValue(matrix, 3)) --> 1  (The last row's first 3 values (1s) are equally matched)
-	print(MatrixUtil.GetMatchingRowsValue(matrix, 4)) --> nil  (No row's first 4 values are equally matched)
+	print(MatrixUtil.getMatchingRowsValue(matrix, 3)) --> 1  (The last row's first 3 values (1s) are equally matched)
+	print(MatrixUtil.getMatchingRowsValue(matrix, 4)) --> nil  (No row's first 4 values are equally matched)
 	```
 ]=]
 
-function MatrixUtil.GetMatchingRowsValue(matrix: { { any } }, depth: number?): any
+function MatrixUtil.getMatchingRowsValue(matrix: { { any } }, depth: number?): any
 	-- Search the matrix row-wise and return a value from  a row which matches with
 	-- the rest of the rows in the matrix:
 	for row = 1, #matrix do
@@ -65,7 +68,10 @@ function MatrixUtil.GetMatchingRowsValue(matrix: { { any } }, depth: number?): a
 end
 
 --[=[
-	Searches `matrix` diagonally, and returns a value which matches with the rest of the values of the arrays in `matrix`. E.g:
+	Searches `matrix` diagonally, and returns a value which matches with the 
+	rest of the values of the arrays in `matrix`. 
+	
+	E.g:
 
 	```lua
 	local matrix = {
@@ -74,10 +80,11 @@ end
 		{0, 0, 5},
 	}
 
-	print(MatrixUtil.GetMatchingDiagonalColumnsValue(matrix)) --> 1 (A column has matching values diagonally (just 5s))
+	print(MatrixUtil.getMatchingDiagonalColumnsValue(matrix)) --> 1 (A column has matching values diagonally (just 5s))
 	```
 
-	Additionally, you can specify `depth` if you want to control how far the method should search `matrix` diagonally. For e.g: 
+	Additionally, you can specify `depth` if you want to control how far the 
+	method should search `matrix` diagonally. For e.g: 
 
 	```lua
 	local matrix = {
@@ -87,15 +94,16 @@ end
 		{0, 0, 0, 0},
 	}
 
-	print(MatrixUtil.GetMatchingDiagonalColumnsValue(matrix, 3)) --> 2 (A column has FIRST 3 matching values diagonally (just 2s))
+	print(MatrixUtil.getMatchingDiagonalColumnsValue(matrix, 3)) --> 2 (A column has FIRST 3 matching values diagonally (just 2s))
 	```
 ]=]
 
-function MatrixUtil.GetMatchingDiagonalColumnsValue(matrix: { { any } }, depth: number?): any
+function MatrixUtil.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: number?): any
 	depth = depth or #matrix
 
 	-- Diagonally search from the top left side of the matrix, and return a value
-	-- from a column which matches with the rest of the diagonal columns in the matrix:
+	-- from a column which matches with the rest of the diagonal columns in the
+	-- matrix:
 	local goalColumnValue = matrix[1][1]
 
 	for index = 1, depth do
@@ -130,7 +138,8 @@ function MatrixUtil.GetMatchingDiagonalColumnsValue(matrix: { { any } }, depth: 
 end
 
 --[=[
-	Searches `matrix` column wise and returns a value of a column which matches with the rest of the values of that column. E.g:
+	Searches `matrix` column wise and returns a value of a column which matches 
+	with the rest of the values of that column. E.g:
 
 	```lua
 	local matrix = {
@@ -139,10 +148,11 @@ end
 		{5, 0, 1},
 	}
 
-	print(MatrixUtil.GetMatchingColumnsValue(matrix)) --> 5 (A column has ALL equally matching values (just 5s))
+	print(MatrixUtil.getMatchingColumnsValue(matrix)) --> 5 (A column has ALL equally matching values (just 5s))
 	```
 
-	Additionally, you can specify `depth` if you want to control how far the method should check each column. For e.g: 
+	Additionally, you can specify `depth` if you want to control how far the 
+	method should check each column. For e.g: 
 
 	```lua
 	local matrix = {
@@ -151,11 +161,11 @@ end
 		{2, 1, 1},
 	}
 
-	print(MatrixUtil.GetMatchingColumnsValue(matrix, 2)) --> 5 (A column has FIRST 2 matching values (just 5s))
+	print(MatrixUtil.getMatchingColumnsValue(matrix, 2)) --> 5 (A column has FIRST 2 matching values (just 5s))
 	```
 ]=]
 
-function MatrixUtil.GetMatchingColumnsValue(matrix: { { any } }, depth: number?): any
+function MatrixUtil.getMatchingColumnsValue(matrix: { { any } }, depth: number?): any
 	depth = depth or #matrix
 
 	-- Search the matrix column wise and return a value from a
@@ -179,4 +189,4 @@ function MatrixUtil.GetMatchingColumnsValue(matrix: { { any } }, depth: number?)
 	return nil
 end
 
-return MatrixUtil
+return table.freeze(MatrixUtil)

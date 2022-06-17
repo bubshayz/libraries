@@ -1,6 +1,6 @@
 local EnumList = require(script.Parent.Parent.EnumList)
 
-return EnumList.new("Shared Network Constants", {
+return EnumList.new("SharedConstants", {
 	ErrorMessage = {
 		InvalidArgumentType = "Invalid argument#%d to %s, expected %s, got %s instead.",
 	},

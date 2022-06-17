@@ -1,8 +1,9 @@
 [package]
 name = "bubshayz/property"
-description = "Class for wrapping values around setters and getters."
+description = "A class for wrapping values around setters and getters."
 authors = ["bubshayz"]
-version = "1.1.0"
+version = "1.1.1"
+license = "MIT"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 

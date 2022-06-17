@@ -1,12 +1,6 @@
 {
-  "name": "Roblox-Modules",
+  "name": "Roblox Modules",
   "tree": {
-    "$className": "DataModel",
-
-    "ReplicatedStorage": {
-      "$className": "ReplicatedStorage",
-      "$ignoreUnknownInstances": true,
-      "$path": "src"
-    }
+    "$path": "src"
   }
 }

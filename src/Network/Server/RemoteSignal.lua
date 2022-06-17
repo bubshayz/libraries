@@ -11,6 +11,15 @@
 	:::
 ]=]
 
+--[=[ 
+	@prop RemoteSignal Type 
+	@within RemoteSignal
+	@tag Luau Type
+	@readonly
+
+	An exported Luau type of a remote signal object.
+]=]
+
 --[=[
 	@interface SignalConnection 
 	@within RemoteSignal	
@@ -19,12 +28,12 @@
 	.Connected boolean
 ]=]
 
-local packages = script.Parent.Parent.Parent
-local ancestor = script.Parent.Parent
+local Packages = script.Parent.Parent.Parent
+local Network = script.Parent.Parent
 
-local SharedConstants = require(ancestor.SharedConstants)
-local Signal = require(packages.Signal)
-local Janitor = require(packages.Janitor)
+local SharedConstants = require(Network.SharedConstants)
+local Signal = require(Packages.Signal)
+local Janitor = require(Packages.Janitor)
 
 local RemoteSignal = { __index = {} }
 
@@ -48,7 +57,7 @@ end
 	Returns a boolean indicating if `self` is a remote signal or not.
 ]=]
 
-function RemoteSignal.IsA(self: any): boolean
+function RemoteSignal.is(self: any): boolean
 	return getmetatable(self) == RemoteSignal
 end
 
@@ -56,11 +65,11 @@ end
 	@tag RemoteSignal instance
 	@return SignalConnection
 
-	Works almost exactly the same as [RemoteSignal:ConnectOnce], except the connection returned 
+	Works almost exactly the same as [RemoteSignal:connectOnce], except the connection returned 
 	is disconnected automaticaly once `callback` is called.
 ]=]
 
-function RemoteSignal.__index:ConnectOnce(callback: (...any) -> ())
+function RemoteSignal.__index:connectOnce(callback: (...any) -> ())
 	return self._signal:ConnectOnce(callback)
 end
 
@@ -72,49 +81,49 @@ end
 	fires the remote signal, and `callback` will be passed arguments sent by the client.
 ]=]
 
-function RemoteSignal.__index:Connect(callback: (...any) -> ())
+function RemoteSignal.__index:connect(callback: (...any) -> ())
 	return self._signal:Connect(callback)
 end
 
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to every player in the `players` table only.
+	Fires the arguments `...` to every client in the `clients` table only.
 ]=]
 
-function RemoteSignal.__index:FireForSpecificPlayers(players: { Player }, ...: any)
-	for _, player in players do
-		self._remoteEvent:FireClient(player, ...)
+function RemoteSignal.__index:fireForClients(clients: { Player }, ...: any)
+	for _, client in clients do
+		self._remoteEvent:FireClient(client, ...)
 	end
 end
 
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to  `player`.
+	Fires the arguments `...` to `client`.
 ]=]
 
-function RemoteSignal.__index:FireForPlayer(player: Player, ...: any)
-	self._remoteEvent:FireClient(player, ...)
+function RemoteSignal.__index:fireClient(client: Player, ...: any)
+	self._remoteEvent:FireClient(client, ...)
 end
 
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to every player in the game.
+	Fires the arguments `...` to every client in the game.
 ]=]
 
-function RemoteSignal.__index:FireForAll(...: any)
+function RemoteSignal.__index:fireAllClients(...: any)
 	self._remoteEvent:FireAllClients(...)
 end
 
 --[=[
 	@tag RemoteSignal instance
 
-	Disconnects all connections connected via [RemoteSignal:Connect] or [RemoteSignal:ConnectOnce].
+	Disconnects all connections connected via [RemoteSignal:connect] or [RemoteSignal:connectOnce].
 ]=]
 
-function RemoteSignal.__index:DisconnectAll()
+function RemoteSignal.__index:disconnectAll()
 	self._signal:DisconnectAll()
 end
 
@@ -124,7 +133,7 @@ end
 	Destroys the remote signal and renders it unusable.
 ]=]
 
-function RemoteSignal.__index:Destroy()
+function RemoteSignal.__index:destroy()
 	self._janitor:Destroy()
 end
 
@@ -132,7 +141,7 @@ end
 	@private
 ]=]
 
-function RemoteSignal.__index:Dispatch(name: string, parent: Instance)
+function RemoteSignal.__index:dispatch(name: string, parent: Instance)
 	local remoteEvent = self._janitor:Add(Instance.new("RemoteEvent"))
 	remoteEvent.Name = name
 	remoteEvent:SetAttribute(SharedConstants.Attribute.BoundToRemoteSignal, true)
@@ -152,6 +161,10 @@ function RemoteSignal.__index:_init()
 	end)
 end
 
+function RemoteSignal:__tostring()
+	return ("[RemoteSignal]: (%s)"):format(self._remoteEvent.Name)
+end
+
 export type RemoteSignal = typeof(setmetatable(
 	{} :: {
 		_signal: any,
@@ -161,4 +174,4 @@ export type RemoteSignal = typeof(setmetatable(
 	RemoteSignal
 ))
 
-return RemoteSignal
+return table.freeze(RemoteSignal)
