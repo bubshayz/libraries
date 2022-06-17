@@ -20,7 +20,7 @@ local enumList = EnumList.new(&quot;EnumList&quot;, {
 	}
 })
 
-print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123
+print(enumList.PhoneNumber:getEnumItems().BabaBoey) --&gt; 123
 ```"><meta data-react-helmet="true" property="og:description" content=" 
 
 A custom enum is simply just an enum in an enum list, except that it is transformed to an instance
@@ -37,10 +37,10 @@ local enumList = EnumList.new(&quot;EnumList&quot;, {
 	}
 })
 
-print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123
+print(enumList.PhoneNumber:getEnumItems().BabaBoey) --&gt; 123
 ```"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/CustomEnum"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="shortcut icon" href="/Roblox-Modules/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/CustomEnum"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/CustomEnum" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/CustomEnum" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
-<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js" as="script">
-<link rel="preload" href="/Roblox-Modules/assets/js/main.7aa1c97e.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.a80765cc.js" as="script">
 </head>
 <body>
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -59,9 +59,9 @@ print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token function">print</span><span class="token punctuation">(</span>enumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">:</span><span class="token function">GetEnumItems</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>BabaBoey<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
+<span class="token function">print</span><span class="token punctuation">(</span>enumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">:</span><span class="token function">getEnumItems</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>BabaBoey<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
 </code></pre>
-</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="GetEnumItems"><code style="text-decoration:none">GetEnumItems</code><a aria-hidden="true" class="hash-link" href="#GetEnumItems" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#925FB9;color:#925FB9">CustomEnum instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/CustomEnum.lua#L57"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>CustomEnum<!-- -->:</code><code class="green_3LnD">GetEnumItems</code><code>(</code><code>) → </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy">any</code><code class="purple__nFc">}</code></div><div>
+</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getEnumItems"><code style="text-decoration:none">getEnumItems</code><a aria-hidden="true" class="hash-link" href="#getEnumItems" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#925FB9;color:#925FB9">CustomEnum instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/CustomEnum.lua#L60"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>CustomEnum<!-- -->:</code><code class="green_3LnD">getEnumItems</code><code>(</code><code>) → </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy">any</code><code class="purple__nFc">}</code></div><div>
 <p>Returns the enum items of the enum.</p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> EnumList <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
 
@@ -71,10 +71,12 @@ print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token keyword">local</span> enumItems <span class="token operator">=</span> enumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">:</span><span class="token function">GetEnumItems</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">local</span> enumItems <span class="token operator">=</span> enumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">:</span><span class="token function">getEnumItems</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token function">print</span><span class="token punctuation">(</span>enumItems <span class="token operator">==</span> enumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">)</span> <span class="token comment">--> true</span>
 <span class="token function">print</span><span class="token punctuation">(</span>enumItems<span class="token punctuation">.</span>BabaBoey<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
 </code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getName"><code style="text-decoration:none">getName</code><a aria-hidden="true" class="hash-link" href="#getName" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#925FB9;color:#925FB9">CustomEnum instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/CustomEnum.lua#L70"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>CustomEnum<!-- -->:</code><code class="green_3LnD">getName</code><code>(</code><code>) → </code><code class="blue_2Afy">string</code></div><div>
+<p>Returns the name of the custom enum.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
         {
@@ -106,8 +108,8 @@ print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123
             }
         },
         {
-            &quot;name&quot;: &quot;GetEnumItems&quot;,
-            &quot;desc&quot;: &quot;Returns the enum items of the enum.\n\n```lua\nlocal EnumList = require(...)\n\nlocal enumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tPhoneNumber = { -- Custom Enum\n\t\tBabaBoey = 123,\n\t}\n})\n\nlocal enumItems = enumList.PhoneNumber:GetEnumItems()\nprint(enumItems == enumList.PhoneNumber) --&gt; true\nprint(enumItems.BabaBoey) --&gt; 123\n```&quot;,
+            &quot;name&quot;: &quot;getEnumItems&quot;,
+            &quot;desc&quot;: &quot;Returns the enum items of the enum.\n\n```lua\nlocal EnumList = require(...)\n\nlocal enumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tPhoneNumber = { -- Custom Enum\n\t\tBabaBoey = 123,\n\t}\n})\n\nlocal enumItems = enumList.PhoneNumber:getEnumItems()\nprint(enumItems == enumList.PhoneNumber) --&gt; true\nprint(enumItems.BabaBoey) --&gt; 123\n```&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [
                 {
@@ -120,7 +122,26 @@ print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123
                 &quot;CustomEnum instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 57,
+                &quot;line&quot;: 60,
+                &quot;path&quot;: &quot;src/EnumList/CustomEnum.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getName&quot;,
+            &quot;desc&quot;: &quot;Returns the name of the custom enum.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;CustomEnum instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 70,
                 &quot;path&quot;: &quot;src/EnumList/CustomEnum.lua&quot;
             }
         }
@@ -128,13 +149,13 @@ print(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123
     &quot;properties&quot;: [],
     &quot;types&quot;: [],
     &quot;name&quot;: &quot;CustomEnum&quot;,
-    &quot;desc&quot;: &quot; \n\nA custom enum is simply just an enum in an enum list, except that it is transformed to an instance\nof this class.\n\n```lua\nlocal EnumList = require(...)\n\nlocal enumList = EnumList.new(\&quot;EnumList\&quot;, {\n\t-- This enum below will be turned into an Custom Enum instance automatically \n\t-- once this enum list is created!\n\tPhoneNumber = { \n\t\tBabaBoey = 123,\n\t}\n})\n\nprint(enumList.PhoneNumber:GetEnumItems().BabaBoey) --&gt; 123\n```&quot;,
+    &quot;desc&quot;: &quot; \n\nA custom enum is simply just an enum in an enum list, except that it is transformed to an instance\nof this class.\n\n```lua\nlocal EnumList = require(...)\n\nlocal enumList = EnumList.new(\&quot;EnumList\&quot;, {\n\t-- This enum below will be turned into an Custom Enum instance automatically \n\t-- once this enum list is created!\n\tPhoneNumber = { \n\t\tBabaBoey = 123,\n\t}\n})\n\nprint(enumList.PhoneNumber:getEnumItems().BabaBoey) --&gt; 123\n```&quot;,
     &quot;source&quot;: {
         &quot;line&quot;: 22,
         &quot;path&quot;: &quot;src/EnumList/CustomEnum.lua&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#GetEnumItems" class="table-of-contents__link toc-highlight">:GetEnumItems</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js"></script>
-<script src="/Roblox-Modules/assets/js/main.7aa1c97e.js"></script>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#getEnumItems" class="table-of-contents__link toc-highlight">:getEnumItems</a></li><li><a href="#getName" class="table-of-contents__link toc-highlight">:getName</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js"></script>
+<script src="/Roblox-Modules/assets/js/main.a80765cc.js"></script>
 </body>
 </html>

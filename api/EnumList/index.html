@@ -10,13 +10,13 @@ A class for creating enum lists. An enum list in layman&#x27;s terms is simply a
 used to store *custom* enums inside.
  
 ```lua
-local enumList = EnumList.new(&quot;EnumList&quot;, {
+local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
 	PhoneNumber = {
 		BabaBoey = 123,
 	}
 })
 
-print(enumList.PhoneNumber.BabaBoey) --&gt; 123
+print(MyEnumList.PhoneNumber.BabaBoey) --&gt; 123
 ```
 
 :::tip Generalization iteration!
@@ -24,11 +24,11 @@ print(enumList.PhoneNumber.BabaBoey) --&gt; 123
 EnumLists are iterable, e.g:
 
 ```lua
-local enumList = EnumList.new(&quot;EnumList&quot;, {
+local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
 	Test = {Alphabet = &quot;A&quot;}
 })
 
-for enumName, enum in enumList do
+for enumName, enum in MyEnumList do
 	print(enumName, enum.Alphabet)
 end
 
@@ -42,7 +42,7 @@ EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* 
 ```lua
 local EnumList = require(...)
 
-local enumList = EnumList.new(&quot;EnumList&quot;, {
+local MyEnumList = EnumList.new(&quot;MyEnumList&quot;, {
 	Enum = {
 		Deep = {
 			MoreDeep = {
@@ -52,9 +52,9 @@ local enumList = EnumList.new(&quot;EnumList&quot;, {
 	}
 })
 
-print(enumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..
-print(enumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..
-print(enumList.Enum.b) --&gt; will error (not a deep chain!)
+print(MyEnumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
 ``` 
 :::"><meta data-react-helmet="true" property="og:description" content=" 
 
@@ -62,13 +62,13 @@ A class for creating enum lists. An enum list in layman&#x27;s terms is simply a
 used to store *custom* enums inside.
  
 ```lua
-local enumList = EnumList.new(&quot;EnumList&quot;, {
+local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
 	PhoneNumber = {
 		BabaBoey = 123,
 	}
 })
 
-print(enumList.PhoneNumber.BabaBoey) --&gt; 123
+print(MyEnumList.PhoneNumber.BabaBoey) --&gt; 123
 ```
 
 :::tip Generalization iteration!
@@ -76,11 +76,11 @@ print(enumList.PhoneNumber.BabaBoey) --&gt; 123
 EnumLists are iterable, e.g:
 
 ```lua
-local enumList = EnumList.new(&quot;EnumList&quot;, {
+local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
 	Test = {Alphabet = &quot;A&quot;}
 })
 
-for enumName, enum in enumList do
+for enumName, enum in MyEnumList do
 	print(enumName, enum.Alphabet)
 end
 
@@ -94,7 +94,7 @@ EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* 
 ```lua
 local EnumList = require(...)
 
-local enumList = EnumList.new(&quot;EnumList&quot;, {
+local MyEnumList = EnumList.new(&quot;MyEnumList&quot;, {
 	Enum = {
 		Deep = {
 			MoreDeep = {
@@ -104,13 +104,13 @@ local enumList = EnumList.new(&quot;EnumList&quot;, {
 	}
 })
 
-print(enumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..
-print(enumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..
-print(enumList.Enum.b) --&gt; will error (not a deep chain!)
+print(MyEnumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
 ``` 
 :::"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/EnumList"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="shortcut icon" href="/Roblox-Modules/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/EnumList"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/EnumList" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/EnumList" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
-<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js" as="script">
-<link rel="preload" href="/Roblox-Modules/assets/js/main.7aa1c97e.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.a80765cc.js" as="script">
 </head>
 <body>
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -119,13 +119,13 @@ print(enumList.Enum.b) --&gt; will error (not a deep chain!)
   A class for creating enum lists. An enum list in layman's terms is simply an object
   used to store <em>custom</em> enums inside.
 </p>
-<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> enumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"EnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"EnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
 	PhoneNumber <span class="token operator">=</span> <span class="token punctuation">{</span>
 		BabaBoey <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">,</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token function">print</span><span class="token punctuation">(</span>enumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">.</span>BabaBoey<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">.</span>BabaBoey<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
 </code></pre>
 <div class="admonition admonition-tip alert alert--success">
   <div class="admonition-heading">
@@ -135,11 +135,11 @@ print(enumList.Enum.b) --&gt; will error (not a deep chain!)
   </div>
   <div class="admonition-content">
     <p>EnumLists are iterable, e.g:</p>
-    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> enumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"EnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"EnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
 	Test <span class="token operator">=</span> <span class="token punctuation">{</span>Alphabet <span class="token operator">=</span> <span class="token string">"A"</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token keyword">for</span> enumName<span class="token punctuation">,</span> enum <span class="token keyword">in</span> enumList <span class="token keyword">do</span>
+<span class="token keyword">for</span> enumName<span class="token punctuation">,</span> enum <span class="token keyword">in</span> MyEnumList <span class="token keyword">do</span>
 	<span class="token function">print</span><span class="token punctuation">(</span>enumName<span class="token punctuation">,</span> enum<span class="token punctuation">.</span>Alphabet<span class="token punctuation">)</span>
 <span class="token keyword">end</span>
 
@@ -157,7 +157,7 @@ print(enumList.Enum.b) --&gt; will error (not a deep chain!)
     <p>EnumLists don't provide support for deep chained enums (they're <em>not</em> idiomatic, so you shouldn't be having deep chained enums anyways), e.g:</p>
     <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> EnumList <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
 
-<span class="token keyword">local</span> enumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"EnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+<span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"MyEnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
 	Enum <span class="token operator">=</span> <span class="token punctuation">{</span>
 		Deep <span class="token operator">=</span> <span class="token punctuation">{</span>
 			MoreDeep <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -167,29 +167,40 @@ print(enumList.Enum.b) --&gt; will error (not a deep chain!)
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token function">print</span><span class="token punctuation">(</span>enumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>Deep<span class="token punctuation">.</span>MoreDeep<span class="token punctuation">.</span>none<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
-<span class="token function">print</span><span class="token punctuation">(</span>enumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>Deep<span class="token punctuation">.</span>lo<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
-<span class="token function">print</span><span class="token punctuation">(</span>enumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token comment">--> will error (not a deep chain!)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>Deep<span class="token punctuation">.</span>MoreDeep<span class="token punctuation">.</span>none<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>Deep<span class="token punctuation">.</span>lo<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token comment">--> will error (not a deep chain!)</span>
 </code></pre>
   </div>
 </div>
-</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L83"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><div class="inset_2cJr"><div><code>name<!-- -->: </code><code class="blue_2Afy">string</code><code>,</code></div><div><code>enums<!-- -->: </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="green_3LnD">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy">any</code><code class="green_3LnD">}</code><code class="purple__nFc">}</code></div></div><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/EnumList">EnumList</a></code></div><div>
-<p>A constructor method which creates a new enum list out of <code>enumItems</code>, and with name <code>name</code>.</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="EnumList"><code style="text-decoration:none">EnumList</code><a aria-hidden="true" class="hash-link" href="#EnumList" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Luau Type</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L72"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.<!-- -->EnumList<!-- -->:<!-- --> </code> <code class="blue_2Afy">Type</code></div><div>
+<p>An exported Luau type of an EnumList object.</p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> EnumList <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
 
-<span class="token keyword">local</span> enumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Enums"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>Test <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-<span class="token function">print</span><span class="token punctuation">(</span>enumList<span class="token punctuation">.</span>Test<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
+<span class="token keyword">local</span> MyEnumList <span class="token punctuation">:</span> EnumList<span class="token punctuation">.</span>EnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span> 
 </code></pre>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsA"><code style="text-decoration:none">IsA</code><a aria-hidden="true" class="hash-link" href="#IsA" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L100"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.</code><code class="green_3LnD">IsA</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L99"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><div class="inset_2cJr"><div><code>name<!-- -->: </code><code class="blue_2Afy">string</code><code>,</code></div><div><code>enums<!-- -->: </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="green_3LnD">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy">any</code><code class="green_3LnD">}</code><code class="purple__nFc">}</code></div></div><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/EnumList">EnumList</a></code></div><div>
+<p>
+  A constructor method which creates a new enum list out of <code>enumItems</code>,
+  with the name of <code>name</code>.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> EnumList <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Enums"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>Test <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Test<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
+</code></pre>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="is"><code style="text-decoration:none">is</code><a aria-hidden="true" class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L116"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.</code><code class="green_3LnD">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
 <p>A method which returns a boolean indicating if <code>self</code> is a enumlist or not.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="GetEnums"><code style="text-decoration:none">GetEnums</code><a aria-hidden="true" class="hash-link" href="#GetEnums" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L111"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->:</code><code class="green_3LnD">GetEnums</code><code>(</code><code>) → </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/CustomEnum">CustomEnum</a></code><code class="purple__nFc">}</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getName"><code style="text-decoration:none">getName</code><a aria-hidden="true" class="hash-link" href="#getName" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L126"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->:</code><code class="green_3LnD">getName</code><code>(</code><code>) → </code><code class="blue_2Afy">string</code></div><div>
+<p>Returns the name of the enum list.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getEnums"><code style="text-decoration:none">getEnums</code><a aria-hidden="true" class="hash-link" href="#getEnums" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L137"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->:</code><code class="green_3LnD">getEnums</code><code>(</code><code>) → </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/CustomEnum">CustomEnum</a></code><code class="purple__nFc">}</code></div><div>
 <p>Returns the enums of the enum list.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
         {
             &quot;name&quot;: &quot;new&quot;,
-            &quot;desc&quot;: &quot;A constructor method which creates a new enum list out of `enumItems`, and with name `name`.\n\n```lua\nlocal EnumList = require(...)\n\nlocal enumList = EnumList.new(\&quot;Enums\&quot;, {Test = 123})\n\nprint(enumList.Test) --&gt; 123\n```&quot;,
+            &quot;desc&quot;: &quot;A constructor method which creates a new enum list out of `enumItems`, \nwith the name of `name`.\n\n```lua\nlocal EnumList = require(...)\n\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {Test = 123})\n\nprint(MyEnumList.Test) --&gt; 123\n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;name&quot;,
@@ -210,12 +221,12 @@ print(enumList.Enum.b) --&gt; will error (not a deep chain!)
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 83,
+                &quot;line&quot;: 99,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;IsA&quot;,
+            &quot;name&quot;: &quot;is&quot;,
             &quot;desc&quot;: &quot;A method which returns a boolean indicating if `self` is a enumlist or not.&quot;,
             &quot;params&quot;: [
                 {
@@ -232,12 +243,31 @@ print(enumList.Enum.b) --&gt; will error (not a deep chain!)
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 100,
+                &quot;line&quot;: 116,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;GetEnums&quot;,
+            &quot;name&quot;: &quot;getName&quot;,
+            &quot;desc&quot;: &quot;Returns the name of the enum list.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;EnumList instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 126,
+                &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getEnums&quot;,
             &quot;desc&quot;: &quot;Returns the enums of the enum list.&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [
@@ -251,21 +281,35 @@ print(enumList.Enum.b) --&gt; will error (not a deep chain!)
                 &quot;EnumList instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 111,
+                &quot;line&quot;: 137,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         }
     ],
-    &quot;properties&quot;: [],
+    &quot;properties&quot;: [
+        {
+            &quot;name&quot;: &quot;EnumList&quot;,
+            &quot;desc&quot;: &quot; \n\nAn exported Luau type of an EnumList object.\n\n```lua\nlocal EnumList = require(...)\n\nlocal MyEnumList : EnumList.EnumList = EnumList.new(...) \n```&quot;,
+            &quot;lua_type&quot;: &quot;Type&quot;,
+            &quot;tags&quot;: [
+                &quot;Luau Type&quot;
+            ],
+            &quot;readonly&quot;: true,
+            &quot;source&quot;: {
+                &quot;line&quot;: 72,
+                &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
+            }
+        }
+    ],
     &quot;types&quot;: [],
     &quot;name&quot;: &quot;EnumList&quot;,
-    &quot;desc&quot;: &quot; \n\nA class for creating enum lists. An enum list in layman&#x27;s terms is simply an object\nused to store *custom* enums inside.\n \n```lua\nlocal enumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tPhoneNumber = {\n\t\tBabaBoey = 123,\n\t}\n})\n\nprint(enumList.PhoneNumber.BabaBoey) --&gt; 123\n```\n\n:::tip Generalization iteration!\n\nEnumLists are iterable, e.g:\n\n```lua\nlocal enumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tTest = {Alphabet = \&quot;A\&quot;}\n})\n\nfor enumName, enum in enumList do\n\tprint(enumName, enum.Alphabet)\nend\n\n--&gt; \&quot;Test\&quot; \&quot;A\&quot;\n```\n:::\n\n:::note\nEnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), e.g:\n\n```lua\nlocal EnumList = require(...)\n\nlocal enumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tEnum = {\n\t\tDeep = {\n\t\t\tMoreDeep = {\n\t\t\t\tLol = 5\n\t\t\t}\n\t\t}\n\t}\n})\n\nprint(enumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..\nprint(enumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..\nprint(enumList.Enum.b) --&gt; will error (not a deep chain!)\n``` \n:::&quot;,
+    &quot;desc&quot;: &quot; \n\nA class for creating enum lists. An enum list in layman&#x27;s terms is simply an object\nused to store *custom* enums inside.\n \n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tPhoneNumber = {\n\t\tBabaBoey = 123,\n\t}\n})\n\nprint(MyEnumList.PhoneNumber.BabaBoey) --&gt; 123\n```\n\n:::tip Generalization iteration!\n\nEnumLists are iterable, e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tTest = {Alphabet = \&quot;A\&quot;}\n})\n\nfor enumName, enum in MyEnumList do\n\tprint(enumName, enum.Alphabet)\nend\n\n--&gt; \&quot;Test\&quot; \&quot;A\&quot;\n```\n:::\n\n:::note\nEnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), e.g:\n\n```lua\nlocal EnumList = require(...)\n\nlocal MyEnumList = EnumList.new(\&quot;MyEnumList\&quot;, {\n\tEnum = {\n\t\tDeep = {\n\t\t\tMoreDeep = {\n\t\t\t\tLol = 5\n\t\t\t}\n\t\t}\n\t}\n})\n\nprint(MyEnumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)\n``` \n:::&quot;,
     &quot;source&quot;: {
         &quot;line&quot;: 57,
         &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#GetEnums" class="table-of-contents__link toc-highlight">:GetEnums</a></li><li><a href="#IsA" class="table-of-contents__link toc-highlight">.IsA</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js"></script>
-<script src="/Roblox-Modules/assets/js/main.7aa1c97e.js"></script>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#EnumList" class="table-of-contents__link toc-highlight">EnumList</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#getEnums" class="table-of-contents__link toc-highlight">:getEnums</a></li><li><a href="#getName" class="table-of-contents__link toc-highlight">:getName</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js"></script>
+<script src="/Roblox-Modules/assets/js/main.a80765cc.js"></script>
 </body>
 </html>

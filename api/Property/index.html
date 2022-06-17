@@ -12,13 +12,13 @@ A class for wrapping values around setters and getters. A property in layman&#x2
 local Property = require(...)
 
 local property = Property.new(5)
-print(property:Get()) --&gt; 5
+print(property:get()) --&gt; 5
 
-property.Updated:Connect(function(newValue)
+property.updated:Connect(function(newValue)
 	print(newValue) --&gt; 10
 end)
 
-property:Set(10) 
+property:set(10) 
 ```"><meta data-react-helmet="true" property="og:description" content=" 
 
 A class for wrapping values around setters and getters. A property in layman&#x27;s terms, is simply a object which contains some value.
@@ -27,16 +27,16 @@ A class for wrapping values around setters and getters. A property in layman&#x2
 local Property = require(...)
 
 local property = Property.new(5)
-print(property:Get()) --&gt; 5
+print(property:get()) --&gt; 5
 
-property.Updated:Connect(function(newValue)
+property.updated:Connect(function(newValue)
 	print(newValue) --&gt; 10
 end)
 
-property:Set(10) 
+property:set(10) 
 ```"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/Property"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="shortcut icon" href="/Roblox-Modules/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/Property"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/Property" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/Property" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
-<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js" as="script">
-<link rel="preload" href="/Roblox-Modules/assets/js/main.7aa1c97e.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.a80765cc.js" as="script">
 </head>
 <body>
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -45,65 +45,70 @@ property:Set(10)
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Property <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
 
 <span class="token keyword">local</span> property <span class="token operator">=</span> Property<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
-<span class="token function">print</span><span class="token punctuation">(</span>property<span class="token punctuation">:</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 5</span>
+<span class="token function">print</span><span class="token punctuation">(</span>property<span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 5</span>
 
-property<span class="token punctuation">.</span>Updated<span class="token punctuation">:</span><span class="token function">Connect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span>
+property<span class="token punctuation">.</span>updated<span class="token punctuation">:</span><span class="token function">Connect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span>
 	<span class="token function">print</span><span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token comment">--> 10</span>
 <span class="token keyword">end</span><span class="token punctuation">)</span>
 
-property<span class="token punctuation">:</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> 
+property<span class="token punctuation">:</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> 
 </code></pre>
-</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Updated"><code style="text-decoration:none">Updated</code><a aria-hidden="true" class="hash-link" href="#Updated" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L30"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.<!-- -->Updated<!-- -->:<!-- --> </code> <code class="blue_2Afy">Signal</code><code class="op_1JtD">&lt;</code><code>newValue<!-- -->: </code><code class="blue_2Afy">any</code><code class="op_1JtD">&gt;</code></div><div>
+</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="updated"><code style="text-decoration:none">updated</code><a aria-hidden="true" class="hash-link" href="#updated" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L30"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.<!-- -->updated<!-- -->:<!-- --> </code> <code class="blue_2Afy">Signal</code><code class="op_1JtD">&lt;</code><code>newValue<!-- -->: </code><code class="blue_2Afy">any</code><code class="op_1JtD">&gt;</code></div><div>
 <p>
   A <a href="https://sleitnick.github.io/RbxUtil/api/Signal/" target="_blank">signal</a> which is fired whenever the value of the property is
   set to a new one. The signal is only passed the new value as the only argument.
 </p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Property"><code style="text-decoration:none">Property</code><a aria-hidden="true" class="hash-link" href="#Property" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Luau Type</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L45"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.<!-- -->Property<!-- -->:<!-- --> </code> <code class="blue_2Afy">Type</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Property"><code style="text-decoration:none">Property</code><a aria-hidden="true" class="hash-link" href="#Property" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Luau Type</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L39"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.<!-- -->Property<!-- -->:<!-- --> </code> <code class="blue_2Afy">Type</code></div><div>
 <p>An exported Luau type of a property object.</p>
-<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Property <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
-
-<span class="token keyword">local</span> property<span class="token punctuation">:</span> Property<span class="token punctuation">.</span>Property <span class="token operator">=</span> Property<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span> 
-</code></pre>
-</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L56"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><code>initialValue<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/Property">Property</a></code></div><div>
+</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L50"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><code>initialValue<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/Property">Property</a></code></div><div>
 <p>
   A constructor method which creates a new property object, with <code>initialValue</code> as the current value
   of the property.
 </p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsA"><code style="text-decoration:none">IsA</code><a aria-hidden="true" class="hash-link" href="#IsA" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L67"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.</code><code class="green_3LnD">IsA</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="is"><code style="text-decoration:none">is</code><a aria-hidden="true" class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L61"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->.</code><code class="green_3LnD">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
 <p>A method which returns a boolean indicating if <code>self</code> is a property or not.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Set"><code style="text-decoration:none">Set</code><a aria-hidden="true" class="hash-link" href="#Set" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L77"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">Set</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="set"><code style="text-decoration:none">set</code><a aria-hidden="true" class="hash-link" href="#set" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L71"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">set</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets the value of the property to <code>value</code>, if this new value isn't the same as the previous value.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="DeferredSet"><code style="text-decoration:none">DeferredSet</code><a aria-hidden="true" class="hash-link" href="#DeferredSet" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L92"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">DeferredSet</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
-<p>Works exactly the same as <a href="/Roblox-Modules/api/Property#Set">Property.Set</a>, except the updating of the property's value to <code>value</code> is deferred through <a href="https://create.roblox.com/docs/reference/engine/libraries/task#defer" target="_blank">task.defer</a>.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="ForceSet"><code style="text-decoration:none">ForceSet</code><a aria-hidden="true" class="hash-link" href="#ForceSet" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L126"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">ForceSet</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
-<p>Works exactly the same as <a href="/Roblox-Modules/api/Property#Set">Property.Set</a> except that tables aren't checked for equality, e.g:</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="deferredSet"><code style="text-decoration:none">deferredSet</code><a aria-hidden="true" class="hash-link" href="#deferredSet" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L86"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">deferredSet</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Works exactly the same as <a href="/Roblox-Modules/api/Property#set">Property:set</a>, except the updating of the property's value to <code>value</code> is deferred through <a href="https://create.roblox.com/docs/reference/engine/libraries/task#defer" target="_blank">task.defer</a>.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="forceSet"><code style="text-decoration:none">forceSet</code><a aria-hidden="true" class="hash-link" href="#forceSet" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L129"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">forceSet</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Works exactly the same as <a href="/Roblox-Modules/api/Property#set">Property:set</a> except that tables aren't checked for equality, e.g:</p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Property <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
 
 <span class="token keyword">local</span> property <span class="token operator">=</span> Property<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-property<span class="token punctuation">.</span>Updated<span class="token punctuation">:</span><span class="token function">Connect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>newVal<span class="token punctuation">)</span>
+property<span class="token punctuation">.</span>updated<span class="token punctuation">:</span><span class="token function">Connect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>newVal<span class="token punctuation">)</span>
 	<span class="token function">warn</span><span class="token punctuation">(</span>newVal<span class="token punctuation">)</span> <span class="token comment">--> {1}</span>
 <span class="token keyword">end</span><span class="token punctuation">)</span>
 
 <span class="token keyword">local</span> t <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span>
-property<span class="token punctuation">:</span><span class="token function">ForceSet</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token comment">--> Fires off the .Updated signal (expected)</span>
-property<span class="token punctuation">:</span><span class="token function">ForceSet</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token comment">--> Fires off the .Updated signal (this ought to not fire off the signal, but the previous and new value aren't checked for equality since they're both tables)</span>
 
-property<span class="token punctuation">:</span><span class="token function">ForceSet</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">--> Fires off the .Updated signal (expected as a number ~= table)</span>
-property<span class="token punctuation">:</span><span class="token function">ForceSet</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">--> DOES NOT fire off the .Updated signal, since the previous value (a number, not a table) and the new value (a number, not a table) are the same!</span>
+property<span class="token punctuation">:</span><span class="token function">forceSet</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token comment">--> Fires off the .Updated signal (expected)</span>
+
+<span class="token comment">-- This ought to not fire off the signal, but the previous and new value</span>
+<span class="token comment">-- aren't checked for equality since they're both tables)</span>
+property<span class="token punctuation">:</span><span class="token function">forceSet</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> 
+
+<span class="token comment">-- Fires off the .Updated signal (expected as a number ~= table) </span>
+property<span class="token punctuation">:</span><span class="token function">forceSet</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 
+
+<span class="token comment">-- Does NOT fire off the .Updated signal, since the previous value </span>
+<span class="token comment">-- (a number, not a table) and the new value (a number, not a table) are the</span>
+<span class="token comment">-- same!</span>
+property<span class="token punctuation">:</span><span class="token function">forceSet</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 
 </code></pre>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="BulkSet"><code style="text-decoration:none">BulkSet</code><a aria-hidden="true" class="hash-link" href="#BulkSet" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L141"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">BulkSet</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
-<p>Works almost exactly the same as <a href="/Roblox-Modules/api/Property#Set">Property:Set</a>, but never fires off the <a href="/Roblox-Modules/api/Property#Updated">Property.Updated</a> signal.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Get"><code style="text-decoration:none">Get</code><a aria-hidden="true" class="hash-link" href="#Get" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L160"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">Get</code><code>(</code><code>) → </code><code class="blue_2Afy">any</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="bulkSet"><code style="text-decoration:none">bulkSet</code><a aria-hidden="true" class="hash-link" href="#bulkSet" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L144"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">bulkSet</code><code>(</code><code>value<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Works almost exactly the same as <a href="/Roblox-Modules/api/Property#set">Property:set</a>, but never fires off the <a href="/Roblox-Modules/api/Property#updated">Property.updated</a> signal.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="get"><code style="text-decoration:none">get</code><a aria-hidden="true" class="hash-link" href="#get" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L163"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">get</code><code>(</code><code>) → </code><code class="blue_2Afy">any</code></div><div>
 <p>Returns the current value of the property.</p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Property <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
 
 <span class="token keyword">local</span> property <span class="token operator">=</span> Property<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 property<span class="token punctuation">:</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
-<span class="token function">print</span><span class="token punctuation">(</span>property<span class="token punctuation">:</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 5</span>
+<span class="token function">print</span><span class="token punctuation">(</span>property<span class="token punctuation">:</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 5</span>
 </code></pre>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Destroy"><code style="text-decoration:none">Destroy</code><a aria-hidden="true" class="hash-link" href="#Destroy" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L170"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">Destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="destroy"><code style="text-decoration:none">destroy</code><a aria-hidden="true" class="hash-link" href="#destroy" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Property Instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/Property/init.lua#L173"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>Property<!-- -->:</code><code class="green_3LnD">destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Destroys the property and renders it unusable.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
@@ -125,12 +130,12 @@ property<span class="token punctuation">:</span><span class="token function">Set
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 56,
+                &quot;line&quot;: 50,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;IsA&quot;,
+            &quot;name&quot;: &quot;is&quot;,
             &quot;desc&quot;: &quot;A method which returns a boolean indicating if `self` is a property or not.&quot;,
             &quot;params&quot;: [
                 {
@@ -147,12 +152,12 @@ property<span class="token punctuation">:</span><span class="token function">Set
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 67,
+                &quot;line&quot;: 61,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;Set&quot;,
+            &quot;name&quot;: &quot;set&quot;,
             &quot;desc&quot;: &quot;Sets the value of the property to `value`, if this new value isn&#x27;t the same as the previous value. &quot;,
             &quot;params&quot;: [
                 {
@@ -167,13 +172,13 @@ property<span class="token punctuation">:</span><span class="token function">Set
                 &quot;Property Instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 77,
+                &quot;line&quot;: 71,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;DeferredSet&quot;,
-            &quot;desc&quot;: &quot;Works exactly the same as [Property.Set], except the updating of the property&#x27;s value to `value` is deferred through [task.defer](https://create.roblox.com/docs/reference/engine/libraries/task#defer).&quot;,
+            &quot;name&quot;: &quot;deferredSet&quot;,
+            &quot;desc&quot;: &quot;Works exactly the same as [Property:set], except the updating of the property&#x27;s value to `value` is deferred through [task.defer](https://create.roblox.com/docs/reference/engine/libraries/task#defer).&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;value&quot;,
@@ -187,13 +192,13 @@ property<span class="token punctuation">:</span><span class="token function">Set
                 &quot;Property Instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 92,
+                &quot;line&quot;: 86,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;ForceSet&quot;,
-            &quot;desc&quot;: &quot;Works exactly the same as [Property.Set] except that tables aren&#x27;t checked for equality, e.g:\n\n```lua\nlocal Property = require(...)\n\nlocal property = Property.new()\n\nproperty.Updated:Connect(function(newVal)\n\twarn(newVal) --&gt; {1}\nend)\n\nlocal t = {1}\nproperty:ForceSet(t) --&gt; Fires off the .Updated signal (expected)\nproperty:ForceSet(t) --&gt; Fires off the .Updated signal (this ought to not fire off the signal, but the previous and new value aren&#x27;t checked for equality since they&#x27;re both tables)\n\nproperty:ForceSet(1) --&gt; Fires off the .Updated signal (expected as a number ~= table)\nproperty:ForceSet(1) --&gt; DOES NOT fire off the .Updated signal, since the previous value (a number, not a table) and the new value (a number, not a table) are the same!\n```&quot;,
+            &quot;name&quot;: &quot;forceSet&quot;,
+            &quot;desc&quot;: &quot;Works exactly the same as [Property:set] except that tables aren&#x27;t checked for equality, e.g:\n\n```lua\nlocal Property = require(...)\n\nlocal property = Property.new()\n\nproperty.updated:Connect(function(newVal)\n\twarn(newVal) --&gt; {1}\nend)\n\nlocal t = {1}\n\nproperty:forceSet(t) --&gt; Fires off the .Updated signal (expected)\n\n-- This ought to not fire off the signal, but the previous and new value\n-- aren&#x27;t checked for equality since they&#x27;re both tables)\nproperty:forceSet(t) \n\n-- Fires off the .Updated signal (expected as a number ~= table) \nproperty:forceSet(1) \n\n-- Does NOT fire off the .Updated signal, since the previous value \n-- (a number, not a table) and the new value (a number, not a table) are the\n-- same!\nproperty:forceSet(1) \n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;value&quot;,
@@ -207,13 +212,13 @@ property<span class="token punctuation">:</span><span class="token function">Set
                 &quot;Property Instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 126,
+                &quot;line&quot;: 129,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;BulkSet&quot;,
-            &quot;desc&quot;: &quot;Works almost exactly the same as [Property:Set], but never fires off the [Property.Updated] signal.&quot;,
+            &quot;name&quot;: &quot;bulkSet&quot;,
+            &quot;desc&quot;: &quot;Works almost exactly the same as [Property:set], but never fires off the [Property.updated] signal.&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;value&quot;,
@@ -227,13 +232,13 @@ property<span class="token punctuation">:</span><span class="token function">Set
                 &quot;Property Instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 141,
+                &quot;line&quot;: 144,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;Get&quot;,
-            &quot;desc&quot;: &quot;Returns the current value of the property.\n\n```lua\nlocal Property = require(...)\n\nlocal property = Property.new()\n\nproperty:Set(5)\nprint(property:Get()) --&gt; 5\n```&quot;,
+            &quot;name&quot;: &quot;get&quot;,
+            &quot;desc&quot;: &quot;Returns the current value of the property.\n\n```lua\nlocal Property = require(...)\n\nlocal property = Property.new()\n\nproperty:Set(5)\nprint(property:get()) --&gt; 5\n```&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [
                 {
@@ -246,12 +251,12 @@ property<span class="token punctuation">:</span><span class="token function">Set
                 &quot;Property Instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 160,
+                &quot;line&quot;: 163,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;Destroy&quot;,
+            &quot;name&quot;: &quot;destroy&quot;,
             &quot;desc&quot;: &quot;Destroys the property and renders it unusable.&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [],
@@ -260,14 +265,14 @@ property<span class="token punctuation">:</span><span class="token function">Set
                 &quot;Property Instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 170,
+                &quot;line&quot;: 173,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         }
     ],
     &quot;properties&quot;: [
         {
-            &quot;name&quot;: &quot;Updated&quot;,
+            &quot;name&quot;: &quot;updated&quot;,
             &quot;desc&quot;: &quot; \n\nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value of the property is \nset to a new one. The signal is only passed the new value as the only argument.&quot;,
             &quot;lua_type&quot;: &quot;Signal &lt;newValue: any&gt;&quot;,
             &quot;tags&quot;: [
@@ -282,27 +287,27 @@ property<span class="token punctuation">:</span><span class="token function">Set
         },
         {
             &quot;name&quot;: &quot;Property&quot;,
-            &quot;desc&quot;: &quot; \n\nAn exported Luau type of a property object.\n\n```lua\nlocal Property = require(...)\n\nlocal property: Property.Property = Property.new(...) \n```&quot;,
+            &quot;desc&quot;: &quot; \n\nAn exported Luau type of a property object.&quot;,
             &quot;lua_type&quot;: &quot;Type&quot;,
             &quot;tags&quot;: [
                 &quot;Luau Type&quot;
             ],
             &quot;readonly&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 45,
+                &quot;line&quot;: 39,
                 &quot;path&quot;: &quot;src/Property/init.lua&quot;
             }
         }
     ],
     &quot;types&quot;: [],
     &quot;name&quot;: &quot;Property&quot;,
-    &quot;desc&quot;: &quot; \n\nA class for wrapping values around setters and getters. A property in layman&#x27;s terms, is simply a object which contains some value.\n \n```lua\nlocal Property = require(...)\n\nlocal property = Property.new(5)\nprint(property:Get()) --&gt; 5\n\nproperty.Updated:Connect(function(newValue)\n\tprint(newValue) --&gt; 10\nend)\n\nproperty:Set(10) \n```&quot;,
+    &quot;desc&quot;: &quot; \n\nA class for wrapping values around setters and getters. A property in layman&#x27;s terms, is simply a object which contains some value.\n \n```lua\nlocal Property = require(...)\n\nlocal property = Property.new(5)\nprint(property:get()) --&gt; 5\n\nproperty.updated:Connect(function(newValue)\n\tprint(newValue) --&gt; 10\nend)\n\nproperty:set(10) \n```&quot;,
     &quot;source&quot;: {
         &quot;line&quot;: 19,
         &quot;path&quot;: &quot;src/Property/init.lua&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#Property" class="table-of-contents__link toc-highlight">Property</a></li><li><a href="#Updated" class="table-of-contents__link toc-highlight">Updated</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#BulkSet" class="table-of-contents__link toc-highlight">:BulkSet</a></li><li><a href="#DeferredSet" class="table-of-contents__link toc-highlight">:DeferredSet</a></li><li><a href="#Destroy" class="table-of-contents__link toc-highlight">:Destroy</a></li><li><a href="#ForceSet" class="table-of-contents__link toc-highlight">:ForceSet</a></li><li><a href="#Get" class="table-of-contents__link toc-highlight">:Get</a></li><li><a href="#Set" class="table-of-contents__link toc-highlight">:Set</a></li><li><a href="#IsA" class="table-of-contents__link toc-highlight">.IsA</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js"></script>
-<script src="/Roblox-Modules/assets/js/main.7aa1c97e.js"></script>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#Property" class="table-of-contents__link toc-highlight">Property</a></li><li><a href="#updated" class="table-of-contents__link toc-highlight">updated</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#bulkSet" class="table-of-contents__link toc-highlight">:bulkSet</a></li><li><a href="#deferredSet" class="table-of-contents__link toc-highlight">:deferredSet</a></li><li><a href="#destroy" class="table-of-contents__link toc-highlight">:destroy</a></li><li><a href="#forceSet" class="table-of-contents__link toc-highlight">:forceSet</a></li><li><a href="#get" class="table-of-contents__link toc-highlight">:get</a></li><li><a href="#set" class="table-of-contents__link toc-highlight">:set</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js"></script>
+<script src="/Roblox-Modules/assets/js/main.a80765cc.js"></script>
 </body>
 </html>

@@ -5,14 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="generator" content="Docusaurus v2.0.0-beta.9">
 <title data-react-helmet="true">WindLines | Roblox-Modules</title><meta data-react-helmet="true" property="og:title" content="WindLines | Roblox-Modules"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="description" content=" 
-
 WindLines is a fork of boatbomber&#x27;s wind lines module, however it is heavily refactored and has a few slight changes 
 in behavior. Overall, it is a module for creating wind line effects."><meta data-react-helmet="true" property="og:description" content=" 
-
 WindLines is a fork of boatbomber&#x27;s wind lines module, however it is heavily refactored and has a few slight changes 
 in behavior. Overall, it is a module for creating wind line effects."><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/WindLines"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="shortcut icon" href="/Roblox-Modules/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/WindLines"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/WindLines" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/WindLines" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
-<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js" as="script">
-<link rel="preload" href="/Roblox-Modules/assets/js/main.7aa1c97e.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js" as="script">
+<link rel="preload" href="/Roblox-Modules/assets/js/main.a80765cc.js" as="script">
 </head>
 <body>
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -21,32 +19,32 @@ in behavior. Overall, it is a module for creating wind line effects."><meta data
   WindLines is a fork of boatbomber's wind lines module, however it is heavily refactored and has a few slight changes
   in behavior. Overall, it is a module for creating wind line effects.
 </p>
-</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="types">Types<a aria-hidden="true" class="hash-link" href="#types" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="WindLinesConfig"><code style="text-decoration:none">WindLinesConfig</code><a aria-hidden="true" class="hash-link" href="#WindLinesConfig" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L13"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code class="purple__nFc">interface</code> <code>WindLinesConfig<!-- --> <!-- -->{</code><div class="inset_2cJr"><div><code>Lifetime<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
+</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="types">Types<a aria-hidden="true" class="hash-link" href="#types" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="WindLinesConfig"><code style="text-decoration:none">WindLinesConfig</code><a aria-hidden="true" class="hash-link" href="#WindLinesConfig" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L14"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code class="purple__nFc">interface</code> <code>WindLinesConfig<!-- --> <!-- -->{</code><div class="inset_2cJr"><div><code>lifetime<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
 <p>The life time of wind lines.</p>
-</span></span></div><div><code>Direction<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
+</span></span></div><div><code>direction<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
 <p>The direction of wind lines.</p>
-</span></span></div><div><code>Speed<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
+</span></span></div><div><code>speed<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
 <p>The speed at which wind lines move.</p>
-</span></span></div><div><code>SpawnRate<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
+</span></span></div><div><code>spawnRate<!-- -->: </code><code class="blue_2Afy">number</code><span class="inlineDescription_17uy">-- <span>
 <p>The rate at which wind lines are created.</p>
-</span></span></div><div><code>RaycastParams<!-- -->: </code><code class="blue_2Afy">RaycastParams</code><span class="inlineDescription_17uy">-- <span>
+</span></span></div><div><code>raycastParams<!-- -->: </code><code class="blue_2Afy">RaycastParams</code><span class="inlineDescription_17uy">-- <span>
 <p>A <code>RaycastParams</code> object, to be used in determining if the player is under a roof or not.</p>
 </span></span></div></div><code>}</code></div><div>
 <p>
   This is a config template, none of these members are required in the config table when configuring WindLines through <a href="/Roblox-Modules/api/WindLines#SetConfig">WindLines.SetConfig</a>, however
   the config table must not be empty!
 </p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="DefaultWindLinesConfig"><code style="text-decoration:none">DefaultWindLinesConfig</code><a aria-hidden="true" class="hash-link" href="#DefaultWindLinesConfig" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L26"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code class="purple__nFc">interface</code> <code>DefaultWindLinesConfig<!-- --> <!-- -->{</code><div class="inset_2cJr"><div><code>Lifetime<!-- -->: </code><code class="blue_2Afy">3</code></div><div><code>Direction<!-- -->: </code><code class="blue_2Afy">Vector3.xAxis</code></div><div><code>Speed<!-- -->: </code><code class="blue_2Afy">6</code></div><div><code>SpawnRate<!-- -->: </code><code class="blue_2Afy">25</code></div><div><code>RaycastParams<!-- -->: </code><code class="blue_2Afy">nil</code></div></div><code>}</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="DefaultWindLinesConfig"><code style="text-decoration:none">DefaultWindLinesConfig</code><a aria-hidden="true" class="hash-link" href="#DefaultWindLinesConfig" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L26"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code class="purple__nFc">interface</code> <code>DefaultWindLinesConfig<!-- --> <!-- -->{</code><div class="inset_2cJr"><div><code>lifetime<!-- -->: </code><code class="blue_2Afy">3</code></div><div><code>direction<!-- -->: </code><code class="blue_2Afy">Vector3.xAxis</code></div><div><code>speed<!-- -->: </code><code class="blue_2Afy">6</code></div><div><code>spawnRate<!-- -->: </code><code class="blue_2Afy">25</code></div><div><code>raycastParams<!-- -->: </code><code class="blue_2Afy">nil</code></div></div><code>}</code></div><div>
 <p>This is the <strong>default</strong> config template that WindLines initially uses. You can configure WindLines through <a href="/Roblox-Modules/api/WindLines#SetConfig">WindLines.SetConfig</a>.</p>
-</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="EffectStarted"><code style="text-decoration:none">EffectStarted</code><a aria-hidden="true" class="hash-link" href="#EffectStarted" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L42"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.<!-- -->EffectStarted<!-- -->:<!-- --> </code> <code class="blue_2Afy">Signal</code><code class="op_1JtD">&lt;</code><code class="op_1JtD">&gt;</code></div><div>
+</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="effectStarted"><code style="text-decoration:none">effectStarted</code><a aria-hidden="true" class="hash-link" href="#effectStarted" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L40"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.<!-- -->effectStarted<!-- -->:<!-- --> </code> <code class="blue_2Afy">Signal</code><code class="op_1JtD">&lt;</code><code class="op_1JtD">&gt;</code></div><div>
 <p>A <a href="https://sleitnick.github.io/RbxUtil/api/Signal/" target="_blank">signal</a> which is fired whenever the wind lines effect starts.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="EffectStopped"><code style="text-decoration:none">EffectStopped</code><a aria-hidden="true" class="hash-link" href="#EffectStopped" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L51"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.<!-- -->EffectStopped<!-- -->:<!-- --> </code> <code class="blue_2Afy">Signal</code><code class="op_1JtD">&lt;</code><code class="op_1JtD">&gt;</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="effectStopped"><code style="text-decoration:none">effectStopped</code><a aria-hidden="true" class="hash-link" href="#effectStopped" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L48"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.<!-- -->effectStopped<!-- -->:<!-- --> </code> <code class="blue_2Afy">Signal</code><code class="op_1JtD">&lt;</code><code class="op_1JtD">&gt;</code></div><div>
 <p>A <a href="https://sleitnick.github.io/RbxUtil/api/Signal/" target="_blank">signal</a> which is fired whenever the wind lines effect stops.</p>
-</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsEffectStarted"><code style="text-decoration:none">IsEffectStarted</code><a aria-hidden="true" class="hash-link" href="#IsEffectStarted" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L93"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">IsEffectStarted</code><code>(</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="isEffectStarted"><code style="text-decoration:none">isEffectStarted</code><a aria-hidden="true" class="hash-link" href="#isEffectStarted" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L91"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">isEffectStarted</code><code>(</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
 <p>Returns a boolean indicating if the wind lines effect has started.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="IsStarted"><code style="text-decoration:none">IsStarted</code><a aria-hidden="true" class="hash-link" href="#IsStarted" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L101"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">IsStarted</code><code>(</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
-<p>Returns a boolean indicating if WindLines, the module it self, is started through <a href="/Roblox-Modules/api/WindLines#Start">WindLines.Start</a>.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="SetConfig"><code style="text-decoration:none">SetConfig</code><a aria-hidden="true" class="hash-link" href="#SetConfig" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L115"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">SetConfig</code><code>(</code><code>newConfig<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/WindLines#WindLinesConfig">WindLinesConfig</a></code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="isStarted"><code style="text-decoration:none">isStarted</code><a aria-hidden="true" class="hash-link" href="#isStarted" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L99"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">isStarted</code><code>(</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+<p>Returns a boolean indicating if WindLines, the module it self, is started through <a href="/Roblox-Modules/api/WindLines#start">WindLines.start</a>.</p>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="setConfig"><code style="text-decoration:none">setConfig</code><a aria-hidden="true" class="hash-link" href="#setConfig" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L113"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">setConfig</code><code>(</code><code>newConfig<!-- -->: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/WindLines#WindLinesConfig">WindLinesConfig</a></code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets the current config of WindLines to <code>newConfig</code>, which means that this new config will be used for wind line effects.</p>
 <div class="admonition admonition-warning alert alert--danger">
   <div class="admonition-heading">
@@ -58,42 +56,44 @@ in behavior. Overall, it is a module for creating wind line effects."><meta data
     <p>You cannot configure WindLines once it is started, so always make sure to call this method <strong>before</strong> you start WindLines!</p>
   </div>
 </div>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Start"><code style="text-decoration:none">Start</code><a aria-hidden="true" class="hash-link" href="#Start" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L161"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">Start</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="start"><code style="text-decoration:none">start</code><a aria-hidden="true" class="hash-link" href="#start" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L158"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">start</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Starts up the wind lines effect.</p>
-<div class="admonition admonition-note alert alert--secondary">
+<div class="admonition admonition-tip alert alert--success">
   <div class="admonition-heading">
-    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16">
-          <path d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path>
-        </svg></span>note</h5>
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path>
+        </svg></span>tip</h5>
   </div>
   <div class="admonition-content">
     <p>
       If the player is standing under a roof, then the wind lines effect will be stopped for realism purposes and this
-      behavior cannot be toggled. However, you can adjust this behavior through <a href="/Roblox-Modules/api/WindLines#SetConfig">WindLines:SetConfig</a> through the <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams" target="_blank">RaycastParams</a>
-      member, since ray casting is used in determining if the player is standing under a roof.
+      behavior cannot be toggled. However, you can adjust this behavior through <a href="/Roblox-Modules/api/WindLines#SetConfig">WindLines:SetConfig</a> through the
+      <a href="https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams" target="_blank">RaycastParams</a> member, since ray casting
+      is used in determining if the player is standing under a roof.
     </p>
     <p>
-      E.g, the following config does not consider descendants in the <code>badParts</code> folder as roofs, so if a player stands under them, the wind
-      lines effect will not be stopped:
+      E.g, the following config does not consider descendants in the <code>filteredPartsFolder</code> folder as roofs,
+      so if a player stands under them, the wind lines effect will not be stopped:
     </p>
-    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> WindLines <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Workspace <span class="token operator">=</span> game<span class="token punctuation">:</span><span class="token function">GetService</span><span class="token punctuation">(</span><span class="token string">"Workspace"</span><span class="token punctuation">)</span>
 
-<span class="token keyword">local</span> filteredPartsFolder <span class="token operator">=</span> workspace<span class="token punctuation">.</span>SomeFolder
+<span class="token keyword">local</span> WindLines <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
 
+<span class="token keyword">local</span> filteredPartsFolder <span class="token operator">=</span> Workspace<span class="token punctuation">.</span>SomeFolder
 <span class="token keyword">local</span> raycastParams <span class="token operator">=</span> RaycastParams<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 raycastParams<span class="token punctuation">.</span>FilterDescendantsInstances <span class="token operator">=</span> <span class="token punctuation">{</span>filteredPartsFolder<span class="token punctuation">}</span> 
 
-WindLines<span class="token punctuation">.</span><span class="token function">SetConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>RaycastParams <span class="token operator">=</span> raycastParams<span class="token punctuation">}</span><span class="token punctuation">)</span>
-WindLines<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+WindLines<span class="token punctuation">.</span><span class="token function">setConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>RaycastParams <span class="token operator">=</span> raycastParams<span class="token punctuation">}</span><span class="token punctuation">)</span>
+WindLines<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
   </div>
 </div>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="Stop"><code style="text-decoration:none">Stop</code><a aria-hidden="true" class="hash-link" href="#Stop" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L190"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">Stop</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="stop"><code style="text-decoration:none">stop</code><a aria-hidden="true" class="hash-link" href="#stop" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/WindLines/init.lua#L189"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>WindLines<!-- -->.</code><code class="green_3LnD">stop</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Stops the wind lines effect.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
         {
-            &quot;name&quot;: &quot;IsEffectStarted&quot;,
+            &quot;name&quot;: &quot;isEffectStarted&quot;,
             &quot;desc&quot;: &quot;Returns a boolean indicating if the wind lines effect has started.&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [
@@ -104,13 +104,13 @@ WindLines<span class="token punctuation">.</span><span class="token function">St
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 93,
+                &quot;line&quot;: 91,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;IsStarted&quot;,
-            &quot;desc&quot;: &quot;Returns a boolean indicating if WindLines, the module it self, is started through [WindLines.Start].&quot;,
+            &quot;name&quot;: &quot;isStarted&quot;,
+            &quot;desc&quot;: &quot;Returns a boolean indicating if WindLines, the module it self, is started through [WindLines.start].&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [
                 {
@@ -120,12 +120,12 @@ WindLines<span class="token punctuation">.</span><span class="token function">St
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 101,
+                &quot;line&quot;: 99,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;SetConfig&quot;,
+            &quot;name&quot;: &quot;setConfig&quot;,
             &quot;desc&quot;: &quot;Sets the current config of WindLines to `newConfig`, which means that this new config will be used for wind line effects.\n\n:::warning\nYou cannot configure WindLines once it is started, so always make sure to call this method **before** you start WindLines!\n:::&quot;,
             &quot;params&quot;: [
                 {
@@ -137,57 +137,57 @@ WindLines<span class="token punctuation">.</span><span class="token function">St
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 115,
+                &quot;line&quot;: 113,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;Start&quot;,
-            &quot;desc&quot;: &quot;Starts up the wind lines effect.\n\n:::note\nIf the player is standing under a roof, then the wind lines effect will be stopped for realism purposes and this\nbehavior cannot be toggled. However, you can adjust this behavior through [WindLines:SetConfig] through the [RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams)\nmember, since ray casting is used in determining if the player is standing under a roof. \n\nE.g, the following config does not consider descendants in the `badParts` folder as roofs, so if a player stands under them, the wind\nlines effect will not be stopped:\n\n```lua\nlocal WindLines = require(...)\n\nlocal filteredPartsFolder = workspace.SomeFolder\n\nlocal raycastParams = RaycastParams.new()\nraycastParams.FilterDescendantsInstances = {filteredPartsFolder} \n\nWindLines.SetConfig({RaycastParams = raycastParams})\nWindLines.Start()\n```\n:::&quot;,
+            &quot;name&quot;: &quot;start&quot;,
+            &quot;desc&quot;: &quot;Starts up the wind lines effect.\n\n:::tip\nIf the player is standing under a roof, then the wind lines effect will be stopped for realism purposes and this\nbehavior cannot be toggled. However, you can adjust this behavior through [WindLines:SetConfig] through the \n[RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) member, since ray casting \nis used in determining if the player is standing under a roof. \n\nE.g, the following config does not consider descendants in the `filteredPartsFolder` folder as roofs, \nso if a player stands under them, the wind lines effect will not be stopped:\n\n```lua\nlocal Workspace = game:GetService(\&quot;Workspace\&quot;)\n\nlocal WindLines = require(...)\n\nlocal filteredPartsFolder = Workspace.SomeFolder\nlocal raycastParams = RaycastParams.new()\nraycastParams.FilterDescendantsInstances = {filteredPartsFolder} \n\nWindLines.setConfig({RaycastParams = raycastParams})\nWindLines.start()\n```\n:::&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 161,
+                &quot;line&quot;: 158,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;Stop&quot;,
+            &quot;name&quot;: &quot;stop&quot;,
             &quot;desc&quot;: &quot;Stops the wind lines effect.&quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 190,
+                &quot;line&quot;: 189,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         }
     ],
     &quot;properties&quot;: [
         {
-            &quot;name&quot;: &quot;EffectStarted&quot;,
-            &quot;desc&quot;: &quot; \n\nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the wind lines effect starts.&quot;,
+            &quot;name&quot;: &quot;effectStarted&quot;,
+            &quot;desc&quot;: &quot; \nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the wind lines effect starts.&quot;,
             &quot;lua_type&quot;: &quot;Signal &lt;&gt;&quot;,
             &quot;tags&quot;: [
                 &quot;Signal&quot;
             ],
             &quot;readonly&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 42,
+                &quot;line&quot;: 40,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;EffectStopped&quot;,
-            &quot;desc&quot;: &quot; \n\nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the wind lines effect stops.&quot;,
+            &quot;name&quot;: &quot;effectStopped&quot;,
+            &quot;desc&quot;: &quot; \nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the wind lines effect stops.&quot;,
             &quot;lua_type&quot;: &quot;Signal &lt;&gt;&quot;,
             &quot;tags&quot;: [
                 &quot;Signal&quot;
             ],
             &quot;readonly&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 51,
+                &quot;line&quot;: 48,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         }
@@ -198,33 +198,33 @@ WindLines<span class="token punctuation">.</span><span class="token function">St
             &quot;desc&quot;: &quot;This is a config template, none of these members are required in the config table when configuring WindLines through [WindLines.SetConfig], however\nthe config table must not be empty!&quot;,
             &quot;fields&quot;: [
                 {
-                    &quot;name&quot;: &quot;Lifetime&quot;,
+                    &quot;name&quot;: &quot;lifetime&quot;,
                     &quot;lua_type&quot;: &quot;number&quot;,
                     &quot;desc&quot;: &quot;The life time of wind lines.&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;Direction&quot;,
+                    &quot;name&quot;: &quot;direction&quot;,
                     &quot;lua_type&quot;: &quot;number&quot;,
                     &quot;desc&quot;: &quot;The direction of wind lines.&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;Speed&quot;,
+                    &quot;name&quot;: &quot;speed&quot;,
                     &quot;lua_type&quot;: &quot;number&quot;,
                     &quot;desc&quot;: &quot;The speed at which wind lines move.&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;SpawnRate&quot;,
+                    &quot;name&quot;: &quot;spawnRate&quot;,
                     &quot;lua_type&quot;: &quot;number&quot;,
                     &quot;desc&quot;: &quot;The rate at which wind lines are created.&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;RaycastParams&quot;,
+                    &quot;name&quot;: &quot;raycastParams&quot;,
                     &quot;lua_type&quot;: &quot;RaycastParams&quot;,
                     &quot;desc&quot;: &quot;A `RaycastParams` object, to be used in determining if the player is under a roof or not.&quot;
                 }
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 13,
+                &quot;line&quot;: 14,
                 &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
             }
         },
@@ -233,27 +233,27 @@ WindLines<span class="token punctuation">.</span><span class="token function">St
             &quot;desc&quot;: &quot;This is the **default** config template that WindLines initially uses. You can configure WindLines through [WindLines.SetConfig].&quot;,
             &quot;fields&quot;: [
                 {
-                    &quot;name&quot;: &quot;Lifetime&quot;,
+                    &quot;name&quot;: &quot;lifetime&quot;,
                     &quot;lua_type&quot;: &quot;3&quot;,
                     &quot;desc&quot;: &quot;&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;Direction&quot;,
+                    &quot;name&quot;: &quot;direction&quot;,
                     &quot;lua_type&quot;: &quot;Vector3.xAxis&quot;,
                     &quot;desc&quot;: &quot;&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;Speed&quot;,
+                    &quot;name&quot;: &quot;speed&quot;,
                     &quot;lua_type&quot;: &quot;6&quot;,
                     &quot;desc&quot;: &quot;&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;SpawnRate&quot;,
+                    &quot;name&quot;: &quot;spawnRate&quot;,
                     &quot;lua_type&quot;: &quot;25&quot;,
                     &quot;desc&quot;: &quot;&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;RaycastParams&quot;,
+                    &quot;name&quot;: &quot;raycastParams&quot;,
                     &quot;lua_type&quot;: &quot;nil&quot;,
                     &quot;desc&quot;: &quot;&quot;
                 }
@@ -265,13 +265,13 @@ WindLines<span class="token punctuation">.</span><span class="token function">St
         }
     ],
     &quot;name&quot;: &quot;WindLines&quot;,
-    &quot;desc&quot;: &quot; \n\nWindLines is a fork of boatbomber&#x27;s wind lines module, however it is heavily refactored and has a few slight changes \nin behavior. Overall, it is a module for creating wind line effects.&quot;,
+    &quot;desc&quot;: &quot; \nWindLines is a fork of boatbomber&#x27;s wind lines module, however it is heavily refactored and has a few slight changes \nin behavior. Overall, it is a module for creating wind line effects.&quot;,
     &quot;source&quot;: {
-        &quot;line&quot;: 33,
+        &quot;line&quot;: 32,
         &quot;path&quot;: &quot;src/WindLines/init.lua&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#DefaultWindLinesConfig" class="table-of-contents__link toc-highlight">DefaultWindLinesConfig</a></li><li><a href="#WindLinesConfig" class="table-of-contents__link toc-highlight">WindLinesConfig</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#EffectStarted" class="table-of-contents__link toc-highlight">EffectStarted</a></li><li><a href="#EffectStopped" class="table-of-contents__link toc-highlight">EffectStopped</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#IsEffectStarted" class="table-of-contents__link toc-highlight">.IsEffectStarted</a></li><li><a href="#IsStarted" class="table-of-contents__link toc-highlight">.IsStarted</a></li><li><a href="#SetConfig" class="table-of-contents__link toc-highlight">.SetConfig</a></li><li><a href="#Start" class="table-of-contents__link toc-highlight">.Start</a></li><li><a href="#Stop" class="table-of-contents__link toc-highlight">.Stop</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/Roblox-Modules/assets/js/runtime~main.6f98f0e5.js"></script>
-<script src="/Roblox-Modules/assets/js/main.7aa1c97e.js"></script>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#DefaultWindLinesConfig" class="table-of-contents__link toc-highlight">DefaultWindLinesConfig</a></li><li><a href="#WindLinesConfig" class="table-of-contents__link toc-highlight">WindLinesConfig</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#effectStarted" class="table-of-contents__link toc-highlight">effectStarted</a></li><li><a href="#effectStopped" class="table-of-contents__link toc-highlight">effectStopped</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#isEffectStarted" class="table-of-contents__link toc-highlight">.isEffectStarted</a></li><li><a href="#isStarted" class="table-of-contents__link toc-highlight">.isStarted</a></li><li><a href="#setConfig" class="table-of-contents__link toc-highlight">.setConfig</a></li><li><a href="#start" class="table-of-contents__link toc-highlight">.start</a></li><li><a href="#stop" class="table-of-contents__link toc-highlight">.stop</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/Roblox-Modules/assets/js/runtime~main.e4d05f41.js"></script>
+<script src="/Roblox-Modules/assets/js/main.a80765cc.js"></script>
 </body>
 </html>
