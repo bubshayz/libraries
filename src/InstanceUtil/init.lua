@@ -94,43 +94,26 @@ function InstanceUtil.resetInstancePhysicsCollisionGroup(instance: Instance)
 end
 
 --[=[
-	Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to match the `physicalProperties` table, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	(BaseParts') will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to match the `physicalProperties` table
+	Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to `physicalProperties`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
+	(BaseParts') will have their [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) set to `physicalProperties`.
 
 	```lua
-	local physicalProperties = {density = 1}
+	local physicalProperties = PhysicalProperties.new(1)
 
 	InstanceUtil.setInstancePhysicalProperties(workspace.Baseplate, physicalProperties)
 	```
 ]=]
 
-function InstanceUtil.setInstancePhysicalProperties(
-	instance: Instance,
-	physicalProperties: {
-		density: number?,
-		friction: number?,
-		elasticity: number?,
-		frictionWeight: number?,
-		elasticityWeight: number?,
-	}
-)
-	local customPhysicalProperties = PhysicalProperties.new(
-		physicalProperties.density or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Density,
-		physicalProperties.friction or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Friction,
-		physicalProperties.elasticity or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.Elasticity,
-		physicalProperties.frictionWeight or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.FrictionWeight,
-		physicalProperties.elasticityWeight or DEFAULT_INSTANCE_PHYSICAL_PROPERTIES.ElasticityWeight
-	)
-
+function InstanceUtil.setInstancePhysicalProperties(instance: Instance, physicalProperties: PhysicalProperties)
 	if instance:IsA("BasePart") then
-		instance.CustomPhysicalProperties = customPhysicalProperties
+		instance.CustomPhysicalProperties = physicalProperties
 	else
 		for _, descendant in instance:GetDescendants() do
 			if not descendant:IsA("BasePart") then
 				continue
 			end
 
-			descendant.CustomPhysicalProperties = customPhysicalProperties
+			descendant.CustomPhysicalProperties = physicalProperties
 		end
 	end
 end
@@ -158,7 +141,7 @@ end
 	Returns a read only dictionary of all corners of `instance`, top and bottom.
 ]=]
 
-function InstanceUtil.getInstanceCorners(instance: Instance): { top: { Vector3 }, bottom: { Vector3 } }
+function InstanceUtil.getInstanceCorners(instance: BasePart): { top: { Vector3 }, bottom: { Vector3 } }
 	local size = instance.Size
 
 	local frontFaceCenter = (instance.CFrame + instance.CFrame.LookVector * size.Z / 2)
@@ -260,11 +243,11 @@ function InstanceUtil._getGroundInstanceMaterial(
 	raycastParams: RaycastParams?,
 	depth: number
 ): EnumItem?
-	local corners = InstanceUtil.GetInstanceCorners(instance)
+	local corners = InstanceUtil.getInstanceCorners(instance)
 	local depthVector = Vector3.new(0, depth, 0)
 
-	for index, cornerPosition in corners.Top do
-		local bottomCornerPosition = corners.Bottom[index]
+	for index, cornerPosition in corners.top do
+		local bottomCornerPosition = corners.bottom[index]
 		local ray = Workspace:Raycast(
 			cornerPosition,
 			(bottomCornerPosition - cornerPosition) - depthVector,
