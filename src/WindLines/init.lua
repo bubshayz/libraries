@@ -1,39 +1,33 @@
--- ORIGINAL AUTHOR: BOAT BOMBER
+-- ORIGINAL AUTHOR: boatbomber
 
 --[=[
 	@interface WindLinesConfig  
 	@within WindLines	
-	.Lifetime number -- The life time of wind lines.
-	.Direction number -- The direction of wind lines.
-	.Speed number -- The speed at which wind lines move.
-	.SpawnRate number -- The rate at which wind lines are created.
-	.RaycastParams RaycastParams -- A `RaycastParams` object, to be used in determining if the player is under a roof or not.
-
-	This is a config template, none of these members are required in the config 
-	table when configuring WindLines through [WindLines.SetConfig], however
+	.lifetime number -- The life time of wind lines.
+	.direction number -- The direction of wind lines.
+	.speed number -- The speed at which wind lines move.
+	.spawnRate number -- The rate at which wind lines are created.
+	.raycastParams RaycastParams -- A `RaycastParams` object, to be used in determining if the player is under a roof or not.
+	This is a config template, none of these members are required in the config table when configuring WindLines through [WindLines.SetConfig], however
 	the config table must not be empty!
 ]=]
 
 --[=[
 	@interface DefaultWindLinesConfig 
 	@within WindLines	
-
-	.Lifetime 3 
-	.Direction Vector3.xAxis 
-	.Speed 6 
-	.SpawnRate 25
-	.RaycastParams nil
+	.lifetime 3 
+	.direction Vector3.xAxis 
+	.speed 6 
+	.spawnRate 25
+	.raycastParams nil
 	
-	This is the **default** config template that WindLines initially uses. You can
-	 configure WindLines through [WindLines.SetConfig].
+	This is the **default** config template that WindLines initially uses. You can configure WindLines through [WindLines.SetConfig].
 ]=]
 
 --[=[ 
 	@class WindLines
-
-	WindLines is a fork of boatbomber's wind lines module, however it is heavily 
-	refactored and has a few slight changes  in behavior. Overall, it is a module 
-	for creating wind line effects.
+	WindLines is a fork of boatbomber's wind lines module, however it is heavily refactored and has a few slight changes 
+	in behavior. Overall, it is a module for creating wind line effects.
 ]=]
 
 --[=[ 
@@ -41,9 +35,7 @@
 	@within WindLines
 	@tag Signal
 	@readonly
-
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired 
-	whenever the wind lines effect starts.
+	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the wind lines effect starts.
 ]=]
 
 --[=[ 
@@ -51,9 +43,7 @@
 	@within WindLines
 	@tag Signal
 	@readonly
-
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired 
-	whenever the wind lines effect stops.
+	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the wind lines effect stops.
 ]=]
 
 local Workspace = game:GetService("Workspace")
@@ -64,15 +54,20 @@ local WindLine = require(script.WindLine)
 local Janitor = require(script.Parent.Janitor)
 local Types = require(script.Types)
 
-local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %s instead."
 local WIND_POSITION_OFFSET = Vector3.new(0, 0.1, 0)
 local CAMERA_CEILING_Y_VECTOR = Vector3.new(0, 1000, 0)
+local DEFAULT_CONFIG = {
+	lifetime = 3,
+	direction = Vector3.xAxis,
+	speed = 6,
+	spawnRate = 25,
+}
 local CONFIG_TEMPLATE = {
-	Lifetime = "number",
-	Direction = "Vector3",
-	Speed = "number",
-	SpawnRate = "number",
-	RaycastParams = "RaycastParams",
+	lifetime = "number",
+	direction = "Vector3",
+	speed = "number",
+	spawnRate = "number",
+	raycastParams = "RaycastParams",
 }
 
 local camera = Workspace.CurrentCamera
@@ -81,17 +76,13 @@ local WindLines = {
 	effectStarted = Signal.new(),
 	effectStopped = Signal.new(),
 	_janitor = Janitor.new(),
-	_config = {
-		Lifetime = 3,
-		Direction = Vector3.xAxis,
-		Speed = 6,
-		SpawnRate = 25,
-		RaycastParams = nil,
-	},
 	_updateQueue = table.create(30),
 	_updateQueueFinished = Signal.new(),
-	_isStarted = false,
-	_isWindLinesEffectStarted = false,
+	_mutatable = {
+		config = {},
+		isStarted = false,
+		isWindLinesEffectStarted = false,
+	},
 }
 
 --[=[
@@ -99,39 +90,32 @@ local WindLines = {
 ]=]
 
 function WindLines.isEffectStarted(): boolean
-	return WindLines._isWindLinesEffectStarted
+	return WindLines._mutatable.isWindLinesEffectStarted
 end
 
 --[=[
-	Returns a boolean indicating if WindLines, the module it self, is started 
-	through [WindLines.Start].
+	Returns a boolean indicating if WindLines, the module it self, is started through [WindLines.start].
 ]=]
 
 function WindLines.isStarted(): boolean
-	return WindLines._isStarted
+	return WindLines._mutatable.isStarted
 end
 
 --[=[
 	@param newConfig WindLinesConfig
 
-	Sets the current config of WindLines to `newConfig`, which means that this 
-	new config will be used for wind line effects.
+	Sets the current config of WindLines to `newConfig`, which means that this new config will be used for wind line effects.
 
 	:::warning
-	You cannot configure WindLines once it is started, so always make sure to 
-	call this method **before** you start WindLines!
+	You cannot configure WindLines once it is started, so always make sure to call this method **before** you start WindLines!
 	:::
 ]=]
 
 function WindLines.setConfig(newConfig: Types.WindLinesConfig)
-	assert(not WindLines._isStarted, "Cannot configure WindLines now as WindLines is started!")
-	assert(
-		typeof(newConfig) == "table",
-		INVALID_ARGUMENT_TYPE:format(1, "WindLines.setConfig", "table", typeof(newConfig))
-	)
+	assert(not WindLines.isStarted(), "Cannot configure WindLines now as WindLines is started!")
 	assert(next(newConfig), "Config table must not be empty!")
 
-	local currentConfig = WindLines._config
+	local currentConfig = WindLines._mutatable.config
 
 	for key, value in newConfig do
 		local expectedType = CONFIG_TEMPLATE[key]
@@ -149,22 +133,20 @@ end
 	Starts up the wind lines effect.
 
 	:::tip
-	If the player is standing under a roof, then the wind lines effect will be 
-	stopped for realism purposes and this behavior cannot be toggled. However, 
-	you can adjust this behavior through [WindLines:SetConfig] through the 
-	[RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams)
-	member, since ray casting is used in determining if the player is standing 
-	under a roof. 
+	If the player is standing under a roof, then the wind lines effect will be stopped for realism purposes and this
+	behavior cannot be toggled. However, you can adjust this behavior through [WindLines:SetConfig] through the 
+	[RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) member, since ray casting 
+	is used in determining if the player is standing under a roof. 
 
-	E.g, the following config does not consider descendants in the `filteredPartsFolder` 
-	folder as roofs, so if a player stands under them, the wind lines effect will 
-	not be stopped:
+	E.g, the following config does not consider descendants in the `filteredPartsFolder` folder as roofs, 
+	so if a player stands under them, the wind lines effect will not be stopped:
 
 	```lua
+	local Workspace = game:GetService("Workspace")
+
 	local WindLines = require(...)
 
-	local filteredPartsFolder = workspace.SomeFolder
-
+	local filteredPartsFolder = Workspace.SomeFolder
 	local raycastParams = RaycastParams.new()
 	raycastParams.FilterDescendantsInstances = {filteredPartsFolder} 
 
@@ -175,19 +157,21 @@ end
 ]=]
 
 function WindLines.start()
-	assert(not WindLines._isStarted, "Cannot start wind lines effect again as it is already started!")
+	assert(not WindLines.isStarted(), "Cannot start wind lines effect again as it is already started!")
 
-	WindLines._isStarted = true
+	local mutatable = WindLines._mutatable
+
+	mutatable.isStarted = true
 	WindLines._startHeartbeatUpdate()
 
 	WindLines._janitor:Add(function()
-		WindLines._isStarted = false
-		WindLines._isWindLinesEffectStarted = false
+		mutatable.isStarted = false
+		mutatable.isWindLinesEffectStarted = false
 	end)
 
 	WindLines._janitor:Add(function()
 		local function UpdateQueueFinished()
-			WindLines._heartbeatUpdateConnection:Disconnect()
+			mutatable.heartbeatUpdateConnection:Disconnect()
 			WindLines._updateQueueFinished:DisconnectAll()
 		end
 
@@ -204,68 +188,70 @@ end
 ]=]
 
 function WindLines.stop()
-	assert(WindLines._isStarted, "Cannot stop wind lines effect as it is not started!")
+	assert(WindLines.isStarted(), "Cannot stop wind lines effect as it is not started!")
 
 	WindLines._janitor:Cleanup()
 end
 
 function WindLines._startHeartbeatUpdate()
-	local config = WindLines._config
+	local mutatable = WindLines._mutatable
 	local lastClockSinceWindLineSpawned = os.clock()
-	local spawnRate = 1 / config.SpawnRate
+	local spawnRate = 1 / mutatable.config.spawnRate
 
-	WindLines._heartbeatUpdateConnection = RunService.Heartbeat:Connect(function()
+	mutatable.heartbeatUpdateConnection = RunService.Heartbeat:Connect(function()
 		local clockNow = os.clock()
 		local isCameraUnderPart = Workspace:Raycast(
 			camera.CFrame.Position,
 			CAMERA_CEILING_Y_VECTOR,
-			config.RaycastParams
+			mutatable.config.RaycastParams
 		) ~= nil
 
-		if (clockNow - lastClockSinceWindLineSpawned) > spawnRate and WindLines._isStarted then
+		if (clockNow - lastClockSinceWindLineSpawned) > spawnRate and WindLines.isStarted() then
 			if not isCameraUnderPart then
-				if not WindLines._isWindLinesEffectStarted then
-					WindLines._isWindLinesEffectStarted = true
+				if not WindLines.isEffectStarted() then
+					mutatable.isWindLinesEffectStarted = true
 					WindLines.effectStarted:Fire()
 				end
 
-				WindLine.new(WindLines._config, WindLines._updateQueue)
+				WindLine.new(mutatable.config, WindLines._updateQueue)
 				lastClockSinceWindLineSpawned = clockNow
-			elseif WindLines._isWindLinesEffectStarted then
-				WindLines._isWindLinesEffectStarted = false
+			elseif WindLines.isEffectStarted() then
+				mutatable.isWindLinesEffectStarted = false
 				WindLines.effectStopped:Fire()
 			end
 		end
 
 		for _, windLine in WindLines._updateQueue do
-			local aliveTime = clockNow - windLine.StartClock
+			local aliveTime = clockNow - windLine.startClock
 
-			if aliveTime >= windLine.Lifetime then
+			if aliveTime >= windLine.lifetime then
 				windLine:destroy()
 				continue
 			end
 
-			windLine.Trail.MaxLength = 20 - (20 * (aliveTime / windLine.Lifetime))
+			windLine.trail.MaxLength = 20 - (20 * (aliveTime / windLine.lifetime))
 
-			local seededClock = (clockNow + windLine.Seed) * (windLine.Speed * 0.2)
-			local startPosition = windLine.Position
+			local seededClock = (clockNow + windLine.seed) * (windLine.speed * 0.2)
+			local startPosition = windLine.position
 
-			windLine.Attachment0.WorldPosition = (
-				CFrame.new(startPosition, startPosition + windLine.Direction)
-				* CFrame.new(0, 0, windLine.Speed * -aliveTime)
+			windLine.attachment0.WorldPosition = (
+				CFrame.new(startPosition, startPosition + windLine.direction)
+				* CFrame.new(0, 0, windLine.speed * -aliveTime)
 			).Position + Vector3.new(
 				math.sin(seededClock) * 0.5,
 				math.sin(seededClock) * 0.8,
 				math.sin(seededClock) * 0.5
 			)
 
-			windLine.Attachment1.WorldPosition = windLine.Attachment0.WorldPosition + WIND_POSITION_OFFSET
+			windLine.attachment1.WorldPosition = windLine.attachment0.WorldPosition + WIND_POSITION_OFFSET
 		end
 
-		if #WindLines._updateQueue == 0 and not WindLines._isStarted then
+		if #WindLines._updateQueue == 0 and not WindLines.isStarted() then
 			WindLines._updateQueueFinished:Fire()
 		end
 	end)
 end
+
+WindLines.setConfig(DEFAULT_CONFIG)
 
 return table.freeze(WindLines)

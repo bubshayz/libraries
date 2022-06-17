@@ -1,9 +1,9 @@
 export type WindLinesConfig = {
-	Lifetime: number?,
-	Direction: number?,
-	Speed: number?,
-	SpawnRate: number?,
-	RaycastParams: RaycastParams?,
+	lifetime: number,
+	direction: number,
+	speed: number,
+	spawnRate: number,
+	raycastParams: RaycastParams,
 }
 
 return nil
