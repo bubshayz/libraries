@@ -167,7 +167,7 @@ function RemoteProperty.__index:removeForClient(client: Player)
 		return
 	end
 
-	self._clientProperties[client]:Destroy()
+	self._clientProperties[client]:destroy()
 	self._clientProperties[client] = nil
 
 	-- Send the current value of the remote property back to the client so that
