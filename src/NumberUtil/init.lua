@@ -12,36 +12,69 @@
 ]=]
 
 --[=[ 
-	@prop e number
+	@prop e number <2.7182818284590>
 	@within NumberUtil
 	@readonly
 
-	Also known as Euler's number. This is a mathematical constant approximately equal to approximately `2.7182818284590`.
+	A mathematical constant, also known as Euler's number. 
 ]=]
 
 --[=[ 
-	@prop Phi number
+	@prop Phi number <1.618033988749895>
 	@within NumberUtil
 	@readonly
 
-	Also known as the golden ratio, equal to approximately `1.618033988749895`.
+	A mathematical constant, also known as the golden ratio.
 ]=]
 
 --[=[ 
-	@prop Tau number
+	@prop Tau number <6.28>
 	@within NumberUtil
 	@readonly
 
-	It is the circle constant representing the ratio between circumference and radius and is equal to (2 times pi), so approximately `6.28`.
+	A mathematical constant, it is the circle constant representing the ratio between circumference and radius.
+]=]
+
+--[=[ 
+	@prop G number <6.6743e-11>
+	@within NumberUtil
+	@readonly
+
+	A mathematical constant, used in calculating the gravitational attraction between two objects.
 ]=]
 
 local DEFAULT_NUMBER_EPSLION = 1e-5
 local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %s instead."
+local NUMBER_SUFFIXES = {
+	"K",
+	"M",
+	"B",
+	"t",
+	"q",
+	"Q",
+	"s",
+	"S",
+	"o",
+	"n",
+	"d",
+	"U",
+	"D",
+	"T",
+	"Qt",
+	"Qd",
+	"Sd",
+	"St",
+	"O",
+	"N",
+	"v",
+	"c",
+}
 
 local NumberUtil = {
 	e = 2.7182818284590,
 	Tau = 2 * math.pi,
 	Phi = 1.618033988749895,
+	G = 6.6743e-11,
 }
 
 --[=[
@@ -97,6 +130,43 @@ end
 
 function NumberUtil.inverseLerp(min: number, max: number, alpha: number): number
 	return (alpha - min) / (max - min)
+end
+
+--[=[
+	Returns the average of `...` numbers against `sum`.
+
+	```lua
+	local NumberUtil = require(...)
+
+	print(NumberUtil.inverseLerp(100, 50, 25)) --> 0.75
+	```
+]=]
+
+function NumberUtil.average(sum: number, ...: number): number
+	local accumulatedSum = 0
+
+	for _, number in { ... } do
+		accumulatedSum += number
+	end
+
+	return accumulatedSum / sum
+end
+
+--[=[
+	Return a string as the formatted version of `number`.
+
+	```lua
+	local NumberUtil = require(...)
+
+	print(NumberUtil.format(1650)) --> "1.65K"
+	```
+]=]
+
+function NumberUtil.format(number: number): string
+	local formattedNumberSuffix = math.floor(math.log(number, 1e3))
+
+	return ("%.2f"):format(number / math.pow(10, formattedNumberSuffix * 3)):gsub("%.?0+$", "")
+		.. (NUMBER_SUFFIXES[formattedNumberSuffix] or "")
 end
 
 --[=[
@@ -203,20 +273,6 @@ function NumberUtil.factors(number: number): { number }
 	end
 
 	return table.freeze(factors)
-end
-
---[=[
-	Returns a boolean indicating if `number` is infinite. 
-
-	```lua
-	local NumberUtil = require(...)
-
-	print(NumberUtil.infinite(math.huge)) --> true
-	```
-]=]
-
-function NumberUtil.infinite(number: number): boolean
-	return math.abs(number) == math.huge
 end
 
 --[=[
