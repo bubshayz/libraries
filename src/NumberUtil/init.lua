@@ -153,7 +153,11 @@ function NumberUtil.average(sum: number, ...: number): number
 end
 
 --[=[
-	Return a string as the formatted version of `number`.
+	Return a string as the formatted version of `number`. 
+
+	:::warning
+	This method will struggle to format numbers larger than `10^66`.
+	:::
 
 	```lua
 	local NumberUtil = require(...)
