@@ -28,7 +28,7 @@
 ]=]
 
 --[=[ 
-	@prop Tau number <6.28>
+	@prop Tau number <6.283185307179586>
 	@within NumberUtil
 	@readonly
 
