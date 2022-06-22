@@ -30,7 +30,7 @@ local CustomEnum = { _prototype = {} }
 
 function CustomEnum.new(name: string, enumItems: { [string]: any }): CustomEnum
 	local self = setmetatable({
-		_name = name,
+		name = name,
 		_enumItems = enumItems,
 	}, CustomEnum)
 
@@ -62,16 +62,6 @@ function CustomEnum._prototype:getEnumItems(): { [string]: any }
 	return self._enumItems
 end
 
---[=[
-	@tag CustomEnum instance
-
-	Returns the name of the custom enum.
-]=]
-
-function CustomEnum._prototype:getName(): string
-	return self._name
-end
-
 function CustomEnum._prototype:_init()
 	table.freeze(self)
 end
@@ -80,18 +70,18 @@ function CustomEnum:__index(key)
 	local enumItem = CustomEnum._prototype[key] or self._enumItems[key]
 
 	if enumItem == nil then
-		error(INVALID_ENUM_MEMBER:format(tostring(key), self._name))
+		error(INVALID_ENUM_MEMBER:format(tostring(key), self.name))
 	end
 
 	return enumItem
 end
 
 function CustomEnum:__tostring()
-	return ("[CustomEnum]: (%s)"):format(self._name)
+	return ("[CustomEnum]: (%s)"):format(self.name)
 end
 
 export type CustomEnum = typeof(setmetatable({} :: {
-	_name: string,
+	name: string,
 	_enumItems: { [string]: any },
 }, CustomEnum))
 

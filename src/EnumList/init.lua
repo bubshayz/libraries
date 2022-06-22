@@ -102,7 +102,7 @@ function EnumList.new(name: string, enums: { [string]: { [string]: any } }): Enu
 	assert(typeof(enums) == "table", INVALID_ARGUMENT_TYPE:format(2, "EnumList.new", "table", typeof(enums)))
 
 	local self = setmetatable({
-		_name = name,
+		name = name,
 		_enums = enums,
 	}, EnumList)
 
@@ -119,16 +119,6 @@ function EnumList.is(self: any): boolean
 end
 
 --[=[
-	@tag EnumList instance
-
-	Returns the name of the enum list.
-]=]
-
-function EnumList._prototype:getName(): string
-	return self._name
-end
-
---[=[
 	@return {[string]: CustomEnum}
 	@tag EnumList instance
 
@@ -141,8 +131,8 @@ end
 
 function EnumList._prototype:_init()
 	for enumName, enum in self._enums do
-		assert(typeof(enumName) == "string", INVALID_ENUM_NAME:format(self._name))
-		assert(typeof(enum) == "table", INVALID_ENUM:format(enumName, self._name, typeof(enum)))
+		assert(typeof(enumName) == "string", INVALID_ENUM_NAME:format(self.name))
+		assert(typeof(enum) == "table", INVALID_ENUM:format(enumName, self.name, typeof(enum)))
 		self._enums[enumName] = CustomEnum.new(enumName, enum)
 	end
 
@@ -158,14 +148,14 @@ function EnumList:__index(key)
 	local value = EnumList._prototype[key] or self._enums[key]
 
 	if value == nil then
-		error(INVALID_ENUM_LIST_MEMBER:format(tostring(key), self._name))
+		error(INVALID_ENUM_LIST_MEMBER:format(tostring(key), self.name))
 	end
 
 	return value
 end
 
 function EnumList:__tostring()
-	return ("[EnumList]: (%s)"):format(self._name)
+	return ("[EnumList]: (%s)"):format(self.name)
 end
 
 export type EnumList = typeof(setmetatable({} :: {
