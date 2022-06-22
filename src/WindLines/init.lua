@@ -52,6 +52,7 @@ local RunService = game:GetService("RunService")
 local Signal = require(script.Parent.Signal)
 local WindLine = require(script.WindLine)
 local Janitor = require(script.Parent.Janitor)
+local t = require(script.Parent.t)
 local Types = require(script.Types)
 
 local WIND_POSITION_OFFSET = Vector3.new(0, 0.1, 0)
@@ -62,15 +63,19 @@ local DEFAULT_CONFIG = {
 	speed = 6,
 	spawnRate = 25,
 }
-local CONFIG_TEMPLATE = {
-	lifetime = "number",
-	direction = "Vector3",
-	speed = "number",
-	spawnRate = "number",
-	raycastParams = "RaycastParams",
-}
+
+local ConfigInterface = t.strictInterface({
+	lifetime = t.integer,
+	direction = t.Vector3,
+	speed = t.integer,
+	spawnRate = t.integer,
+	raycastParams = t.RaycastParams,
+})
 
 local camera = Workspace.CurrentCamera
+local isStarted = false
+local isEffectStarted = false
+local heartbeatUpdateConnection
 
 local WindLines = {
 	effectStarted = Signal.new(),
@@ -78,33 +83,29 @@ local WindLines = {
 	_janitor = Janitor.new(),
 	_updateQueue = table.create(30),
 	_updateQueueFinished = Signal.new(),
-	_mutatable = {
-		config = {},
-		isStarted = false,
-		isWindLinesEffectStarted = false,
-	},
+	_config = {},
 }
 
 --[=[
-	Returns a boolean indicating if the wind lines effect has started.
+	Returns a boolean indicating if the wind lines effect is started.
 ]=]
 
 function WindLines.isEffectStarted(): boolean
-	return WindLines._mutatable.isWindLinesEffectStarted
+	return isEffectStarted
 end
 
 --[=[
-	Returns a boolean indicating if WindLines, the module it self, is started through [WindLines.start].
+	Returns a boolean indicating if WindLines (the module it self) is started through [WindLines.start].
 ]=]
 
 function WindLines.isStarted(): boolean
-	return WindLines._mutatable.isStarted
+	return isStarted
 end
 
 --[=[
 	@param newConfig WindLinesConfig
 
-	Sets the current config of WindLines to `newConfig`, which means that this new config will be used for wind line effects.
+	Sets the current config of WindLines to `newConfig`, so that this new config will be used for wind line effects.
 
 	:::warning
 	You cannot configure WindLines once it is started, so always make sure to call this method **before** you start WindLines!
@@ -115,17 +116,12 @@ function WindLines.setConfig(newConfig: Types.WindLinesConfig)
 	assert(not WindLines.isStarted(), "Cannot configure WindLines now as WindLines is started!")
 	assert(next(newConfig), "Config table must not be empty!")
 
-	local currentConfig = WindLines._mutatable.config
+	ConfigInterface(newConfig)
 
+	-- Copy over the new config to the current config as directly setting it will
+	-- cause an error since WindLines is table.freezed:
 	for key, value in newConfig do
-		local expectedType = CONFIG_TEMPLATE[key]
-		assert(expectedType, ('Config member "%s" is invalid.'):format(tostring(key)))
-		assert(
-			typeof(value) == expectedType,
-			('Config must have member "%s" of type %s. Instead is of type %s.'):format(key, expectedType, typeof(value))
-		)
-
-		currentConfig[key] = value
+		WindLines._config[key] = value
 	end
 end
 
@@ -159,19 +155,17 @@ end
 function WindLines.start()
 	assert(not WindLines.isStarted(), "Cannot start wind lines effect again as it is already started!")
 
-	local mutatable = WindLines._mutatable
-
-	mutatable.isStarted = true
+	isStarted = true
 	WindLines._startHeartbeatUpdate()
 
 	WindLines._janitor:Add(function()
-		mutatable.isStarted = false
-		mutatable.isWindLinesEffectStarted = false
+		isStarted = false
+		isEffectStarted = false
 	end)
 
 	WindLines._janitor:Add(function()
 		local function UpdateQueueFinished()
-			mutatable.heartbeatUpdateConnection:Disconnect()
+			heartbeatUpdateConnection:Disconnect()
 			WindLines._updateQueueFinished:DisconnectAll()
 		end
 
@@ -194,29 +188,29 @@ function WindLines.stop()
 end
 
 function WindLines._startHeartbeatUpdate()
-	local mutatable = WindLines._mutatable
 	local lastClockSinceWindLineSpawned = os.clock()
-	local spawnRate = 1 / mutatable.config.spawnRate
+	local config = WindLines._config
+	local spawnRate = 1 / config.spawnRate
 
-	mutatable.heartbeatUpdateConnection = RunService.Heartbeat:Connect(function()
+	heartbeatUpdateConnection = RunService.Heartbeat:Connect(function()
 		local clockNow = os.clock()
 		local isCameraUnderPart = Workspace:Raycast(
 			camera.CFrame.Position,
 			CAMERA_CEILING_Y_VECTOR,
-			mutatable.config.RaycastParams
+			config.RaycastParams
 		) ~= nil
 
-		if (clockNow - lastClockSinceWindLineSpawned) > spawnRate and WindLines.isStarted() then
+		if (clockNow - lastClockSinceWindLineSpawned) > spawnRate and isStarted then
 			if not isCameraUnderPart then
-				if not WindLines.isEffectStarted() then
-					mutatable.isWindLinesEffectStarted = true
+				if not isEffectStarted then
+					isEffectStarted = true
 					WindLines.effectStarted:Fire()
 				end
 
-				WindLine.new(mutatable.config, WindLines._updateQueue)
+				WindLine.new(config, WindLines._updateQueue)
 				lastClockSinceWindLineSpawned = clockNow
 			elseif WindLines.isEffectStarted() then
-				mutatable.isWindLinesEffectStarted = false
+				isEffectStarted = false
 				WindLines.effectStopped:Fire()
 			end
 		end
@@ -246,7 +240,7 @@ function WindLines._startHeartbeatUpdate()
 			windLine.attachment1.WorldPosition = windLine.attachment0.WorldPosition + WIND_POSITION_OFFSET
 		end
 
-		if #WindLines._updateQueue == 0 and not WindLines.isStarted() then
+		if #WindLines._updateQueue == 0 and not isStarted then
 			WindLines._updateQueueFinished:Fire()
 		end
 	end)
