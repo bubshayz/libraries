@@ -1,17 +1,49 @@
 --[=[
-	@class NetworkClient
+	@class networkClient
 
 	The client counterpart of the Network module.
 ]=]
 
-local Packages = script.Parent.Parent
+local packages = script.Parent.Parent
 
-local Promise = require(Packages.Promise)
+local Promise = require(packages.Promise)
 local SharedConstants = require(script.Parent.SharedConstants)
-local ClientRemoteSignal = require(script.ClientRemoteSignal)
-local ClientRemoteProperty = require(script.ClientRemoteProperty)
 
-local NetworkClient = {}
+local networkClient = {
+	ClientRemoteProperty = require(script.ClientRemoteProperty),
+	ClientRemoteSignal = require(script.ClientRemoteSignal),
+}
+
+local function getAbstractOfNetworkFolder(networkFolder): { [string]: any }
+	local abstract = {}
+
+	for _, descendant in networkFolder:GetChildren() do
+		if descendant:GetAttribute(SharedConstants.attribute.boundToRemoteSignal) then
+			abstract[descendant.Name] = networkClient.ClientRemoteSignal.new(descendant)
+			continue
+		elseif descendant:GetAttribute(SharedConstants.attribute.boundToRemoteProperty) then
+			abstract[descendant.Name] = networkClient.ClientRemoteProperty.new(descendant)
+			continue
+		end
+
+		if descendant:GetAttribute("ValueType") == "function" then
+			abstract[descendant.Name] = function(...)
+				local args = { ... }
+				local index = table.find(args, abstract)
+
+				if index then
+					table.remove(args, index)
+				end
+
+				return descendant:InvokeServer(table.unpack(args))
+			end
+		else
+			abstract[descendant.Name] = descendant:InvokeServer()
+		end
+	end
+
+	return table.freeze(abstract)
+end
 
 local function getNetworkFoldersFromParent(parent: Instance): { Folder }
 	local networkFolders = {}
@@ -26,7 +58,6 @@ local function getNetworkFoldersFromParent(parent: Instance): { Folder }
 
 	return networkFolders
 end
-
 --[=[
 	Returns an array of *all* network objects dispatched to `parent`.
 
@@ -54,11 +85,11 @@ end
 	```
 ]=]
 
-function NetworkClient.allFromParent(parent: Instance): { [string]: { [string]: any } }
+function networkClient.allFromParent(parent: Instance): { [string]: { [string]: any } }
 	local networks = {}
 
 	for _, networkFolder in getNetworkFoldersFromParent(parent) do
-		networks[networkFolder.Name] = NetworkClient._getAbstractOfNetworkFolder(networkFolder)
+		networks[networkFolder.Name] = getAbstractOfNetworkFolder(networkFolder)
 	end
 
 	return networks
@@ -72,58 +103,10 @@ end
 	found in `parent`.
 ]=]
 
-function NetworkClient.fromParent(name: string, parent: Instance): any
-	assert(
-		typeof(name) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.fromParent", "string", typeof(name))
-	)
-	assert(
-		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(2, "Network.fromParent", "Instance", typeof(parent))
-	)
-
+function networkClient.fromParent(name: string, parent: Instance): any
 	return Promise.new(function(resolve)
-		resolve(NetworkClient._getAbstractOfNetworkFolder(parent:WaitForChild(name)))
+		resolve(getAbstractOfNetworkFolder(parent:WaitForChild(name)))
 	end)
 end
 
-function NetworkClient._getAbstractOfNetworkFolder(networkFolder: Folder): { any }
-	local abstract = {}
-
-	for _, descendant in networkFolder:GetChildren() do
-		if descendant:GetAttribute(SharedConstants.Attribute.BoundToRemoteSignal) then
-			abstract[descendant.Name] = ClientRemoteSignal.new(descendant)
-			continue
-		elseif descendant:GetAttribute(SharedConstants.Attribute.BoundToRemoteProperty) then
-			abstract[descendant.Name] = ClientRemoteProperty.new(descendant)
-			continue
-		end
-
-		if descendant:GetAttribute("ValueType") == "function" then
-			abstract[descendant.Name] = function(...)
-				local args = { ... }
-				local index = table.find(args, abstract)
-
-				if index then
-					table.remove(args, index)
-				end
-
-				return descendant:InvokeServer(table.unpack(args))
-			end
-		else
-			abstract[descendant.Name] = descendant:InvokeServer()
-		end
-	end
-
-	return table.freeze(abstract)
-end
-
-function NetworkClient._init()
-	for _, module in script:GetChildren() do
-		NetworkClient[module.Name] = require(module)
-	end
-end
-
-NetworkClient._init()
-
-return table.freeze(NetworkClient)
+return table.freeze(networkClient)

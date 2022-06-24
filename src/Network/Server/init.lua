@@ -1,16 +1,31 @@
---[=[
-	@class NetworkServer
+local packages = script.Parent.Parent
+local utilities = script.Parent.utilities
 
-	The server counterpart of the Network module.
-]=]
+local SharedConstants = require(script.Parent.SharedConstants)
+local RemoteSignal = require(script.RemoteSignal)
+local RemoteProperty = require(script.RemoteProperty)
+local tableUtil = require(utilities.tableUtil)
+local networkUtil = require(utilities.networkUtil)
+local Janitor = require(packages.Janitor)
+local t = require(packages.t)
+
+local DEFAULT_MIDDLEWARE = {
+	methodCallOutbound = {},
+	methodCallInbound = {},
+}
+
+local MiddlewareInterface = t.optional(t.strictInterface({
+	methodCallInbound = t.optional(t.strictInterface({ t.optional(t.callback) })),
+	methodCallOutbound = t.optional(t.strictInterface({ t.optional(t.callback) })),
+}))
 
 --[=[
 	@interface Middleware
 	@within NetworkServer
-	.inbound {(args: {...any}) -> ()}?
-	.outbound {(args: {...any}) -> ()}?
+	.methodCallInbound {(args: {...any}) -> boolean}?
+	.methodCallOutbound {(args: {...any}) -> ()}?
 
-	Both `Inbound` and `Outbound` should be array of callbacks (if specified, none of them are required). 
+	Both `methodCallInbound` and `methodCallOutbound` should be array of callbacks (if specified, none of them are required). 
 	Callbacks in `Inbound` are known as "inbound callbacks" and are called whenever a client tries to call 
 	a serverside method  (exposed through the network object). The first argument passed to each inbound 
 	callback is the name of the method (the client called), and the arguments sent by the client (to that method)
@@ -76,52 +91,20 @@
 	:::
 ]=]
 
-local Packages = script.Parent.Parent
+--[=[
+	@class NetworkServer
 
-local Janitor = require(Packages.Janitor)
-local SharedConstants = require(script.Parent.SharedConstants)
-local RemoteSignal = require(script.RemoteSignal)
-local RemoteProperty = require(script.RemoteProperty)
+	The server counterpart of the Network module.
+]=]
 
-local NetworkServer = { __index = {} }
+local NetworkServer = {
+	RemoteProperty = require(script.RemoteProperty),
+	RemoteSignal = require(script.RemoteSignal),
+	__index = {},
+}
 
-local function validateMiddleware(middleware)
-	if not middleware then
-		return table.freeze({ inbound = {}, outbound = {} })
-	end
-
-	if middleware.inbound ~= nil then
-		assert(typeof(middleware.inbound) == "table", '"inbound" member specified in middleware must be a table.')
-
-		for _, callback in middleware.inbound do
-			assert(
-				typeof(callback) == "function",
-				("Inbound table must be an array of functions only. Instead got value of type %s."):format(
-					typeof(callback)
-				)
-			)
-		end
-	else
-		middleware.inbound = {}
-	end
-
-	if middleware.outbound ~= nil then
-		assert(typeof(middleware.outbound) == "table", '"outbound" member specified in middleware must be a table.')
-
-		for _, callback in middleware.outbound do
-			assert(
-				typeof(callback) == "function",
-				("Outbound table must be an array of functions only. Instead got value of type %s."):format(
-					typeof(callback)
-				)
-			)
-		end
-	else
-		middleware.outbound = {}
-	end
-
-	assert(middleware.inbound or middleware.outbound, 'Middleware must have at least an "inbound" or "outbound" table')
-	return table.freeze(middleware)
+local function getDefaultMiddleware()
+	return tableUtil.deepCopy(DEFAULT_MIDDLEWARE)
 end
 
 --[=[
@@ -138,21 +121,24 @@ end
 
 function NetworkServer.new(
 	name: string,
-	middleware: { outbound: { () -> () }, inbound: { () -> boolean } }?
+	middleware: {
+		methodCallOutbound: { () -> () },
+		methodCallInbound: { () -> boolean },
+	}?
 ): NetworkServer
-	assert(
-		typeof(name) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.new", "string", typeof(name))
-	)
-	assert(
-		middleware == nil or typeof(middleware) == "table",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(2, "Network.new", "table or nil", typeof(middleware))
-	)
+	assert(t.string(name))
+	assert(t.optional(t.table)(middleware))
+
+	if middleware then
+		assert(MiddlewareInterface(middleware))
+	end
+
+	middleware = middleware or getDefaultMiddleware()
 
 	local self = setmetatable({
 		_name = name,
 		_janitor = Janitor.new(),
-		_middleware = validateMiddleware(middleware),
+		_middleware = middleware,
 	}, NetworkServer)
 
 	self:_init()
@@ -219,11 +205,11 @@ function NetworkServer.__index:append(
 	key: string,
 	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
 )
-	assert(not self:dispatched(), "Cannot append key value pair as network object is dispatched to the client!")
 	assert(
-		typeof(key) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Server:append", "string", typeof(key))
+		not self:dispatched(),
+		"Cannot append key value pair as network object is dispatched to the client!"
 	)
+	assert(t.string(key))
 
 	self:_setup(key, value)
 end
@@ -240,23 +226,14 @@ end
 ]=]
 
 function NetworkServer.__index:dispatch(parent: Instance)
-	assert(
-		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network:dispatch", "Instance", typeof(parent))
-	)
-
-	for _, child in parent:GetChildren() do
-		assert(
-			child.Name ~= self._name,
-			('A network object "%s" is already dispatched to parent [%s]'):format(child.Name, parent:GetFullName())
-		)
-	end
+	assert(t.Instance(parent))
+	assert(t.children({ [self._name] = t.none })(parent))
 
 	self._networkFolder.Parent = parent
 end
 
 --[=[
-	Destroys the network object and all appended remote properties / 
+	Destroys the network object and all appended remote properties &
 	remote signals within the network object, and renders the network 
 	object useless. 
 ]=]
@@ -265,23 +242,29 @@ function NetworkServer.__index:destroy()
 	self._janitor:Destroy()
 end
 
+function NetworkServer.__index:_setupRemoteObject(
+	key: string,
+	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal
+)
+	value:dispatch(key, self._networkFolder)
+
+	self._janitor:Add(function()
+		-- Destroy the remote property or remote signal if it already isn't
+		-- destroyed yet, to avoid memory leaks:
+		if not RemoteProperty.is(value) or not RemoteProperty.is(value) then
+			return
+		end
+
+		value:destroy()
+	end)
+end
+
 function NetworkServer.__index:_setup(
 	key: string,
 	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
 )
 	if RemoteSignal.is(value) or RemoteProperty.is(value) then
-		value:dispatch(key, self._networkFolder)
-
-		self._janitor:Add(function()
-			-- Destroy the remote property or remote signal if it already
-			-- isn't destroyed yet,  to prevent memory leaks:
-			if not (RemoteSignal.is(value) or RemoteProperty.is(value)) then
-				return
-			end
-
-			value:destroy()
-		end)
-
+		self:_setupRemoteObject(key, value)
 		return
 	end
 
@@ -294,13 +277,32 @@ function NetworkServer.__index:_setup(
 		if typeof(value) == "function" then
 			local args = { ... }
 
-			if self:_getInboundMiddlewareResponse(key, args) == false then
+			-- If there is an explicit false value included in the accumulated
+			-- response of all inbound method callbacks, then that means we should
+			-- avoid this client's request to call the method!
+			if
+				table.find(
+					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+						self._middleware.methodCallInbound,
+						key,
+						args
+					),
+					false
+				)
+			then
 				return nil
 			end
 
-			args.response = value(table.unpack(args))
-			self:_runOutboundMiddlewareCallbacks(key, args)
-			return args.response
+			local methodResponse = value(table.unpack(args))
+			local accumulatedResponsesFromMiddleware =
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+					self._middleware.methodCallOutbound,
+					...
+				)
+
+			return if #accumulatedResponsesFromMiddleware > 0
+				then accumulatedResponsesFromMiddleware
+				else methodResponse
 		else
 			return value
 		end
@@ -312,15 +314,16 @@ function NetworkServer.__index:_setup(
 	end)
 end
 
-function NetworkServer.__index:_runOutboundMiddlewareCallbacks(...)
-	for _, outBoundCallback in self._middleware.outbound do
-		outBoundCallback(...)
-	end
-end
-
 function NetworkServer.__index:_getInboundMiddlewareResponse(...)
-	for _, inBoundCallback in self._middleware.inbound do
-		if inBoundCallback(...) == false then
+	for _, callback in self._middleware.inbound do
+		local didRunSafely, callbackResponse = networkUtil.runCallbackNoYield(callback, ...)
+
+		assert(
+			didRunSafely,
+			"middleware inbound callback yielded! Middleware inbound callbacks must never yield."
+		)
+
+		if callbackResponse == false then
 			return false
 		end
 	end
@@ -339,17 +342,9 @@ end
 function NetworkServer.__index:_setupNetworkFolder()
 	local networkFolder = self._janitor:Add(Instance.new("Folder"))
 	networkFolder.Name = self._name
-	networkFolder:SetAttribute(SharedConstants.Attribute.NetworkFolder, true)
+	networkFolder:SetAttribute(SharedConstants.attribute.networkFolder, true)
 	self._networkFolder = networkFolder
 end
-
-function NetworkServer._init()
-	for _, module in script:GetChildren() do
-		NetworkServer[module.Name] = require(module)
-	end
-end
-
-NetworkServer._init()
 
 export type NetworkServer = typeof(setmetatable(
 	{} :: {

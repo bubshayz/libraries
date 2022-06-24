@@ -27,10 +27,10 @@
 	An exported Luau type of a client remote property object.
 ]=]
 
-local Packages = script.Parent.Parent.Parent
+local packages = script.Parent.Parent.Parent
 
-local Property = require(Packages.Property)
-local Janitor = require(Packages.Janitor)
+local Property = require(packages.Property)
+local Janitor = require(packages.Janitor)
 
 local ClientRemoteProperty = { __index = {} }
 
@@ -68,6 +68,10 @@ end
 
 function ClientRemoteProperty.__index:get(): any
 	return self._property:get()
+end
+
+function ClientRemoteProperty.__index:set(value)
+	task.spawn(self._remoteFunction.InvokeServer, self._remoteFunction, { value = value })
 end
 
 --[=[

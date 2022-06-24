@@ -22,10 +22,10 @@
 	An exported Luau type of a client remote signal object.
 ]=]
 
-local Packages = script.Parent.Parent.Parent
+local packages = script.Parent.Parent.Parent
 
-local Signal = require(Packages.Signal)
-local Janitor = require(Packages.Janitor)
+local Signal = require(packages.Signal)
+local Janitor = require(packages.Janitor)
 
 local ClientRemoteSignal = { __index = {} }
 
@@ -62,7 +62,7 @@ end
 	with the data dispatched to the client remote signal.
 ]=]
 
-function ClientRemoteSignal.__index:connect(callback: (...any) -> ())
+function ClientRemoteSignal.__index:connect(callback: (...any) -> ()): any
 	return self._signal:Connect(callback)
 end
 
@@ -74,7 +74,7 @@ end
 	connection returned is  disconnected immediately upon `callback` being called.
 ]=]
 
-function ClientRemoteSignal.__index:connectOnce(callback: (...any) -> ())
+function ClientRemoteSignal.__index:connectOnce(callback: (...any) -> ()): any
 	return self._signal:ConnectOnce(callback)
 end
 

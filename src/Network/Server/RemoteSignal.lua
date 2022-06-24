@@ -28,12 +28,31 @@
 	.Connected boolean
 ]=]
 
-local Packages = script.Parent.Parent.Parent
-local Network = script.Parent.Parent
+local network = script.Parent.Parent
+local packages = network.Parent
+local utilities = network.utilities
 
-local SharedConstants = require(Network.SharedConstants)
-local Signal = require(Packages.Signal)
-local Janitor = require(Packages.Janitor)
+local SharedConstants = require(network.SharedConstants)
+local Signal = require(packages.Signal)
+local Janitor = require(packages.Janitor)
+local t = require(packages.t)
+local tableUtil = require(utilities.tableUtil)
+local networkUtil = require(utilities.networkUtil)
+
+local MIDDLEWARE_TEMPLATE = {
+	serverEvent = { inbound = {}, outbound = {} },
+}
+
+local MiddlewareInterface = t.optional(t.strictInterface({
+	serverEvent = t.optional(t.strictInterface({
+		inbound = t.optional(t.array(t.callback)),
+		outbound = t.optional(t.array(t.callback)),
+	})),
+}))
+
+local function getDefaultMiddleware()
+	return tableUtil.deepCopy(MIDDLEWARE_TEMPLATE)
+end
 
 local RemoteSignal = { __index = {} }
 
@@ -43,10 +62,21 @@ local RemoteSignal = { __index = {} }
 	Creates and returns a new remote signal.
 ]=]
 
-function RemoteSignal.new()
+function RemoteSignal.new(
+	middleware: { serverEvent: { inbound: { () -> false }, outbound: { () -> () } } }
+)
+	assert(t.optional(t.table)(middleware))
+
+	if middleware then
+		assert(MiddlewareInterface(middleware))
+	end
+
+	middleware = tableUtil.reconcileDeep(middleware or getDefaultMiddleware(), MIDDLEWARE_TEMPLATE)
+
 	local self = setmetatable({
 		_signal = Signal.new(),
 		_janitor = Janitor.new(),
+		_middleware = middleware,
 	}, RemoteSignal)
 
 	self:_init()
@@ -69,7 +99,7 @@ end
 	is disconnected automaticaly once `callback` is called.
 ]=]
 
-function RemoteSignal.__index:connectOnce(callback: (...any) -> ())
+function RemoteSignal.__index:connectOnce(callback: (...any) -> ()): any
 	return self._signal:ConnectOnce(callback)
 end
 
@@ -81,7 +111,7 @@ end
 	fires the remote signal, and `callback` will be passed arguments sent by the client.
 ]=]
 
-function RemoteSignal.__index:connect(callback: (...any) -> ())
+function RemoteSignal.__index:connect(callback: (...any) -> ()): any
 	return self._signal:Connect(callback)
 end
 
@@ -144,10 +174,26 @@ end
 function RemoteSignal.__index:dispatch(name: string, parent: Instance)
 	local remoteEvent = self._janitor:Add(Instance.new("RemoteEvent"))
 	remoteEvent.Name = name
-	remoteEvent:SetAttribute(SharedConstants.Attribute.BoundToRemoteSignal, true)
+	remoteEvent:SetAttribute(SharedConstants.attribute.boundToRemoteSignal, true)
 	remoteEvent.Parent = parent
 
 	remoteEvent.OnServerEvent:Connect(function(...)
+		-- If there is an explicit false value included in the accumulated
+		-- response of all serverEvent callbacks, then that means we should
+		-- avoid this client's request to fire off the remote signal:
+		if
+			table.find(
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+					self._middleware.serverEvent,
+					{ ... }
+				),
+
+				false
+			)
+		then
+			return
+		end
+
 		self._signal:Fire(...)
 	end)
 
