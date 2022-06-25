@@ -1,5 +1,5 @@
 --[=[
-	@class networkClient
+	@class NetworkClient
 
 	The client counterpart of the Network module.
 ]=]
@@ -65,13 +65,13 @@ end
 	-- Server
 	local Network = require(...) 
 
-	local networkObject1 = Network.new("Test1", workspace)
-	networkObject:append("status", "not good mate")
-	networkObject:dispatch()
+	local Network1 = Network.new("Test1", workspace)
+	Network1:append("status", "not good mate")
+	Network1:dispatch()
 
-	local networkObject2 = Network.new("Test2", workspace)
-	networkObject:append("status", "good mate!")
-	networkObject:dispatch()
+	local Network2 = Network.new("Test2", workspace)
+	Network2:append("status", "good mate!")
+	Network2:dispatch()
 
 	-- Client
 	local Network = require(...) 
