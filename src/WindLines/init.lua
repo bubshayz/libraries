@@ -53,7 +53,7 @@ local Signal = require(script.Parent.Signal)
 local WindLine = require(script.WindLine)
 local Janitor = require(script.Parent.Janitor)
 local t = require(script.Parent.t)
-local Types = require(script.Types)
+local types = require(script.types)
 
 local WIND_POSITION_OFFSET = Vector3.new(0, 0.1, 0)
 local CAMERA_CEILING_Y_VECTOR = Vector3.new(0, 1000, 0)
@@ -112,7 +112,7 @@ end
 	:::
 ]=]
 
-function WindLines.setConfig(newConfig: Types.WindLinesConfig)
+function WindLines.setConfig(newConfig: types.WindLinesConfig)
 	assert(not WindLines.isStarted(), "Cannot configure WindLines now as WindLines is started!")
 	assert(next(newConfig), "Config table must not be empty!")
 
