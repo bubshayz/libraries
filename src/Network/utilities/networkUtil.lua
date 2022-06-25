@@ -1,8 +1,6 @@
 local Players = game:GetService("Players")
 
-local tableUtil = require(script.Parent.tableUtil)
-
-local networkUtil = {}
+local networkUtil = { _players = {} }
 
 local function runCallbackNoYield(callback, ...)
 	local callbackResponse
@@ -35,22 +33,20 @@ function networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(callbacks, ..
 	return accumulatedResponses
 end
 
+function networkUtil.truncateAccumulatedResponses(accumulatedResponses)
+	return if #accumulatedResponses > 1 then accumulatedResponses else accumulatedResponses[1]
+end
+
 function networkUtil.trackPlayers()
-	local players = Players:GetPlayers()
-	table.insert(tableUtil._playerTrackQueue, players)
-	return players
+	return networkUtil._players
 end
 
 Players.PlayerAdded:Connect(function(player)
-	for _, players in tableUtil._playerTrackQueue do
-		table.insert(players, player)
-	end
+	table.insert(networkUtil._players, player)
 end)
 
 Players.PlayerRemoving:Connect(function(player)
-	for _, players in tableUtil._playerTrackQueue do
-		table.insert(players, table.find(players, player))
-	end
+	table.remove(networkUtil._players, table.find(networkUtil._players, player))
 end)
 
 return networkUtil

@@ -49,7 +49,7 @@ local function getNetworkFoldersFromParent(parent: Instance): { Folder }
 	local networkFolders = {}
 
 	for _, networkFolder in parent:GetChildren() do
-		if not networkFolder:GetAttribute(SharedConstants.Attribute.NetworkFolder) then
+		if not networkFolder:GetAttribute(SharedConstants.attribute.networkFolder) then
 			continue
 		end
 
@@ -92,7 +92,7 @@ function networkClient.allFromParent(parent: Instance): { [string]: { [string]: 
 		networks[networkFolder.Name] = getAbstractOfNetworkFolder(networkFolder)
 	end
 
-	return networks
+	return table.freeze(networks)
 end
 
 --[=[

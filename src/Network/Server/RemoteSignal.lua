@@ -39,15 +39,10 @@ local t = require(packages.t)
 local tableUtil = require(utilities.tableUtil)
 local networkUtil = require(utilities.networkUtil)
 
-local MIDDLEWARE_TEMPLATE = {
-	serverEvent = { inbound = {}, outbound = {} },
-}
+local MIDDLEWARE_TEMPLATE = { serverEvent = {} }
 
 local MiddlewareInterface = t.optional(t.strictInterface({
-	serverEvent = t.optional(t.strictInterface({
-		inbound = t.optional(t.array(t.callback)),
-		outbound = t.optional(t.array(t.callback)),
-	})),
+	serverEvent = t.optional(t.array(t.callback)),
 }))
 
 local function getDefaultMiddleware()
@@ -178,6 +173,8 @@ function RemoteSignal.__index:dispatch(name: string, parent: Instance)
 	remoteEvent.Parent = parent
 
 	remoteEvent.OnServerEvent:Connect(function(...)
+		local args = { ... }
+
 		-- If there is an explicit false value included in the accumulated
 		-- response of all serverEvent callbacks, then that means we should
 		-- avoid this client's request to fire off the remote signal:
@@ -185,7 +182,7 @@ function RemoteSignal.__index:dispatch(name: string, parent: Instance)
 			table.find(
 				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
 					self._middleware.serverEvent,
-					{ ... }
+					args
 				),
 
 				false
@@ -194,7 +191,7 @@ function RemoteSignal.__index:dispatch(name: string, parent: Instance)
 			return
 		end
 
-		self._signal:Fire(...)
+		self._signal:Fire(table.unpack(args))
 	end)
 
 	self._remoteEvent = remoteEvent

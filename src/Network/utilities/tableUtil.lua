@@ -1,4 +1,4 @@
-local tableUtil = { _playerTrackQueue = {} }
+local tableUtil = {}
 
 function tableUtil.deepCopy(tabl)
 	local deepCopiedTable = {}

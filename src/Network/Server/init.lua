@@ -131,9 +131,10 @@ function NetworkServer.new(
 
 	if middleware then
 		assert(MiddlewareInterface(middleware))
+		middleware = tableUtil.reconcileDeep(middleware, DEFAULT_MIDDLEWARE)
+	else
+		middleware = getDefaultMiddleware()
 	end
-
-	middleware = middleware or getDefaultMiddleware()
 
 	local self = setmetatable({
 		_name = name,
@@ -277,31 +278,28 @@ function NetworkServer.__index:_setup(
 		if typeof(value) == "function" then
 			local args = { ... }
 
+			local methodCallOutboundMiddlewareAccumulatedResponses =
+				networkUtil.truncateAccumulatedResponses(
+					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+						self._middleware.methodCallOutbound,
+						{ ... }
+					)
+				)
+
 			-- If there is an explicit false value included in the accumulated
 			-- response of all inbound method callbacks, then that means we should
 			-- avoid this client's request to call the method!
 			if
-				table.find(
-					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-						self._middleware.methodCallInbound,
-						key,
-						args
-					),
-					false
-				)
+				methodCallOutboundMiddlewareAccumulatedResponses ~= nil
+				and table.find(methodCallOutboundMiddlewareAccumulatedResponses, false)
 			then
-				return nil
+				return
 			end
 
 			local methodResponse = value(table.unpack(args))
-			local accumulatedResponsesFromMiddleware =
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-					self._middleware.methodCallOutbound,
-					...
-				)
 
-			return if #accumulatedResponsesFromMiddleware > 0
-				then accumulatedResponsesFromMiddleware
+			return if methodCallOutboundMiddlewareAccumulatedResponses ~= nil
+				then methodCallOutboundMiddlewareAccumulatedResponses
 				else methodResponse
 		else
 			return value

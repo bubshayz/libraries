@@ -258,14 +258,16 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 		-- their value specifically in the remote property, so let's do that:
 		if typeof(setData) == "table" then
 			local clientSetMiddlewareAccumulatedResponses =
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-					self._middleware.clientSet,
-					setData.value
+				networkUtil.truncateAccumulatedResponses(
+					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+						self._middleware.clientSet,
+						setData.value
+					)
 				)
 
 			self:setForClient(
 				client,
-				if #clientSetMiddlewareAccumulatedResponses > 0
+				if clientSetMiddlewareAccumulatedResponses ~= nil
 					then clientSetMiddlewareAccumulatedResponses
 					else setData.value
 			)
@@ -273,26 +275,17 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 			return nil
 		end
 
-		local clientGetMiddlewareAccumulatedResponses =
+		local clientGetMiddlewareAccumulatedResponses = networkUtil.truncateAccumulatedResponses(
 			networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
 				self._middleware.clientGet,
 				client
 			)
+		)
 
-		if #clientGetMiddlewareAccumulatedResponses > 0 then
-			-- Send in the entire array if there is more than 1 response included
-			-- in it, else just return that response, this is the expected behavior
-			-- as there is no pointing in sending a table with just 1 value:
-			if #clientGetMiddlewareAccumulatedResponses > 1 then
-				return clientGetMiddlewareAccumulatedResponses
-			else
-				return clientGetMiddlewareAccumulatedResponses[1]
-			end
-		elseif self:clientHasValueSet(client) then
-			return self:getForClient(client)
-		else
-			return self:get()
-		end
+		return if clientGetMiddlewareAccumulatedResponses ~= nil
+			then clientGetMiddlewareAccumulatedResponses
+			elseif self:clientHasValueSet(client) then self:getForClient(client)
+			else self:get()
 	end
 
 	-- Send off the new value to the current players in game:
