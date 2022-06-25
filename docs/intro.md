@@ -9,7 +9,7 @@ My open sourced Roblox modules can be installed via [Wally](https://wally.run/) 
 ## Wally Setup
 
 Once Wally is installed, run `wally init` on your project directory, and then add the various open sourced modules that you need, 
-as wally dependencies. For e.g, the following may be a `wally.toml` file for a project that includes a `NumberUtil` wally package:
+as wally dependencies. For e.g, the following may be a `wally.toml` file for a project that includes a `numberUtil` wally package:
 
 ```toml
 [package]
@@ -31,7 +31,7 @@ Once the above necessary steps are completed, the installed wally dependencies c
 ```lua
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local NumberUtil = require(ReplicatedStorage.Packages.NumberUtil)
+local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
 
-print(NumberUtil.Factors(2)) --> {1, 2}
+print(numberUtil.Factors(2)) --> {1, 2}
 ```
