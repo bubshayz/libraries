@@ -1,5 +1,5 @@
 [package]
-name = "bubshayz/instanceutil"
+name = "bubshayz/instanceUtil"
 description = "A utility module for working with instances."
 authors = ["bubshayz"]
 license = "MIT"

@@ -1,6 +1,6 @@
 | Module | Dependency | Realm |
 | -- | -- | -- |
-| [InstanceUtil](https://bubshayz.github.io/Roblox-Modules/api/InstanceUtil) | `InstanceUtil = "bubshayz/instanceutil@1.0.9"` | `shared` |
+| [instanceUtil](https://bubshayz.github.io/Roblox-Modules/api/instanceUtil) | `instanceUtil = "bubshayz/instanceUtil@1.0.9"` | `shared` |
 | [NumberUtil](https://bubshayz.github.io/Roblox-Modules/api/NumberUtil) | `NumberUtil = "bubshayz/numberutil@1.0.8"` | `shared` |
 | [EnumList](https://bubshayz.github.io/Roblox-Modules/api/EnumList) | `EnumList = "bubshayz/enumlist@1.2.1"` | `shared` |
 | [Property](https://bubshayz.github.io/Roblox-Modules/api/Property) | `Property = "bubshayz/property@1.1.1` | `shared` |
