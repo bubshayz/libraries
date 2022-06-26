@@ -252,7 +252,7 @@ function NetworkServer.__index:_setupRemoteObject(
 	self._janitor:Add(function()
 		-- Destroy the remote property or remote signal if it already isn't
 		-- destroyed yet, to avoid memory leaks:
-		if not RemoteProperty.is(value) or not RemoteProperty.is(value) then
+		if not RemoteProperty.is(value) or not RemoteSignal.is(value) then
 			return
 		end
 
@@ -310,23 +310,6 @@ function NetworkServer.__index:_setup(
 		remoteFunction.OnServerInvoke = nil
 		remoteFunction:Destroy()
 	end)
-end
-
-function NetworkServer.__index:_getInboundMiddlewareResponse(...)
-	for _, callback in self._middleware.inbound do
-		local didRunSafely, callbackResponse = networkUtil.runCallbackNoYield(callback, ...)
-
-		assert(
-			didRunSafely,
-			"middleware inbound callback yielded! Middleware inbound callbacks must never yield."
-		)
-
-		if callbackResponse == false then
-			return false
-		end
-	end
-
-	return true
 end
 
 function NetworkServer.__index:_init()
