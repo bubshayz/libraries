@@ -4,17 +4,12 @@
 	A remote signal in layman's terms is simply an object which dispatches data
 	to a client (who can listen to this data through a client remote signal) and 
 	listens to data dispatched to it self by a client (through a client remote signal).
-	
-	:::note
-	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	do apply since remote events are internally used by remote signals to dispatch data to clients.
-	:::
 ]=]
 
 --[=[ 
 	@prop RemoteSignal Type 
 	@within RemoteSignal
-	@tag Luau Type
+	
 	@readonly
 
 	An exported Luau type of a remote signal object.

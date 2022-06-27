@@ -21,7 +21,7 @@
 --[=[ 
 	@prop ClientRemoteProperty Type 
 	@within ClientRemoteProperty
-	@tag Luau Type
+	
 	@readonly
 
 	An exported Luau type of a client remote property object.

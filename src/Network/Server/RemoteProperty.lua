@@ -3,12 +3,6 @@
 
 	A remote property in layman's terms is simply an  object which can store in some value for 
 	all players as well as store in values specific to players. 
-	
-	:::note
-	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	do apply since remote functions are internally used by remote properties to store in values and replicate them to clients
-	(which they can access through client remote properties)  respectively.
-	:::
 ]=]
 
 --[=[ 
@@ -23,7 +17,7 @@
 ]=]
 
 --[=[ 
-	@prop clientValueUpdated Signal <player: Player, newValue: any>
+	@prop clientValueUpdated Signal <client: Player, newValue: any>
 	@within RemoteProperty
 	@readonly
 	@tag Signal
@@ -31,16 +25,22 @@
 
 	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value 
 	of `player` specifically in the remote property is set to a new one. The signal is passed the player 
-	as the first argument, and the new specific value of `player` set in the remote property as the second argument. 
+	as the first argument, and the new specific value of `player` set in the remote property, as the second argument. 
 ]=]
 
 --[=[ 
 	@prop RemoteProperty Type 
 	@within RemoteProperty
-	@tag Luau Type
 	@readonly
 
 	An exported Luau type of a remote property object.
+]=]
+
+--[=[
+	@interface Middleware
+	@within RemoteProperty
+	.clientGet: { (client: Player) -> any }?,
+	.clientSet: { (client: Player, value: any) -> any }?,
 ]=]
 
 local Players = game:GetService("Players")
@@ -55,6 +55,7 @@ local Property = require(packages.Property)
 local t = require(packages.t)
 local tableUtil = require(network.utilities.tableUtil)
 local networkUtil = require(network.utilities.networkUtil)
+local trackerUtil = require(network.utilities.trackerUtil)
 
 local MIDDLEWARE_TEMPLATE = {
 	clientGet = {},
@@ -66,9 +67,14 @@ local MiddlewareInterface = t.optional(t.strictInterface({
 	clientSet = t.optional(t.array(t.callback)),
 }))
 
+type Middleware = {
+	clientGet: { (client: Player) -> any }?,
+	clientSet: { (client: Player, value: any) -> any }?,
+}
+
 local RemoteProperty = {
 	__index = {},
-	_clients = networkUtil.trackPlayers(),
+	_clients = trackerUtil.getTrackingPlayers(),
 }
 
 local function getDefaultMiddleware()
@@ -77,17 +83,12 @@ end
 
 --[=[
 	@return RemoteProperty
+	@param middleware Middleware
 
 	Creates and returns a new remote property with the value of `initialValue`.
 ]=]
 
-function RemoteProperty.new(
-	initialValue: any,
-	middleware: {
-		clientGet: { () -> any }?,
-		clientSet: { () -> boolean }?,
-	}?
-)
+function RemoteProperty.new(initialValue: any, middleware: Middleware?)
 	assert(t.optional(t.table)(middleware))
 
 	if middleware then
@@ -275,6 +276,9 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 			return nil
 		end
 
+		-- If there are accumulated responses from the middleware, return those instead. Else
+		-- if the client has a specific value set for them, then return that. Lastly, return the current
+		-- value of the remote property if the client has no specific value set for them!
 		local clientGetMiddlewareAccumulatedResponses = networkUtil.truncateAccumulatedResponses(
 			networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
 				self._middleware.clientGet,
@@ -327,7 +331,7 @@ function RemoteProperty.__index:_init()
 	self._janitor:Add(self._property, "destroy")
 	self._janitor:Add(function()
 		for _, property in self._clientProperties do
-			property:Destroy()
+			property:destroy()
 		end
 
 		setmetatable(self, nil)
@@ -346,10 +350,7 @@ export type RemoteProperty = typeof(setmetatable(
 		_valueDispatcherRemoteFunction: RemoteFunction,
 		_clientProperties: { [Player]: Property.Property },
 		_janitor: any,
-		_middeware: {
-			clientGet: { () -> any },
-			clientSet: { () -> any }?,
-		}?,
+		_middeware: Middleware,
 	},
 	RemoteProperty
 ))

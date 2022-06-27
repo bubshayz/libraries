@@ -20,7 +20,10 @@ function networkUtil.safeInvokeClient(remoteFunction: RemoteFunction, player: Pl
 	end)
 end
 
-function networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(callbacks, ...)
+function networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+	callbacks: { () -> any },
+	...: any
+): { any }
 	local accumulatedResponses = {}
 
 	for _, callback in callbacks do
@@ -33,20 +36,8 @@ function networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(callbacks, ..
 	return accumulatedResponses
 end
 
-function networkUtil.truncateAccumulatedResponses(accumulatedResponses)
+function networkUtil.truncateAccumulatedResponses(accumulatedResponses: { any }): any
 	return if #accumulatedResponses > 1 then accumulatedResponses else accumulatedResponses[1]
 end
-
-function networkUtil.trackPlayers()
-	return networkUtil._players
-end
-
-Players.PlayerAdded:Connect(function(player)
-	table.insert(networkUtil._players, player)
-end)
-
-Players.PlayerRemoving:Connect(function(player)
-	table.remove(networkUtil._players, table.find(networkUtil._players, player))
-end)
 
 return networkUtil

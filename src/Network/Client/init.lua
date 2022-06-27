@@ -1,7 +1,23 @@
 --[=[
-	@class NetworkClient
+	@class networkClient
 
 	The client counterpart of the Network module.
+]=]
+
+--[=[ 
+	@prop ClientRemoteProperty ClientRemoteProperty
+	@within networkClient
+	@readonly
+
+	A reference to the [ClientRemoteProperty] module.
+]=]
+
+--[=[ 
+	@prop ClientRemoteSignal ClientRemoteSignal
+	@within networkClient
+	@readonly
+
+	A reference to the [ClientRemoteSignal] module.
 ]=]
 
 local packages = script.Parent.Parent

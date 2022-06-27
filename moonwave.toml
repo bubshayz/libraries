@@ -16,7 +16,7 @@ classes = ["EnumList", "CustomEnum"]
 
 [[classOrder]]
 section = "network"
-classes = ["network", "NetworkServer", "NetworkClient", "RemoteProperty", "RemoteSignal", "ClientRemoteProperty", "ClientRemoteSignal"]
+classes = ["network", "NetworkServer", "networkClient", "RemoteProperty", "RemoteSignal", "ClientRemoteProperty", "ClientRemoteSignal"]
 
 [[home.features]]
 title = "Faster Development"

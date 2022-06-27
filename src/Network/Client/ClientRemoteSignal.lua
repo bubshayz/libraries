@@ -16,7 +16,7 @@
 --[=[ 
 	@prop ClientRemoteSignal Type 
 	@within ClientRemoteSignal
-	@tag Luau Type
+	
 	@readonly
 
 	An exported Luau type of a client remote signal object.
