@@ -31,7 +31,6 @@
 --[=[ 
 	@prop Property Type 
 	@within Property
-	@tag Luau Type
 	@readonly
 
 	An exported Luau type of a property object.
