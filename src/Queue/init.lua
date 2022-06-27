@@ -38,7 +38,6 @@
 --[=[ 
 	@prop queue Type 
 	@within Queue
-	@tag Luau Type
 	@readonly
 
 	An exported Luau type of a queue object.
