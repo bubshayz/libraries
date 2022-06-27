@@ -58,7 +58,6 @@
 --[=[ 
 	@prop EnumList Type 
 	@within EnumList
-	@tag Luau Type
 	@readonly
 
 	An exported Luau type of an EnumList object.
@@ -98,8 +97,14 @@ local EnumList = {
 ]=]
 
 function EnumList.new(name: string, enums: { [string]: { [string]: any } }): EnumList
-	assert(typeof(name) == "string", INVALID_ARGUMENT_TYPE:format(1, "EnumList.new", "string", typeof(name)))
-	assert(typeof(enums) == "table", INVALID_ARGUMENT_TYPE:format(2, "EnumList.new", "table", typeof(enums)))
+	assert(
+		typeof(name) == "string",
+		INVALID_ARGUMENT_TYPE:format(1, "EnumList.new", "string", typeof(name))
+	)
+	assert(
+		typeof(enums) == "table",
+		INVALID_ARGUMENT_TYPE:format(2, "EnumList.new", "table", typeof(enums))
+	)
 
 	local self = setmetatable({
 		name = name,
@@ -158,9 +163,12 @@ function EnumList:__tostring()
 	return ("[EnumList]: (%s)"):format(self.name)
 end
 
-export type EnumList = typeof(setmetatable({} :: {
-	name: string,
-	_enums: { [string]: { [string]: any } },
-}, EnumList))
+export type EnumList = typeof(setmetatable(
+	{} :: {
+		name: string,
+		_enums: { [string]: { [string]: any } },
+	},
+	EnumList
+))
 
 return table.freeze(EnumList)
