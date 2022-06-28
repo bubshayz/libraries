@@ -12,10 +12,11 @@
 	@tag Signal
 	@tag ClientRemoteProperty instance
 
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired 
-	whenever the value  of the client in the serverside remote property 
-	(to which the client remote property is connected to) is updated. 
-	The signal is only passed the new updated value as the only argument.
+	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired, whenever the value 
+	of the serverside remote property (to which this client remote property is connected to) is updated.
+	
+	Incase if the client has a specific value set for them in the serverside remote property, then this signal
+	will only fire if *that* value has updated.
 ]=]
 
 --[=[ 
@@ -71,8 +72,9 @@ end
 --[=[
 	@tag ClientRemoteProperty instance
 
-	Returns the value of the client stored in the serverside remote property (
-	to which the client remote property is connected to).
+	Returns the value of the client stored in the serverside remote property (to which the client remote property is connected to).
+	If there is no value stored specifically for the client, then the serverside remote property's current value will be returned
+	instead.
 ]=]
 
 function ClientRemoteProperty.__index:get(): any
@@ -105,7 +107,7 @@ function ClientRemoteProperty.__index:_init()
 	-- Incase a new value was set while we were retrieving the initial value, don't
 	-- update the value of the property to avoid unexpected behavior!
 	if self:get() == nil then
-		self._property:set(newValue)
+		self._property:bulkSet(newValue)
 	end
 
 	self._janitor:Add(self._property, "destroy")

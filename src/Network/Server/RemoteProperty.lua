@@ -300,7 +300,7 @@ end
 --[=[
 	@tag RemoteProperty instance
 
-	Sets a value of the remote property for `client` *specifically*, to `value`. 
+	Sets the value of the remote property for `client` *specifically*, to `value`. 
 		
 	:::note
 	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
@@ -377,9 +377,7 @@ end
 --[=[
 	@tag RemoteProperty instance
 
-	Sets the value of the remote property to `value`, and so for all other 
-	clients (who can access this value through a  client remote property), 
-	who don't have a specific value for them stored in the remote property.
+	Sets the value of the remote property to `value`.
 
 	:::note
 	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
