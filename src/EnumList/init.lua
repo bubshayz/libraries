@@ -81,6 +81,14 @@ local EnumList = {
 	_prototype = {},
 }
 
+export type EnumList = typeof(setmetatable(
+	{} :: {
+		name: string,
+		_enums: { [string]: { [string]: any } },
+	},
+	EnumList
+))
+
 --[=[
 	@return EnumList
 
@@ -162,13 +170,5 @@ end
 function EnumList:__tostring()
 	return ("[EnumList]: (%s)"):format(self.name)
 end
-
-export type EnumList = typeof(setmetatable(
-	{} :: {
-		name: string,
-		_enums: { [string]: { [string]: any } },
-	},
-	EnumList
-))
 
 return table.freeze(EnumList)

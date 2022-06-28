@@ -24,6 +24,14 @@ local INVALID_ENUM_MEMBER = '"%s" is not a valid EnumItem of Enum "%s"!'
 
 local CustomEnum = { _prototype = {} }
 
+export type CustomEnum = typeof(setmetatable(
+	{} :: {
+		name: string,
+		_enumItems: { [string]: any },
+	},
+	CustomEnum
+))
+
 --[=[
 	@private
 ]=]
@@ -79,10 +87,5 @@ end
 function CustomEnum:__tostring()
 	return ("[CustomEnum]: (%s)"):format(self.name)
 end
-
-export type CustomEnum = typeof(setmetatable({} :: {
-	name: string,
-	_enumItems: { [string]: any },
-}, CustomEnum))
 
 return table.freeze(CustomEnum)
