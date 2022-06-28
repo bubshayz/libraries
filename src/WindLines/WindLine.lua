@@ -1,6 +1,6 @@
 local Workspace = game:GetService("Workspace")
 
-local Types = require(script.Parent.Types)
+local types = require(script.Parent.types)
 
 local WIND_POSITION_OFFSET = Vector3.new(0, 0.1, 0)
 local TRAIL_TRANSPARENCY = NumberSequence.new(0.7)
@@ -16,7 +16,7 @@ local camera = Workspace.CurrentCamera
 
 local WindLine = { __index = {} }
 
-function WindLine.new(currentConfig: Types.WindLinesConfig, updateQueue: { any }): WindLine
+function WindLine.new(currentConfig: types.WindLinesConfig, updateQueue: { any }): WindLine
 	local self = setmetatable({
 		lifetime = currentConfig.lifetime + (math.random(-10, 10) * 0.1),
 		speed = currentConfig.speed + (math.random(-10, 10) * 0.1),
@@ -44,7 +44,10 @@ end
 
 function WindLine.__index:_init()
 	local position = self._currentConfig.Position
-		or (camera.CFrame * CFrame.Angles(math.rad(math.random(-30, 70)), math.rad(math.random(-80, 80)), 0))
+		or (
+				camera.CFrame
+				* CFrame.Angles(math.rad(math.random(-30, 70)), math.rad(math.random(-80, 80)), 0)
+			)
 			* CFrame.new(0, 0, math.random(200, 600) * -0.1).Position
 
 	local attachment0 = Instance.new("Attachment")
@@ -78,7 +81,7 @@ export type WindLine = typeof(setmetatable(
 		startClock: number,
 		seed: number,
 		_updateQueue: { WindLine },
-		_currentConfig: Types.WindLinesConfig,
+		_currentConfig: types.WindLinesConfig,
 	},
 	WindLine
 ))
