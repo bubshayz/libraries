@@ -20,7 +20,7 @@
 ]=]
 
 --[=[ 
-	@prop Phi number <1.618033988749895>
+	@prop phi number <1.618033988749895>
 	@within NumberUtil
 	@readonly
 
@@ -28,7 +28,7 @@
 ]=]
 
 --[=[ 
-	@prop Tau number <6.283185307179586>
+	@prop tau number <6.283185307179586>
 	@within NumberUtil
 	@readonly
 
@@ -36,7 +36,7 @@
 ]=]
 
 --[=[ 
-	@prop G number <6.6743e-11>
+	@prop g number <6.6743e-11>
 	@within NumberUtil
 	@readonly
 
@@ -72,9 +72,9 @@ local NUMBER_SUFFIXES = {
 
 local NumberUtil = {
 	e = 2.7182818284590,
-	Tau = 2 * math.pi,
-	Phi = 1.618033988749895,
-	G = 6.6743e-11,
+	tau = 2 * math.pi,
+	phi = 1.618033988749895,
+	g = 6.6743e-11,
 }
 
 --[=[

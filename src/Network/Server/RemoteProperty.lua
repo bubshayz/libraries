@@ -3,12 +3,6 @@
 
 	A remote property in layman's terms is simply an  object which can store in some value for 
 	all players as well as store in values specific to players. 
-	
-	:::note
-	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	do apply since remote functions are internally used by remote properties to store in values and replicate them to clients
-	(which they can access through client remote properties)  respectively.
-	:::
 ]=]
 
 --[=[ 
@@ -23,7 +17,7 @@
 ]=]
 
 --[=[ 
-	@prop clientValueUpdated Signal <player: Player, newValue: any>
+	@prop clientValueUpdated Signal <client: Player, newValue: any>
 	@within RemoteProperty
 	@readonly
 	@tag Signal
@@ -31,52 +25,240 @@
 
 	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value 
 	of `player` specifically in the remote property is set to a new one. The signal is passed the player 
-	as the first argument, and the new specific value of `player` set in the remote property as the second argument. 
+	as the first argument, and the new specific value of `player` set in the remote property, as the second argument. 
 ]=]
 
 --[=[ 
 	@prop RemoteProperty Type 
 	@within RemoteProperty
-	@tag Luau Type
 	@readonly
 
-	An exported Luau type of a remote property object.
+	An exported Luau type of a remote property.
+]=]
+
+--[=[
+	@interface Middleware
+	@within RemoteProperty
+	.clientGet { (client: Player) -> any }?,
+	.clientSet { (client: Player, value: any) -> any }?,
+
+	Both `clientGet` and `clientSet` must be array of callbacks (if specified).
+
+	### `clientGet` 
+
+	Callbacks in `clientGet` are called whenever the client tries to retrieve the value of the remote property
+	(or the value stored for them specifically in the remote property).
+
+	The first and *only* argument passed to each callback is just the client. 
+
+	```lua
+	local clientGetCallbacks = {
+		function (client)
+			print(client:IsA("Player")) --> true 
+		end
+	}
+	---
+	```
+
+	:::tip
+	A callback can return a non-nil value, which will then be returned back to the client instead of the value
+	of the remote property (or the value stored for the client specifically in the remote property). This is useful
+	in cases where you want to have more control over the networking layer of remote properties. 
+	
+	For e.g:
+
+	```lua
+	-- Server
+	local Network = require(...)
+
+	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+		clientGet = {function() return "rickrolled" end}
+	})
+
+	local TestNetwork = Network.new("Test")
+	TestNetwork:append("property", TestRemoteProperty)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...)
+
+	local TestNetwork = network.fromParent("Test", workspace):expect()
+	print(TestNetwork.property:get()) --> "rickrolled" (This ought to return 50, but the middleware returned a custom value!)
+	```
+
+	Additionaly, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
+	back to the client. This is by design - as it isn't really ideal to disregard all returned values for just 1. 
+	
+	For e.g:
+
+	```lua
+	-- Server
+	local Network = require(...)
+
+	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+		clientGet = {
+			function() return "rickrolled" end,
+			function() return "oof" end,
+			function() return "hello" end
+		}
+	})
+
+	local TestNetwork = Network.new("Test")
+	TestNetwork:append("property", TestRemoteProperty)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...)
+
+	local TestNetwork = network.fromParent("Test", workspace):expect()
+	print(TestNetwork.property:get()) --> {"oofed", "rickrolled", "hello"}
+	```
+	:::
+
+	### clientSet
+
+	Callbacks in `clientSet` are called whenever the client tries to set the value of the remote property
+	*for them selves specifically*.
+
+	The first and *only* argument passed to each callback is just the client. 
+
+	```lua
+	local clientSetCallbacks = {
+		function (client)
+			print(client:IsA("Player")) --> true 
+		end
+	}
+	---
+	```
+
+	:::tip
+	A callback can return a non-nil value, which will then be set as the value for the client in the remote property.
+	This is useful in cases where you want to have more control over what values the client can set for them in the remote
+	property.
+	
+	For e.g:
+
+	```lua
+	-- Server
+	local Network = require(...)
+
+	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+		clientSet = {function() return "set lol" end}
+	})
+
+	local TestNetwork = Network.new("Test")
+	TestNetwork:append("property", TestRemoteProperty)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...)
+
+	local TestNetwork = network.fromParent("Test", workspace):expect()
+	print(TestNetwork.property:get()) --> "rickrolled" (this ought to return 50, but the middleware returned a custom value!)
+	```
+
+	Additionaly, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
+	back to the client. This is by design - as it isn't really ideal to disregard all returned values for just 1. 
+	
+	For e.g:
+
+	```lua
+	-- Server
+	local Network = require(...)
+
+	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+		clientGet = {
+			function() return "rickrolled" end,
+			function() return "oof" end,
+			function() return "hello" end
+		}
+	})
+
+	local TestNetwork = Network.new("Test")
+	TestNetwork:append("property", TestRemoteProperty)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...)
+
+	local TestNetwork = network.fromParent("Test", workspace):expect()
+	print(TestNetwork.property:get()) --> {"oofed", "rickrolled", "hello"}
+	```
+	:::
 ]=]
 
 local Players = game:GetService("Players")
 
-local Packages = script.Parent.Parent.Parent
-local Network = script.Parent.Parent
+local network = script.Parent.Parent
+local packages = network.Parent
 
-local SharedConstants = require(Network.SharedConstants)
-local Janitor = require(Packages.Janitor)
-local Signal = require(Packages.Signal)
-local Property = require(Packages.Property)
+local SharedConstants = require(network.SharedConstants)
+local Janitor = require(packages.Janitor)
+local Signal = require(packages.Signal)
+local Property = require(packages.Property)
+local t = require(packages.t)
+local tableUtil = require(network.utilities.tableUtil)
+local networkUtil = require(network.utilities.networkUtil)
+local trackerUtil = require(network.utilities.trackerUtil)
 
-local RemoteProperty = { __index = {} }
+local MIDDLEWARE_TEMPLATE = {
+	clientGet = {},
+	clientSet = {},
+}
 
-local function isPlayer(player)
-	return typeof(player) == "Instance" and player:IsA("Player")
-end
+local MiddlewareInterface = t.optional(t.strictInterface({
+	clientGet = t.optional(t.array(t.callback)),
+	clientSet = t.optional(t.array(t.callback)),
+}))
 
-local function safeInvokeClient(remoteFunction: RemoteFunction, player: Player, value: any)
-	task.spawn(function()
-		pcall(remoteFunction.InvokeClient, remoteFunction, player, value)
-	end)
+local RemoteProperty = {
+	__index = {},
+	_clients = trackerUtil.getTrackingPlayers(),
+}
+
+type Middleware = {
+	clientGet: { (client: Player) -> any }?,
+	clientSet: { (client: Player, value: any) -> any }?,
+}
+export type RemoteProperty = typeof(setmetatable(
+	{} :: {
+		updated: any,
+		clientValueUpdated: any,
+		_property: Property.Property,
+		_valueDispatcherRemoteFunction: RemoteFunction,
+		_clientProperties: { [Player]: Property.Property },
+		_janitor: any,
+		_middeware: Middleware,
+	},
+	RemoteProperty
+))
+
+local function getDefaultMiddleware()
+	return tableUtil.deepCopy(MIDDLEWARE_TEMPLATE)
 end
 
 --[=[
 	@return RemoteProperty
+	@param middleware Middleware?
 
 	Creates and returns a new remote property with the value of `initialValue`.
 ]=]
 
-function RemoteProperty.new(initialValue: any)
+function RemoteProperty.new(initialValue: any, middleware: Middleware?)
+	assert(t.optional(t.table)(middleware))
+
+	if middleware then
+		assert(MiddlewareInterface(middleware))
+	end
+
+	middleware = tableUtil.reconcileDeep(middleware or getDefaultMiddleware(), MIDDLEWARE_TEMPLATE)
+
 	local property = Property.new(initialValue)
 	local self = setmetatable({
 		updated = property.updated,
 		clientValueUpdated = Signal.new(),
 		_property = property,
+		_middleware = middleware,
 		_clientProperties = {},
 		_janitor = Janitor.new(),
 	}, RemoteProperty)
@@ -106,20 +288,10 @@ end
 --[=[
 	@tag RemoteProperty instance
 
-	Sets a value of the remote property for every client in `clients` table, *specifically*, to `value`. 
+	Calls [RemoteProperty:setForClient] for all clients in `clients`.
 ]=]
 
 function RemoteProperty.__index:setForClients(clients: { Player }, value: any)
-	assert(
-		typeof(clients) == "table",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(
-			1,
-			"RemoteProperty:setForClients",
-			"table",
-			typeof(clients)
-		)
-	)
-
 	for _, client in clients do
 		self:setForClient(client, value)
 	end
@@ -129,18 +301,15 @@ end
 	@tag RemoteProperty instance
 
 	Sets a value of the remote property for `client` *specifically*, to `value`. 
+		
+	:::note
+	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
+	apply, as remote functions are internally used to render `value` accessible to the respective clients.
+	:::
 ]=]
 
 function RemoteProperty.__index:setForClient(client: Player, value: any)
-	assert(
-		isPlayer(client),
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(
-			1,
-			"RemoteProperty:setForClient",
-			"Player",
-			typeof(client)
-		)
-	)
+	assert(t.instanceOf("Player")(client))
 
 	local clientProperty = self:_getClientProperty(client)
 	clientProperty:set(value)
@@ -153,15 +322,7 @@ end
 ]=]
 
 function RemoteProperty.__index:removeForClient(client: Player)
-	assert(
-		isPlayer(client),
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(
-			1,
-			"RemoteProperty:removeForClient",
-			"Player",
-			typeof(client)
-		)
-	)
+	assert(t.instanceOf("Player")(client))
 
 	if not self._clientProperties[client] then
 		return
@@ -172,26 +333,16 @@ function RemoteProperty.__index:removeForClient(client: Player)
 
 	-- Send the current value of the remote property back to the client so that
 	-- the client can recieve the update of their new value:
-	safeInvokeClient(self._valueDispatcherRemoteFunction, client, self:get())
+	networkUtil.safeInvokeClient(self._valueDispatcherRemoteFunction, client, self:get())
 end
 
 --[=[
 	@tag RemoteProperty instance
 
-	Removes the value of the remote property stored *specifically* for every client in `clients` table.
+	Calls [RemoteProperty:removeForClient] for all clients in the `clients` table.
 ]=]
 
 function RemoteProperty.__index:removeForClients(clients: { Player })
-	assert(
-		typeof(clients) == "table",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(
-			1,
-			"RemoteProperty:removeForClients",
-			"table",
-			typeof(clients)
-		)
-	)
-
 	for _, client in clients do
 		self:removeForClient(client)
 	end
@@ -205,15 +356,7 @@ end
 ]=]
 
 function RemoteProperty.__index:clientHasValueSet(client: Player): boolean
-	assert(
-		isPlayer(client),
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(
-			1,
-			"RemoteProperty:clientHasValueSet",
-			"Player",
-			typeof(client)
-		)
-	)
+	assert(t.instanceOf("Player")(client))
 
 	return self._clientProperties[client] ~= nil
 end
@@ -225,15 +368,7 @@ end
 ]=]
 
 function RemoteProperty.__index:getForClient(client: Player): any
-	assert(
-		isPlayer(client),
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(
-			1,
-			"RemoteProperty:getForClient",
-			"Player",
-			typeof(client)
-		)
-	)
+	assert(t.instanceOf("Player")(client))
 
 	local clientProperty = self._clientProperties[client]
 	return if clientProperty then clientProperty:get() else nil
@@ -245,6 +380,11 @@ end
 	Sets the value of the remote property to `value`, and so for all other 
 	clients (who can access this value through a  client remote property), 
 	who don't have a specific value for them stored in the remote property.
+
+	:::note
+	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
+	apply, as remote functions are internally used to render `value` accessible to the respective clients.
+	:::
 ]=]
 
 function RemoteProperty.__index:set(value: any)
@@ -268,31 +408,68 @@ end
 function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 	local valueDispatcherRemoteFunction = Instance.new("RemoteFunction")
 	valueDispatcherRemoteFunction.Name = name
-	valueDispatcherRemoteFunction:SetAttribute(SharedConstants.Attribute.BoundToRemoteProperty, true)
+	valueDispatcherRemoteFunction:SetAttribute(
+		SharedConstants.attribute.boundToRemoteProperty,
+		true
+	)
 	valueDispatcherRemoteFunction.Parent = parent
-
-	function valueDispatcherRemoteFunction.OnServerInvoke(client)
-		return if self:clientHasValueSet(client) then self:getForClient(client) else self:get()
-	end
-
-	-- Send off the new value to the current players in game:
-	self._property.updated:Connect(function(newValue)
-		for _, client in RemoteProperty._clients do
-			if self:clientHasValueSet(client) then
-				-- We must not send this new value to this player as it is not needed.
-				continue
-			end
-
-			safeInvokeClient(self._valueDispatcherRemoteFunction, client, newValue)
-		end
-	end)
+	self._valueDispatcherRemoteFunction = valueDispatcherRemoteFunction
 
 	self._janitor:Add(function()
 		valueDispatcherRemoteFunction.OnServerInvoke = nil
 		valueDispatcherRemoteFunction:Destroy()
 	end)
 
-	self._valueDispatcherRemoteFunction = valueDispatcherRemoteFunction
+	function valueDispatcherRemoteFunction.OnServerInvoke(client, setData)
+		-- If the client has sent a set data, then that means they want to set
+		-- their value specifically in the remote property, so let's do that:
+		if typeof(setData) == "table" then
+			local clientSetMiddlewareAccumulatedResponses =
+				networkUtil.truncateAccumulatedResponses(
+					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+						self._middleware.clientSet,
+						setData.value
+					)
+				)
+
+			self:setForClient(
+				client,
+				if clientSetMiddlewareAccumulatedResponses ~= nil
+					then clientSetMiddlewareAccumulatedResponses
+					else setData.value
+			)
+
+			return nil
+		end
+
+		-- If there are accumulated responses from the middleware, return those instead. Else
+		-- if the client has a specific value set for them, then return that. Lastly, return the current
+		-- value of the remote property if the client has no specific value set for them!
+		local clientGetMiddlewareAccumulatedResponses = networkUtil.truncateAccumulatedResponses(
+			networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+				self._middleware.clientGet,
+				client
+			)
+		)
+
+		return if clientGetMiddlewareAccumulatedResponses ~= nil
+			then clientGetMiddlewareAccumulatedResponses
+			elseif self:clientHasValueSet(client) then self:getForClient(client)
+			else self:get()
+	end
+
+	-- Send off the new value to the current players in game:
+	self._property.updated:Connect(function(newValue)
+		for _, client in RemoteProperty._clients do
+			if self:clientHasValueSet(client) then
+				-- If the client already has a value set for them specifically,
+				-- then we must not send this new value to them to avoid bugs.
+				continue
+			end
+
+			networkUtil.safeInvokeClient(self._valueDispatcherRemoteFunction, client, newValue)
+		end
+	end)
 end
 
 function RemoteProperty.__index:_getClientProperty(client: Player): Property.Property
@@ -303,13 +480,12 @@ function RemoteProperty.__index:_getClientProperty(client: Player): Property.Pro
 	local property = Property.new()
 
 	property.updated:Connect(function(newValue)
-		self.clientValueUpdated:Fire(client, newValue)
-
 		if not client:IsDescendantOf(Players) then
 			return
 		end
 
-		safeInvokeClient(self._valueDispatcherRemoteFunction, client, newValue)
+		self.clientValueUpdated:Fire(client, newValue)
+		networkUtil.safeInvokeClient(self._valueDispatcherRemoteFunction, client, newValue)
 	end)
 
 	self._clientProperties[client] = property
@@ -321,7 +497,7 @@ function RemoteProperty.__index:_init()
 	self._janitor:Add(self._property, "destroy")
 	self._janitor:Add(function()
 		for _, property in self._clientProperties do
-			property:Destroy()
+			property:destroy()
 		end
 
 		setmetatable(self, nil)
@@ -331,31 +507,5 @@ end
 function RemoteProperty:__tostring()
 	return ("[RemoteProperty]: (%s)"):format(self._valueDispatcherRemoteFunction.Name)
 end
-
-function RemoteProperty._startTrackingPlayers()
-	RemoteProperty._clients = Players:GetPlayers()
-
-	Players.PlayerAdded:Connect(function(client)
-		table.insert(RemoteProperty._clients, client)
-	end)
-
-	Players.PlayerRemoving:Connect(function(client)
-		table.remove(RemoteProperty._clients, table.find(RemoteProperty._clients, client))
-	end)
-end
-
-RemoteProperty._startTrackingPlayers()
-
-export type RemoteProperty = typeof(setmetatable(
-	{} :: {
-		updated: any,
-		clientValueUpdated: any,
-		_property: Property.Property,
-		_valueDispatcherRemoteFunction: RemoteFunction?,
-		_clientProperties: {},
-		_janitor: any,
-	},
-	RemoteProperty
-))
 
 return table.freeze(RemoteProperty)

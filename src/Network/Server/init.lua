@@ -4,51 +4,101 @@
 	The server counterpart of the Network module.
 ]=]
 
+--[=[ 
+	@prop RemoteProperty RemoteProperty
+	@within NetworkServer
+	@readonly
+
+	A reference to the [RemoteProperty] module.
+]=]
+
+--[=[ 
+	@prop RemoteProperty RemoteSignal
+	@within NetworkServer
+	@readonly
+
+	A reference to the [RemoteSignal] module.
+]=]
+
+--[=[ 
+	@prop NetworkServer Type 
+	@within NetworkServer
+	@readonly
+
+	An exported Luau type of a network object.
+]=]
+
 --[=[
 	@interface Middleware
 	@within NetworkServer
-	.inbound {(args: {...any}) -> ()}?
-	.outbound {(args: {...any}) -> ()}?
+	.methodCallInbound { (methodName: string, args: {any} ) -> boolean}?
+	.methodCallOutbound {(methodName: string, args: {any}) -> any}?
 
-	Both `Inbound` and `Outbound` should be array of callbacks (if specified, none of them are required). 
-	Callbacks in `Inbound` are known as "inbound callbacks" and are called whenever a client tries to call 
-	a serverside method  (exposed through the network object). The first argument passed to each inbound 
-	callback is the name of the method (the client called), and the arguments sent by the client (to that method)
-	are packed into an array, which is then passed as the second argument. 
+	Both `methodCallInbound` and `methodCallOutbound` must be array of callbacks (if specified). 
+
+	### `methodCallInbound` 
+
+	Callbacks in `methodCallInbound` are called whenever a client tries to call any of the appended methods of the network. 
+
+	The first argument passed to each callback is the name of the method (the client called), and the second argument, i.e 
+	the arguments sent by the client, which are are packed into an array. 
 	
 	```lua
-	local inboundCallbacks = {
+	local methodCallInboundCallbacks = {
 		function (methodName, arguments)
-			print(arguments[1]:IsA("Player")) --> true (first argument is always the client)
-			arguments[2] = "booooo" --> You can modify the arguments !
-		end
-	}
-	---
-	```
-
-	:::tip Automatic method call rejection
-	If any inbound callback returns an **explicit** false value, then the method (which the client tried to call) will *not* be
-	called. This is good, e.g for implementing queues!
-	:::
-
-	Callbacks in `Outbound` are known as "outbound callbacks" and are called whenever a serverside method 
-	(exposed through the network object) is called by the client, and has **finished**. The first argument passed to 
-	each inbound callback is the name of the method (the client called), and the arguments sent by the client (to that method)
-	are packed into an array, which is then passed as the second argument. 
-
-	```lua
-	local outboundCallbacks = {
-		function (methodName, arguments)
-			print(arguments[1]:IsA("Player")) --> true (first argument is always the client)
+			print(arguments[1]:IsA("Player")) --> true (the first argument is always the client)
+			print(typeof(arguments)) --> "table"
 		end
 	}
 	---
 	```
 
 	:::tip 
-	For outbound callbacks, an additional member in the arguments array, i.e `response` is injected automatically, which is 
-	the response of the serverside method (which the client called). This means you can modify the response of the serverside method
-	before it is returned back to the client, e.g:
+	- If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
+	called. This is useful as you can implement for e.g, implementing rate limits!
+
+	- Additionally, you can modify the `arguments` table, for e.g:
+
+	```lua
+	-- Server
+	local Network = require(...) 
+
+	local TestNetwork = Network.new("Test", {methodCallInbound = {
+		function(_, arguments) arguments[2] = "test" end
+	}})
+	TestNetwork:append("method", function(player, a)
+		print(a) --> "test" (a ought to be 1, but the middleware modified it!)
+	end)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...) 
+
+	local testNetwork = network.fromParent("Test", workspace)
+	estNetwork.method(1) 
+	```
+	:::
+
+	### `methodCallOutbound` 
+
+	Callbacks in `methodCallOutbound` are called whenever a method (appended to the network) is called by the client, and 
+	has **finished** running.  
+
+	The first argument passed to each callback is the name of the method (client called), and the second argument, i.e 
+	the arguments sent by the client, which are are packed into an array. 
+
+	```lua
+	local methodCallOutboundCallbacks = {
+		function (methodName, arguments)
+			print(arguments[1]:IsA("Player")) --> true (the first argument is always the client)
+			print(typeof(arguments)) --> "table"
+		end
+	}
+	---
+	```
+
+	:::tip 
+	A third argument i.e `response` is passed to each callback as well, which is just the response of the method called. For e.g:
 
 	```lua
 	-- Server:
@@ -56,72 +106,137 @@
 
 	local middleware = {
 		{
-			function (methodName, arguments)
-				arguments.response = "oops modified" 
+			function (methodName, arguments, response)
+				print(response) --> "this"
 			end
 		}
 	}
-	local networkObject = Network.new("test", middleware)
-	networkObject:append("SomeMethod", function()
+
+	local Network = Network.new("test", middleware)
+	Network:append("SomeMethod", function()
 		return "this"
 	end)
-	networkObject:dispatch(workspace)
+	Network:dispatch(workspace)
 
 	-- Client:
 	local Network = require(...)
 
-	local networkObject = Network.FromName("test", workspace):expect()
-	print(networkObject.SomeMethod()) --> "oops modified" (ought to print "this")
+	local networkObject = Network.fromName("test", workspace):expect()
+	print(networkObject.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
+	```
+
+	Additionally, these callbacks can return a value which'll override the actual result of the method (which will be sent
+	back to the client). For e.g:
+
+	```lua
+	-- Server:
+	local Network = require(...)
+
+	local middleware = {
+		{
+			function (methodName, arguments, response)
+				print(response) --> "this"
+				return 50
+			end
+		}
+	}
+
+	local Network = Network.new("test", middleware)
+	Network:append("SomeMethod", function()
+		return "this"
+	end)
+	Network:dispatch(workspace)
+
+	-- Client:
+	local Network = require(...)
+
+	local networkObject = Network.fromName("test", workspace):expect()
+	print(networkObject.SomeMethod()) --> 50 
+	```
+
+	Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
+	back to the client. This is by design - as it isn't really ideal to disregard all returned values for just 1.
+	
+	For e.g: 
+	
+	```lua
+	-- Server:
+	local Network = require(...)
+
+	local middleware = {
+		{
+			function (methodName, arguments, response)
+				return 1
+			end,
+
+			function (methodName, arguments, response)
+				return 2
+			end,
+
+			function (methodName, arguments, response)
+				return 3
+			end
+		}
+	}
+
+	local Network = Network.new("test", middleware)
+	Network:append("SomeMethod", function()
+		return "this"
+	end)
+	Network:dispatch(workspace)
+
+	-- Client:
+	local Network = require(...)
+
+	local networkObject = Network.fromName("test", workspace):expect()
+	print(networkObject.SomeMethod()) --> {1, 2, 3} 
 	```
 	:::
 ]=]
 
-local Packages = script.Parent.Parent
+local packages = script.Parent.Parent
+local utilities = script.Parent.utilities
 
-local Janitor = require(Packages.Janitor)
 local SharedConstants = require(script.Parent.SharedConstants)
 local RemoteSignal = require(script.RemoteSignal)
 local RemoteProperty = require(script.RemoteProperty)
+local tableUtil = require(utilities.tableUtil)
+local networkUtil = require(utilities.networkUtil)
+local Janitor = require(packages.Janitor)
+local t = require(packages.t)
 
-local NetworkServer = { __index = {} }
+local DEFAULT_MIDDLEWARE = {
+	methodCallOutbound = {},
+	methodCallInbound = {},
+}
 
-local function validateMiddleware(middleware)
-	if not middleware then
-		return table.freeze({ inbound = {}, outbound = {} })
-	end
+local MiddlewareInterface = t.optional(t.strictInterface({
+	methodCallInbound = t.optional(t.strictInterface({ t.optional(t.callback) })),
+	methodCallOutbound = t.optional(t.strictInterface({ t.optional(t.callback) })),
+}))
 
-	if middleware.inbound ~= nil then
-		assert(typeof(middleware.inbound) == "table", '"inbound" member specified in middleware must be a table.')
+local NetworkServer = {
+	RemoteProperty = require(script.RemoteProperty),
+	RemoteSignal = require(script.RemoteSignal),
+	__index = {},
+}
 
-		for _, callback in middleware.inbound do
-			assert(
-				typeof(callback) == "function",
-				("Inbound table must be an array of functions only. Instead got value of type %s."):format(
-					typeof(callback)
-				)
-			)
-		end
-	else
-		middleware.inbound = {}
-	end
+type Middleware = {
+	methodCallOutbound: { (methodName: string, args: { any }) -> any },
+	methodCallInbound: { (methodName: string, args: { any }) -> boolean },
+}
 
-	if middleware.outbound ~= nil then
-		assert(typeof(middleware.outbound) == "table", '"outbound" member specified in middleware must be a table.')
+export type NetworkServer = typeof(setmetatable(
+	{} :: {
+		_name: string,
+		_janitor: any,
+		_middleware: Middleware,
+	},
+	NetworkServer
+))
 
-		for _, callback in middleware.outbound do
-			assert(
-				typeof(callback) == "function",
-				("Outbound table must be an array of functions only. Instead got value of type %s."):format(
-					typeof(callback)
-				)
-			)
-		end
-	else
-		middleware.outbound = {}
-	end
-
-	assert(middleware.inbound or middleware.outbound, 'Middleware must have at least an "inbound" or "outbound" table')
-	return table.freeze(middleware)
+local function getDefaultMiddleware()
+	return tableUtil.deepCopy(DEFAULT_MIDDLEWARE)
 end
 
 --[=[
@@ -130,29 +245,26 @@ end
 
 	Creates and returns a new network object of the name i.e `name`. 
 	
-	Internally, a folder is created for each newly created network object, which
-	too is named to `name`, but the folder it self is initially parented to `nil` 
-	so the network object isn't available to the client - call [NetworkServer:Dispatch] 
-	in order to render the network object accessible to the client.
+	:::note
+	The network object will initially not be available to the client, you need to call [NetworkServer:dispatch] 
+	in order to render the network object accessible to the client!
+	:::
 ]=]
 
-function NetworkServer.new(
-	name: string,
-	middleware: { outbound: { () -> () }, inbound: { () -> boolean } }?
-): NetworkServer
-	assert(
-		typeof(name) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.new", "string", typeof(name))
-	)
-	assert(
-		middleware == nil or typeof(middleware) == "table",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(2, "Network.new", "table or nil", typeof(middleware))
-	)
+function NetworkServer.new(name: string, middleware: Middleware?): NetworkServer
+	assert(t.string(name))
+	assert(t.optional(t.table)(middleware))
+
+	if middleware then
+		assert(MiddlewareInterface(middleware))
+	end
+
+	middleware = tableUtil.reconcileDeep(middleware or getDefaultMiddleware(), DEFAULT_MIDDLEWARE)
 
 	local self = setmetatable({
 		_name = name,
 		_janitor = Janitor.new(),
-		_middleware = validateMiddleware(middleware),
+		_middleware = middleware,
 	}, NetworkServer)
 
 	self:_init()
@@ -186,7 +298,7 @@ end
 	Appends a key value pair, `key` and `value`, to the network object, so that
 	it is available to the client once the network object is dispatched. 
 	
-	E.g:
+	For e.g:
 
 	```lua
 	-- Server
@@ -200,11 +312,10 @@ end
 	local networkObject = Network.fromServer("test", workspace):expect()
 	print(networkObject.key) --> "the value!"
 	```
-		
+
 	:::note
 	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	do apply since remote functions are internally used to replicate the appended
-	key value pairs to the client.
+	apply, as remote functions are internally used the key value pairs accessible to the clients.
 	:::
 
 	:::warning
@@ -219,11 +330,11 @@ function NetworkServer.__index:append(
 	key: string,
 	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
 )
-	assert(not self:dispatched(), "Cannot append key value pair as network object is dispatched to the client!")
 	assert(
-		typeof(key) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Server:append", "string", typeof(key))
+		not self:dispatched(),
+		"Cannot append key value pair as network object is dispatched to the client!"
 	)
+	assert(t.string(key))
 
 	self:_setup(key, value)
 end
@@ -240,23 +351,14 @@ end
 ]=]
 
 function NetworkServer.__index:dispatch(parent: Instance)
-	assert(
-		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network:dispatch", "Instance", typeof(parent))
-	)
-
-	for _, child in parent:GetChildren() do
-		assert(
-			child.Name ~= self._name,
-			('A network object "%s" is already dispatched to parent [%s]'):format(child.Name, parent:GetFullName())
-		)
-	end
+	assert(t.Instance(parent))
+	assert(t.children({ [self._name] = t.none })(parent))
 
 	self._networkFolder.Parent = parent
 end
 
 --[=[
-	Destroys the network object and all appended remote properties / 
+	Destroys the network object and all appended remote properties &
 	remote signals within the network object, and renders the network 
 	object useless. 
 ]=]
@@ -265,23 +367,29 @@ function NetworkServer.__index:destroy()
 	self._janitor:Destroy()
 end
 
+function NetworkServer.__index:_setupRemoteObject(
+	key: string,
+	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal
+)
+	value:dispatch(key, self._networkFolder)
+
+	self._janitor:Add(function()
+		-- Destroy the remote property or remote signal if it already isn't
+		-- destroyed yet, to avoid memory leaks:
+		if not RemoteProperty.is(value) or not RemoteSignal.is(value) then
+			return
+		end
+
+		value:destroy()
+	end)
+end
+
 function NetworkServer.__index:_setup(
 	key: string,
 	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
 )
 	if RemoteSignal.is(value) or RemoteProperty.is(value) then
-		value:dispatch(key, self._networkFolder)
-
-		self._janitor:Add(function()
-			-- Destroy the remote property or remote signal if it already
-			-- isn't destroyed yet,  to prevent memory leaks:
-			if not (RemoteSignal.is(value) or RemoteProperty.is(value)) then
-				return
-			end
-
-			value:destroy()
-		end)
-
+		self:_setupRemoteObject(key, value)
 		return
 	end
 
@@ -291,16 +399,40 @@ function NetworkServer.__index:_setup(
 	remoteFunction.Parent = self._networkFolder
 
 	function remoteFunction.OnServerInvoke(...)
-		if typeof(value) == "function" then
-			local args = { ... }
+		local args = { ... }
 
-			if self:_getInboundMiddlewareResponse(key, args) == false then
-				return nil
+		if typeof(value) == "function" then
+			local methodCallInboundMiddlewareAccumulatedResponses =
+				networkUtil.truncateAccumulatedResponses(
+					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+						self._middleware.methodCallInbound,
+						args
+					)
+				)
+
+			-- If there is an explicit false value included in the accumulated
+			-- response of all inbound method callbacks, then that means we should
+			-- avoid this client's request to call the method!
+			if
+				methodCallInboundMiddlewareAccumulatedResponses ~= nil
+				and table.find(methodCallInboundMiddlewareAccumulatedResponses, false)
+			then
+				return
 			end
 
-			args.response = value(table.unpack(args))
-			self:_runOutboundMiddlewareCallbacks(key, args)
-			return args.response
+			local methodResponse = value(table.unpack(args))
+			local methodCallOutboundMiddlewareAccumulatedResponses =
+				networkUtil.truncateAccumulatedResponses(
+					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+						self._middleware.methodCallOutbound,
+						args,
+						methodResponse
+					)
+				)
+
+			return if methodCallOutboundMiddlewareAccumulatedResponses ~= nil
+				then methodCallOutboundMiddlewareAccumulatedResponses
+				else methodResponse
 		else
 			return value
 		end
@@ -310,22 +442,6 @@ function NetworkServer.__index:_setup(
 		remoteFunction.OnServerInvoke = nil
 		remoteFunction:Destroy()
 	end)
-end
-
-function NetworkServer.__index:_runOutboundMiddlewareCallbacks(...)
-	for _, outBoundCallback in self._middleware.outbound do
-		outBoundCallback(...)
-	end
-end
-
-function NetworkServer.__index:_getInboundMiddlewareResponse(...)
-	for _, inBoundCallback in self._middleware.inbound do
-		if inBoundCallback(...) == false then
-			return false
-		end
-	end
-
-	return true
 end
 
 function NetworkServer.__index:_init()
@@ -339,27 +455,8 @@ end
 function NetworkServer.__index:_setupNetworkFolder()
 	local networkFolder = self._janitor:Add(Instance.new("Folder"))
 	networkFolder.Name = self._name
-	networkFolder:SetAttribute(SharedConstants.Attribute.NetworkFolder, true)
+	networkFolder:SetAttribute(SharedConstants.attribute.networkFolder, true)
 	self._networkFolder = networkFolder
 end
-
-function NetworkServer._init()
-	for _, module in script:GetChildren() do
-		NetworkServer[module.Name] = require(module)
-	end
-end
-
-NetworkServer._init()
-
-export type NetworkServer = typeof(setmetatable(
-	{} :: {
-		_name: string,
-		_parent: Instance,
-		_janitor: any,
-		_remotes: { RemoteSignal.RemoteSignal | RemoteProperty.RemoteProperty },
-		_middleware: { Outbound: { () -> any? }, Inbound: { () -> any? } },
-	},
-	NetworkServer
-))
 
 return table.freeze(NetworkServer)

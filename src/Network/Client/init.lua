@@ -1,101 +1,44 @@
 --[=[
-	@class NetworkClient
+	@class networkClient
 
 	The client counterpart of the Network module.
 ]=]
 
-local Packages = script.Parent.Parent
+--[=[ 
+	@prop ClientRemoteProperty ClientRemoteProperty
+	@within networkClient
+	@readonly
 
-local Promise = require(Packages.Promise)
+	A reference to the [ClientRemoteProperty] module.
+]=]
+
+--[=[ 
+	@prop ClientRemoteSignal ClientRemoteSignal
+	@within networkClient
+	@readonly
+
+	A reference to the [ClientRemoteSignal] module.
+]=]
+
+local packages = script.Parent.Parent
+
+local Promise = require(packages.Promise)
 local SharedConstants = require(script.Parent.SharedConstants)
-local ClientRemoteSignal = require(script.ClientRemoteSignal)
-local ClientRemoteProperty = require(script.ClientRemoteProperty)
 
-local NetworkClient = {}
+local networkClient = {
+	ClientRemoteProperty = require(script.ClientRemoteProperty),
+	ClientRemoteSignal = require(script.ClientRemoteSignal),
+}
 
-local function getNetworkFoldersFromParent(parent: Instance): { Folder }
-	local networkFolders = {}
-
-	for _, networkFolder in parent:GetChildren() do
-		if not networkFolder:GetAttribute(SharedConstants.Attribute.NetworkFolder) then
-			continue
-		end
-
-		table.insert(networkFolders, networkFolder)
-	end
-
-	return networkFolders
-end
-
---[=[
-	Returns an array of *all* network objects dispatched to `parent`.
-
-	```lua
-	-- Server
-	local Network = require(...) 
-
-	local networkObject1 = Network.new("Test1", workspace)
-	networkObject:append("status", "not good mate")
-	networkObject:dispatch()
-
-	local networkObject2 = Network.new("Test2", workspace)
-	networkObject:append("status", "good mate!")
-	networkObject:dispatch()
-
-	-- Client
-	local Network = require(...) 
-
-	for _, networkObject in Network.allFromParent(workspace) do
-		print(networkObject.status) 
-	end
-
-	--> "not good mate"
-	--> "good mate!"
-	```
-]=]
-
-function NetworkClient.allFromParent(parent: Instance): { [string]: { [string]: any } }
-	local networks = {}
-
-	for _, networkFolder in getNetworkFoldersFromParent(parent) do
-		networks[networkFolder.Name] = NetworkClient._getAbstractOfNetworkFolder(networkFolder)
-	end
-
-	return networks
-end
-
---[=[
-	@return Promise<DispatchedNetworkObject: {[string]: any}>
-
-	Returns a [promise](https://eryn.io/roblox-lua-promise/) which is resolved 
-	(with the network object)  once a network object of name i.e `name`, is 
-	found in `parent`.
-]=]
-
-function NetworkClient.fromParent(name: string, parent: Instance): any
-	assert(
-		typeof(name) == "string",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(1, "Network.fromParent", "string", typeof(name))
-	)
-	assert(
-		typeof(parent) == "Instance",
-		SharedConstants.ErrorMessage.InvalidArgumentType:format(2, "Network.fromParent", "Instance", typeof(parent))
-	)
-
-	return Promise.new(function(resolve)
-		resolve(NetworkClient._getAbstractOfNetworkFolder(parent:WaitForChild(name)))
-	end)
-end
-
-function NetworkClient._getAbstractOfNetworkFolder(networkFolder: Folder): { any }
+local function getAbstractOfNetworkFolder(networkFolder): { [string]: any }
 	local abstract = {}
 
 	for _, descendant in networkFolder:GetChildren() do
-		if descendant:GetAttribute(SharedConstants.Attribute.BoundToRemoteSignal) then
-			abstract[descendant.Name] = ClientRemoteSignal.new(descendant)
+		if descendant:GetAttribute(SharedConstants.attribute.boundToRemoteSignal) then
+			abstract[descendant.Name] = networkClient.ClientRemoteSignal.new(descendant)
 			continue
-		elseif descendant:GetAttribute(SharedConstants.Attribute.BoundToRemoteProperty) then
-			abstract[descendant.Name] = ClientRemoteProperty.new(descendant)
+		elseif descendant:GetAttribute(SharedConstants.attribute.boundToRemoteProperty) then
+			abstract[descendant.Name] = networkClient.ClientRemoteProperty.new(descendant)
 			continue
 		end
 
@@ -118,12 +61,90 @@ function NetworkClient._getAbstractOfNetworkFolder(networkFolder: Folder): { any
 	return table.freeze(abstract)
 end
 
-function NetworkClient._init()
-	for _, module in script:GetChildren() do
-		NetworkClient[module.Name] = require(module)
+local function getNetworkFoldersFromParent(parent: Instance): { Folder }
+	local networkFolders = {}
+
+	for _, networkFolder in parent:GetChildren() do
+		if not networkFolder:GetAttribute(SharedConstants.attribute.networkFolder) then
+			continue
+		end
+
+		table.insert(networkFolders, networkFolder)
 	end
+
+	return networkFolders
+end
+--[=[
+	Returns an array of *all* networks dispatched to `parent`.
+
+	```lua
+	-- Server
+	local Network = require(...) 
+
+	local Network1 = Network.new("Test1", workspace)
+	Network1:append("status", "not good mate")
+	Network1:dispatch()
+
+	local Network2 = Network.new("Test2", workspace)
+	Network2:append("status", "good mate!")
+	Network2:dispatch()
+
+	-- Client
+	local Network = require(...) 
+
+	for _, networkObject in Network.allFromParent(workspace) do
+		print(networkObject.status) 
+	end
+
+	--> "not good mate"
+	--> "good mate!"
+	```
+]=]
+
+function networkClient.allFromParent(parent: Instance): { [string]: { [string]: any } }
+	local networks = {}
+
+	for _, networkFolder in getNetworkFoldersFromParent(parent) do
+		networks[networkFolder.Name] = getAbstractOfNetworkFolder(networkFolder)
+	end
+
+	return table.freeze(networks)
 end
 
-NetworkClient._init()
+--[=[
+	@return Promise<DispatchedNetwork: {[string]: any}>
 
-return table.freeze(NetworkClient)
+	Returns a [promise](https://eryn.io/roblox-lua-promise/) which is resolved once a network with the 
+	name of `name`, is dispatched to `parent`. If a network with the name of `name` is already dispatched to
+	`parent`, the promise will immediately resolve.
+
+	For e.g:
+
+	```lua
+	-- Server
+	local network = require(...) 
+
+	local TestNetwork = network.new("Test")
+	TestNetwork:append("method", function(player)
+		return ("hi, %s!"):format(player.Name)
+	end)
+
+	-- Dispatch the network to workspace:
+	TestNetwork:dispatch(workspace) 
+
+	-- Client
+	local network = require(...) 
+
+	-- Get the network of name "Test", dispatched to workspace
+	local testNetwork = network.fromParent("Test", workspace)
+	print(testNetwork.method()) --> "hi, bubshayz!"
+	```
+]=]
+
+function networkClient.fromParent(name: string, parent: Instance): any
+	return Promise.new(function(resolve)
+		resolve(getAbstractOfNetworkFolder(parent:WaitForChild(name)))
+	end)
+end
+
+return table.freeze(networkClient)

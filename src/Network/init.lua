@@ -1,30 +1,34 @@
 local RunService = game:GetService("RunService")
 
 --[=[
-	@class Network
+	@class network
 
-	An advanced network module for easy server-client communication. The network
-	module it self consists of a [NetworkServer] and  a [NetworkClient] module, 
-	so whenever you require the Network module it self, in return one of these 2 
-	modules are required  and returned, based off of the environment 
-	(server / client).
+	An advanced network module for easy server-client communication. Upon requiring
+	the network module, either the [NetworkServer] or [NetworkClient] module is respectively
+	returned (based off of the enviroment, i.e server / client). 
+	
+	For e.g:
 
 	```lua
 	-- Server
-	local Network = require(...) 
+	local Network = require(...) -- [NetworkServer] is returned
 
-	local networkObject = Network.new("Test")
-	networkObject:append("method", function(player)
+	local TestNetwork = Network.new("Test")
+	TestNetwork:append("method", function(player)
 		return ("hi, %s!"):format(player.Name)
 	end)
-	networkObject:dispatch(workspace)
+	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local Network = require(...) 
+	local network = require(...) -- [NetworkClient] is returned
 
-	local networkObject = Network.fromParent("Test", workspace)
-	print(networkObject.Method()) --> "hi, bubshayz!"
+	local testNetwork = network.fromParent("Test", workspace)
+	print(testNetwork.method()) --> "hi, bubshayz!"
 	```
 ]=]
 
-return if RunService:IsServer() then require(script.Server) else require(script.Client)
+if RunService:IsServer() then
+	return require(script.Server)
+else
+	return require(script.client)
+end
