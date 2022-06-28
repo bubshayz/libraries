@@ -9,10 +9,9 @@
 --[=[ 
 	@prop RemoteSignal Type 
 	@within RemoteSignal
-	
 	@readonly
 
-	An exported Luau type of a remote signal object.
+	An exported Luau type of a remote signal.
 ]=]
 
 --[=[
@@ -21,6 +20,82 @@
 
 	.Disconnect () -> () 
 	.Connected boolean
+]=]
+
+--[=[
+	@interface Middleware
+	@within RemoteSignal
+	.serverEvent { (client: Player, args: {any}) -> any }?,
+
+	`serverEvent` must be array of callbacks (if specified).
+
+	### `serverEvent` 
+
+	Callbacks in `serverEvent` are called whenever the client fires off the remote signal.
+
+	The first and *only* argument passed to each callback is just an array of arguments sent by the client. 
+
+	```lua
+	local clientGetCallbacks = {
+		function (arguments)
+			print(client:IsA("Player")) --> true (First argument is always the client!)
+		end
+	}
+	---
+	```
+
+	:::tip 
+	- If any of the callbacks return an **explicit** false value, then the remote signal
+	will not be fired. For e.g:
+
+	```lua
+	-- Server
+	local Network = require(...) 
+
+	local TestNetwork = Network.new("Test")
+	local TestRemoteSignal = Network.RemoteSignal.new({
+		clientServer = {function() return false end}
+	})
+
+	TestRemoteSignal:connect(function()
+		print("Fired") --> never prints
+	end)
+
+	TestNetwork:append("Signal", TestRemoteSignal)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...) 
+
+	local testNetwork = network.fromParent("Test", workspace)
+	print(testNetwork.Signal:fire()) 
+	```
+
+	- Additionally, you can modify the `arguments` table, for e.g:
+
+	```lua
+	-- Server
+	local Network = require(...) 
+
+	local TestNetwork = Network.new("Test")
+	local TestRemoteSignal = Network.RemoteSignal.new({
+		clientServer = {function(arguments) arguments[2] = 1 arguments[3] = "test" end}
+	})
+
+	TestRemoteSignal:connect(function(client, a, b)
+		print(a, b) --> 1, "test" (a and b ought to be 24, but they were modified through the middleware)
+	end)
+
+	TestNetwork:append("Signal", TestRemoteSignal)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...) 
+
+	local testNetwork = network.fromParent("Test", workspace)
+	print(testNetwork.Signal:fire(24, 24)) 
+	```
+	:::
 ]=]
 
 local network = script.Parent.Parent
@@ -46,15 +121,25 @@ end
 
 local RemoteSignal = { __index = {} }
 
+type Middleware = { serverEvent: { serverEvent: { () -> boolean } } }
+export type RemoteSignal = typeof(setmetatable(
+	{} :: {
+		_signal: any,
+		_janitor: any,
+		_remoteEvent: RemoteEvent,
+		_middleware: Middleware,
+	},
+	RemoteSignal
+))
+
 --[=[
+	@param middleware Middleware?
 	@return RemoteSignal
 
 	Creates and returns a new remote signal.
 ]=]
 
-function RemoteSignal.new(
-	middleware: { serverEvent: { inbound: { () -> false }, outbound: { () -> () } } }
-)
+function RemoteSignal.new(middleware: Middleware?)
 	assert(t.optional(t.table)(middleware))
 
 	if middleware then
@@ -202,14 +287,5 @@ end
 function RemoteSignal:__tostring()
 	return ("[RemoteSignal]: (%s)"):format(self._remoteEvent.Name)
 end
-
-export type RemoteSignal = typeof(setmetatable(
-	{} :: {
-		_signal: any,
-		_janitor: any,
-		_remoteEvent: RemoteEvent?,
-	},
-	RemoteSignal
-))
 
 return table.freeze(RemoteSignal)

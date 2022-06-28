@@ -29,11 +29,20 @@ local Janitor = require(packages.Janitor)
 
 local ClientRemoteSignal = { __index = {} }
 
+export type ClientRemoteSignal = typeof(setmetatable(
+	{} :: {
+		_remoteEvent: RemoteEvent,
+		_signal: any,
+		_janitor: any,
+	},
+	ClientRemoteSignal
+))
+
 --[=[
 	@private
 ]=]
 
-function ClientRemoteSignal.new(remoteEvent: RemoteEvent): ClientRemoteSignal
+function ClientRemoteSignal.new(remoteEvent: RemoteEvent)
 	local self = setmetatable({
 		_remoteEvent = remoteEvent,
 		_signal = Signal.new(),
@@ -109,7 +118,7 @@ end
 	remote signal.
 ]=]
 
-function ClientRemoteSignal.__index:wait()
+function ClientRemoteSignal.__index:wait(): any
 	return self._signal:Wait()
 end
 
@@ -137,14 +146,5 @@ end
 function ClientRemoteSignal:__tostring()
 	return ("[ClientRemoteSignal]: (%s)"):format(self._remoteEvent.Name)
 end
-
-export type clientRemoteSignal = typeof(setmetatable(
-	{} :: {
-		_remoteEvent: RemoteEvent,
-		_signal: any,
-		_janitor: any,
-	},
-	ClientRemoteSignal
-))
 
 return table.freeze(ClientRemoteSignal)

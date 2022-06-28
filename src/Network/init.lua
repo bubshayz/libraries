@@ -4,16 +4,16 @@ local RunService = game:GetService("RunService")
 	@class network
 
 	An advanced network module for easy server-client communication. Upon requiring
-	the network module, the [NetworkServer] or [NetworkClient] counterpart is respectively
+	the network module, either the [NetworkServer] or [NetworkClient] module is respectively
 	returned (based off of the enviroment, i.e server / client). 
 	
 	For e.g:
 
 	```lua
 	-- Server
-	local network = require(...) -- [NetworkServer] is returned
+	local Network = require(...) -- [NetworkServer] is returned
 
-	local TestNetwork = network.new("Test")
+	local TestNetwork = Network.new("Test")
 	TestNetwork:append("method", function(player)
 		return ("hi, %s!"):format(player.Name)
 	end)
@@ -25,11 +25,6 @@ local RunService = game:GetService("RunService")
 	local testNetwork = network.fromParent("Test", workspace)
 	print(testNetwork.method()) --> "hi, bubshayz!"
 	```
-
-	:::note
-	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	apply for the **entirety** of the network module, as remote events and remote fucntions are internally used.
-	:::
 ]=]
 
 if RunService:IsServer() then

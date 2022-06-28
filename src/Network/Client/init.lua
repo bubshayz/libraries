@@ -75,7 +75,7 @@ local function getNetworkFoldersFromParent(parent: Instance): { Folder }
 	return networkFolders
 end
 --[=[
-	Returns an array of *all* network objects dispatched to `parent`.
+	Returns an array of *all* networks dispatched to `parent`.
 
 	```lua
 	-- Server
@@ -112,11 +112,33 @@ function networkClient.allFromParent(parent: Instance): { [string]: { [string]: 
 end
 
 --[=[
-	@return Promise<DispatchedNetworkObject: {[string]: any}>
+	@return Promise<DispatchedNetwork: {[string]: any}>
 
-	Returns a [promise](https://eryn.io/roblox-lua-promise/) which is resolved 
-	(with the network object)  once a network object of name i.e `name`, is 
-	found in `parent`.
+	Returns a [promise](https://eryn.io/roblox-lua-promise/) which is resolved once a network with the 
+	name of `name`, is dispatched to `parent`. If a network with the name of `name` is already dispatched to
+	`parent`, the promise will immediately resolve.
+
+	For e.g:
+
+	```lua
+	-- Server
+	local network = require(...) 
+
+	local TestNetwork = network.new("Test")
+	TestNetwork:append("method", function(player)
+		return ("hi, %s!"):format(player.Name)
+	end)
+
+	-- Dispatch the network to workspace:
+	TestNetwork:dispatch(workspace) 
+
+	-- Client
+	local network = require(...) 
+
+	-- Get the network of name "Test", dispatched to workspace
+	local testNetwork = network.fromParent("Test", workspace)
+	print(testNetwork.method()) --> "hi, bubshayz!"
+	```
 ]=]
 
 function networkClient.fromParent(name: string, parent: Instance): any

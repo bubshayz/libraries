@@ -34,6 +34,15 @@ local Janitor = require(packages.Janitor)
 
 local ClientRemoteProperty = { __index = {} }
 
+export type ClientRemoteProperty = typeof(setmetatable(
+	{} :: {
+		_remoteEvent: RemoteEvent,
+		_signal: any,
+		_janitor: any,
+	},
+	ClientRemoteProperty
+))
+
 --[=[
 	@private
 ]=]

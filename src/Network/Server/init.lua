@@ -31,17 +31,17 @@
 --[=[
 	@interface Middleware
 	@within NetworkServer
-	.methodCallInbound { (methodName: string, args: {...any} ) -> boolean}?
-	.methodCallOutbound {(methodName: string, args: {...any}) -> any}?
+	.methodCallInbound { (methodName: string, args: {any} ) -> boolean}?
+	.methodCallOutbound {(methodName: string, args: {any}) -> any}?
 
-	Both `methodCallInbound` and `methodCallOutbound` should be array of callbacks (if specified, as none of them are required). 
+	Both `methodCallInbound` and `methodCallOutbound` must be array of callbacks (if specified). 
 
-	### `methodCallInbound` callbacks
+	### `methodCallInbound` 
 
 	Callbacks in `methodCallInbound` are called whenever a client tries to call any of the appended methods of the network. 
 
 	The first argument passed to each callback is the name of the method (the client called), and the second argument, i.e 
-	the arguments sent by the client, which are are packed into an array. For e.g:
+	the arguments sent by the client, which are are packed into an array. 
 	
 	```lua
 	local methodCallInboundCallbacks = {
@@ -54,17 +54,38 @@
 	```
 
 	:::tip 
-	If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
+	- If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
 	called. This is useful as you can implement for e.g, implementing rate limits!
+
+	- Additionally, you can modify the `arguments` table, for e.g:
+
+	```lua
+	-- Server
+	local Network = require(...) 
+
+	local TestNetwork = Network.new("Test", {methodCallInbound = {
+		function(_, arguments) arguments[2] = "test" end
+	}})
+	TestNetwork:append("method", function(player, a)
+		print(a) --> "test" (a ought to be 1, but the middleware modified it!)
+	end)
+	TestNetwork:dispatch(workspace)
+
+	-- Client
+	local network = require(...) 
+
+	local testNetwork = network.fromParent("Test", workspace)
+	estNetwork.method(1) 
+	```
 	:::
 
-	### `methodCallOutbound` callbacks
+	### `methodCallOutbound` 
 
 	Callbacks in `methodCallOutbound` are called whenever a method (appended to the network) is called by the client, and 
 	has **finished** running.  
 
 	The first argument passed to each callback is the name of the method (client called), and the second argument, i.e 
-	the arguments sent by the client, which are are packed into an array. For e.g:
+	the arguments sent by the client, which are are packed into an array. 
 
 	```lua
 	local methodCallOutboundCallbacks = {
@@ -77,8 +98,7 @@
 	```
 
 	:::tip 
-	A third argument i.e `response` is passed to each callback as well, which is just the response of the method called. 
-	For e.g:
+	A third argument i.e `response` is passed to each callback as well, which is just the response of the method called. For e.g:
 
 	```lua
 	-- Server:
@@ -105,8 +125,8 @@
 	print(networkObject.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
 	```
 
-	Additionally, these callbacks can return a value which'll override the actual result of the method (as it'll be sent
-	back to the client), for e.g:
+	Additionally, these callbacks can return a value which'll override the actual result of the method (which will be sent
+	back to the client). For e.g:
 
 	```lua
 	-- Server:
@@ -134,9 +154,8 @@
 	print(networkObject.SomeMethod()) --> 50 
 	```
 
-	If more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
-	back to the client. This is good, as it allows you to respect the results of your callbacks, instead of just unexpectedly 
-	overwriting it with any one result! 
+	Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
+	back to the client. This is by design - as it isn't really ideal to disregard all returned values for just 1.
 	
 	For e.g: 
 	
@@ -196,16 +215,25 @@ local MiddlewareInterface = t.optional(t.strictInterface({
 	methodCallOutbound = t.optional(t.strictInterface({ t.optional(t.callback) })),
 }))
 
-type Middleware = {
-	methodCallOutbound: { (methodName: string, args: { any }) -> any },
-	methodCallInbound: { (methodName: string, args: { any }) -> boolean },
-}
-
 local NetworkServer = {
 	RemoteProperty = require(script.RemoteProperty),
 	RemoteSignal = require(script.RemoteSignal),
 	__index = {},
 }
+
+type Middleware = {
+	methodCallOutbound: { (methodName: string, args: { any }) -> any },
+	methodCallInbound: { (methodName: string, args: { any }) -> boolean },
+}
+
+export type NetworkServer = typeof(setmetatable(
+	{} :: {
+		_name: string,
+		_janitor: any,
+		_middleware: Middleware,
+	},
+	NetworkServer
+))
 
 local function getDefaultMiddleware()
 	return tableUtil.deepCopy(DEFAULT_MIDDLEWARE)
@@ -284,6 +312,11 @@ end
 	local networkObject = Network.fromServer("test", workspace):expect()
 	print(networkObject.key) --> "the value!"
 	```
+
+	:::note
+	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
+	apply, as remote functions are internally used the key value pairs accessible to the clients.
+	:::
 
 	:::warning
 	This method will error if the network object is dispatched to the client. 
@@ -425,14 +458,5 @@ function NetworkServer.__index:_setupNetworkFolder()
 	networkFolder:SetAttribute(SharedConstants.attribute.networkFolder, true)
 	self._networkFolder = networkFolder
 end
-
-export type NetworkServer = typeof(setmetatable(
-	{} :: {
-		_name: string,
-		_janitor: any,
-		_middleware: Middleware,
-	},
-	NetworkServer
-))
 
 return table.freeze(NetworkServer)
