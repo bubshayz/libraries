@@ -1,0 +1,8 @@
+[package]
+name = "bubshayz/numberutil"
+description = "A utility module for working with numbers."
+authors = ["bubshayz"]
+license = "MIT"
+version = "1.0.9"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"

@@ -1,0 +1,13 @@
+[package]
+name = "bubshayz/windlines"
+description = "A module for creating wind line effects."
+authors = ["bubshayz"]
+version = "1.2.0"
+license = "MIT"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+Signal = "sleitnick/signal@1.2.0"
+Janitor = "howmanysmall/janitor@1.14.1"
+t = "osyrisrblx/t@3.0.0"
