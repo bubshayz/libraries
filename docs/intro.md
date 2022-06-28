@@ -19,7 +19,7 @@ registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
 [dependencies]
-InstanceUtil = "bubshayz/instanceutil@1.0.8"
+instanceUtil = "bubshayz/instanceUtil@1.0.8"
 ```
 
 Now, to install these dependencies, run `wally install` within your project. Wally will  then create a package folder in your directory with the installed dependencies. Then use [Rojo](https://rojo.space/) to sync in the package folder to Studio.
