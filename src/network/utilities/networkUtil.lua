@@ -1,5 +1,3 @@
-local Players = game:GetService("Players")
-
 local networkUtil = { _players = {} }
 
 local function runCallbackNoYield(callback, ...)
