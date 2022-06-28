@@ -7,4 +7,4 @@
 | [network](https://bubshayz.github.io/Roblox-Modules/api/Network) | `Network = "bubshayz/network@1.5.0"` | `shared` |
 | [WindLines](https://bubshayz.github.io/Roblox-Modules/api/WindLines) | `WindLines = "bubshayz/windlines@1.2.0"` | `shared` |
 | [Queue](https://bubshayz.github.io/Roblox-Modules/api/Queue) | `Queue = "bubshayz/queue@1.1.2"` | `shared` |
-| [MatrixUtil](https://bubshayz.github.io/Roblox-Modules/api/MatrixUtil) | `MatrixUtil = "bubshayz/matrixutil@1.0.7"` | `shared` |
+| [matrixUtil](https://bubshayz.github.io/Roblox-Modules/api/matrixUtil) | `matrixUtil = "bubshayz/matrixUtil@1.0.7"` | `shared` |

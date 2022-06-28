@@ -1,5 +1,5 @@
 [package]
-name = "bubshayz/matrixutil"
+name = "bubshayz/matrixUtil"
 description = "A utility module for working with matrixes."
 authors = ["bubshayz"]
 license = "MIT"
