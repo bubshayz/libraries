@@ -20,6 +20,21 @@
 	```
 ]=]
 
+--[=[ 
+	@prop name string
+	@within CustomEnum
+	@readonly
+
+	The name of the custom enum.
+
+	```lua
+	local EnumList = require(...)
+
+	local MyEnumList = EnumList.new("My", {Test = {}}) 
+	print(MyEnumList.Test.name) --> "Test"
+	```
+]=]
+
 local INVALID_ENUM_MEMBER = '"%s" is not a valid EnumItem of Enum "%s"!'
 
 local CustomEnum = { _prototype = {} }

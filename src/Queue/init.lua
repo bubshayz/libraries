@@ -118,8 +118,7 @@ end
 	ever since it was appended). 
 	
 	The method also returns a promise, which too resolves with a number 
-	(the time it took for `callback` to run ever since it was appended),  
-	once `callback` is called.
+	(the time it took for `callback` to run ever since it was appended), once `callback` is called.
 
 	```lua
 	local Queue = require(...)
@@ -193,7 +192,7 @@ end
 --[=[
 	@tag Queue Instance
 
-	Calls [Queue:EmptyQueue] and renders the queue unusable.
+	Calls [Queue:emptyQueue] and renders the queue unusable.
 ]=]
 
 function Queue.__index:destroy()

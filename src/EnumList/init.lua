@@ -69,6 +69,21 @@
 	```
 ]=]
 
+--[=[ 
+	@prop name string
+	@within EnumList
+	@readonly
+
+	The name of the enum list.
+
+	```lua
+	local EnumList = require(...)
+
+	local MyEnumList = EnumList.new("My", {}) 
+	print(MyEnumList.name) --> "My"
+	```
+]=]
+
 local CustomEnum = require(script.CustomEnum)
 
 local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %s instead."
