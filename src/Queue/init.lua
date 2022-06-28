@@ -50,6 +50,11 @@ local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %
 
 local Queue = { __index = {} }
 
+export type Queue = typeof(setmetatable({} :: {
+	progressed: any,
+	_promises: { any },
+}, Queue))
+
 --[=[
 	@return Queue
 	
@@ -200,10 +205,5 @@ end
 function Queue:__tostring()
 	return ("[Queue]: (%d)"):format(#self._promises)
 end
-
-export type Queue = typeof(setmetatable({} :: {
-	progressed: any,
-	_promises: { any },
-}, Queue))
 
 return table.freeze(Queue)
