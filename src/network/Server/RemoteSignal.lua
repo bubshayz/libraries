@@ -51,6 +51,7 @@
 	```lua
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local Network = require(ReplicatedStorage.Packages.network) 
 
@@ -64,14 +65,14 @@
 	end)
 
 	TestNetwork:append("Signal", TestRemoteSignal)
-	TestNetwork:dispatch(workspace)
+	TestNetwork:dispatch(Workspace)
 
 	-- Client
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local testNetwork = network.fromParent("Test", workspace)
+	local testNetwork = network.fromParent("Test", Workspace)
 	print(testNetwork.Signal:fire()) 
 	```
 
@@ -80,6 +81,7 @@
 	```lua
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local Network = require(ReplicatedStorage.Packages.network) 
 
@@ -93,14 +95,15 @@
 	end)
 
 	TestNetwork:append("Signal", TestRemoteSignal)
-	TestNetwork:dispatch(workspace)
+	TestNetwork:dispatch(Workspace)
 
 	-- Client
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local testNetwork = network.fromParent("Test", workspace)
+	local testNetwork = network.fromParent("Test", Workspace)
 	print(testNetwork.Signal:fire(24, 24)) 
 	```
 	:::

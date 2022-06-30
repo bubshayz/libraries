@@ -62,6 +62,7 @@
 	```lua
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local Network = require(ReplicatedStorage.Packages.network) 
 
@@ -71,14 +72,14 @@
 	TestNetwork:append("method", function(player, a)
 		print(a) --> "test" (a ought to be 1, but the middleware modified it!)
 	end)
-	TestNetwork:dispatch(workspace)
+	TestNetwork:dispatch(Workspace)
 
 	-- Client
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local testNetwork = network.fromParent("Test", workspace)
+	local testNetwork = network.fromParent("Test", Workspace)
 	estNetwork.method(1) 
 	```
 	:::
@@ -107,6 +108,7 @@
 	```lua
 	-- Server:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local Network = require(ReplicatedStorage.Packages.network) 
 
@@ -122,14 +124,15 @@
 	Network:append("SomeMethod", function()
 		return "this"
 	end)
-	Network:dispatch(workspace)
+	Network:dispatch(Workspace)
 
 	-- Client:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local networkObject = network.fromName("test", workspace):expect()
+	local networkObject = network.fromName("test", Workspace):expect()
 	print(networkObject.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
 	```
 
@@ -139,6 +142,7 @@
 	```lua
 	-- Server:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local Network = require(ReplicatedStorage.Packages.network) 
 
@@ -155,14 +159,15 @@
 	Network:append("SomeMethod", function()
 		return "this"
 	end)
-	Network:dispatch(workspace)
+	Network:dispatch(Workspace)
 
 	-- Client:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local networkObject = network.fromName("test", workspace):expect()
+	local networkObject = network.fromName("test", Workspace):expect()
 	print(networkObject.SomeMethod()) --> 50 
 	```
 
@@ -174,6 +179,7 @@
 	```lua
 	-- Server:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local Network = require(ReplicatedStorage.Packages.network) 
 
@@ -197,14 +203,15 @@
 	Network:append("SomeMethod", function()
 		return "this"
 	end)
-	Network:dispatch(workspace)
+	Network:dispatch(Workspace)
 
 	-- Client:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local networkObject = network.fromName("test", workspace):expect()
+	local networkObject = network.fromName("test", Workspace):expect()
 	print(networkObject.SomeMethod()) --> {1, 2, 3} 
 	```
 	:::
@@ -319,15 +326,16 @@ end
 	```lua
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local Network = require(ReplicatedStorage.Packages.network) 
 
 	local networkObject = Network.new("test")
 	networkObject:append("key", "the value!")
-	networkObject:dispatch(workspace)
+	networkObject:dispatch(Workspace)
 
 	-- Client
-	local networkObject = Network.fromServer("test", workspace):expect()
+	local networkObject = Network.fromServer("test", Workspace):expect()
 	print(networkObject.key) --> "the value!"
 	```
 
