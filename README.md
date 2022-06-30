@@ -1,3 +1,7 @@
+## License notice
+
+All libraries are open sourced under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
+
 | Module | Dependency | Realm |
 | -- | -- | -- |
 | [EnumList](https://bubshayz.github.io/Roblox-Modules/api/EnumList) | `EnumList = "bubshayz/enumlist@1.2.2"` | `shared` |
