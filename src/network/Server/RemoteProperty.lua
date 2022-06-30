@@ -71,13 +71,13 @@
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+	local TestRemoteProperty = network.Server.RemoteProperty.new(50, {
 		clientGet = {function() return "rickrolled" end}
 	})
 
-	local TestNetwork = Network.new("Test")
+	local TestNetwork = Network.Server.new("Test")
 	TestNetwork:append("property", TestRemoteProperty)
 	TestNetwork:dispatch(workspace)
 
@@ -86,7 +86,7 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = network.fromParent("Test", workspace):expect()
+	local TestNetwork = network.client.fromParent("Test", workspace):expect()
 	print(TestNetwork.property:get()) --> "rickrolled" (This ought to return 50, but the middleware returned a custom value!)
 	```
 
@@ -98,10 +98,11 @@
 	```lua
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+	local TestRemoteProperty = network.Server.RemoteProperty.new(50, {
 		clientGet = {
 			function() return "rickrolled" end,
 			function() return "oof" end,
@@ -109,16 +110,17 @@
 		}
 	})
 
-	local TestNetwork = Network.new("Test")
+	local TestNetwork = network.Server.new("Test")
 	TestNetwork:append("property", TestRemoteProperty)
 	TestNetwork:dispatch(workspace)
 
 	-- Client
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = network.fromParent("Test", workspace):expect()
+	local TestNetwork = network.client.fromParent("Test", Workspace):expect()
 	print(TestNetwork.property:get()) --> {"oofed", "rickrolled", "hello"}
 	```
 	:::
@@ -150,13 +152,13 @@
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
 		clientSet = {function() return "set lol" end}
 	})
 
-	local TestNetwork = Network.new("Test")
+	local TestNetwork = Network.Server.new("Test")
 	TestNetwork:append("property", TestRemoteProperty)
 	TestNetwork:dispatch(workspace)
 
@@ -165,7 +167,7 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = network.fromParent("Test", workspace):expect()
+	local TestNetwork = network.client.fromParent("Test", workspace):expect()
 	print(TestNetwork.property:get()) --> "rickrolled" (this ought to return 50, but the middleware returned a custom value!)
 	```
 
@@ -178,9 +180,9 @@
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestRemoteProperty = Network.RemoteProperty.new(50, {
+	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
 		clientGet = {
 			function() return "rickrolled" end,
 			function() return "oof" end,
@@ -188,7 +190,7 @@
 		}
 	})
 
-	local TestNetwork = Network.new("Test")
+	local TestNetwork = Network.Server.new("Test")
 	TestNetwork:append("property", TestRemoteProperty)
 	TestNetwork:dispatch(workspace)
 
@@ -197,7 +199,7 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = network.fromParent("Test", workspace):expect()
+	local TestNetwork = network.client.fromParent("Test", workspace):expect()
 	print(TestNetwork.property:get()) --> {"oofed", "rickrolled", "hello"}
 	```
 	:::
@@ -205,17 +207,17 @@
 
 local Players = game:GetService("Players")
 
-local network = script.Parent.Parent
-local packages = network.Parent
+local networkFolder = script.Parent.Parent
+local packages = networkFolder.Parent
 
-local SharedConstants = require(network.SharedConstants)
+local SharedConstants = require(networkFolder.SharedConstants)
 local Janitor = require(packages.Janitor)
 local Signal = require(packages.Signal)
 local Property = require(packages.Property)
 local t = require(packages.t)
-local tableUtil = require(network.utilities.tableUtil)
-local networkUtil = require(network.utilities.networkUtil)
-local trackerUtil = require(network.utilities.trackerUtil)
+local tableUtil = require(networkFolder.utilities.tableUtil)
+local networkUtil = require(networkFolder.utilities.networkUtil)
+local trackerUtil = require(networkFolder.utilities.trackerUtil)
 
 local MIDDLEWARE_TEMPLATE = {
 	clientGet = {},

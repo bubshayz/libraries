@@ -64,9 +64,9 @@
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = Network.new("Test", {methodCallInbound = {
+	local TestNetwork = Network.Server.new("Test", {methodCallInbound = {
 		function(_, arguments) arguments[2] = "test" end
 	}})
 	TestNetwork:append("method", function(player, a)
@@ -79,7 +79,7 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local testNetwork = network.fromParent("Test", Workspace)
+	local testNetwork = network.client.fromParent("Test", Workspace)
 	estNetwork.method(1) 
 	```
 	:::
@@ -110,7 +110,7 @@
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
 	local middleware = {
 		{
@@ -120,7 +120,7 @@
 		}
 	}
 
-	local Network = Network.new("test", middleware)
+	local Network = network.Server.new("test", middleware)
 	Network:append("SomeMethod", function()
 		return "this"
 	end)
@@ -132,8 +132,8 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local networkObject = network.fromName("test", Workspace):expect()
-	print(networkObject.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
+	local testNetwork = network.client.fromName("test", Workspace):expect()
+	print(testNetwork.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
 	```
 
 	Additionally, these callbacks can return a value which'll override the actual result of the method (which will be sent
@@ -144,7 +144,7 @@
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
 	local middleware = {
 		{
@@ -155,11 +155,11 @@
 		}
 	}
 
-	local Network = Network.new("test", middleware)
-	Network:append("SomeMethod", function()
+	local TestNetwork = network.Server.new("test", middleware)
+	TestNetwork:append("SomeMethod", function()
 		return "this"
 	end)
-	Network:dispatch(Workspace)
+	TestNetwork:dispatch(Workspace)
 
 	-- Client:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -167,8 +167,8 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local networkObject = network.fromName("test", Workspace):expect()
-	print(networkObject.SomeMethod()) --> 50 
+	local testNetwork = network.fromName("test", Workspace):expect()
+	print(testNetwork.SomeMethod()) --> 50 
 	```
 
 	Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
@@ -181,7 +181,7 @@
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
 	local middleware = {
 		{
@@ -199,11 +199,11 @@
 		}
 	}
 
-	local Network = Network.new("test", middleware)
-	Network:append("SomeMethod", function()
+	local TestNetwork = network.server.new("test", middleware)
+	TestNetwork:append("someMethod", function()
 		return "this"
 	end)
-	Network:dispatch(Workspace)
+	TestNetwork:dispatch(Workspace)
 
 	-- Client:
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -211,8 +211,8 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local networkObject = network.fromName("test", Workspace):expect()
-	print(networkObject.SomeMethod()) --> {1, 2, 3} 
+	local testNetwork = network.client.fromName("test", Workspace):expect()
+	print(testNetwork.someMethod()) --> {1, 2, 3} 
 	```
 	:::
 ]=]
@@ -328,15 +328,15 @@ end
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local networkObject = Network.new("test")
-	networkObject:append("key", "the value!")
-	networkObject:dispatch(Workspace)
+	local TestNetwork = Network.Server.new("test")
+	TestNetwork:append("key", "the value!")
+	TestNetwork:dispatch(Workspace)
 
 	-- Client
-	local networkObject = Network.fromServer("test", Workspace):expect()
-	print(networkObject.key) --> "the value!"
+	local testNetwork = Network.client.fromParent("test", Workspace):expect()
+	print(testNetwork.key) --> "the value!"
 	```
 
 	:::note

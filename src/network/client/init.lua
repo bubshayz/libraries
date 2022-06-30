@@ -80,23 +80,25 @@ end
 	```lua
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local Network1 = Network.new("Test1", workspace)
+	local Network1 = network.Server.new("Test1", workspace)
 	Network1:append("status", "not good mate")
-	Network1:dispatch()
+	Network1:dispatch(Workspace)
 
-	local Network2 = Network.new("Test2", workspace)
+	local Network2 = network.Server.new("Test2", workspace)
 	Network2:append("status", "good mate!")
-	Network2:dispatch()
+	Network2:dispatch(Workspace)
 
 	-- Client
+	local Workspace = game:GetService("Workspace")
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	for _, networkObject in Network.allFromParent(workspace) do
+	for _, networkObject in Network.client.allFromParent(Workspace) do
 		print(networkObject.status) 
 	end
 
@@ -128,9 +130,9 @@ end
 	-- Server
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = Network.new("Test")
+	local TestNetwork = Network.Server.new("Test")
 	TestNetwork:append("method", function(player)
 		return ("hi, %s!"):format(player.Name)
 	end)
@@ -144,7 +146,7 @@ end
 	local network = require(ReplicatedStorage.Packages.network) 
 
 	-- Get the network of name "Test", dispatched to workspace
-	local testNetwork = network.fromParent("Test", workspace)
+	local testNetwork = network.client.fromParent("Test", workspace)
 	print(testNetwork.method()) --> "hi, bubshayz!"
 	```
 ]=]

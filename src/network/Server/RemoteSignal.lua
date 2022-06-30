@@ -53,10 +53,10 @@
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = Network.new("Test")
-	local TestRemoteSignal = Network.RemoteSignal.new({
+	local TestNetwork = network.Server.new("Test")
+	local TestRemoteSignal = network.Server.RemoteSignal.new({
 		clientServer = {function() return false end}
 	})
 
@@ -64,7 +64,7 @@
 		print("Fired") --> never prints
 	end)
 
-	TestNetwork:append("Signal", TestRemoteSignal)
+	TestNetwork:append("signal", TestRemoteSignal)
 	TestNetwork:dispatch(Workspace)
 
 	-- Client
@@ -72,8 +72,8 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local testNetwork = network.fromParent("Test", Workspace)
-	print(testNetwork.Signal:fire()) 
+	local testNetwork = network.client.fromParent("Test", Workspace)
+	print(testNetwork.signal:fire()) 
 	```
 
 	- Additionally, you can modify the `arguments` table, for e.g:
@@ -83,10 +83,10 @@
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
 
-	local Network = require(ReplicatedStorage.Packages.network) 
+	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = Network.new("Test")
-	local TestRemoteSignal = Network.RemoteSignal.new({
+	local TestNetwork = network.Server.new("Test")
+	local TestRemoteSignal = network.Server.RemoteSignal.new({
 		clientServer = {function(arguments) arguments[2] = 1 arguments[3] = "test" end}
 	})
 
@@ -94,7 +94,7 @@
 		print(a, b) --> 1, "test" (a and b ought to be 24, but they were modified through the middleware)
 	end)
 
-	TestNetwork:append("Signal", TestRemoteSignal)
+	TestNetwork:append("signal", TestRemoteSignal)
 	TestNetwork:dispatch(Workspace)
 
 	-- Client
@@ -103,17 +103,17 @@
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local testNetwork = network.fromParent("Test", Workspace)
+	local testNetwork = network.client.fromParent("test", Workspace)
 	print(testNetwork.Signal:fire(24, 24)) 
 	```
 	:::
 ]=]
 
-local network = script.Parent.Parent
-local packages = network.Parent
-local utilities = network.utilities
+local networkFolder = script.Parent.Parent
+local packages = networkFolder.Parent
+local utilities = networkFolder.utilities
 
-local SharedConstants = require(network.SharedConstants)
+local SharedConstants = require(networkFolder.SharedConstants)
 local Signal = require(packages.Signal)
 local Janitor = require(packages.Janitor)
 local t = require(packages.t)
