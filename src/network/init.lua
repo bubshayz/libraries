@@ -11,7 +11,9 @@ local RunService = game:GetService("RunService")
 
 	```lua
 	-- Server
-	local Network = require(...) -- [NetworkServer] is returned
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Network = require(ReplicatedStorage.Packages.network) -- [NetworkServer] is returned
 
 	local TestNetwork = Network.new("Test")
 	TestNetwork:append("method", function(player)
@@ -20,7 +22,9 @@ local RunService = game:GetService("RunService")
 	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local network = require(...) -- [NetworkClient] is returned
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Network = require(ReplicatedStorage.Packages.network) -- [NetworkClient] is returned
 
 	local testNetwork = network.fromParent("Test", workspace)
 	print(testNetwork.method()) --> "hi, bubshayz!"

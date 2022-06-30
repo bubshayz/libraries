@@ -1,5 +1,5 @@
 [package]
-name = "bubshayz/numberutil"
+name = "bubshayz/numberUtil"
 description = "A utility module for working with numbers."
 authors = ["bubshayz"]
 license = "MIT"

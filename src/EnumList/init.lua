@@ -7,50 +7,53 @@
  
 	```lua
 	local MyEnumList = EnumList.new("EnumList", {
-		PhoneNumber = {
-			BabaBoey = 123,
+		phoneNumber = {
+			babaBoey = 123,
 		}
 	})
 
-	print(MyEnumList.PhoneNumber.BabaBoey) --> 123
+	print(MyEnumList.phoneNumber.babaBoey) --> 123
 	```
 
 	:::tip Generalization iteration!
 
-	EnumLists are iterable, e.g:
+	EnumLists are iterable, for e.g:
 
 	```lua
 	local MyEnumList = EnumList.new("EnumList", {
-		Test = {Alphabet = "A"}
+		test = {alphabet = "A"}
 	})
 
 	for enumName, enum in MyEnumList do
-		print(enumName, enum.Alphabet)
+		print(enumName, enum.alphabet)
 	end
 
-	--> "Test" "A"
+	--> "test" "A"
 	```
 	:::
 
-	:::note
-	EnumLists don't provide support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), e.g:
+	:::warning
+	EnumLists don't provide support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), 
+	for e.g:
 
 	```lua
-	local EnumList = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local EnumList = require(ReplicatedStorage.Packages.EnumList)
 
 	local MyEnumList = EnumList.new("MyEnumList", {
-		Enum = {
-			Deep = {
-				MoreDeep = {
-					Lol = 5
+		t = {
+			deep = {
+				moreDeep = {
+					lol = 5
 				}
 			}
 		}
 	})
 
-	print(MyEnumList.Enum.Deep.MoreDeep.none) --> nil, but won't error..
-	print(MyEnumList.Enum.Deep.lo) --> nil, but won't error..
-	print(MyEnumList.Enum.b) --> will error (not a deep chain!)
+	print(MyEnumList.t.deep.moreDeep.lol) --> nil, but won't error..
+	print(MyEnumList.t.deep.lo) --> nil, but won't error..
+	print(MyEnumList.t.b) --> will error (not a deep chain!)
 	``` 
 	:::
 ]=]
@@ -63,7 +66,9 @@
 	An exported Luau type of an EnumList object.
 
 	```lua
-	local EnumList = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local EnumList = require(ReplicatedStorage.Packages.EnumList)
 
 	local MyEnumList : EnumList.EnumList = EnumList.new(...) 
 	```
@@ -77,7 +82,9 @@
 	The name of the enum list.
 
 	```lua
-	local EnumList = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local EnumList = require(ReplicatedStorage.Packages.EnumList)
 
 	local MyEnumList = EnumList.new("My", {}) 
 	print(MyEnumList.name) --> "My"
@@ -111,7 +118,9 @@ export type EnumList = typeof(setmetatable(
 	with the name of `name`.
 
 	```lua
-	local EnumList = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local EnumList = require(ReplicatedStorage.Packages.EnumList)
 
 	local MyEnumList = EnumList.new("Enums", {test = 123})
 

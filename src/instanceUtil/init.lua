@@ -12,7 +12,9 @@ local DEFAULT_DEPTH = 0.01
 	A utility module for working with instances.
  
 	```lua
-	local instanceUtil = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
 
 	instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsCool = true})
 	print(workspace.Baseplate:GetAttributes()) --> {IsCool = true}
@@ -25,7 +27,9 @@ local instanceUtil = {}
 	Sets the properties of `instance` from the `properties` table.
 
 	```lua
-	local instanceUtil = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
 
 	instanceUtil.setInstanceProperties(workspace.Baseplate, {Transparency = 1})
 	print(workspace.Baseplate.Transparency) --> 1
@@ -42,7 +46,9 @@ end
 	Sets the attributes of `instance` from the `attributes` table.
 
 	```lua
-	local instanceUtil = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
 
 	instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsMayoSauce = true})
 	print(workspace.Baseplate:GetAttribute("IsMayoSauce")) --> true
@@ -58,6 +64,19 @@ end
 --[=[
 	Sets the collision group of `instance` to `collisionGroup`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
 	(BaseParts only) will have their collision group set to `collisionGroup`.
+
+	```lua
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local PhysicsService = game:GetService("PhysicsService")
+	local Workspace = game:GetService("Workspace")
+
+	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
+
+	PhysicsService:CreateCollisionGroup("Test")
+
+	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.Baseplate, "Test")
+	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.SomeModel, "Test")
+	```
 ]=]
 
 function instanceUtil.setInstancePhysicsCollisionGroup(instance: Instance, collisionGroup: string)
@@ -77,6 +96,24 @@ end
 --[=[
 	Sets the collision group of `instance` to `Default`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
 	(BaseParts only) will have their collision group set to `"Default"`.
+
+	```lua
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local PhysicsService = game:GetService("PhysicsService")
+	local Workspace = game:GetService("Workspace")
+
+	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
+
+	PhysicsService:CreateCollisionGroup("Test")
+
+	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.Baseplate, "Test")
+	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.SomeModel, "Test")
+
+	-- Okay on second thought, let's actually remove the collision group from these
+	-- instances:
+	instanceUtil.resetInstancePhysicsCollisionGroup(Workspace.Baseplate)
+	instanceUtil.resetInstancePhysicsCollisionGroup(Workspace.SomeModel)
+	```
 ]=]
 
 function instanceUtil.resetInstancePhysicsCollisionGroup(instance: Instance)
@@ -98,9 +135,13 @@ end
 	(BaseParts only) will have their physical properties set to `physicalProperties`.
 
 	```lua
-	local physicalProperties = PhysicalProperties.new(1)
+	local Workspace = game:GetService("Workspace")
 
-	instanceUtil.setInstancePhysicalProperties(workspace.Baseplate, physicalProperties)
+	instanceUtil.setInstancePhysicalProperties(Workspace.Baseplate, PhysicalProperties.new(5, 2, 3))
+
+	print(Workspace.Baseplate.Density) --> 5
+	print(Workspace.Baseplate.Elasticity) --> 2
+	print(Workspace.Baseplate.ElasticityWeight) --> 3
 	```
 ]=]
 
@@ -124,6 +165,24 @@ end
 --[=[
 	Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to the default, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
 	(BaseParts only) will have their physical properties set to the default.
+
+	```lua
+	local Workspace = game:GetService("Workspace")
+
+	instanceUtil.setInstancePhysicalProperties(Workspace.Baseplate, PhysicalProperties.new(5, 2, 3))
+	
+	print(Workspace.Baseplate.Density) --> 5
+	print(Workspace.Baseplate.Elasticity) --> 2
+	print(Workspace.Baseplate.ElasticityWeight) --> 3
+
+	-- Okay on second thought, let's actually remove the physical properties
+	-- we've set on the instance:
+	instanceUtil.resetInstancePhysicalProperties(Workspace.Baseplate)
+	
+	print(Workspace.Baseplate.Density) --> 0.7
+	print(Workspace.Baseplate.Elasticity) --> 0.5
+	print(Workspace.Baseplate.ElasticityWeight) --> 1
+	```
 ]=]
 
 function instanceUtil.resetInstancePhysicalProperties(instance: Instance)

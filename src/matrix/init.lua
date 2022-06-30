@@ -1,5 +1,5 @@
 --[=[
-	@class matrixUtil
+	@class matrix
 
 	A utility module for working with matrixes. A matrix is simply an array 
 	consisting of arrays, e.g:
@@ -13,7 +13,7 @@
 	```
 ]=]
 
-local matrixUtil = {}
+local matrix = {}
 
 --[=[
 	Searches `matrix` row wise, and returns a value in a row which matches with
@@ -26,7 +26,7 @@ local matrixUtil = {}
 		{0, 0, 2},
 	}
 
-	print(matrixUtil.getMatchingRowsValue(matrix)) --> 1 (The first row is equally matched (all 1s))
+	print(matrix.getMatchingRowsValue(matrix)) --> 1 (The first row is equally matched (all 1s))
 	```
 
 	Additionally, you can specify `depth` if you want to control how far the 
@@ -39,12 +39,12 @@ local matrixUtil = {}
 		{1, 1, 1, 0}, 
 	}
 
-	print(matrixUtil.getMatchingRowsValue(matrix, 3)) --> 1  (The last row's first 3 values (1s) are equally matched)
-	print(matrixUtil.getMatchingRowsValue(matrix, 4)) --> nil  (No row's first 4 values are equally matched)
+	print(matrix.getMatchingRowsValue(matrix, 3)) --> 1  (The last row's first 3 values (1s) are equally matched)
+	print(matrix.getMatchingRowsValue(matrix, 4)) --> nil  (No row's first 4 values are equally matched)
 	```
 ]=]
 
-function matrixUtil.getMatchingRowsValue(matrix: { { any } }, depth: number?): any
+function matrix.getMatchingRowsValue(matrix: { { any } }, depth: number?): any
 	-- Search the matrix row-wise and return a value from  a row which matches with
 	-- the rest of the rows in the matrix:
 	for row = 1, #matrix do
@@ -80,7 +80,7 @@ end
 		{0, 0, 5},
 	}
 
-	print(matrixUtil.getMatchingDiagonalColumnsValue(matrix)) --> 1 (A column has matching values diagonally (just 5s))
+	print(matrix.getMatchingDiagonalColumnsValue(matrix)) --> 1 (A column has matching values diagonally (just 5s))
 	```
 
 	Additionally, you can specify `depth` if you want to control how far the 
@@ -94,11 +94,11 @@ end
 		{0, 0, 0, 0},
 	}
 
-	print(matrixUtil.getMatchingDiagonalColumnsValue(matrix, 3)) --> 2 (A column has FIRST 3 matching values diagonally (just 2s))
+	print(matrix.getMatchingDiagonalColumnsValue(matrix, 3)) --> 2 (A column has FIRST 3 matching values diagonally (just 2s))
 	```
 ]=]
 
-function matrixUtil.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: number?): any
+function matrix.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: number?): any
 	depth = depth or #matrix
 
 	-- Diagonally search from the top left side of the matrix, and return a value
@@ -148,7 +148,7 @@ end
 		{5, 0, 1},
 	}
 
-	print(matrixUtil.getMatchingColumnsValue(matrix)) --> 5 (A column has ALL equally matching values (just 5s))
+	print(matrix.getMatchingColumnsValue(matrix)) --> 5 (A column has ALL equally matching values (just 5s))
 	```
 
 	Additionally, you can specify `depth` if you want to control how far the 
@@ -161,11 +161,11 @@ end
 		{2, 1, 1},
 	}
 
-	print(matrixUtil.getMatchingColumnsValue(matrix, 2)) --> 5 (A column has FIRST 2 matching values (just 5s))
+	print(matrix.getMatchingColumnsValue(matrix, 2)) --> 5 (A column has FIRST 2 matching values (just 5s))
 	```
 ]=]
 
-function matrixUtil.getMatchingColumnsValue(matrix: { { any } }, depth: number?): any
+function matrix.getMatchingColumnsValue(matrix: { { any } }, depth: number?): any
 	depth = depth or #matrix
 
 	-- Search the matrix column wise and return a value from a
@@ -189,4 +189,4 @@ function matrixUtil.getMatchingColumnsValue(matrix: { { any } }, depth: number?)
 	return nil
 end
 
-return table.freeze(matrixUtil)
+return table.freeze(matrix)

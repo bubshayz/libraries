@@ -1,5 +1,5 @@
 [package]
-name = "bubshayz/windlines"
+name = "bubshayz/windLines"
 description = "A module for creating wind line effects."
 authors = ["bubshayz"]
 version = "1.2.0"

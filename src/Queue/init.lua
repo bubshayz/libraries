@@ -2,11 +2,13 @@
 	@class Queue
 
 	A class for creating queues. A queue in layman's term, is simply an to which
-	you can append callbacks to, which will run based on when they're added, i.e 
-	they **follow** the *FIFO (First In, First Out) pattern* .
+	you can append callbacks to, which will run based on when they're added --
+	they follow the *FIFO (First In, First Out) pattern* .
  
 	```lua
-	local Queue = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Queue = require(ReplicatedStorage.Packages.Queue)
 
 	local queue = Queue.new()
 
@@ -29,14 +31,13 @@
 	@tag Queue Instance
 
 	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired 
-	whenever the queue is progressed, i.e an appended callback is called. The callback 
-	called is passed as the first argument, and a second argument, `deltaTime` is also 
-	passed (which is basically how long (in seconds) it was before `callbackProgressed` 
-	was called ever since it was appended).
+	whenever the queue is progressed, i.e when an appended callback (through [Queue:append]) is called. The 
+	callback called is passed as the first argument to the signal, and a second argument, `deltaTime` is also 
+	passed which is how long (in seconds) it took for the callback to be called ever since it was appended.
 ]=]
 
 --[=[ 
-	@prop queue Type 
+	@prop Queue Type 
 	@within Queue
 	@readonly
 
@@ -83,7 +84,9 @@ end
 	will never be resumed
 
 	```lua
-	local Queue = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Queue = require(ReplicatedStorage.Packages.Queue)
 
 	local queue = Queue.new()
 
@@ -121,7 +124,9 @@ end
 	(the time it took for `callback` to run ever since it was appended), once `callback` is called.
 
 	```lua
-	local Queue = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Queue = require(ReplicatedStorage.Packages.Queue)
 
 	local queue = Queue.new()
 
@@ -146,7 +151,9 @@ end
 	added callback from the queue, e.g:
 
 	```lua
-	local Queue = require(...)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Queue = require(ReplicatedStorage.Packages.Queue)
 
 	local queue = Queue.new()
 

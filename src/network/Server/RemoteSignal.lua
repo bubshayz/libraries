@@ -36,7 +36,7 @@
 	The first and *only* argument passed to each callback is just an array of arguments sent by the client. 
 
 	```lua
-	local clientGetCallbacks = {
+	local serverEventCallbacks = {
 		function (arguments)
 			print(client:IsA("Player")) --> true (First argument is always the client!)
 		end
@@ -50,7 +50,9 @@
 
 	```lua
 	-- Server
-	local Network = require(...) 
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Network = require(ReplicatedStorage.Packages.network) 
 
 	local TestNetwork = Network.new("Test")
 	local TestRemoteSignal = Network.RemoteSignal.new({
@@ -65,7 +67,9 @@
 	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local network = require(...) 
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local network = require(ReplicatedStorage.Packages.network) 
 
 	local testNetwork = network.fromParent("Test", workspace)
 	print(testNetwork.Signal:fire()) 
@@ -75,7 +79,9 @@
 
 	```lua
 	-- Server
-	local Network = require(...) 
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Network = require(ReplicatedStorage.Packages.network) 
 
 	local TestNetwork = Network.new("Test")
 	local TestRemoteSignal = Network.RemoteSignal.new({
@@ -90,7 +96,9 @@
 	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local network = require(...) 
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local network = require(ReplicatedStorage.Packages.network) 
 
 	local testNetwork = network.fromParent("Test", workspace)
 	print(testNetwork.Signal:fire(24, 24)) 
@@ -193,18 +201,6 @@ end
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to every client in the `clients` table only.
-]=]
-
-function RemoteSignal.__index:fireForClients(clients: { Player }, ...: any)
-	for _, client in clients do
-		self._remoteEvent:FireClient(client, ...)
-	end
-end
-
---[=[
-	@tag RemoteSignal instance
-
 	Fires the arguments `...` to `client`.
 ]=]
 
@@ -215,11 +211,23 @@ end
 --[=[
 	@tag RemoteSignal instance
 
-	Fires the arguments `...` to every client in the game.
+	Calls [remoteSignal:fireClient] on every player in the game.
 ]=]
 
 function RemoteSignal.__index:fireAllClients(...: any)
 	self._remoteEvent:FireAllClients(...)
+end
+
+--[=[
+	@tag RemoteSignal instance
+
+	Calls [remoteSignal:fireClient] on every player in the `clients` table only.
+]=]
+
+function RemoteSignal.__index:fireForClients(clients: { Player }, ...: any)
+	for _, client in clients do
+		self._remoteEvent:FireClient(client, ...)
+	end
 end
 
 --[=[
