@@ -40,7 +40,6 @@
 		print("WindLines effect started")
 	end)
 
-	
 	windLines.effectStopped:Connect(function()
 		print("WindLines effect stopped")
 	end)
