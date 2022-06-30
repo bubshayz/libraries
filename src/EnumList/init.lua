@@ -113,9 +113,9 @@ export type EnumList = typeof(setmetatable(
 	```lua
 	local EnumList = require(...)
 
-	local MyEnumList = EnumList.new("Enums", {Test = 123})
+	local MyEnumList = EnumList.new("Enums", {test = 123})
 
-	print(MyEnumList.Test) --> 123
+	print(MyEnumList.test) --> 123
 	```
 ]=]
 
@@ -153,7 +153,7 @@ end
 	Returns the enums of the enum list.
 ]=]
 
-function EnumList._prototype:getEnums(): { [string]: { [string]: any } }
+function EnumList._prototype:getEnums(): { [string]: { [string]: CustomEnum.CustomEnum } }
 	return self._enums
 end
 

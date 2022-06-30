@@ -51,7 +51,7 @@ export type CustomEnum = typeof(setmetatable(
 	@private
 ]=]
 
-function CustomEnum.new(name: string, enumItems: { [string]: any }): CustomEnum
+function CustomEnum.new(name: string, enumItems: { [string]: any })
 	local self = setmetatable({
 		name = name,
 		_enumItems = enumItems,
