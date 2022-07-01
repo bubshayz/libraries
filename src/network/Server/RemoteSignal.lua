@@ -90,8 +90,8 @@
 	-- Client
 	local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.client.fromParent("test", Workspace)
-	print(testNetwork.Signal:fire(24, 24)) 
+	local testNetwork = network.client.fromParent("Test", Workspace)
+	print(testNetwork.signal:fire(24, 24)) 
 	```
 	:::
 ]=]
@@ -109,9 +109,7 @@ local networkUtil = require(utilities.networkUtil)
 
 local MIDDLEWARE_TEMPLATE = { serverEvent = {} }
 
-local MiddlewareInterface = t.optional(
-	t.strictInterface({ serverEvent = t.optional(t.array(t.callback)) })
-)
+local MiddlewareInterface = t.optional(t.strictInterface({ serverEvent = t.optional(t.array(t.callback)) }))
 
 local function getDefaultMiddleware()
 	return tableUtil.deepCopy(MIDDLEWARE_TEMPLATE)
@@ -258,11 +256,7 @@ function RemoteSignal.__index:dispatch(name: string, parent: Instance)
 		-- avoid this client's request to fire off the remote signal:
 		if
 			table.find(
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-					self._middleware.serverEvent,
-					args
-				),
-
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.serverEvent, args),
 				false
 			)
 		then

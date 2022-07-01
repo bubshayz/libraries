@@ -290,16 +290,16 @@ end
 	:::
 ]=]
 
-function NetworkServer.__index:dispatched(): boolean
+function NetworkServer.__index:isDispatched(): boolean
 	return self._networkFolder.Parent ~= nil
 end
 
 --[=[
-	@param value RemoteProperty | RemoteSignal | any
+	@param value any
 
 	Appends a key value pair, `key` and `value`, to the network object, so that
 	it is available to the client once the network object is dispatched. 
-	
+
 	For e.g:
 
 	```lua
@@ -315,6 +315,10 @@ end
 	print(testNetwork.key) --> "the value!"
 	```
 
+	:::tip
+	You can also append a [RemoteSignal] and a [RemoteProperty] as well!
+	:::	
+
 	:::note
 	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
 	apply, as remote functions are internally used the key value pairs accessible to the clients.
@@ -328,14 +332,8 @@ end
 	:::
 ]=]
 
-function NetworkServer.__index:append(
-	key: string,
-	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
-)
-	assert(
-		not self:dispatched(),
-		"Cannot append key value pair as network object is dispatched to the client!"
-	)
+function NetworkServer.__index:append(key: string, value: any)
+	assert(not self:isDispatched(), "Cannot append key value pair as network object is dispatched to the client!")
 	assert(t.string(key))
 
 	self:_setup(key, value)
@@ -405,36 +403,29 @@ function NetworkServer.__index:_setup(
 
 		if typeof(value) == "function" then
 			local methodCallInboundMiddlewareAccumulatedResponses =
-				networkUtil.truncateAccumulatedResponses(
-					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-						self._middleware.methodCallInbound,
-						args
-					)
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+					self._middleware.methodCallInbound,
+					args
 				)
 
 			-- If there is an explicit false value included in the accumulated
 			-- response of all inbound method callbacks, then that means we should
 			-- avoid this client's request to call the method!
-			if methodCallInboundMiddlewareAccumulatedResponses ~= nil then
-				if
-					typeof(methodCallInboundMiddlewareAccumulatedResponses) == "table"
-					and table.find(methodCallInboundMiddlewareAccumulatedResponses, false)
-				then
-					return
-				elseif methodCallInboundMiddlewareAccumulatedResponses == false then
-					return
-				end
+			if
+				methodCallInboundMiddlewareAccumulatedResponses
+				and table.find(methodCallInboundMiddlewareAccumulatedResponses, false)
+			then
+				return
 			end
 
 			local methodResponse = value(table.unpack(args))
-			local methodCallOutboundMiddlewareAccumulatedResponses =
-				networkUtil.truncateAccumulatedResponses(
-					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-						self._middleware.methodCallOutbound,
-						args,
-						methodResponse
-					)
+			local methodCallOutboundMiddlewareAccumulatedResponses = networkUtil.truncateAccumulatedResponses(
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+					self._middleware.methodCallOutbound,
+					args,
+					methodResponse
 				)
+			)
 
 			return if methodCallOutboundMiddlewareAccumulatedResponses ~= nil
 				then methodCallOutboundMiddlewareAccumulatedResponses

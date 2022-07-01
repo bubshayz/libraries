@@ -71,7 +71,7 @@
 	local Workspace = game:GetService("Workspace")
 	
 	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
-		clientSet = {function() return "rickrolled" end,}
+		clientSet = {function() return "rickrolled" end}
 	})
 
 	local TestNetwork = Network.Server.new("Test")
@@ -79,9 +79,11 @@
 	TestNetwork:dispatch(Workspace)
 
 	-- Client
+	local Workspace = game:GetService("Workspace")
+
 	local TestNetwork = network.client.fromParent("Test", Workspace):expect()
 	TestNetwork.property:set(1)
-	print(TestNetwork.updated:wait()) --> "rickrolled" (This ought to print 1, but our middleware returned a custom value!)
+	print(TestNetwork.updated:Wait()) --> "rickrolled" (This ought to print 1, but our middleware returned a custom value!)
 	```
 
 	Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
@@ -91,6 +93,7 @@
 
 	```lua
 	-- Server
+	local Workspace = game:GetService("Workspace")
 	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
 		clientSet = {
 			function() return "rickrolled" end,
@@ -101,12 +104,13 @@
 
 	local TestNetwork = Network.Server.new("Test")
 	TestNetwork:append("property", TestRemoteProperty)
-	TestNetwork:dispatch(workspace)
+	TestNetwork:dispatch(Workspace)
 
 	-- Client
-	local TestNetwork = network.client.fromParent("Test", workspace):expect()
+	local Workspace = game:GetService("Workspace")
+	local TestNetwork = network.client.fromParent("Test", Workspace):expect()
 	TestNetwork.property:set(1)
-	print(TestNetwork.updated:wait()) --> {"oofed", "rickrolled", "hello"} 
+	print(TestNetwork.updated:Wait()) --> {"oofed", "rickrolled", "hello"} 
 	```
 	:::
 ]=]
@@ -123,20 +127,18 @@ local Property = require(packages.Property)
 local t = require(packages.t)
 local tableUtil = require(networkFolder.utilities.tableUtil)
 local networkUtil = require(networkFolder.utilities.networkUtil)
-local trackerUtil = require(networkFolder.utilities.trackerUtil)
+local tracker = require(networkFolder.utilities.tracker)
 
 local MIDDLEWARE_TEMPLATE = {
 	clientGet = {},
 	clientSet = {},
 }
 
-local MiddlewareInterface = t.optional(
-	t.strictInterface({ clientSet = t.optional(t.array(t.callback)) })
-)
+local MiddlewareInterface = t.optional(t.strictInterface({ clientSet = t.optional(t.array(t.callback)) }))
 
 local RemoteProperty = {
 	__index = {},
-	_clients = trackerUtil.getTrackingPlayers(),
+	_clients = tracker.getTrackingPlayers(),
 }
 
 type Middleware = { clientSet: { (client: Player, value: any) -> any }? }
@@ -278,7 +280,7 @@ end
 	in the remote property.
 ]=]
 
-function RemoteProperty.__index:clientHasValueSet(client: Player): boolean
+function RemoteProperty.__index:hasClientValueSet(client: Player): boolean
 	assert(t.instanceOf("Player")(client))
 
 	return self._clientProperties[client] ~= nil
@@ -329,10 +331,7 @@ end
 function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 	local valueDispatcherRemoteFunction = Instance.new("RemoteFunction")
 	valueDispatcherRemoteFunction.Name = name
-	valueDispatcherRemoteFunction:SetAttribute(
-		SharedConstants.attribute.boundToRemoteProperty,
-		true
-	)
+	valueDispatcherRemoteFunction:SetAttribute(SharedConstants.attribute.boundToRemoteProperty, true)
 	valueDispatcherRemoteFunction.Parent = parent
 	self._valueDispatcherRemoteFunction = valueDispatcherRemoteFunction
 
@@ -345,13 +344,9 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 		-- If the client has sent a set data, then that means they want to set
 		-- their value specifically in the remote property, so let's do that:
 		if typeof(setData) == "table" then
-			local clientSetMiddlewareAccumulatedResponses =
-				networkUtil.truncateAccumulatedResponses(
-					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-						self._middleware.clientSet,
-						setData.value
-					)
-				)
+			local clientSetMiddlewareAccumulatedResponses = networkUtil.truncateAccumulatedResponses(
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.clientSet, setData.value)
+			)
 
 			self:setForClient(
 				client,
@@ -363,13 +358,13 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 			return nil
 		end
 
-		return if self:clientHasValueSet(client) then self:getForClient(client) else self:get()
+		return if self:hasClientValueSet(client) then self:getForClient(client) else self:get()
 	end
 
 	-- Send off the new value to the current players in game:
 	self._property.updated:Connect(function(newValue)
 		for _, client in RemoteProperty._clients do
-			if self:clientHasValueSet(client) then
+			if self:hasClientValueSet(client) then
 				-- If the client already has a value set for them specifically,
 				-- then we must not send this new value to them to avoid bugs.
 				continue
