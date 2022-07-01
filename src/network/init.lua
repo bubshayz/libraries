@@ -18,6 +18,22 @@
 	```
 ]=]
 
+--[=[ 
+	@prop Server NetworkServer
+	@within network
+	@readonly
+
+	A reference to the [NetworkServer] module.
+]=]
+
+--[=[ 
+	@prop client networkClient
+	@within network
+	@readonly
+
+	A reference to the [networkClient] module.
+]=]
+
 return {
 	Server = require(script.Server),
 	client = require(script.client),
