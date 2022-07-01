@@ -41,7 +41,7 @@
 		t = {
 			deep = {
 				moreDeep = {
-					lol = 5
+					b = 5
 				}
 			}
 		}
@@ -49,7 +49,7 @@
 
 	print(MyEnumList.t.deep.moreDeep.lol) --> nil, but won't error..
 	print(MyEnumList.t.deep.lo) --> nil, but won't error..
-	print(MyEnumList.t.b) --> will error (not a deep chain!)
+	print(MyEnumList.t.b) --> will error (as it is not a deep chain!)
 	``` 
 	:::
 ]=]
