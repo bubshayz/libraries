@@ -107,7 +107,7 @@ function ClientRemoteProperty.__index:_init()
 	-- Incase a new value was set while we were retrieving the initial value, don't
 	-- update the value of the property to avoid unexpected behavior!
 	if self:get() == nil then
-		self._property:bulkSet(newValue)
+		self._property:set(newValue)
 	end
 
 	self._janitor:Add(self._property, "destroy")
