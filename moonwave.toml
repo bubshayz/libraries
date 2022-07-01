@@ -1,7 +1,9 @@
+gitSourceBranch = "main"
+changelog = true
+
 [home]
 enabled = true
 includeReadme = true
-gitSourceBranch = "main"
 
 [docusaurus]
 favicon = "/icon.ico"
