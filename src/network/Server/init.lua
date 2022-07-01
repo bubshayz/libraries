@@ -210,8 +210,8 @@ local DEFAULT_MIDDLEWARE = {
 }
 
 local MiddlewareInterface = t.optional(t.strictInterface({
-	methodCallInbound = t.optional(t.strictInterface({ t.optional(t.callback) })),
-	methodCallOutbound = t.optional(t.strictInterface({ t.optional(t.callback) })),
+	methodCallInbound = t.optional(t.array(t.optional(t.callback))),
+	methodCallOutbound = t.optional(t.array(t.optional(t.callback))),
 }))
 
 local NetworkServer = {
