@@ -32,7 +32,6 @@
 
 	```lua
 	local Workspace = game:GetService("Workspace")
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 	windLines.effectStarted:Connect(function()
 		print("WindLines effect started")
@@ -150,20 +149,17 @@ end
 	[RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) member, since ray casting 
 	is used in determining if the player is standing under a roof. 
 
-	E.g, the following config does not consider descendants in the `filteredPartsFolder` folder as roofs, 
+	For e.g, the following config does not consider descendants in the `filteredPartsFolder` folder as roofs, 
 	so if a player stands under them, the wind lines effect will not be stopped:
 
 	```lua
 	local Workspace = game:GetService("Workspace")
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local windLines = require(ReplicatedStorage.Packages.windLines)
 
 	local filteredPartsFolder = Workspace.SomeFolder
 	local raycastParams = RaycastParams.new()
 	raycastParams.FilterDescendantsInstances = {filteredPartsFolder} 
 
-	windLines.setConfig({RaycastParams = raycastParams})
+	windLines.setConfig({raycastParams = raycastParams})
 	windLines.start()
 	```
 	:::
@@ -217,7 +213,7 @@ function windLines._startHeartbeatUpdate()
 		local isCameraUnderPart = Workspace:Raycast(
 			camera.CFrame.Position,
 			CAMERA_CEILING_Y_VECTOR,
-			config.RaycastParams
+			config.raycastParams
 		) ~= nil
 
 		if (clockNow - lastClockSincewindLinespawned) > spawnRate and isStarted then

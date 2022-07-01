@@ -9,12 +9,12 @@
 	local enumList = EnumList.new("EnumList", {
 		-- This enum below will be turned into an Custom Enum instance automatically 
 		-- once this enum list is created!
-		PhoneNumber = { 
-			BabaBoey = 123,
+		phoneNumber = { 
+			babaBoey = 123,
 		}
 	})
 
-	print(enumList.PhoneNumber:getEnumItems().BabaBoey) --> 123
+	print(enumList.phoneNumber.babaBoey) --> 123
 	```
 ]=]
 
@@ -26,8 +26,8 @@
 	The name of the custom enum.
 
 	```lua
-	local MyEnumList = EnumList.new("My", {Test = {}}) 
-	print(MyEnumList.Test.name) --> "Test"
+	local MyEnumList = EnumList.new("My", {test = {}}) 
+	print(MyEnumList.test.name) --> "Test"
 	```
 ]=]
 

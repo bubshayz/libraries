@@ -88,8 +88,6 @@ end
 	local PhysicsService = game:GetService("PhysicsService")
 	local Workspace = game:GetService("Workspace")
 
-	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
-
 	PhysicsService:CreateCollisionGroup("Test")
 
 	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.Baseplate, "Test")

@@ -134,7 +134,7 @@ end
 	```
 
 	:::tip
-	The promise returned will be cancelled if [Queue:EmptyQueue] is called, but 
+	The promise returned will be cancelled if [Queue:emptyQueue] is called, but 
 	you can also manually  just cancel the promise to effectively remove the 
 	added callback from the queue, e.g:
 
