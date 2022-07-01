@@ -6,10 +6,6 @@
 	they follow the *FIFO (First In, First Out) pattern* .
  
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local Queue = require(ReplicatedStorage.Packages.Queue)
-
 	local queue = Queue.new()
 
 	for i = 1, 3 do 
@@ -84,10 +80,6 @@ end
 	will never be resumed
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local Queue = require(ReplicatedStorage.Packages.Queue)
-
 	local queue = Queue.new()
 
 	local promise1 = queue:append(function()
@@ -124,10 +116,6 @@ end
 	(the time it took for `callback` to run ever since it was appended), once `callback` is called.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local Queue = require(ReplicatedStorage.Packages.Queue)
-
 	local queue = Queue.new()
 
 	local promise1 = queue:append(function(deltaTime)
@@ -151,10 +139,6 @@ end
 	added callback from the queue, e.g:
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local Queue = require(ReplicatedStorage.Packages.Queue)
-
 	local queue = Queue.new()
 
 	local promise = queue:append(function(deltaTime) 

@@ -4,10 +4,6 @@
 	A utility module for working with numbers.
  
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.e) --> 2.7182818284590
 	print(numberUtil.nan(3)) --> false
 	```
@@ -46,7 +42,6 @@
 ]=]
 
 local DEFAULT_NUMBER_EPSLION = 1e-5
-local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %s instead."
 local NUMBER_SUFFIXES = {
 	"K",
 	"M",
@@ -83,10 +78,6 @@ local numberUtil = {
 	Interpolates `number` to `goal`, with `alpha` being the multiplier.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.lerp(2, 5, 0.7)) --> 4.1
 	```
 ]=]
@@ -99,10 +90,6 @@ end
 	Quadraticly interpolates `number` to `goal`, with `alpha` being the multiplier.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.quadraticLerp(2, 5, 0.7)) --> 4.1
 	```
 ]=]
@@ -116,10 +103,6 @@ end
 	based on its output. For e.g, the value of a Lerp between `0` and `2` with `alpha` being `1` is `0.5`. Therefore the value of an Inverse Lerp between `0` and `2` with `alpha` being `0.5` is `1`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.inverseLerp(2, 5, 0.7)) --> -0.43333333333333335
 	```
 ]=]
@@ -132,9 +115,6 @@ end
 	Returns the average of `...` numbers against `sum`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
 	print(numberUtil.average(100, 50, 25)) --> 0.75
 	```
 ]=]
@@ -156,20 +136,12 @@ end
 	This method will struggle to format numbers larger than `10^68` approximately. 
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-	
 	print(numberUtil.format(10^70)) --> 10 (this is wrong)
 	print(numberUtil.format(10^68)) --> 100c (this is correct)
 	```
 	:::
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.format(1650)) --> "1.65K"
 	```
 ]=]
@@ -185,10 +157,6 @@ end
 	Maps `number` between `inMin` and `inMax`, and `outMin` and `outMax`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.map(1,2,3,4,5)) --> 3
 	```
 ]=]
@@ -207,19 +175,14 @@ end
 	Returns a boolean indicating if `number` is NaN (Not A Number). 
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.nan(0 / 0)) --> true
 	```
 ]=]
 
 function numberUtil.nan(number: number): boolean
-	assert(
-		typeof(number) == "number",
-		INVALID_ARGUMENT_TYPE:format(1, "numberUtil.nan", "number", typeof(number))
-	)
+	if typeof(number) ~= "number" then
+		return false
+	end
 
 	return number ~= number
 end
@@ -228,10 +191,6 @@ end
 	Returns a boolean indicating if the difference between `number` and `to` is lower than or equal to `eplsion`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.close(0.1 + 0.2, 0.3)) --> true
 	print(numberUtil.close(0.1 + 0.2, 0.3, 0)) --> false
 	```
@@ -247,10 +206,6 @@ end
 	Returns the `root` of `number`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.root(2, 3)) --> 1.2599210498948732 (same as cube root of 2)
 	print(numberUtil.root(2, 2)) --> 1.4142135623730951 (same as square root of 2)
 	```
@@ -264,10 +219,6 @@ end
 	Returns the factorial of `number`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.factorial(3)) --> 6
 	```
 ]=]
@@ -284,10 +235,6 @@ end
 	Returns an array of all factors of `number`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.factors(2)) --> {1, 2}
 	```
 ]=]
@@ -312,10 +259,6 @@ end
 	Clamps `number` to `clamp`, if `number` is greater than `max` or lower than `min`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local numberUtil = require(ReplicatedStorage.Packages.numberUtil)
-
 	print(numberUtil.clampTo(1, 2, 5, 150)) --> 150
 	```
 ]=]

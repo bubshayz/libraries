@@ -6,10 +6,6 @@
 	of this class.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local EnumList = require(ReplicatedStorage.Packages.EnumList)
-
 	local enumList = EnumList.new("EnumList", {
 		-- This enum below will be turned into an Custom Enum instance automatically 
 		-- once this enum list is created!
@@ -30,10 +26,6 @@
 	The name of the custom enum.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local EnumList = require(ReplicatedStorage.Packages.EnumList)
-
 	local MyEnumList = EnumList.new("My", {Test = {}}) 
 	print(MyEnumList.Test.name) --> "Test"
 	```
@@ -71,10 +63,6 @@ end
 	Returns the enum items of the enum.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local EnumList = require(ReplicatedStorage.Packages.EnumList)
-
 	local enumList = EnumList.new("EnumList", {
 		PhoneNumber = { -- Custom Enum
 			BabaBoey = 123,

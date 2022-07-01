@@ -37,10 +37,6 @@
 	for e.g:
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local EnumList = require(ReplicatedStorage.Packages.EnumList)
-
 	local MyEnumList = EnumList.new("MyEnumList", {
 		t = {
 			deep = {
@@ -66,10 +62,6 @@
 	An exported Luau type of an EnumList object.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local EnumList = require(ReplicatedStorage.Packages.EnumList)
-
 	local MyEnumList : EnumList.EnumList = EnumList.new(...) 
 	```
 ]=]
@@ -82,10 +74,6 @@
 	The name of the enum list.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local EnumList = require(ReplicatedStorage.Packages.EnumList)
-
 	local MyEnumList = EnumList.new("My", {}) 
 	print(MyEnumList.name) --> "My"
 	```
@@ -118,10 +106,6 @@ export type EnumList = typeof(setmetatable(
 	with the name of `name`.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local EnumList = require(ReplicatedStorage.Packages.EnumList)
-
 	local MyEnumList = EnumList.new("Enums", {test = 123})
 
 	print(MyEnumList.test) --> 123

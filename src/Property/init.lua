@@ -4,10 +4,6 @@
 	A class for wrapping values around setters and getters. A property in layman's terms, is simply a object which contains some value.
  
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local Property = require(ReplicatedStorage.Packages.Property)
-
 	local property = Property.new(5)
 	print(property:get()) --> 5
 
@@ -102,10 +98,6 @@ end
 	Works exactly the same as [Property:set] except that tables aren't checked for equality, e.g:
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local Property = require(ReplicatedStorage.Packages.Property)
-
 	local property = Property.new()
 
 	property.updated:Connect(function(newVal)
@@ -155,10 +147,6 @@ end
 	Returns the current value of the property.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local Property = require(ReplicatedStorage.Packages.Property)
-
 	local property = Property.new()
 
 	property:Set(5)

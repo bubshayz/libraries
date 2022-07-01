@@ -79,10 +79,7 @@ end
 
 	```lua
 	-- Server
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
-
-	local network = require(ReplicatedStorage.Packages.network) 
 
 	local Network1 = network.Server.new("Test1", workspace)
 	Network1:append("status", "not good mate")
@@ -94,9 +91,6 @@ end
 
 	-- Client
 	local Workspace = game:GetService("Workspace")
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
 
 	for _, networkObject in Network.client.allFromParent(Workspace) do
 		print(networkObject.status) 
@@ -141,10 +135,6 @@ end
 	TestNetwork:dispatch(workspace) 
 
 	-- Client
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
-
 	-- Get the network of name "Test", dispatched to workspace
 	local testNetwork = network.client.fromParent("Test", workspace)
 	print(testNetwork.method()) --> "hi, bubshayz!"

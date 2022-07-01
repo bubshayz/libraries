@@ -12,10 +12,6 @@ local DEFAULT_DEPTH = 0.01
 	A utility module for working with instances.
  
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
-
 	instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsCool = true})
 	print(workspace.Baseplate:GetAttributes()) --> {IsCool = true}
 	```
@@ -27,10 +23,6 @@ local instanceUtil = {}
 	Sets the properties of `instance` from the `properties` table.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
-
 	instanceUtil.setInstanceProperties(workspace.Baseplate, {Transparency = 1})
 	print(workspace.Baseplate.Transparency) --> 1
 	```
@@ -46,10 +38,6 @@ end
 	Sets the attributes of `instance` from the `attributes` table.
 
 	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
-
 	instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsMayoSauce = true})
 	print(workspace.Baseplate:GetAttribute("IsMayoSauce")) --> true
 	```
@@ -69,8 +57,6 @@ end
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local PhysicsService = game:GetService("PhysicsService")
 	local Workspace = game:GetService("Workspace")
-
-	local instanceUtil = require(ReplicatedStorage.Packages.instanceUtil)
 
 	PhysicsService:CreateCollisionGroup("Test")
 

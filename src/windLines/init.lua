@@ -34,8 +34,6 @@
 	local Workspace = game:GetService("Workspace")
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-	local windLines = require(ReplicatedStorage.Packages.windLines)
-
 	windLines.effectStarted:Connect(function()
 		print("WindLines effect started")
 	end)

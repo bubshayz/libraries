@@ -69,10 +69,6 @@
 
 	```lua
 	-- Server
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
-
 	local TestRemoteProperty = network.Server.RemoteProperty.new(50, {
 		clientGet = {function() return "rickrolled" end}
 	})
@@ -82,10 +78,6 @@
 	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
-
 	local TestNetwork = network.client.fromParent("Test", workspace):expect()
 	print(TestNetwork.property:get()) --> "rickrolled" (This ought to return 50, but the middleware returned a custom value!)
 	```
@@ -97,10 +89,7 @@
 
 	```lua
 	-- Server
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
-
-	local network = require(ReplicatedStorage.Packages.network) 
 
 	local TestRemoteProperty = network.Server.RemoteProperty.new(50, {
 		clientGet = {
@@ -115,10 +104,7 @@
 	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	local Workspace = game:GetService("Workspace")
-
-	local network = require(ReplicatedStorage.Packages.network) 
 
 	local TestNetwork = network.client.fromParent("Test", Workspace):expect()
 	print(TestNetwork.property:get()) --> {"oofed", "rickrolled", "hello"}
@@ -150,10 +136,6 @@
 
 	```lua
 	-- Server
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
-
 	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
 		clientSet = {function() return "set lol" end}
 	})
@@ -163,10 +145,6 @@
 	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
-
 	local TestNetwork = network.client.fromParent("Test", workspace):expect()
 	print(TestNetwork.property:get()) --> "rickrolled" (this ought to return 50, but the middleware returned a custom value!)
 	```
@@ -178,10 +156,6 @@
 
 	```lua
 	-- Server
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
-
 	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
 		clientGet = {
 			function() return "rickrolled" end,
@@ -195,10 +169,6 @@
 	TestNetwork:dispatch(workspace)
 
 	-- Client
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-	local network = require(ReplicatedStorage.Packages.network) 
-
 	local TestNetwork = network.client.fromParent("Test", workspace):expect()
 	print(TestNetwork.property:get()) --> {"oofed", "rickrolled", "hello"}
 	```
