@@ -1,5 +1,6 @@
 --[=[
 	@class NetworkServer
+	@server
 
 	The server counterpart of the Network module.
 ]=]
