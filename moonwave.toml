@@ -4,7 +4,7 @@ includeReadme = true
 gitSourceBranch = "main"
 
 [docusaurus]
-favicon = "/favicon.ico"
+favicon = "/icon.ico"
 
 [footer]
 style = "dark"
