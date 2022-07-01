@@ -12,27 +12,37 @@
 	@tag Signal
 	@tag ClientRemoteProperty instance
 
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired 
-	whenever the value  of the client in the serverside remote property 
-	(to which the client remote property is connected to) is updated. 
-	The signal is only passed the new updated value as the only argument.
+	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired, whenever the value 
+	of the serverside remote property (to which this client remote property is connected to) is updated.
+	
+	Incase if the client has a specific value set for them in the serverside remote property, then this signal
+	will only fire if *that* value has updated.
 ]=]
 
 --[=[ 
 	@prop ClientRemoteProperty Type 
 	@within ClientRemoteProperty
-	@tag Luau Type
+	
 	@readonly
 
 	An exported Luau type of a client remote property object.
 ]=]
 
-local Packages = script.Parent.Parent.Parent
+local packages = script.Parent.Parent.Parent
 
-local Property = require(Packages.Property)
-local Janitor = require(Packages.Janitor)
+local Property = require(packages.Property)
+local Janitor = require(packages.Janitor)
 
 local ClientRemoteProperty = { __index = {} }
+
+export type ClientRemoteProperty = typeof(setmetatable(
+	{} :: {
+		_remoteEvent: RemoteEvent,
+		_signal: any,
+		_janitor: any,
+	},
+	ClientRemoteProperty
+))
 
 --[=[
 	@private
@@ -62,12 +72,17 @@ end
 --[=[
 	@tag ClientRemoteProperty instance
 
-	Returns the value of the client stored in the serverside remote property (
-	to which the client remote property is connected to).
+	Returns the value of the client stored in the serverside remote property (to which the client remote property is connected to).
+	If there is no value stored specifically for the client, then the serverside remote property's current value will be returned
+	instead.
 ]=]
 
 function ClientRemoteProperty.__index:get(): any
 	return self._property:get()
+end
+
+function ClientRemoteProperty.__index:set(value)
+	task.spawn(self._remoteFunction.InvokeServer, self._remoteFunction, { value = value })
 end
 
 --[=[

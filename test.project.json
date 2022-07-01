@@ -1,0 +1,12 @@
+{
+  "name": "libraries (Test)",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "$path": "src",
+      "$ignoreUnknownInstances": true
+    }
+  }
+}

@@ -7,50 +7,49 @@
  
 	```lua
 	local MyEnumList = EnumList.new("EnumList", {
-		PhoneNumber = {
-			BabaBoey = 123,
+		phoneNumber = {
+			babaBoey = 123,
 		}
 	})
 
-	print(MyEnumList.PhoneNumber.BabaBoey) --> 123
+	print(MyEnumList.phoneNumber.babaBoey) --> 123
 	```
 
 	:::tip Generalization iteration!
 
-	EnumLists are iterable, e.g:
+	EnumLists are iterable, for e.g:
 
 	```lua
 	local MyEnumList = EnumList.new("EnumList", {
-		Test = {Alphabet = "A"}
+		test = {alphabet = "A"}
 	})
 
 	for enumName, enum in MyEnumList do
-		print(enumName, enum.Alphabet)
+		print(enumName, enum.alphabet)
 	end
 
-	--> "Test" "A"
+	--> "test" "A"
 	```
 	:::
 
-	:::note
-	EnumLists don't provide support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), e.g:
+	:::warning
+	EnumLists don't provide support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), 
+	for e.g:
 
 	```lua
-	local EnumList = require(...)
-
 	local MyEnumList = EnumList.new("MyEnumList", {
-		Enum = {
-			Deep = {
-				MoreDeep = {
-					Lol = 5
+		t = {
+			deep = {
+				moreDeep = {
+					b = 5
 				}
 			}
 		}
 	})
 
-	print(MyEnumList.Enum.Deep.MoreDeep.none) --> nil, but won't error..
-	print(MyEnumList.Enum.Deep.lo) --> nil, but won't error..
-	print(MyEnumList.Enum.b) --> will error (not a deep chain!)
+	print(MyEnumList.t.deep.moreDeep.lol) --> nil, but won't error..
+	print(MyEnumList.t.deep.lo) --> nil, but won't error..
+	print(MyEnumList.t.b) --> will error (as it is not a deep chain!)
 	``` 
 	:::
 ]=]
@@ -58,15 +57,25 @@
 --[=[ 
 	@prop EnumList Type 
 	@within EnumList
-	@tag Luau Type
 	@readonly
 
 	An exported Luau type of an EnumList object.
 
 	```lua
-	local EnumList = require(...)
-
 	local MyEnumList : EnumList.EnumList = EnumList.new(...) 
+	```
+]=]
+
+--[=[ 
+	@prop name string
+	@within EnumList
+	@readonly
+
+	The name of the enum list.
+
+	```lua
+	local MyEnumList = EnumList.new("My", {}) 
+	print(MyEnumList.name) --> "My"
 	```
 ]=]
 
@@ -82,6 +91,14 @@ local EnumList = {
 	_prototype = {},
 }
 
+export type EnumList = typeof(setmetatable(
+	{} :: {
+		name: string,
+		_enums: { [string]: { [string]: any } },
+	},
+	EnumList
+))
+
 --[=[
 	@return EnumList
 
@@ -89,20 +106,24 @@ local EnumList = {
 	with the name of `name`.
 
 	```lua
-	local EnumList = require(...)
+	local MyEnumList = EnumList.new("Enums", {test = 123})
 
-	local MyEnumList = EnumList.new("Enums", {Test = 123})
-
-	print(MyEnumList.Test) --> 123
+	print(MyEnumList.test) --> 123
 	```
 ]=]
 
 function EnumList.new(name: string, enums: { [string]: { [string]: any } }): EnumList
-	assert(typeof(name) == "string", INVALID_ARGUMENT_TYPE:format(1, "EnumList.new", "string", typeof(name)))
-	assert(typeof(enums) == "table", INVALID_ARGUMENT_TYPE:format(2, "EnumList.new", "table", typeof(enums)))
+	assert(
+		typeof(name) == "string",
+		INVALID_ARGUMENT_TYPE:format(1, "EnumList.new", "string", typeof(name))
+	)
+	assert(
+		typeof(enums) == "table",
+		INVALID_ARGUMENT_TYPE:format(2, "EnumList.new", "table", typeof(enums))
+	)
 
 	local self = setmetatable({
-		_name = name,
+		name = name,
 		_enums = enums,
 	}, EnumList)
 
@@ -119,30 +140,20 @@ function EnumList.is(self: any): boolean
 end
 
 --[=[
-	@tag EnumList instance
-
-	Returns the name of the enum list.
-]=]
-
-function EnumList._prototype:getName(): string
-	return self._name
-end
-
---[=[
 	@return {[string]: CustomEnum}
 	@tag EnumList instance
 
 	Returns the enums of the enum list.
 ]=]
 
-function EnumList._prototype:getEnums(): { [string]: { [string]: any } }
+function EnumList._prototype:getEnums(): { [string]: { [string]: CustomEnum.CustomEnum } }
 	return self._enums
 end
 
 function EnumList._prototype:_init()
 	for enumName, enum in self._enums do
-		assert(typeof(enumName) == "string", INVALID_ENUM_NAME:format(self._name))
-		assert(typeof(enum) == "table", INVALID_ENUM:format(enumName, self._name, typeof(enum)))
+		assert(typeof(enumName) == "string", INVALID_ENUM_NAME:format(self.name))
+		assert(typeof(enum) == "table", INVALID_ENUM:format(enumName, self.name, typeof(enum)))
 		self._enums[enumName] = CustomEnum.new(enumName, enum)
 	end
 
@@ -158,19 +169,14 @@ function EnumList:__index(key)
 	local value = EnumList._prototype[key] or self._enums[key]
 
 	if value == nil then
-		error(INVALID_ENUM_LIST_MEMBER:format(tostring(key), self._name))
+		error(INVALID_ENUM_LIST_MEMBER:format(tostring(key), self.name))
 	end
 
 	return value
 end
 
 function EnumList:__tostring()
-	return ("[EnumList]: (%s)"):format(self._name)
+	return ("[EnumList]: (%s)"):format(self.name)
 end
-
-export type EnumList = typeof(setmetatable({} :: {
-	name: string,
-	_enums: { [string]: { [string]: any } },
-}, EnumList))
 
 return table.freeze(EnumList)

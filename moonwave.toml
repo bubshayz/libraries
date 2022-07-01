@@ -4,7 +4,7 @@ includeReadme = true
 gitSourceBranch = "main"
 
 [docusaurus]
-favicon = "/favicon.ico"
+favicon = "/icon.ico"
 
 [footer]
 style = "dark"
@@ -15,17 +15,17 @@ section = "EnumList"
 classes = ["EnumList", "CustomEnum"]
 
 [[classOrder]]
-section = "Network"
-classes = ["Network", "NetworkServer", "NetworkClient", "RemoteProperty", "RemoteSignal", "ClientRemoteProperty", "ClientRemoteSignal"]
+section = "network"
+classes = ["network", "NetworkServer", "networkClient", "RemoteProperty", "RemoteSignal", "ClientRemoteProperty", "ClientRemoteSignal"]
 
 [[home.features]]
-title = "Easy to learn & easy to use"
-description = "Each module is very easy to use, and you aren't required to 'learn' them - just go to their respective docs for their API and start working!"
+title = "Faster Development"
+description = "Speed up your development progress by using already battle tested modules like network and queue!"
 
 [[home.features]]
-title = "Active maintenance"
-description = "Each module is actively maintained - you don't have to worry about any lack of updates or bug fixes, instead focus on writing code peacefully."
+title = "Better Productivity"
+description = "Each module is actively maintained - you don't have to worry about any lack of updates or bug fixes, instead focus on writing code peacefully and increase productivity!"
 
 [[home.features]]
 title = "Reusuability & Efficiency"
-description = "Don't waste time writing down systems which have been already created and are actively maintained. Instead, be an efficient programmer and use already well maintained system."
+description = "Don't waste time writing down systems which have been already created and are actively maintained. Instead, be an efficient programmer and use already well maintained systems."

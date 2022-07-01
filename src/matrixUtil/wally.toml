@@ -1,6 +1,6 @@
 [package]
-name = "bubshayz/numberutil"
-description = "A utility module for working with numbers."
+name = "bubshayz/matrixutil"
+description = "A utility module for working with matrixes."
 authors = ["bubshayz"]
 license = "MIT"
 version = "1.0.8"

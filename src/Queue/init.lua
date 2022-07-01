@@ -2,12 +2,10 @@
 	@class Queue
 
 	A class for creating queues. A queue in layman's term, is simply an to which
-	you can append callbacks to, which will run based on when they're added, i.e 
-	they **follow** the *FIFO (First In, First Out) pattern* .
+	you can append callbacks to, which will run based on when they're added --
+	they follow the *FIFO (First In, First Out) pattern* .
  
 	```lua
-	local Queue = require(...)
-
 	local queue = Queue.new()
 
 	for i = 1, 3 do 
@@ -29,16 +27,14 @@
 	@tag Queue Instance
 
 	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired 
-	whenever the queue is progressed, i.e an appended callback is called. The callback 
-	called is passed as the first argument, and a second argument, `deltaTime` is also 
-	passed (which is basically how long (in seconds) it was before `callbackProgressed` 
-	was called ever since it was appended).
+	whenever the queue is progressed, i.e when an appended callback (through [Queue:append]) is called. The 
+	callback called is passed as the first argument to the signal, and a second argument, `deltaTime` is also 
+	passed which is how long (in seconds) it took for the callback to be called ever since it was appended.
 ]=]
 
 --[=[ 
-	@prop queue Type 
+	@prop Queue Type 
 	@within Queue
-	@tag Luau Type
 	@readonly
 
 	An exported Luau type of a queue object.
@@ -50,6 +46,11 @@ local Signal = require(script.Parent.Signal)
 local INVALID_ARGUMENT_TYPE = "Invalid argument#%d to %s. Expected %s, but got %s instead."
 
 local Queue = { __index = {} }
+
+export type Queue = typeof(setmetatable({} :: {
+	progressed: any,
+	_promises: { any },
+}, Queue))
 
 --[=[
 	@return Queue
@@ -79,8 +80,6 @@ end
 	will never be resumed
 
 	```lua
-	local Queue = require(...)
-
 	local queue = Queue.new()
 
 	local promise1 = queue:append(function()
@@ -114,12 +113,9 @@ end
 	ever since it was appended). 
 	
 	The method also returns a promise, which too resolves with a number 
-	(the time it took for `callback` to run ever since it was appended),  
-	once `callback` is called.
+	(the time it took for `callback` to run ever since it was appended), once `callback` is called.
 
 	```lua
-	local Queue = require(...)
-
 	local queue = Queue.new()
 
 	local promise1 = queue:append(function(deltaTime)
@@ -138,13 +134,11 @@ end
 	```
 
 	:::tip
-	The promise returned will be cancelled if [Queue:EmptyQueue] is called, but 
+	The promise returned will be cancelled if [Queue:emptyQueue] is called, but 
 	you can also manually  just cancel the promise to effectively remove the 
 	added callback from the queue, e.g:
 
 	```lua
-	local Queue = require(...)
-
 	local queue = Queue.new()
 
 	local promise = queue:append(function(deltaTime) 
@@ -189,7 +183,7 @@ end
 --[=[
 	@tag Queue Instance
 
-	Calls [Queue:EmptyQueue] and renders the queue unusable.
+	Calls [Queue:emptyQueue] and renders the queue unusable.
 ]=]
 
 function Queue.__index:destroy()
@@ -201,10 +195,5 @@ end
 function Queue:__tostring()
 	return ("[Queue]: (%d)"):format(#self._promises)
 end
-
-export type Queue = typeof(setmetatable({} :: {
-	progressed: any,
-	_promises: { any },
-}, Queue))
 
 return table.freeze(Queue)

@@ -4,8 +4,6 @@
 	A class for wrapping values around setters and getters. A property in layman's terms, is simply a object which contains some value.
  
 	```lua
-	local Property = require(...)
-
 	local property = Property.new(5)
 	print(property:get()) --> 5
 
@@ -31,7 +29,6 @@
 --[=[ 
 	@prop Property Type 
 	@within Property
-	@tag Luau Type
 	@readonly
 
 	An exported Luau type of a property object.
@@ -101,8 +98,6 @@ end
 	Works exactly the same as [Property:set] except that tables aren't checked for equality, e.g:
 
 	```lua
-	local Property = require(...)
-
 	local property = Property.new()
 
 	property.updated:Connect(function(newVal)
@@ -152,8 +147,6 @@ end
 	Returns the current value of the property.
 
 	```lua
-	local Property = require(...)
-
 	local property = Property.new()
 
 	property:Set(5)

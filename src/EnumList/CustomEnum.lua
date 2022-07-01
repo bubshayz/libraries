@@ -6,17 +6,28 @@
 	of this class.
 
 	```lua
-	local EnumList = require(...)
-
 	local enumList = EnumList.new("EnumList", {
 		-- This enum below will be turned into an Custom Enum instance automatically 
 		-- once this enum list is created!
-		PhoneNumber = { 
-			BabaBoey = 123,
+		phoneNumber = { 
+			babaBoey = 123,
 		}
 	})
 
-	print(enumList.PhoneNumber:getEnumItems().BabaBoey) --> 123
+	print(enumList.phoneNumber.babaBoey) --> 123
+	```
+]=]
+
+--[=[ 
+	@prop name string
+	@within CustomEnum
+	@readonly
+
+	The name of the custom enum.
+
+	```lua
+	local MyEnumList = EnumList.new("My", {test = {}}) 
+	print(MyEnumList.test.name) --> "Test"
 	```
 ]=]
 
@@ -24,13 +35,21 @@ local INVALID_ENUM_MEMBER = '"%s" is not a valid EnumItem of Enum "%s"!'
 
 local CustomEnum = { _prototype = {} }
 
+export type CustomEnum = typeof(setmetatable(
+	{} :: {
+		name: string,
+		_enumItems: { [string]: any },
+	},
+	CustomEnum
+))
+
 --[=[
 	@private
 ]=]
 
-function CustomEnum.new(name: string, enumItems: { [string]: any }): CustomEnum
+function CustomEnum.new(name: string, enumItems: { [string]: any })
 	local self = setmetatable({
-		_name = name,
+		name = name,
 		_enumItems = enumItems,
 	}, CustomEnum)
 
@@ -44,8 +63,6 @@ end
 	Returns the enum items of the enum.
 
 	```lua
-	local EnumList = require(...)
-
 	local enumList = EnumList.new("EnumList", {
 		PhoneNumber = { -- Custom Enum
 			BabaBoey = 123,
@@ -62,16 +79,6 @@ function CustomEnum._prototype:getEnumItems(): { [string]: any }
 	return self._enumItems
 end
 
---[=[
-	@tag CustomEnum instance
-
-	Returns the name of the custom enum.
-]=]
-
-function CustomEnum._prototype:getName(): string
-	return self._name
-end
-
 function CustomEnum._prototype:_init()
 	table.freeze(self)
 end
@@ -80,19 +87,14 @@ function CustomEnum:__index(key)
 	local enumItem = CustomEnum._prototype[key] or self._enumItems[key]
 
 	if enumItem == nil then
-		error(INVALID_ENUM_MEMBER:format(tostring(key), self._name))
+		error(INVALID_ENUM_MEMBER:format(tostring(key), self.name))
 	end
 
 	return enumItem
 end
 
 function CustomEnum:__tostring()
-	return ("[CustomEnum]: (%s)"):format(self._name)
+	return ("[CustomEnum]: (%s)"):format(self.name)
 end
-
-export type CustomEnum = typeof(setmetatable({} :: {
-	_name: string,
-	_enumItems: { [string]: any },
-}, CustomEnum))
 
 return table.freeze(CustomEnum)
