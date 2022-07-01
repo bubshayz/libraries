@@ -104,10 +104,13 @@
 	local Workspace = game:GetService("Workspace")
 
 	local middleware = {
-		{
-			function (methodName, arguments, response)
-				print(response) --> "this"
-			end
+		methodCallOutbound = {
+			{
+				function (methodName, arguments, response)
+					print(response) --> "this"
+					return "oops modified"
+				end
+			}
 		}
 	}
 
@@ -120,7 +123,7 @@
 	-- Client:
 	local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.client.fromName("test", Workspace):expect()
+	local testNetwork = network.client.fromParent("test", Workspace):expect()
 	print(testNetwork.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
 	```
 
@@ -149,7 +152,7 @@
 	-- Client:
 	local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.fromName("test", Workspace):expect()
+	local testNetwork = network.fromParent("test", Workspace):expect()
 	print(testNetwork.SomeMethod()) --> 50 
 	```
 
@@ -187,7 +190,7 @@
 	-- Client:
 	local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.client.fromName("test", Workspace):expect()
+	local testNetwork = network.client.fromParent("test", Workspace):expect()
 	print(testNetwork.someMethod()) --> {1, 2, 3} 
 	```
 	:::
@@ -221,8 +224,8 @@ local NetworkServer = {
 }
 
 type Middleware = {
-	methodCallOutbound: { (methodName: string, args: { any }) -> any },
-	methodCallInbound: { (methodName: string, args: { any }) -> boolean },
+	methodCallOutbound: { (methodName: string, args: { any }) -> any }?,
+	methodCallInbound: { (methodName: string, args: { any }) -> boolean }?,
 }
 
 export type NetworkServer = typeof(setmetatable(

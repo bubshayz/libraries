@@ -109,9 +109,9 @@ local networkUtil = require(utilities.networkUtil)
 
 local MIDDLEWARE_TEMPLATE = { serverEvent = {} }
 
-local MiddlewareInterface = t.optional(t.strictInterface({
-	serverEvent = t.optional(t.array(t.callback)),
-}))
+local MiddlewareInterface = t.optional(
+	t.strictInterface({ serverEvent = t.optional(t.array(t.callback)) })
+)
 
 local function getDefaultMiddleware()
 	return tableUtil.deepCopy(MIDDLEWARE_TEMPLATE)

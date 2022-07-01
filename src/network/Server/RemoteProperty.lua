@@ -130,20 +130,16 @@ local MIDDLEWARE_TEMPLATE = {
 	clientSet = {},
 }
 
-local MiddlewareInterface = t.optional(t.strictInterface({
-	clientGet = t.optional(t.array(t.callback)),
-	clientSet = t.optional(t.array(t.callback)),
-}))
+local MiddlewareInterface = t.optional(
+	t.strictInterface({ clientSet = t.optional(t.array(t.callback)) })
+)
 
 local RemoteProperty = {
 	__index = {},
 	_clients = trackerUtil.getTrackingPlayers(),
 }
 
-type Middleware = {
-	clientGet: { (client: Player) -> any }?,
-	clientSet: { (client: Player, value: any) -> any }?,
-}
+type Middleware = { clientSet: { (client: Player, value: any) -> any }? }
 export type RemoteProperty = typeof(setmetatable(
 	{} :: {
 		updated: any,
