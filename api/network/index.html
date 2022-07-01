@@ -8,33 +8,41 @@
 [NetworkServer] and a [NetworkClient] module.
 
 ```lua
+local Workspace = game:GetService(&quot;Workspace&quot;)
+
 -- Server
 local TestNetwork = Network.Server.new(&quot;Test&quot;)
 TestNetwork:append(&quot;method&quot;, function(player)
 	return (&quot;hi, %s!&quot;):format(player.Name)
 end)
-TestNetwork:dispatch(workspace)
+TestNetwork:dispatch(Workspace)
 
 -- Client
-local testNetwork = network.client.fromParent(&quot;Test&quot;, workspace)
+local Workspace = game:GetService(&quot;Workspace&quot;)
+
+local testNetwork = network.client.fromParent(&quot;Test&quot;, Workspace)
 print(testNetwork.method()) --&gt; &quot;hi, bubshayz!&quot;
 ```"><meta data-rh="true" property="og:description" content="An advanced network module for easy server-client communication. The module consists of 
 [NetworkServer] and a [NetworkClient] module.
 
 ```lua
+local Workspace = game:GetService(&quot;Workspace&quot;)
+
 -- Server
 local TestNetwork = Network.Server.new(&quot;Test&quot;)
 TestNetwork:append(&quot;method&quot;, function(player)
 	return (&quot;hi, %s!&quot;):format(player.Name)
 end)
-TestNetwork:dispatch(workspace)
+TestNetwork:dispatch(Workspace)
 
 -- Client
-local testNetwork = network.client.fromParent(&quot;Test&quot;, workspace)
+local Workspace = game:GetService(&quot;Workspace&quot;)
+
+local testNetwork = network.client.fromParent(&quot;Test&quot;, Workspace)
 print(testNetwork.method()) --&gt; &quot;hi, bubshayz!&quot;
 ```"><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/network"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/network" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/network" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.33774dd7.css">
-<link rel="preload" href="/libraries/assets/js/runtime~main.f1fabd16.js" as="script">
-<link rel="preload" href="/libraries/assets/js/main.0ef9decf.js" as="script">
+<link rel="preload" href="/libraries/assets/js/runtime~main.90cbfe29.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.c8cc39ae.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -43,20 +51,24 @@ print(testNetwork.method()) --&gt; &quot;hi, bubshayz!&quot;
   An advanced network module for easy server-client communication. The module consists of
   <a href="/libraries/api/NetworkServer">NetworkServer</a> and a <a href="https://developer.roblox.com/en-us/api-reference/class/NetworkClient" target="_blank">NetworkClient</a> module.
 </p>
-<pre class="language-lua"><code class="language-lua"><span class="token comment">-- Server</span>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> Workspace <span class="token operator">=</span> game<span class="token punctuation">:</span><span class="token function">GetService</span><span class="token punctuation">(</span><span class="token string">"Workspace"</span><span class="token punctuation">)</span>
+
+<span class="token comment">-- Server</span>
 <span class="token keyword">local</span> TestNetwork <span class="token operator">=</span> Network<span class="token punctuation">.</span>Server<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Test"</span><span class="token punctuation">)</span>
 TestNetwork<span class="token punctuation">:</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"method"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>player<span class="token punctuation">)</span>
 	<span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token string">"hi, %s!"</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">format</span><span class="token punctuation">(</span>player<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
 <span class="token keyword">end</span><span class="token punctuation">)</span>
-TestNetwork<span class="token punctuation">:</span><span class="token function">dispatch</span><span class="token punctuation">(</span>workspace<span class="token punctuation">)</span>
+TestNetwork<span class="token punctuation">:</span><span class="token function">dispatch</span><span class="token punctuation">(</span>Workspace<span class="token punctuation">)</span>
 
 <span class="token comment">-- Client</span>
-<span class="token keyword">local</span> testNetwork <span class="token operator">=</span> network<span class="token punctuation">.</span>client<span class="token punctuation">.</span><span class="token function">fromParent</span><span class="token punctuation">(</span><span class="token string">"Test"</span><span class="token punctuation">,</span> workspace<span class="token punctuation">)</span>
+<span class="token keyword">local</span> Workspace <span class="token operator">=</span> game<span class="token punctuation">:</span><span class="token function">GetService</span><span class="token punctuation">(</span><span class="token string">"Workspace"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> testNetwork <span class="token operator">=</span> network<span class="token punctuation">.</span>client<span class="token punctuation">.</span><span class="token function">fromParent</span><span class="token punctuation">(</span><span class="token string">"Test"</span><span class="token punctuation">,</span> Workspace<span class="token punctuation">)</span>
 <span class="token function">print</span><span class="token punctuation">(</span>testNetwork<span class="token punctuation">.</span><span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> "hi, bubshayz!"</span>
 </code></pre>
-</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Server"><code style="text-decoration:none">Server</code><a class="hash-link" href="#Server" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/network/init.lua#L28"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>network<!-- -->.<!-- -->Server<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/NetworkServer">NetworkServer</a></code></div><div>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Server"><code style="text-decoration:none">Server</code><a class="hash-link" href="#Server" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/network/init.lua#L32"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>network<!-- -->.<!-- -->Server<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/NetworkServer">NetworkServer</a></code></div><div>
 <p>A reference to the <a href="/libraries/api/NetworkServer">NetworkServer</a> module.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="client"><code style="text-decoration:none">client</code><a class="hash-link" href="#client" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/network/init.lua#L36"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>network<!-- -->.<!-- -->client<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/networkClient">networkClient</a></code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="client"><code style="text-decoration:none">client</code><a class="hash-link" href="#client" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/network/init.lua#L40"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>network<!-- -->.<!-- -->client<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/networkClient">networkClient</a></code></div><div>
 <p>A reference to the <a href="/libraries/api/networkClient">networkClient</a> module.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [],
@@ -67,7 +79,7 @@ TestNetwork<span class="token punctuation">:</span><span class="token function">
             &quot;lua_type&quot;: &quot;NetworkServer&quot;,
             &quot;readonly&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 28,
+                &quot;line&quot;: 32,
                 &quot;path&quot;: &quot;src/network/init.lua&quot;
             }
         },
@@ -77,20 +89,20 @@ TestNetwork<span class="token punctuation">:</span><span class="token function">
             &quot;lua_type&quot;: &quot;networkClient&quot;,
             &quot;readonly&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 36,
+                &quot;line&quot;: 40,
                 &quot;path&quot;: &quot;src/network/init.lua&quot;
             }
         }
     ],
     &quot;types&quot;: [],
     &quot;name&quot;: &quot;network&quot;,
-    &quot;desc&quot;: &quot;An advanced network module for easy server-client communication. The module consists of \n[NetworkServer] and a [NetworkClient] module.\n\n```lua\n-- Server\nlocal TestNetwork = Network.Server.new(\&quot;Test\&quot;)\nTestNetwork:append(\&quot;method\&quot;, function(player)\n\treturn (\&quot;hi, %s!\&quot;):format(player.Name)\nend)\nTestNetwork:dispatch(workspace)\n\n-- Client\nlocal testNetwork = network.client.fromParent(\&quot;Test\&quot;, workspace)\nprint(testNetwork.method()) --&gt; \&quot;hi, bubshayz!\&quot;\n```&quot;,
+    &quot;desc&quot;: &quot;An advanced network module for easy server-client communication. The module consists of \n[NetworkServer] and a [NetworkClient] module.\n\n```lua\nlocal Workspace = game:GetService(\&quot;Workspace\&quot;)\n\n-- Server\nlocal TestNetwork = Network.Server.new(\&quot;Test\&quot;)\nTestNetwork:append(\&quot;method\&quot;, function(player)\n\treturn (\&quot;hi, %s!\&quot;):format(player.Name)\nend)\nTestNetwork:dispatch(Workspace)\n\n-- Client\nlocal Workspace = game:GetService(\&quot;Workspace\&quot;)\n\nlocal testNetwork = network.client.fromParent(\&quot;Test\&quot;, Workspace)\nprint(testNetwork.method()) --&gt; \&quot;hi, bubshayz!\&quot;\n```&quot;,
     &quot;source&quot;: {
-        &quot;line&quot;: 20,
+        &quot;line&quot;: 24,
         &quot;path&quot;: &quot;src/network/init.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#client" class="table-of-contents__link toc-highlight">client</a></li><li><a href="#Server" class="table-of-contents__link toc-highlight">Server</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/libraries/assets/js/runtime~main.f1fabd16.js"></script>
-<script src="/libraries/assets/js/main.0ef9decf.js"></script>
+<script src="/libraries/assets/js/runtime~main.90cbfe29.js"></script>
+<script src="/libraries/assets/js/main.c8cc39ae.js"></script>
 </body>
 </html>
