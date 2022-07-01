@@ -31,8 +31,6 @@
 	in behavior. Overall, it is a module for creating wind line effects.
 
 	```lua
-	local Workspace = game:GetService("Workspace")
-
 	windLines.effectStarted:Connect(function()
 		print("WindLines effect started")
 	end)
@@ -166,10 +164,7 @@ end
 ]=]
 
 function windLines.start()
-	assert(
-		not windLines.isStarted(),
-		"Cannot start wind lines effect again as it is already started!"
-	)
+	assert(not windLines.isStarted(), "Cannot start wind lines effect again as it is already started!")
 
 	isStarted = true
 	windLines._startHeartbeatUpdate()
@@ -244,17 +239,16 @@ function windLines._startHeartbeatUpdate()
 			local seededClock = (clockNow + windLine.seed) * (windLine.speed * 0.2)
 			local startPosition = windLine.position
 
-			windLine.attachment0.WorldPosition = (CFrame.new(
-				startPosition,
-				startPosition + windLine.direction
-			) * CFrame.new(0, 0, windLine.speed * -aliveTime)).Position + Vector3.new(
+			windLine.attachment0.WorldPosition = (
+				CFrame.new(startPosition, startPosition + windLine.direction)
+				* CFrame.new(0, 0, windLine.speed * -aliveTime)
+			).Position + Vector3.new(
 				math.sin(seededClock) * 0.5,
 				math.sin(seededClock) * 0.8,
 				math.sin(seededClock) * 0.5
 			)
 
-			windLine.attachment1.WorldPosition = windLine.attachment0.WorldPosition
-				+ WIND_POSITION_OFFSET
+			windLine.attachment1.WorldPosition = windLine.attachment0.WorldPosition + WIND_POSITION_OFFSET
 		end
 
 		if #windLines._updateQueue == 0 and not isStarted then
