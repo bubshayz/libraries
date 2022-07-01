@@ -412,11 +412,15 @@ function NetworkServer.__index:_setup(
 			-- If there is an explicit false value included in the accumulated
 			-- response of all inbound method callbacks, then that means we should
 			-- avoid this client's request to call the method!
-			if
-				methodCallInboundMiddlewareAccumulatedResponses ~= nil
-				and table.find(methodCallInboundMiddlewareAccumulatedResponses, false)
-			then
-				return
+			if methodCallInboundMiddlewareAccumulatedResponses ~= nil then
+				if
+					typeof(methodCallInboundMiddlewareAccumulatedResponses) == "table"
+					and table.find(methodCallInboundMiddlewareAccumulatedResponses, false)
+				then
+					return
+				elseif methodCallInboundMiddlewareAccumulatedResponses == false then
+					return
+				end
 			end
 
 			local methodResponse = value(table.unpack(args))
