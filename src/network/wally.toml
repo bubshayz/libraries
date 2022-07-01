@@ -9,7 +9,7 @@ realm = "shared"
 
 [dependencies]
 Signal = "sleitnick/signal@1.2.0"
-Property = "bubshayz/property@1.1.1"
+Property = "bubshayz/property@1.1.2"
 Promise = "evaera/promise@4"
 Janitor = "howmanysmall/janitor@1.14.1"
 t = "osyrisrblx/t@3.0.0"
