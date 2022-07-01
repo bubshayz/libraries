@@ -1,131 +1,129 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="generator" content="Docusaurus v2.0.0-beta.9">
-<title data-react-helmet="true">EnumList | Roblox-Modules</title><meta data-react-helmet="true" property="og:title" content="EnumList | Roblox-Modules"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="description" content=" 
+<meta name="generator" content="Docusaurus v2.0.0-beta.21">
+<title data-rh="true">EnumList | libraries</title><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://bubshayz.github.io/libraries/api/EnumList"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="EnumList | libraries"><meta data-rh="true" name="description" content=" 
 
 A class for creating enum lists. An enum list in layman&#x27;s terms is simply an object
 used to store *custom* enums inside.
  
 ```lua
 local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
-	PhoneNumber = {
-		BabaBoey = 123,
+	phoneNumber = {
+		babaBoey = 123,
 	}
 })
 
-print(MyEnumList.PhoneNumber.BabaBoey) --&gt; 123
+print(MyEnumList.phoneNumber.babaBoey) --&gt; 123
 ```
 
 :::tip Generalization iteration!
 
-EnumLists are iterable, e.g:
+EnumLists are iterable, for e.g:
 
 ```lua
 local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
-	Test = {Alphabet = &quot;A&quot;}
+	test = {alphabet = &quot;A&quot;}
 })
 
 for enumName, enum in MyEnumList do
-	print(enumName, enum.Alphabet)
+	print(enumName, enum.alphabet)
 end
 
---&gt; &quot;Test&quot; &quot;A&quot;
+--&gt; &quot;test&quot; &quot;A&quot;
 ```
 :::
 
-:::note
-EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), e.g:
+:::warning
+EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), 
+for e.g:
 
 ```lua
-local EnumList = require(...)
-
 local MyEnumList = EnumList.new(&quot;MyEnumList&quot;, {
-	Enum = {
-		Deep = {
-			MoreDeep = {
-				Lol = 5
+	t = {
+		deep = {
+			moreDeep = {
+				b = 5
 			}
 		}
 	}
 })
 
-print(MyEnumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..
-print(MyEnumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..
-print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
+print(MyEnumList.t.deep.moreDeep.lol) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.t.deep.lo) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
 ``` 
-:::"><meta data-react-helmet="true" property="og:description" content=" 
+:::"><meta data-rh="true" property="og:description" content=" 
 
 A class for creating enum lists. An enum list in layman&#x27;s terms is simply an object
 used to store *custom* enums inside.
  
 ```lua
 local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
-	PhoneNumber = {
-		BabaBoey = 123,
+	phoneNumber = {
+		babaBoey = 123,
 	}
 })
 
-print(MyEnumList.PhoneNumber.BabaBoey) --&gt; 123
+print(MyEnumList.phoneNumber.babaBoey) --&gt; 123
 ```
 
 :::tip Generalization iteration!
 
-EnumLists are iterable, e.g:
+EnumLists are iterable, for e.g:
 
 ```lua
 local MyEnumList = EnumList.new(&quot;EnumList&quot;, {
-	Test = {Alphabet = &quot;A&quot;}
+	test = {alphabet = &quot;A&quot;}
 })
 
 for enumName, enum in MyEnumList do
-	print(enumName, enum.Alphabet)
+	print(enumName, enum.alphabet)
 end
 
---&gt; &quot;Test&quot; &quot;A&quot;
+--&gt; &quot;test&quot; &quot;A&quot;
 ```
 :::
 
-:::note
-EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), e.g:
+:::warning
+EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), 
+for e.g:
 
 ```lua
-local EnumList = require(...)
-
 local MyEnumList = EnumList.new(&quot;MyEnumList&quot;, {
-	Enum = {
-		Deep = {
-			MoreDeep = {
-				Lol = 5
+	t = {
+		deep = {
+			moreDeep = {
+				b = 5
 			}
 		}
 	}
 })
 
-print(MyEnumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..
-print(MyEnumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..
-print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
+print(MyEnumList.t.deep.moreDeep.lol) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.t.deep.lo) --&gt; nil, but won&#x27;t error..
+print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
 ``` 
-:::"><meta data-react-helmet="true" property="og:url" content="https://bubshayz.github.io/Roblox-Modules/api/EnumList"><meta data-react-helmet="true" name="docusaurus_locale" content="en"><meta data-react-helmet="true" name="docusaurus_tag" content="default"><link data-react-helmet="true" rel="shortcut icon" href="/Roblox-Modules/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://bubshayz.github.io/Roblox-Modules/api/EnumList"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/EnumList" hreflang="en"><link data-react-helmet="true" rel="alternate" href="https://bubshayz.github.io/Roblox-Modules/api/EnumList" hreflang="x-default"><link rel="stylesheet" href="/Roblox-Modules/assets/css/styles.f1390675.css">
-<link rel="preload" href="/Roblox-Modules/assets/js/runtime~main.e24df099.js" as="script">
-<link rel="preload" href="/Roblox-Modules/assets/js/main.7be6dd2b.js" as="script">
+:::"><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/EnumList"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/EnumList" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/EnumList" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.33774dd7.css">
+<link rel="preload" href="/libraries/assets/js/runtime~main.f1fabd16.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.0ef9decf.js" as="script">
 </head>
-<body>
+<body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
-<div><a href="#" class="skipToContent_1oUP">Skip to main content</a></div><nav class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Navigation bar toggle" class="navbar__toggle clean-btn" type="button" tabindex="0"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Roblox-Modules/"><b class="navbar__title">Roblox-Modules</b></a><a class="navbar__item navbar__link" href="/Roblox-Modules/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Roblox-Modules/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/bubshayz/Roblox-Modules" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link"><span>GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_3J9K"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></span></a><div class="toggle_71bT toggle_3Zt9 toggleDisabled_3cF-"><div class="toggleTrack_32Fl" role="button" tabindex="-1"><div class="toggleTrackCheck_3lV7"><span class="toggleIcon_O4iE">🌜</span></div><div class="toggleTrackX_S2yS"><span class="toggleIcon_O4iE">🌞</span></div><div class="toggleTrackThumb_xI_Z"></div></div><input type="checkbox" class="toggleScreenReader_28Tw" aria-label="Switch between dark and light mode"></div><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input type="search" id="search_input_react" placeholder="Press S to Search..." aria-label="Search" class="navbar__search-input search-bar"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div class="main-wrapper docPageContainer_2Kz0"><div class="docPage_1bdk"><div class="docSidebarContainer_1ykS"><div class="sidebar_15mo"><nav class="menu thin-scrollbar menu_Bmed"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><a class="menu__link menu__link--sublist menu__link--active" href="#">EnumList</a><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/Roblox-Modules/api/EnumList">​Enum​List</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Roblox-Modules/api/CustomEnum">​Custom​Enum</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><a class="menu__link menu__link--sublist" href="#">Network</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/MatrixUtil">​Matrix​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/NumberUtil">​Number​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/Property">​Property</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/Queue">​Queue</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Roblox-Modules/api/WindLines">​Wind​Lines</a></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_1CGd"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_3E-R"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div><main class="docMainContainer_28N5"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_3WPG"><div class="docItemContainer_3XDu"><article><div class="member_qHIL markdown"><div class="tocCollapsible_1PrD theme-doc-toc-mobile tocMobile_3ryM"><button type="button" class="clean-btn tocCollapsibleButton_2O1e">On this page</button></div><header><h1 class="docTitle_1ddc" style="text-decoration:none"><span style="display:inline-block">Enum</span><span style="display:inline-block">List</span></h1><div class="luaClassTags_2Zrs"></div><div>
+<div role="region"><a href="#" class="skipToContent_fXgn">Skip to main content</a></div><nav class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Navigation bar toggle" class="navbar__toggle clean-btn" type="button" tabindex="0"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/libraries/"><b class="navbar__title text--truncate">libraries</b></a><a class="navbar__item navbar__link" href="/libraries/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/libraries/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/bubshayz/libraries" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_lCJq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="searchBox_ZlJk"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input type="search" id="search_input_react" placeholder="Press S to Search..." aria-label="Search" class="navbar__search-input search-bar"></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div class="main-wrapper docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/libraries/api/EnumList">EnumList</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/libraries/api/EnumList">​Enum​List</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/libraries/api/CustomEnum">​Custom​Enum</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/libraries/api/network">network</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/libraries/api/instanceUtil">instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/libraries/api/matrixUtil">matrix​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/libraries/api/numberUtil">number​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/libraries/api/Property">​Property</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/libraries/api/Queue">​Queue</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/libraries/api/windLines">wind​Lines</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Enum</span><span style="display:inline-block">List</span></h1><div class="luaClassTags_EipM"></div><div>
 <p>
   A class for creating enum lists. An enum list in layman's terms is simply an object
   used to store <em>custom</em> enums inside.
 </p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"EnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-	PhoneNumber <span class="token operator">=</span> <span class="token punctuation">{</span>
-		BabaBoey <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">,</span>
+	phoneNumber <span class="token operator">=</span> <span class="token punctuation">{</span>
+		babaBoey <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">,</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>PhoneNumber<span class="token punctuation">.</span>BabaBoey<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>phoneNumber<span class="token punctuation">.</span>babaBoey<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
 </code></pre>
 <div class="admonition admonition-tip alert alert--success">
   <div class="admonition-heading">
@@ -134,73 +132,73 @@ print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
         </svg></span>Generalization iteration!</h5>
   </div>
   <div class="admonition-content">
-    <p>EnumLists are iterable, e.g:</p>
+    <p>EnumLists are iterable, for e.g:</p>
     <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"EnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-	Test <span class="token operator">=</span> <span class="token punctuation">{</span>Alphabet <span class="token operator">=</span> <span class="token string">"A"</span><span class="token punctuation">}</span>
+	test <span class="token operator">=</span> <span class="token punctuation">{</span>alphabet <span class="token operator">=</span> <span class="token string">"A"</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
 <span class="token keyword">for</span> enumName<span class="token punctuation">,</span> enum <span class="token keyword">in</span> MyEnumList <span class="token keyword">do</span>
-	<span class="token function">print</span><span class="token punctuation">(</span>enumName<span class="token punctuation">,</span> enum<span class="token punctuation">.</span>Alphabet<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>enumName<span class="token punctuation">,</span> enum<span class="token punctuation">.</span>alphabet<span class="token punctuation">)</span>
 <span class="token keyword">end</span>
 
-<span class="token comment">--> "Test" "A"</span>
+<span class="token comment">--> "test" "A"</span>
 </code></pre>
   </div>
 </div>
-<div class="admonition admonition-note alert alert--secondary">
+<div class="admonition admonition-warning alert alert--danger">
   <div class="admonition-heading">
-    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16">
-          <path d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path>
-        </svg></span>note</h5>
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path>
+        </svg></span>warning</h5>
   </div>
   <div class="admonition-content">
-    <p>EnumLists don't provide support for deep chained enums (they're <em>not</em> idiomatic, so you shouldn't be having deep chained enums anyways), e.g:</p>
-    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> EnumList <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
-
-<span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"MyEnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-	Enum <span class="token operator">=</span> <span class="token punctuation">{</span>
-		Deep <span class="token operator">=</span> <span class="token punctuation">{</span>
-			MoreDeep <span class="token operator">=</span> <span class="token punctuation">{</span>
-				Lol <span class="token operator">=</span> <span class="token number">5</span>
+    <p>
+      EnumLists don't provide support for deep chained enums (they're <em>not</em> idiomatic, so you shouldn't be having deep chained enums anyways),
+      for e.g:
+    </p>
+    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"MyEnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+	t <span class="token operator">=</span> <span class="token punctuation">{</span>
+		deep <span class="token operator">=</span> <span class="token punctuation">{</span>
+			moreDeep <span class="token operator">=</span> <span class="token punctuation">{</span>
+				b <span class="token operator">=</span> <span class="token number">5</span>
 			<span class="token punctuation">}</span>
 		<span class="token punctuation">}</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>Deep<span class="token punctuation">.</span>MoreDeep<span class="token punctuation">.</span>none<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
-<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>Deep<span class="token punctuation">.</span>lo<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
-<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Enum<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token comment">--> will error (not a deep chain!)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>t<span class="token punctuation">.</span>deep<span class="token punctuation">.</span>moreDeep<span class="token punctuation">.</span>lol<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>t<span class="token punctuation">.</span>deep<span class="token punctuation">.</span>lo<span class="token punctuation">)</span> <span class="token comment">--> nil, but won't error..</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>t<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token comment">--> will error (as it is not a deep chain!)</span>
 </code></pre>
   </div>
 </div>
-</div></header><h2 class="anchor anchorWithStickyNavbar_31ik" id="properties">Properties<a aria-hidden="true" class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="EnumList"><code style="text-decoration:none">EnumList</code><a aria-hidden="true" class="hash-link" href="#EnumList" title="Direct link to heading">​</a></h3><span class="badge_3ZFo" style="color:#e74c3c"><span class="badgeTooltip_2qiw">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_2yaQ"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag_3qMS" style="border-color:#ff793f;color:#ff793f">Luau Type</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L72"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.<!-- -->EnumList<!-- -->:<!-- --> </code> <code class="blue_2Afy">Type</code></div><div>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="EnumList"><code style="text-decoration:none">EnumList</code><a class="hash-link" href="#EnumList" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/EnumList/init.lua#L68"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.<!-- -->EnumList<!-- -->:<!-- --> </code> <code class="blue_P4bS">Type</code></div><div>
 <p>An exported Luau type of an EnumList object.</p>
-<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> EnumList <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
-
-<span class="token keyword">local</span> MyEnumList <span class="token punctuation">:</span> EnumList<span class="token punctuation">.</span>EnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span> 
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token punctuation">:</span> EnumList<span class="token punctuation">.</span>EnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span> 
 </code></pre>
-</div><h2 class="anchor anchorWithStickyNavbar_31ik" id="functions">Functions<a aria-hidden="true" class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="new"><code style="text-decoration:none">new</code><a aria-hidden="true" class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L99"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.</code><code class="green_3LnD">new</code><code>(</code><div class="inset_2cJr"><div><code>name<!-- -->: </code><code class="blue_2Afy">string</code><code>,</code></div><div><code>enums<!-- -->: </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="green_3LnD">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy">any</code><code class="green_3LnD">}</code><code class="purple__nFc">}</code></div></div><code>) → </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/EnumList">EnumList</a></code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="name"><code style="text-decoration:none">name</code><a class="hash-link" href="#name" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/EnumList/init.lua#L81"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.<!-- -->name<!-- -->:<!-- --> </code> <code class="blue_P4bS">string</code></div><div>
+<p>The name of the enum list.</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"My"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">--> "My"</span>
+</code></pre>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="new"><code style="text-decoration:none">new</code><a class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/EnumList/init.lua#L114"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.</code><code class="green_DgR4">new</code><code>(</code><div class="inset_uKQm"><div><code>name<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>enums<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="green_DgR4">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="green_DgR4">}</code><code class="purple_ieR2">}</code></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/EnumList">EnumList</a></code></div><div>
 <p>
   A constructor method which creates a new enum list out of <code>enumItems</code>,
   with the name of <code>name</code>.
 </p>
-<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> EnumList <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Enums"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>test <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Enums"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>Test <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>Test<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>test<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
 </code></pre>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="is"><code style="text-decoration:none">is</code><a aria-hidden="true" class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L116"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->.</code><code class="green_3LnD">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_2Afy">any</code><code>) → </code><code class="blue_2Afy">boolean</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="is"><code style="text-decoration:none">is</code><a class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/EnumList/init.lua#L137"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.</code><code class="green_DgR4">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
 <p>A method which returns a boolean indicating if <code>self</code> is a enumlist or not.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getName"><code style="text-decoration:none">getName</code><a aria-hidden="true" class="hash-link" href="#getName" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L126"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->:</code><code class="green_3LnD">getName</code><code>(</code><code>) → </code><code class="blue_2Afy">string</code></div><div>
-<p>Returns the name of the enum list.</p>
-</div><div class="divider_3z1R"></div><h3 class="anchor anchorWithStickyNavbar_31ik" id="getEnums"><code style="text-decoration:none">getEnums</code><a aria-hidden="true" class="hash-link" href="#getEnums" title="Direct link to heading">​</a></h3><span class="docTag_3qMS" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_1UH0"><a class="sourceButton_2aE5" href="https://github.com/bubshayz/Roblox-Modules/blob/master/src/EnumList/init.lua#L137"><div class="sourceButtonText_monK">&lt;/&gt;</div></a></div><div class="memberString_P8-X"><code>EnumList<!-- -->:</code><code class="green_3LnD">getEnums</code><code>(</code><code>) → </code><code class="purple__nFc">{</code><span><code>[</code><code class="blue_2Afy">string</code><code>]</code></span><code>: </code><code class="blue_2Afy"><a style="text-decoration:underline;color:inherit" href="/Roblox-Modules/api/CustomEnum">CustomEnum</a></code><code class="purple__nFc">}</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getEnums"><code style="text-decoration:none">getEnums</code><a class="hash-link" href="#getEnums" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/master/src/EnumList/init.lua#L148"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->:</code><code class="green_DgR4">getEnums</code><code>(</code><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/CustomEnum">CustomEnum</a></code><code class="purple_ieR2">}</code></div><div>
 <p>Returns the enums of the enum list.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
         {
             &quot;name&quot;: &quot;new&quot;,
-            &quot;desc&quot;: &quot;A constructor method which creates a new enum list out of `enumItems`, \nwith the name of `name`.\n\n```lua\nlocal EnumList = require(...)\n\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {Test = 123})\n\nprint(MyEnumList.Test) --&gt; 123\n```&quot;,
+            &quot;desc&quot;: &quot;A constructor method which creates a new enum list out of `enumItems`, \nwith the name of `name`.\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = 123})\n\nprint(MyEnumList.test) --&gt; 123\n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;name&quot;,
@@ -221,7 +219,7 @@ print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 99,
+                &quot;line&quot;: 114,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         },
@@ -243,26 +241,7 @@ print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 116,
-                &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
-            }
-        },
-        {
-            &quot;name&quot;: &quot;getName&quot;,
-            &quot;desc&quot;: &quot;Returns the name of the enum list.&quot;,
-            &quot;params&quot;: [],
-            &quot;returns&quot;: [
-                {
-                    &quot;desc&quot;: &quot;&quot;,
-                    &quot;lua_type&quot;: &quot;string\r\n&quot;
-                }
-            ],
-            &quot;function_type&quot;: &quot;method&quot;,
-            &quot;tags&quot;: [
-                &quot;EnumList instance&quot;
-            ],
-            &quot;source&quot;: {
-                &quot;line&quot;: 126,
+                &quot;line&quot;: 137,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         },
@@ -281,7 +260,7 @@ print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
                 &quot;EnumList instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 137,
+                &quot;line&quot;: 148,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         }
@@ -289,27 +268,34 @@ print(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)
     &quot;properties&quot;: [
         {
             &quot;name&quot;: &quot;EnumList&quot;,
-            &quot;desc&quot;: &quot; \n\nAn exported Luau type of an EnumList object.\n\n```lua\nlocal EnumList = require(...)\n\nlocal MyEnumList : EnumList.EnumList = EnumList.new(...) \n```&quot;,
+            &quot;desc&quot;: &quot; \n\nAn exported Luau type of an EnumList object.\n\n```lua\nlocal MyEnumList : EnumList.EnumList = EnumList.new(...) \n```&quot;,
             &quot;lua_type&quot;: &quot;Type&quot;,
-            &quot;tags&quot;: [
-                &quot;Luau Type&quot;
-            ],
             &quot;readonly&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 72,
+                &quot;line&quot;: 68,
+                &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;name&quot;,
+            &quot;desc&quot;: &quot; \n\nThe name of the enum list.\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;My\&quot;, {}) \nprint(MyEnumList.name) --&gt; \&quot;My\&quot;\n```&quot;,
+            &quot;lua_type&quot;: &quot;string&quot;,
+            &quot;readonly&quot;: true,
+            &quot;source&quot;: {
+                &quot;line&quot;: 81,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         }
     ],
     &quot;types&quot;: [],
     &quot;name&quot;: &quot;EnumList&quot;,
-    &quot;desc&quot;: &quot; \n\nA class for creating enum lists. An enum list in layman&#x27;s terms is simply an object\nused to store *custom* enums inside.\n \n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tPhoneNumber = {\n\t\tBabaBoey = 123,\n\t}\n})\n\nprint(MyEnumList.PhoneNumber.BabaBoey) --&gt; 123\n```\n\n:::tip Generalization iteration!\n\nEnumLists are iterable, e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tTest = {Alphabet = \&quot;A\&quot;}\n})\n\nfor enumName, enum in MyEnumList do\n\tprint(enumName, enum.Alphabet)\nend\n\n--&gt; \&quot;Test\&quot; \&quot;A\&quot;\n```\n:::\n\n:::note\nEnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), e.g:\n\n```lua\nlocal EnumList = require(...)\n\nlocal MyEnumList = EnumList.new(\&quot;MyEnumList\&quot;, {\n\tEnum = {\n\t\tDeep = {\n\t\t\tMoreDeep = {\n\t\t\t\tLol = 5\n\t\t\t}\n\t\t}\n\t}\n})\n\nprint(MyEnumList.Enum.Deep.MoreDeep.none) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.Enum.Deep.lo) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.Enum.b) --&gt; will error (not a deep chain!)\n``` \n:::&quot;,
+    &quot;desc&quot;: &quot; \n\nA class for creating enum lists. An enum list in layman&#x27;s terms is simply an object\nused to store *custom* enums inside.\n \n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n\tphoneNumber = {\n\t\tbabaBoey = 123,\n\t}\n})\n\nprint(MyEnumList.phoneNumber.babaBoey) --&gt; 123\n```\n\n:::tip Generalization iteration!\n\nEnumLists are iterable, for e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n\ttest = {alphabet = \&quot;A\&quot;}\n})\n\nfor enumName, enum in MyEnumList do\n\tprint(enumName, enum.alphabet)\nend\n\n--&gt; \&quot;test\&quot; \&quot;A\&quot;\n```\n:::\n\n:::warning\nEnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), \nfor e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;MyEnumList\&quot;, {\n\tt = {\n\t\tdeep = {\n\t\t\tmoreDeep = {\n\t\t\t\tb = 5\n\t\t\t}\n\t\t}\n\t}\n})\n\nprint(MyEnumList.t.deep.moreDeep.lol) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.t.deep.lo) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)\n``` \n:::&quot;,
     &quot;source&quot;: {
-        &quot;line&quot;: 57,
+        &quot;line&quot;: 56,
         &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_35-E thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#EnumList" class="table-of-contents__link toc-highlight">EnumList</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#getEnums" class="table-of-contents__link toc-highlight">:getEnums</a></li><li><a href="#getName" class="table-of-contents__link toc-highlight">:getName</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/Roblox-Modules/assets/js/runtime~main.e24df099.js"></script>
-<script src="/Roblox-Modules/assets/js/main.7be6dd2b.js"></script>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#EnumList" class="table-of-contents__link toc-highlight">EnumList</a></li><li><a href="#name" class="table-of-contents__link toc-highlight">name</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#getEnums" class="table-of-contents__link toc-highlight">:getEnums</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/libraries/assets/js/runtime~main.f1fabd16.js"></script>
+<script src="/libraries/assets/js/main.0ef9decf.js"></script>
 </body>
 </html>
