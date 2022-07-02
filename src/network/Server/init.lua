@@ -411,6 +411,7 @@ function NetworkServer.__index:_setup(key: string, value: any)
 			local methodCallInboundMiddlewareAccumulatedResponses =
 				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
 					self._middleware.methodCallInbound,
+					key,
 					args
 				)
 
@@ -428,6 +429,7 @@ function NetworkServer.__index:_setup(key: string, value: any)
 			local methodCallOutboundMiddlewareAccumulatedResponses = networkUtil.truncateAccumulatedResponses(
 				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
 					self._middleware.methodCallOutbound,
+					key,
 					args,
 					methodResponse
 				)
