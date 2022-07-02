@@ -1,110 +1,110 @@
 --[=[
-	@class RemoteSignal
+    @class RemoteSignal
 
-	A remote signal in layman's terms is simply an object which dispatches data
-	to a client (who can listen to this data through a client remote signal) and 
-	listens to data dispatched to it self by a client (through a client remote signal).
+    A remote signal in layman's terms is simply an object which dispatches data
+    to a client (who can listen to this data through a client remote signal) and 
+    listens to data dispatched to itself by a client (through a client remote signal).
 ]=]
 
 --[=[ 
-	@prop RemoteSignal Type 
-	@within RemoteSignal
-	@readonly
+    @prop RemoteSignal Type 
+    @within RemoteSignal
+    @readonly
 
-	An exported Luau type of a remote signal.
+    An exported Luau type of remote signal.
 ]=]
 
 --[=[
-	@interface SignalConnection 
-	@within RemoteSignal	
+    @interface SignalConnection 
+    @within RemoteSignal    
 
-	.Disconnect () -> () 
-	.Connected boolean
+    .Disconnect () -> () 
+    .Connected boolean
 ]=]
 
 --[=[
-	@interface Middleware
-	@within RemoteSignal
-	.serverEvent { (client: Player, args: {any}) -> any }?,
+    @interface Middleware
+    @within RemoteSignal
+    .serverEvent { (client: Player, args: {any}) -> any }?,
 
-	`serverEvent` must be array of callbacks, if specified.
+    `serverEvent` must be array of callbacks, if specified.
 
-	### `serverEvent` 
+    ### `serverEvent` 
 
-	Callbacks in `serverEvent` are called whenever the client fires off the remote signal.
+    Callbacks in `serverEvent` are called whenever the client fires off the remote signal.
 
-	The first and *only* argument passed to each callback is just an array of arguments sent by the client. 
+    The first and *only* argument passed to each callback is just an array of arguments sent by the client. 
 
-	```lua
-	local serverEventCallbacks = {
-		function (arguments)
-			print(client:IsA("Player")) --> true (First argument is always the client!)
-		end
-	}
-	---
-	```
+    ```lua
+    local serverEventCallbacks = {
+        function (arguments)
+            print(client:IsA("Player")) --> true (First argument is always the client!)
+        end
+    }
+    ---
+    ```
 
-	:::warning Yielding not allowed
-	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
-	:::
+    :::warning Yielding is not allowed
+    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    :::
 
-	:::tip 
-	- If any of the callbacks return an **explicit** false value, then the remote signal
-	will not be fired. For e.g:
+    :::tip 
+    - If any of the callbacks return an **explicit** false value, then the remote signal
+    will not be fired. For e.g:
 
-	```lua
-	-- Server
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    -- Server
+    local Workspace = game:GetService("Workspace")
 
-	local TestNetwork = network.Server.new("Test")
-	local TestRemoteSignal = network.Server.RemoteSignal.new({
-		clientServer = {function() return false end}
-	})
+    local TestNetwork = network.Server.new("Test")
+    local TestRemoteSignal = network.Server.RemoteSignal.new({
+        clientServer = {function() return false end}
+    })
 
-	TestRemoteSignal:connect(function()
-		print("Fired") --> never prints
-	end)
+    TestRemoteSignal:connect(function()
+        print("Fired") --> never prints
+    end)
 
-	TestNetwork:append("signal", TestRemoteSignal)
-	TestNetwork:dispatch(Workspace)
+    TestNetwork:append("signal", TestRemoteSignal)
+    TestNetwork:dispatch(Workspace)
 
-	-- Client
-	local Workspace = game:GetService("Workspace")
-	
-	local testNetwork = network.client.fromParent("Test", Workspace)
-	print(testNetwork.signal:fire()) 
-	```
+    -- Client
+    local Workspace = game:GetService("Workspace")
+    
+    local testNetwork = network.client.fromParent("Test", Workspace)
+    print(testNetwork.signal:fire()) 
+    ```
 
-	- Additionally, you can modify the `arguments` table, for e.g:
+    - Additionally, you can modify the `arguments` table, for e.g:
 
-	```lua
-	-- Server
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    -- Server
+    local Workspace = game:GetService("Workspace")
 
-	local TestNetwork = network.Server.new("Test")
-	local TestRemoteSignal = network.Server.RemoteSignal.new({
-		clientServer = {
-			function(arguments) 
-				arguments[2] = 1 
-				arguments[3] = "test"
-			end
-		}
-	})
+    local TestNetwork = network.Server.new("Test")
+    local TestRemoteSignal = network.Server.RemoteSignal.new({
+        clientServer = {
+            function(arguments) 
+                arguments[2] = 1 
+                arguments[3] = "test"
+            end
+        }
+    })
 
-	TestRemoteSignal:connect(function(client, a, b)
-		print(a, b) --> 1, "test" (a and b ought to be 24, but they were modified through the middleware)
-	end)
+    TestRemoteSignal:connect(function(client, a, b)
+        print(a, b) --> 1, "test" (a and b ought to be 24, but they were modified through the middleware)
+    end)
 
-	TestNetwork:append("signal", TestRemoteSignal)
-	TestNetwork:dispatch(Workspace)
+    TestNetwork:append("signal", TestRemoteSignal)
+    TestNetwork:dispatch(Workspace)
 
-	-- Client
-	local Workspace = game:GetService("Workspace")
+    -- Client
+    local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.client.fromParent("Test", Workspace)
-	print(testNetwork.signal:fire(24, 24)) 
-	```
-	:::
+    local testNetwork = network.client.fromParent("Test", Workspace)
+    print(testNetwork.signal:fire(24, 24)) 
+    ```
+    :::
 ]=]
 
 local networkFolder = script.Parent.Parent
@@ -140,10 +140,10 @@ export type RemoteSignal = typeof(setmetatable(
 ))
 
 --[=[
-	@param middleware Middleware?
-	@return RemoteSignal
+    @param middleware Middleware?
+    @return RemoteSignal
 
-	Creates and returns a new remote signal.
+    Creates and returns a new remote signal.
 ]=]
 
 function RemoteSignal.new(middleware: Middleware?)
@@ -166,7 +166,7 @@ function RemoteSignal.new(middleware: Middleware?)
 end
 
 --[=[
-	Returns a boolean indicating if `self` is a remote signal or not.
+    Returns a boolean indicating if `self` is a remote signal or not.
 ]=]
 
 function RemoteSignal.is(self: any): boolean
@@ -174,11 +174,11 @@ function RemoteSignal.is(self: any): boolean
 end
 
 --[=[
-	@tag RemoteSignal instance
-	@return SignalConnection
+    @tag RemoteSignal instance
+    @return SignalConnection
 
-	Works almost exactly the same as [RemoteSignal:connectOnce], except the connection returned 
-	is disconnected automaticaly once `callback` is called.
+    Works almost the same as [RemoteSignal:connectOnce], except the connection returned 
+    is disconnected automatically once `callback` is called.
 ]=]
 
 function RemoteSignal.__index:connectOnce(callback: (...any) -> ()): any
@@ -186,12 +186,12 @@ function RemoteSignal.__index:connectOnce(callback: (...any) -> ()): any
 end
 
 --[=[
-	@tag RemoteSignal instance
-	@return SignalConnection
+    @tag RemoteSignal instance
+    @return SignalConnection
 
-	Connects `callback` to the remote signal so that it is called whenever the client
-	fires the remote signal. Additionally, `callback` will be passed all the arguments sent 
-	by the client.
+    Connects `callback` to the remote signal so that it is called whenever the client
+    fires the remote signal. Additionally, `callback` will be passed to all the arguments sent 
+    by the client.
 ]=]
 
 function RemoteSignal.__index:connect(callback: (...any) -> ()): any
@@ -199,9 +199,9 @@ function RemoteSignal.__index:connect(callback: (...any) -> ()): any
 end
 
 --[=[
-	@tag RemoteSignal instance
+    @tag RemoteSignal instance
 
-	Fires the arguments `...` to `client`.
+    Fires the arguments `...` to `client`.
 ]=]
 
 function RemoteSignal.__index:fireClient(client: Player, ...: any)
@@ -209,9 +209,9 @@ function RemoteSignal.__index:fireClient(client: Player, ...: any)
 end
 
 --[=[
-	@tag RemoteSignal instance
+    @tag RemoteSignal instance
 
-	Calls [remoteSignal:fireClient] on every player in the game.
+    Calls [remoteSignal:fireClient] on every player in the game.
 ]=]
 
 function RemoteSignal.__index:fireAllClients(...: any)
@@ -219,9 +219,9 @@ function RemoteSignal.__index:fireAllClients(...: any)
 end
 
 --[=[
-	@tag RemoteSignal instance
+    @tag RemoteSignal instance
 
-	Calls [remoteSignal:fireClient] on every player in the `clients` table only.
+    Calls [remoteSignal:fireClient] on every player in the `clients` table only.
 ]=]
 
 function RemoteSignal.__index:fireForClients(clients: { Player }, ...: any)
@@ -231,9 +231,9 @@ function RemoteSignal.__index:fireForClients(clients: { Player }, ...: any)
 end
 
 --[=[
-	@tag RemoteSignal instance
+    @tag RemoteSignal instance
 
-	Disconnects all connections connected via [RemoteSignal:connect] or [RemoteSignal:connectOnce].
+    Disconnects all connections connected via [RemoteSignal:connect] or [RemoteSignal:connectOnce].
 ]=]
 
 function RemoteSignal.__index:disconnectAll()
@@ -241,9 +241,9 @@ function RemoteSignal.__index:disconnectAll()
 end
 
 --[=[
-	@tag RemoteSignal instance
-	
-	Destroys the remote signal and renders it unusable.
+    @tag RemoteSignal instance
+    
+    Destroys the remote signal and renders it unusable.
 ]=]
 
 function RemoteSignal.__index:destroy()
@@ -251,7 +251,7 @@ function RemoteSignal.__index:destroy()
 end
 
 --[=[
-	@private
+    @private
 ]=]
 
 function RemoteSignal.__index:dispatch(name: string, parent: Instance)

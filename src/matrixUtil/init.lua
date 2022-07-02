@@ -1,47 +1,47 @@
 --[=[
-	@class matrixUtil
+    @class matrixUtil
 
-	A utility module for working with matrixes. A matrix is simply an array 
-	consisting of arrays, e.g:
+    A utility module for working with matrixes. A matrix is simply an array 
+    consisting of arrays, e.g:
 
-	```lua
-	local matrix = {
-		{1, 1, 2},
-		{1, 1, 1},
-		{3, 3, 3},
-	}
-	```
+    ```lua
+    local matrix = {
+        {1, 1, 2},
+        {1, 1, 1},
+        {3, 3, 3},
+    }
+    ```
 ]=]
 
 local matrixUtil = {}
 
 --[=[
-	Searches `matrix` row wise, and returns a value in a row which matches with
-	the rest of the values of that row. E.g:
+    Searches `matrix` row-wise, and returns a value in a row that matches with
+    the rest of the values of that row. E.g:
 
-	```lua
-	local matrix = {
-		{1, 1, 1},
-		{5, 5, 2}, 
-		{0, 0, 2},
-	}
+    ```lua
+    local matrix = {
+        {1, 1, 1},
+        {5, 5, 2}, 
+        {0, 0, 2},
+    }
 
-	print(matrixUtil.getMatchingRowsValue(matrix)) --> 1 (The first row is equally matched (all 1s))
-	```
+    print(matrixUtil.getMatchingRowsValue(matrix)) --> 1 (The first row is equally matched (all 1s))
+    ```
 
-	Additionally, you can specify `depth` if you want to control how far the 
-	method should check each row. For e.g: 
+    Additionally, you can specify `depth` if you want to control how far the 
+    method should check each row. For e.g: 
 
-	```lua
-	local matrix = {
-		{1, 2, 3, 4}, 
-		{5, 6, 7, 8}, 
-		{1, 1, 1, 0}, 
-	}
+    ```lua
+    local matrix = {
+        {1, 2, 3, 4}, 
+        {5, 6, 7, 8}, 
+        {1, 1, 1, 0}, 
+    }
 
-	print(matrixUtil.getMatchingRowsValue(matrix, 3)) --> 1  (The last row's first 3 values (1s) are equally matched)
-	print(matrixUtil.getMatchingRowsValue(matrix, 4)) --> nil  (No row's first 4 values are equally matched)
-	```
+    print(matrixUtil.getMatchingRowsValue(matrix, 3)) --> 1  (The last row's first 3 values (1s) are equally matched)
+    print(matrixUtil.getMatchingRowsValue(matrix, 4)) --> nil  (No row's first 4 values are equally matched)
+    ```
 ]=]
 
 function matrixUtil.getMatchingRowsValue(matrix: { { any } }, depth: number?): any
@@ -68,41 +68,41 @@ function matrixUtil.getMatchingRowsValue(matrix: { { any } }, depth: number?): a
 end
 
 --[=[
-	Searches `matrix` diagonally, and returns a value which matches with the 
-	rest of the values of the arrays in `matrix`. 
-	
-	E.g:
+    Searches `matrix` diagonally, and returns a value that matches with the 
+    rest of the values of the arrays in `matrix`. 
+    
+    E.g:
 
-	```lua
-	local matrix = {
-		{5, 0, 0},
-		{0, 5, 0},
-		{0, 0, 5},
-	}
+    ```lua
+    local matrix = {
+        {5, 0, 0},
+        {0, 5, 0},
+        {0, 0, 5},
+    }
 
-	print(matrixUtil.getMatchingDiagonalColumnsValue(matrix)) --> 1 (A column has matching values diagonally (just 5s))
-	```
+    print(matrixUtil.getMatchingDiagonalColumnsValue(matrix)) --> 1 (A column has matching values diagonally (just 5s))
+    ```
 
-	Additionally, you can specify `depth` if you want to control how far the 
-	method should search `matrix` diagonally. For e.g: 
+    Additionally, you can specify `depth` if you want to control how far the 
+    method should search `matrix` diagonally. For e.g: 
 
-	```lua
-	local matrix = {
-		{2, 0, 0, 0},
-		{0, 2, 0, 0},
-		{0, 0, 2, 0},
-		{0, 0, 0, 0},
-	}
+    ```lua
+    local matrix = {
+        {2, 0, 0, 0},
+        {0, 2, 0, 0},
+        {0, 0, 2, 0},
+        {0, 0, 0, 0},
+    }
 
-	print(matrix.getMatchingDiagonalColumnsValue(matrix, 3)) --> 2 (A column has FIRST 3 matching values diagonally (just 2s))
-	```
+    print(matrix.getMatchingDiagonalColumnsValue(matrix, 3)) --> 2 (A column has FIRST 3 matching values diagonally (just 2s))
+    ```
 ]=]
 
 function matrixUtil.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: number?): any
 	depth = depth or #matrix
 
 	-- Diagonally search from the top left side of the matrix, and return a value
-	-- from a column which matches with the rest of the diagonal columns in the
+	-- from a column that matches with the rest of the diagonal columns in the
 	-- matrix:
 	local goalColumnValue = matrix[1][1]
 
@@ -119,7 +119,7 @@ function matrixUtil.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: 
 	end
 
 	-- Diagonally search from the top right side of the matrix, and return a value
-	-- from a column which matches with the rest of the diagonal columns in the matrix:
+	-- from a column that matches with the rest of the diagonal columns in the matrix:
 	goalColumnValue = matrix[1][#matrix[1]]
 
 	for index = 1, depth do
@@ -138,31 +138,31 @@ function matrixUtil.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: 
 end
 
 --[=[
-	Searches `matrix` column wise and returns a value of a column which matches 
-	with the rest of the values of that column. E.g:
+    Searches `matrix` column-wise and returns a value of a column that matches 
+    with the rest of the values of that column. E.g:
 
-	```lua
-	local matrix = {
-		{5, 0, 0},
-		{5, 1, 0},
-		{5, 0, 1},
-	}
+    ```lua
+    local matrix = {
+        {5, 0, 0},
+        {5, 1, 0},
+        {5, 0, 1},
+    }
 
-	print(matrixUtil.getMatchingColumnsValue(matrix)) --> 5 (A column has ALL equally matching values (just 5s))
-	```
+    print(matrixUtil.getMatchingColumnsValue(matrix)) --> 5 (A column has ALL equally matching values (just 5s))
+    ```
 
-	Additionally, you can specify `depth` if you want to control how far the 
-	method should check each column. For e.g: 
+    Additionally, you can specify `depth` if you want to control how far the 
+    method should check each column. For e.g: 
 
-	```lua
-	local matrix = {
-		{5, 0, 0},
-		{5, 0, 0},
-		{2, 1, 1},
-	}
+    ```lua
+    local matrix = {
+        {5, 0, 0},
+        {5, 0, 0},
+        {2, 1, 1},
+    }
 
-	print(matrixUtil.getMatchingColumnsValue(matrix, 2)) --> 5 (A column has FIRST 2 matching values (just 5s))
-	```
+    print(matrixUtil.getMatchingColumnsValue(matrix, 2)) --> 5 (A column has FIRST 2 matching values (just 5s))
+    ```
 ]=]
 
 function matrixUtil.getMatchingColumnsValue(matrix: { { any } }, depth: number?): any

@@ -1,82 +1,82 @@
 --[=[ 
-	@class EnumList
-	@__index _prototype
+    @class EnumList
+    @__index _prototype
 
-	A class for creating enum lists. An enum list in layman's terms is simply an object
-	used to store *custom* enums inside.
+    A class for creating enum lists. An enum list in layman's terms is simply an object
+    used to store *custom* enums inside.
  
-	```lua
-	local MyEnumList = EnumList.new("EnumList", {
-		phoneNumber = {
-			babaBoey = 123,
-		}
-	})
+    ```lua
+    local MyEnumList = EnumList.new("EnumList", {
+        phoneNumber = {
+            babaBoey = 123,
+        }
+    })
 
-	print(MyEnumList.phoneNumber.babaBoey) --> 123
-	```
+    print(MyEnumList.phoneNumber.babaBoey) --> 123
+    ```
 
-	:::tip Generalization iteration!
+    :::tip Generalization iteration!
 
-	EnumLists are iterable, for e.g:
+    EnumLists are iterable, for e.g:
 
-	```lua
-	local MyEnumList = EnumList.new("EnumList", {
-		test = {alphabet = "A"}
-	})
+    ```lua
+    local MyEnumList = EnumList.new("EnumList", {
+        test = {alphabet = "A"}
+    })
 
-	for enumName, enum in MyEnumList do
-		print(enumName, enum.alphabet)
-	end
+    for enumName, enum in MyEnumList do
+        print(enumName, enum.alphabet)
+    end
 
-	--> "test" "A"
-	```
-	:::
+    --> "test" "A"
+    ```
+    :::
 
-	:::warning
-	EnumLists don't provide support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), 
-	for e.g:
+    :::warning
+    EnumLists don't provide support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), 
+    for e.g:
 
-	```lua
-	local MyEnumList = EnumList.new("MyEnumList", {
-		t = {
-			deep = {
-				moreDeep = {
-					b = 5
-				}
-			}
-		}
-	})
+    ```lua
+    local MyEnumList = EnumList.new("MyEnumList", {
+        t = {
+            deep = {
+                moreDeep = {
+                    b = 5
+                }
+            }
+        }
+    })
 
-	print(MyEnumList.t.deep.moreDeep.lol) --> nil, but won't error..
-	print(MyEnumList.t.deep.lo) --> nil, but won't error..
-	print(MyEnumList.t.b) --> will error (as it is not a deep chain!)
-	``` 
-	:::
+    print(MyEnumList.t.deep.moreDeep.lol) --> nil, but won't error..
+    print(MyEnumList.t.deep.lo) --> nil, but won't error..
+    print(MyEnumList.t.b) --> will error (as it is not a deep chain!)
+    ``` 
+    :::
 ]=]
 
 --[=[ 
-	@prop EnumList Type 
-	@within EnumList
-	@readonly
+    @prop EnumList Type 
+    @within EnumList
+    @readonly
 
-	An exported Luau type of an EnumList object.
+    An exported Luau type of an EnumList object.
 
-	```lua
-	local MyEnumList : EnumList.EnumList = EnumList.new(...) 
-	```
+    ```lua
+    local MyEnumList : EnumList.EnumList = EnumList.new(...) 
+    ```
 ]=]
 
 --[=[ 
-	@prop name string
-	@within EnumList
-	@readonly
+    @prop name string
+    @within EnumList
+    @readonly
 
-	The name of the enum list.
+    The name of the enum list.
 
-	```lua
-	local MyEnumList = EnumList.new("My", {}) 
-	print(MyEnumList.name) --> "My"
-	```
+    ```lua
+    local MyEnumList = EnumList.new("My", {}) 
+    print(MyEnumList.name) --> "My"
+    ```
 ]=]
 
 local CustomEnum = require(script.CustomEnum)
@@ -97,27 +97,27 @@ export type EnumList = typeof(setmetatable({} :: {
 }, EnumList))
 
 --[=[
-	@return EnumList
+    @return EnumList
 
-	A constructor method which creates a new enum list out of `enumItems`, 
-	with the name of `name`.
+    A constructor method that creates a new enum list out of `enumItems`, 
+    with the name of `name`.
 
-	```lua
-	local MyEnumList = EnumList.new("Enums", {test = {bo = 123}})
+    ```lua
+    local MyEnumList = EnumList.new("Enums", {test = {bo = 123}})
 
-	print(MyEnumList.test.bo) --> 123
-	```
+    print(MyEnumList.test.bo) --> 123
+    ```
 
-	:::tip
-	After an enum list is created, all of it's enums are transformed into a [CustomEnum] object. For e.g:
+    :::tip
+    After an enum list is created, all of its enums are transformed into an [CustomEnum] object. For e.g:
 
-	```lua
-	local MyEnumList = EnumList.new("Enums", {test = {bo = 123}})
+    ```lua
+    local MyEnumList = EnumList.new("Enums", {test = {bo = 123}})
 
-	print(CustomEnum.is(MyEnumList.test)) --> true
-	print(MyEnumList.test.name) --> "test"
-	```
-	:::
+    print(CustomEnum.is(MyEnumList.test)) --> true
+    print(MyEnumList.test.name) --> "test"
+    ```
+    :::
 ]=]
 
 function EnumList.new(name: string, enums: { [string]: { [string]: any } }): EnumList
@@ -134,7 +134,7 @@ function EnumList.new(name: string, enums: { [string]: { [string]: any } }): Enu
 end
 
 --[=[
-	A method which returns a boolean indicating if `self` is a enumlist or not.
+    A method that returns a boolean indicating if `self` is an enum list or not.
 ]=]
 
 function EnumList.is(self: any): boolean
@@ -142,10 +142,10 @@ function EnumList.is(self: any): boolean
 end
 
 --[=[
-	@return {[string]: CustomEnum}
-	@tag EnumList instance
+    @return {[string]: CustomEnum}
+    @tag EnumList instance
 
-	Returns the enums of the enum list.
+    Returns the enums of the enum list.
 ]=]
 
 function EnumList._prototype:getEnums(): { [string]: { [string]: CustomEnum.CustomEnum } }

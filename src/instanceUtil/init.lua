@@ -7,25 +7,25 @@ local VOXEL_GRID_RESOLUTION = 4
 local DEFAULT_DEPTH = 0.01
 
 --[=[ 
-	@class instanceUtil
+    @class instanceUtil
 
-	A utility module for working with instances.
+    A utility module for working with instances.
  
-	```lua
-	instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsCool = true})
-	print(workspace.Baseplate:GetAttributes()) --> {IsCool = true}
-	```
+    ```lua
+    instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsCool = true})
+    print(workspace.Baseplate:GetAttributes()) --> {IsCool = true}
+    ```
 ]=]
 
 local instanceUtil = {}
 
 --[=[
-	Sets the properties of `instance` from the `properties` table.
+    Sets the properties of `instance` from the `properties` table.
 
-	```lua
-	instanceUtil.setInstanceProperties(workspace.Baseplate, {Transparency = 1})
-	print(workspace.Baseplate.Transparency) --> 1
-	```
+    ```lua
+    instanceUtil.setInstanceProperties(workspace.Baseplate, {Transparency = 1})
+    print(workspace.Baseplate.Transparency) --> 1
+    ```
 ]=]
 
 function instanceUtil.setInstanceProperties(instance: Instance, properties: { [string]: any })
@@ -35,12 +35,12 @@ function instanceUtil.setInstanceProperties(instance: Instance, properties: { [s
 end
 
 --[=[
-	Sets the attributes of `instance` from the `attributes` table.
+    Sets the attributes of `instance` from the `attributes` table.
 
-	```lua
-	instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsMayoSauce = true})
-	print(workspace.Baseplate:GetAttribute("IsMayoSauce")) --> true
-	```
+    ```lua
+    instanceUtil.setInstanceAttributes(workspace.Baseplate, {IsMayoSauce = true})
+    print(workspace.Baseplate:GetAttribute("IsMayoSauce")) --> true
+    ```
 ]=]
 
 function instanceUtil.setInstanceAttributes(instance: Instance, attributes: { [string]: any })
@@ -50,19 +50,19 @@ function instanceUtil.setInstanceAttributes(instance: Instance, attributes: { [s
 end
 
 --[=[
-	Sets the collision group of `instance` to `collisionGroup`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	(BaseParts only) will have their collision group set to `collisionGroup`.
+    Sets the collision group of `instance` to `collisionGroup`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
+    (BaseParts only) will have their collision group set to `collisionGroup`.
 
-	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local PhysicsService = game:GetService("PhysicsService")
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local PhysicsService = game:GetService("PhysicsService")
+    local Workspace = game:GetService("Workspace")
 
-	PhysicsService:CreateCollisionGroup("Test")
+    PhysicsService:CreateCollisionGroup("Test")
 
-	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.Baseplate, "Test")
-	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.SomeModel, "Test")
-	```
+    instanceUtil.setInstancePhysicsCollisionGroup(Workspace.Baseplate, "Test")
+    instanceUtil.setInstancePhysicsCollisionGroup(Workspace.SomeModel, "Test")
+    ```
 ]=]
 
 function instanceUtil.setInstancePhysicsCollisionGroup(instance: Instance, collisionGroup: string)
@@ -80,24 +80,24 @@ function instanceUtil.setInstancePhysicsCollisionGroup(instance: Instance, colli
 end
 
 --[=[
-	Sets the collision group of `instance` to `Default`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	(BaseParts only) will have their collision group set to `"Default"`.
+    Sets the collision group of `instance` to `Default`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
+    (BaseParts only) will have their collision group set to `"Default"`.
 
-	```lua
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
-	local PhysicsService = game:GetService("PhysicsService")
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local PhysicsService = game:GetService("PhysicsService")
+    local Workspace = game:GetService("Workspace")
 
-	PhysicsService:CreateCollisionGroup("Test")
+    PhysicsService:CreateCollisionGroup("Test")
 
-	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.Baseplate, "Test")
-	instanceUtil.setInstancePhysicsCollisionGroup(Workspace.SomeModel, "Test")
+    instanceUtil.setInstancePhysicsCollisionGroup(Workspace.Baseplate, "Test")
+    instanceUtil.setInstancePhysicsCollisionGroup(Workspace.SomeModel, "Test")
 
-	-- Okay on second thought, let's actually remove the collision group from these
-	-- instances:
-	instanceUtil.resetInstancePhysicsCollisionGroup(Workspace.Baseplate)
-	instanceUtil.resetInstancePhysicsCollisionGroup(Workspace.SomeModel)
-	```
+    -- Okay on second thought, let's actually remove the collision group from these
+    -- instances:
+    instanceUtil.resetInstancePhysicsCollisionGroup(Workspace.Baseplate)
+    instanceUtil.resetInstancePhysicsCollisionGroup(Workspace.SomeModel)
+    ```
 ]=]
 
 function instanceUtil.resetInstancePhysicsCollisionGroup(instance: Instance)
@@ -115,24 +115,21 @@ function instanceUtil.resetInstancePhysicsCollisionGroup(instance: Instance)
 end
 
 --[=[
-	Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to `physicalProperties`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	(BaseParts only) will have their physical properties set to `physicalProperties`.
+    Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to `physicalProperties`, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
+    (BaseParts only) will have their physical properties set to `physicalProperties`.
 
-	```lua
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    local Workspace = game:GetService("Workspace")
 
-	instanceUtil.setInstancePhysicalProperties(Workspace.Baseplate, PhysicalProperties.new(5, 2, 3))
+    instanceUtil.setInstancePhysicalProperties(Workspace.Baseplate, PhysicalProperties.new(5, 2, 3))
 
-	print(Workspace.Baseplate.Density) --> 5
-	print(Workspace.Baseplate.Elasticity) --> 2
-	print(Workspace.Baseplate.ElasticityWeight) --> 3
-	```
+    print(Workspace.Baseplate.Density) --> 5
+    print(Workspace.Baseplate.Elasticity) --> 2
+    print(Workspace.Baseplate.ElasticityWeight) --> 3
+    ```
 ]=]
 
-function instanceUtil.setInstancePhysicalProperties(
-	instance: Instance,
-	physicalProperties: PhysicalProperties
-)
+function instanceUtil.setInstancePhysicalProperties(instance: Instance, physicalProperties: PhysicalProperties)
 	if instance:IsA("BasePart") then
 		instance.CustomPhysicalProperties = physicalProperties
 	else
@@ -147,26 +144,26 @@ function instanceUtil.setInstancePhysicalProperties(
 end
 
 --[=[
-	Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to the default, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
-	(BaseParts only) will have their physical properties set to the default.
+    Sets the [PhysicalProperties](https://create.roblox.com/docs/reference/engine/datatypes/PhysicalProperties) of `instance` to the default, if it is a [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart). Else, all the descendants of `instance`
+    (BaseParts only) will have their physical properties set to the default.
 
-	```lua
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    local Workspace = game:GetService("Workspace")
 
-	instanceUtil.setInstancePhysicalProperties(Workspace.Baseplate, PhysicalProperties.new(5, 2, 3))
-	
-	print(Workspace.Baseplate.Density) --> 5
-	print(Workspace.Baseplate.Elasticity) --> 2
-	print(Workspace.Baseplate.ElasticityWeight) --> 3
+    instanceUtil.setInstancePhysicalProperties(Workspace.Baseplate, PhysicalProperties.new(5, 2, 3))
+    
+    print(Workspace.Baseplate.Density) --> 5
+    print(Workspace.Baseplate.Elasticity) --> 2
+    print(Workspace.Baseplate.ElasticityWeight) --> 3
 
-	-- Okay on second thought, let's actually remove the physical properties
-	-- we've set on the instance:
-	instanceUtil.resetInstancePhysicalProperties(Workspace.Baseplate)
-	
-	print(Workspace.Baseplate.Density) --> 0.7
-	print(Workspace.Baseplate.Elasticity) --> 0.5
-	print(Workspace.Baseplate.ElasticityWeight) --> 1
-	```
+    -- Okay on second thought, let's remove the physical properties
+    -- we've set on the instance:
+    instanceUtil.resetInstancePhysicalProperties(Workspace.Baseplate)
+    
+    print(Workspace.Baseplate.Density) --> 0.7
+    print(Workspace.Baseplate.Elasticity) --> 0.5
+    print(Workspace.Baseplate.ElasticityWeight) --> 1
+    ```
 ]=]
 
 function instanceUtil.resetInstancePhysicalProperties(instance: Instance)
@@ -184,12 +181,10 @@ function instanceUtil.resetInstancePhysicalProperties(instance: Instance)
 end
 
 --[=[
-	Returns a read only dictionary of all corners of `instance`, top and bottom.
+    Returns a read-only dictionary of all corners of `instance`, top and bottom.
 ]=]
 
-function instanceUtil.getInstanceCorners(
-	instance: BasePart
-): { top: { Vector3 }, bottom: { Vector3 } }
+function instanceUtil.getInstanceCorners(instance: BasePart): { top: { Vector3 }, bottom: { Vector3 } }
 	local size = instance.Size
 
 	local frontFaceCenter = (instance.CFrame + instance.CFrame.LookVector * size.Z / 2)
@@ -217,17 +212,17 @@ function instanceUtil.getInstanceCorners(
 end
 
 --[=[
-	Returns the material the instance is lying on. If `instance` is under water, then `Enum.Material.Water` will be returned, elseif
-	`instance` is in air, then `Enum.Material.Air` will be returned.
-	
-	- The 2nd argument can be passed as a [RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) object,
-	which will be used in determining the material of `instance` through ray casting.
-	     
-	- The 3rd argument can be passed as a number (depth) which will increase the length 
-	of the ray by `depth` studs (on the Y axis). This is only useful when you want to add 
-	in more leeway in determining the material of `instance` **reliably**, since sometimes
-	the instance may be very slightly over the top of some ground due to it's geometry so in those cases,
-	the ray may not register properly. If this argument isn't specified, then it will default to `0.01`.
+    Returns the material the instance is lying on. If `instance` is underwater, then `Enum.Material.Water` will be returned, elseif
+    `instance` is in air, then `Enum.Material.Air` will be returned.
+    
+    - The 2nd argument can be passed as a [RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) object,
+    which will be used in determining the material of `instance` through ray casting.
+         
+    - The 3rd argument can be passed as a number (depth) which will increase the length 
+    of the ray by `depth` studs (on the Y-axis). This is only useful when you want to add 
+    in more leeway in determining the material of `instance` **reliably**, since sometimes
+    the instance may be very slightly over the top of some ground due to its geometry so in those cases,
+    the ray may not register properly. If this argument isn't specified, then it will default to `0.01`.
 ]=]
 
 function instanceUtil.getInstanceFloorMaterial(
@@ -241,11 +236,7 @@ function instanceUtil.getInstanceFloorMaterial(
 		return Enum.Material.Water
 	end
 
-	local groundInstanceMaterial = instanceUtil._getGroundInstanceMaterial(
-		instance,
-		raycastParams,
-		depth
-	)
+	local groundInstanceMaterial = instanceUtil._getGroundInstanceMaterial(instance, raycastParams, depth)
 
 	if groundInstanceMaterial then
 		return groundInstanceMaterial
@@ -255,13 +246,13 @@ function instanceUtil.getInstanceFloorMaterial(
 end
 
 --[=[
-	Sets the network owner of `instance` to `networkOwner` *safely*.
+    Sets the network owner of `instance` to `networkOwner` *safely*.
 
-	:::tip
-	This method should be preferred over directly setting the network owner of `instance` 
-	via [SetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#SetNetworkOwner), as
-	it won't error in cases where the network ownership API cannot be used on `instance`.
-	::: 
+    :::tip
+    This method should be preferred over directly setting the network owner of `instance` 
+    via [SetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#SetNetworkOwner), as
+    it won't error in cases where the network ownership API cannot be used on `instance`.
+    ::: 
 ]=]
 
 function instanceUtil.setInstanceNetworkOwner(instance: BasePart, networkOwner: Player?)
@@ -273,13 +264,13 @@ function instanceUtil.setInstanceNetworkOwner(instance: BasePart, networkOwner: 
 end
 
 --[=[
-	Returns the network owner of `instance` *safely*.
-	
-	:::tip
-	This method should be preferred over directly getting the network owner of `instance` 
-	via [GetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#GetNetworkOwner), as
-	it will safely return `nil` in cases where the network ownership API cannot be used on `instance`.
-	::: 
+    Returns the network owner of `instance` *safely*.
+    
+    :::tip
+    This method should be preferred over directly getting the network owner of `instance` 
+    via [GetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#GetNetworkOwner), as
+    it will safely return `nil` in cases where the network ownership API cannot be used on `instance`.
+    ::: 
 ]=]
 
 function instanceUtil.getInstanceNetworkOwner(instance: BasePart): Player?
@@ -318,9 +309,7 @@ function instanceUtil._isInstanceInWater(instance: BasePart): boolean
 	local halfSize = instance.Size / 2
 
 	return Workspace.Terrain:ReadVoxels(
-		Region3.new(instance.Position - halfSize, instance.Position + halfSize):ExpandToGrid(
-			VOXEL_GRID_RESOLUTION
-		),
+		Region3.new(instance.Position - halfSize, instance.Position + halfSize):ExpandToGrid(VOXEL_GRID_RESOLUTION),
 		VOXEL_GRID_RESOLUTION
 	)[1][1][1] == Enum.Material.Water
 end

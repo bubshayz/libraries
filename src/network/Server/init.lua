@@ -1,207 +1,207 @@
 --[=[
-	@class NetworkServer
-	@server
+    @class NetworkServer
+    @server
 
-	The server counterpart of the [network] module.
+    The server counterpart of the [network] module.
 ]=]
 
 --[=[ 
-	@prop RemoteProperty RemoteProperty
-	@within NetworkServer
-	@readonly
+    @prop RemoteProperty RemoteProperty
+    @within NetworkServer
+    @readonly
 
-	A reference to the [RemoteProperty] module.
+    A reference to the [RemoteProperty] module.
 ]=]
 
 --[=[ 
-	@prop RemoteProperty RemoteSignal
-	@within NetworkServer
-	@readonly
+    @prop RemoteProperty RemoteSignal
+    @within NetworkServer
+    @readonly
 
-	A reference to the [RemoteSignal] module.
+    A reference to the [RemoteSignal] module.
 ]=]
 
 --[=[ 
-	@prop NetworkServer Type 
-	@within NetworkServer
-	@readonly
+    @prop NetworkServer Type 
+    @within NetworkServer
+    @readonly
 
-	An exported Luau type of a network object.
+    An exported Luau type of a network object.
 ]=]
 
 --[=[
-	@interface Middleware
-	@within NetworkServer
-	.methodCallInbound { (methodName: string, args: {any}) -> boolean}?
-	.methodCallOutbound {(methodName: string, args: {any}, methodResponse: any) -> any}?
+    @interface Middleware
+    @within NetworkServer
+    .methodCallInbound { (methodName: string, args: {any}) -> boolean}?
+    .methodCallOutbound {(methodName: string, args: {any}, methodResponse: any) -> any}?
 
-	Both `methodCallInbound` and `methodCallOutbound` must be array of callbacks, if specified. 
+    Both `methodCallInbound` and `methodCallOutbound` must be an array of callbacks if specified. 
 
-	### `methodCallInbound` 
+    ### `methodCallInbound` 
 
-	Callbacks in `methodCallInbound` are called whenever a client tries to call any of the appended methods of the network. 
+    Callbacks in `methodCallInbound` are called whenever a client tries to call any of the appended methods of the network. 
 
-	The first argument passed to each callback is the name of the method (the client called), and the second argument, i.e 
-	the arguments sent by the client, which are are packed into an array. 
-	
-	```lua
-	local methodCallInboundCallbacks = {
-		function (methodName, arguments)
-			print(arguments[1]:IsA("Player")) --> true (the first argument is always the client)
-			print(typeof(arguments)) --> "table"
-		end
-	}
-	---
-	```
+    The first argument passed to each callback is the name of the method (the client called), and the second argument, i.e 
+    the arguments sent by the client, which are packed into an array. 
+    
+    ```lua
+    local methodCallInboundCallbacks = {
+        function (methodName, arguments)
+            print(arguments[1]:IsA("Player")) --> true (the first argument is always the client)
+            print(typeof(arguments)) --> "table"
+        end
+    }
+    ---
+    ```
 
-	:::warning Yielding not allowed
-	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
-	:::
+    :::warning Yielding is not allowed
+    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    :::
 
-	:::tip 
-	- If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
-	called. This is useful as you can implement for e.g, implementing rate limits!
+    :::tip 
+    - If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
+    called. This is useful as you can implement for e.g, implementing rate limits!
 
-	- Additionally, you can modify the `arguments` table which will be reflected to the method, for e.g:
+    - Additionally, you can modify the `arguments` table which will be reflected in the method, for e.g:
 
-	```lua
-	-- Server
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    -- Server
+    local Workspace = game:GetService("Workspace")
 
-	local TestNetwork = Network.Server.new("Test", {methodCallInbound = {
-		function(_, arguments) arguments[2] = "test" end
-	}})
-	TestNetwork:append("method", function(player, a)
-		print(a) --> "test" (a ought to be 1, but the middleware modified it!)
-	end)
-	TestNetwork:dispatch(Workspace)
+    local TestNetwork = Network.Server.new("Test", {methodCallInbound = {
+        function(_, arguments) arguments[2] = "test" end
+    }})
+    TestNetwork:append("method", function(player, a)
+        print(a) --> "test" (a ought to be 1, but the middleware modified it!)
+    end)
+    TestNetwork:dispatch(Workspace)
 
-	-- Client
-	local testNetwork = network.client.fromParent("Test", Workspace)
-	estNetwork.method(1) 
-	```
-	:::
+    -- Client
+    local testNetwork = network.client.fromParent("Test", Workspace)
+    estNetwork.method(1) 
+    ```
+    :::
 
-	### `methodCallOutbound` 
+    ### `methodCallOutbound` 
 
-	Callbacks in `methodCallOutbound` are called whenever a method (appended to the network) is called by the client, and 
-	has **finished** running.  
+    Callbacks in `methodCallOutbound` are called whenever a method (appended to the network) is called by the client, and 
+    has **finished** running.  
 
-	The first argument passed to each callback is the name of the method (client called), and the second argument, i.e 
-	the arguments sent by the client, which are are packed into an array. 
+    The first argument passed to each callback is the name of the method (client called), and the second argument, i.e 
+    the arguments sent by the client, which are packed into an array. 
 
-	```lua
-	local methodCallOutboundCallbacks = {
-		function (methodName, arguments)
-			print(arguments[1]:IsA("Player")) --> true (the first argument is always the client)
-			print(typeof(arguments)) --> "table"
-		end
-	}
-	---
-	```
+    ```lua
+    local methodCallOutboundCallbacks = {
+        function (methodName, arguments)
+            print(arguments[1]:IsA("Player")) --> true (the first argument is always the client)
+            print(typeof(arguments)) --> "table"
+        end
+    }
+    ---
+    ```
 
-	:::warning Yielding not allowed
-	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
-	:::
+    :::warning Yielding is not allowed
+    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    :::
 
-	:::tip 
-	A third argument i.e `methodResponse` is passed to each callback as well, which is just the response of the method called. For e.g:
+    :::tip 
+    A third argument i.e `methodResponse` is passed to each callback as well, which is just the response of the method called. For e.g:
 
-	```lua
-	-- Server:
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    -- Server:
+    local Workspace = game:GetService("Workspace")
 
-	local middleware = {
-		methodCallOutbound = {
-			{
-				function (methodName, arguments, methodResponse)
-					print(methodResponse) --> "this"
-					return "oops modified"
-				end
-			}
-		}
-	}
+    local middleware = {
+        methodCallOutbound = {
+            {
+                function (methodName, arguments, methodResponse)
+                    print(methodResponse) --> "this"
+                    return "oops modified"
+                end
+            }
+        }
+    }
 
-	local Network = network.Server.new("test", middleware)
-	Network:append("SomeMethod", function()
-		return "this"
-	end)
-	Network:dispatch(Workspace)
+    local Network = network.Server.new("test", middleware)
+    Network:append("SomeMethod", function()
+        return "this"
+    end)
+    Network:dispatch(Workspace)
 
-	-- Client:
-	local Workspace = game:GetService("Workspace")
+    -- Client:
+    local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.client.fromParent("test", Workspace):expect()
-	print(testNetwork.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
-	```
+    local testNetwork = network.client.fromParent("test", Workspace):expect()
+    print(testNetwork.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
+    ```
 
-	Additionally, these callbacks can return a value which'll override the actual result of the method (which will be sent
-	back to the client). For e.g:
+    Additionally, these callbacks can return a value that overrides the actual result of the method (which will be sent
+    back to the client). For e.g:
 
-	```lua
-	-- Server:
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    -- Server:
+    local Workspace = game:GetService("Workspace")
 
-	local middleware = {
-		{
-			function (methodName, arguments, methodResponse)
-				print(methodResponse) --> "this"
-				return 50
-			end
-		}
-	}
+    local middleware = {
+        {
+            function (methodName, arguments, methodResponse)
+                print(methodResponse) --> "this"
+                return 50
+            end
+        }
+    }
 
-	local TestNetwork = network.Server.new("test", middleware)
-	TestNetwork:append("SomeMethod", function()
-		return "this"
-	end)
-	TestNetwork:dispatch(Workspace)
+    local TestNetwork = network.Server.new("test", middleware)
+    TestNetwork:append("SomeMethod", function()
+        return "this"
+    end)
+    TestNetwork:dispatch(Workspace)
 
-	-- Client:
-	local Workspace = game:GetService("Workspace")
+    -- Client:
+    local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.fromParent("test", Workspace):expect()
-	print(testNetwork.SomeMethod()) --> 50 
-	```
+    local testNetwork = network.fromParent("test", Workspace):expect()
+    print(testNetwork.SomeMethod()) --> 50 
+    ```
 
-	Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
-	back to the client. This is by design - as it isn't really ideal to disregard all returned values for just 1.
-	
-	For e.g: 
-	
-	```lua
-	-- Server:
-	local Workspace = game:GetService("Workspace")
+    Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
+    back to the client. This is by design - as it isn't ideal to disregard all returned values for just 1.
+    
+    For e.g: 
+    
+    ```lua
+    -- Server:
+    local Workspace = game:GetService("Workspace")
 
-	local middleware = {
-		{
-			function (methodName, arguments, response)
-				return 1
-			end,
+    local middleware = {
+        {
+            function (methodName, arguments, response)
+                return 1
+            end,
 
-			function (methodName, arguments, response)
-				return 2
-			end,
+            function (methodName, arguments, response)
+                return 2
+            end,
 
-			function (methodName, arguments, response)
-				return 3
-			end
-		}
-	}
+            function (methodName, arguments, response)
+                return 3
+            end
+        }
+    }
 
-	local TestNetwork = network.server.new("test", middleware)
-	TestNetwork:append("someMethod", function()
-		return "this"
-	end)
-	TestNetwork:dispatch(Workspace)
+    local TestNetwork = network.server.new("test", middleware)
+    TestNetwork:append("someMethod", function()
+        return "this"
+    end)
+    TestNetwork:dispatch(Workspace)
 
-	-- Client:
-	local Workspace = game:GetService("Workspace")
+    -- Client:
+    local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.client.fromParent("test", Workspace):expect()
-	print(testNetwork.someMethod()) --> {1, 2, 3} 
-	```
-	:::
+    local testNetwork = network.client.fromParent("test", Workspace):expect()
+    print(testNetwork.someMethod()) --> {1, 2, 3} 
+    ```
+    :::
 ]=]
 
 local packages = script.Parent.Parent
@@ -250,15 +250,15 @@ local function getDefaultMiddleware()
 end
 
 --[=[
-	@param middleware Middleware?
-	@return NetworkServer
+    @param middleware Middleware?
+    @return NetworkServer
 
-	Creates and returns a new network object of the name i.e `name`. 
-	
-	:::note
-	The network object will initially not be available to the client, you need to call [NetworkServer:dispatch] 
-	in order to render the network object accessible to the client!
-	:::
+    Creates and returns a new network object of the name i.e `name`. 
+    
+    :::note
+    The network object will initially not be available to the client, you need to call [NetworkServer:dispatch] 
+    to render the network object accessible to the client!
+    :::
 ]=]
 
 function NetworkServer.new(name: string, middleware: Middleware?): NetworkServer
@@ -282,7 +282,7 @@ function NetworkServer.new(name: string, middleware: Middleware?): NetworkServer
 end
 
 --[=[
-	Returns a boolean indicating if `self` is a network object or not.
+    Returns a boolean indicating if `self` is a network object or not.
 ]=]
 
 function NetworkServer.is(self: any): boolean
@@ -290,12 +290,12 @@ function NetworkServer.is(self: any): boolean
 end
 
 --[=[
-	Returns a boolean indicating if the network object is dispatched to the 
-	client or not. 
+    Returns a boolean indicating if the network object is dispatched to the 
+    client or not. 
 
-	:::note
-	This method will always return false if the network object is destroyed.
-	:::
+    :::note
+    This method will always return false if the network object is destroyed.
+    :::
 ]=]
 
 function NetworkServer.__index:isDispatched(): boolean
@@ -303,42 +303,42 @@ function NetworkServer.__index:isDispatched(): boolean
 end
 
 --[=[
-	@param value any
+    @param value any
 
-	Appends a key value pair, `key` and `value`, to the network object, so that
-	it is available to the client once the network object is dispatched. 
+    Appends a key-value pair, `key` and `value`, to the network object, so that
+    it is available to the client once the network object is dispatched. 
 
-	For e.g:
+    For e.g:
 
-	```lua
-	-- Server
-	local Workspace = game:GetService("Workspace")
+    ```lua
+    -- Server
+    local Workspace = game:GetService("Workspace")
 
-	local TestNetwork = Network.Server.new("test")
-	TestNetwork:append("key", "the value!")
-	TestNetwork:dispatch(Workspace)
+    local TestNetwork = Network.Server.new("test")
+    TestNetwork:append("key", "the value!")
+    TestNetwork:dispatch(Workspace)
 
-	-- Client
-	local testNetwork = Network.client.fromParent("test", Workspace):expect()
-	print(testNetwork.key) --> "the value!"
-	```
+    -- Client
+    local testNetwork = Network.client.fromParent("test", Workspace):expect()
+    print(testNetwork.key) --> "the value!"
+    ```
 
-	:::tip
-	You can also append a [RemoteSignal] and a [RemoteProperty] as well, they'll be represented as a [ClientRemoteSignal] and a [ClientRemoteProperty]
-	to the client respectively!
-	:::	
+    :::tip
+    You can also append a [RemoteSignal] and a [RemoteProperty] as well, they'll be represented as a [ClientRemoteSignal] and a [ClientRemoteProperty]
+    to the client respectively!
+    ::: 
 
-	:::note
-	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	apply, as remote functions are internally used the key value pairs accessible to the clients.
-	:::
+    :::note
+    [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
+    apply, as remote functions are internally used the key-value pairs accessible to the clients.
+    :::
 
-	:::warning
-	This method will error if the network object is dispatched to the client. 
-	Always make sure to append keys and values *before* you dispatch the 
-	network object. You can check if a network object is dispatched to the 
-	client or not through [NetworkServer:dispatched].
-	:::
+    :::warning
+    This method will error if the network object is dispatched to the client. 
+    Always make sure to append keys and values *before* you dispatch the 
+    network object. You can check if a network object is dispatched to the 
+    client or not through [NetworkServer:dispatched].
+    :::
 ]=]
 
 function NetworkServer.__index:append(key: string, value: any)
@@ -349,14 +349,14 @@ function NetworkServer.__index:append(key: string, value: any)
 end
 
 --[=[
-	Dispatches the network folder of the network object to `parent`, rendering
-	the network object accessible to the client now.
+    Dispatches the network folder of the network object to `parent`, rendering
+    the network object accessible to the client now.
 
-	:::warning
-	If another network object of the same name as this network object, is already
-	dispatched to `parent`, then this method will error - you can't have more than 
-	1 network object of the same name dispatched to the same instance!
-	:::
+    :::warning
+    If another network object of the same name as this network object is already
+    dispatched to `parent`, then this method will error - you can't have more than 
+    1 network object of the same name dispatched to the same instance!
+    :::
 ]=]
 
 function NetworkServer.__index:dispatch(parent: Instance)
@@ -367,9 +367,9 @@ function NetworkServer.__index:dispatch(parent: Instance)
 end
 
 --[=[
-	Destroys the network object and all appended remote properties &
-	remote signals within the network object, and renders the network 
-	object useless. 
+    Destroys the network object and all appended remote properties &
+    remote signals within the network object, and renders the network 
+    object useless. 
 ]=]
 
 function NetworkServer.__index:destroy()
@@ -416,7 +416,7 @@ function NetworkServer.__index:_setup(key: string, value: any)
 				)
 
 			-- If there is an explicit false value included in the accumulated
-			-- response of all inbound method callbacks, then that means we should
+			-- the response of all inbound method callbacks, then that means we should
 			-- avoid this client's request to call the method!
 			if
 				methodCallInboundMiddlewareAccumulatedResponses

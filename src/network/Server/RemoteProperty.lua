@@ -1,124 +1,124 @@
 --[=[
-	@class RemoteProperty
+    @class RemoteProperty
 
-	A remote property in layman's terms is simply an  object which can store in some value for 
-	all players as well as store in values specific to players. 
+    A remote property in layman's terms is simply an  object which can store some value for 
+    all players as well as store in values specific to players. 
 ]=]
 
 --[=[ 
-	@prop updated Signal <newValue: any>
-	@within RemoteProperty
-	@readonly
-	@tag Signal
-	@tag RemoteProperty Instance
+    @prop updated Signal <newValue: any>
+    @within RemoteProperty
+    @readonly
+    @tag Signal
+    @tag RemoteProperty Instance
 
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value 
-	of the remote property is set to a new one. The signal is only passed the new value as the only argument.
+    A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value 
+    of the remote property is set to a new one. The signal is only passed the new value as the only argument.
 ]=]
 
 --[=[ 
-	@prop clientValueUpdated Signal <client: Player, newValue: any>
-	@within RemoteProperty
-	@readonly
-	@tag Signal
-	@tag RemoteProperty Instance
+    @prop clientValueUpdated Signal <client: Player, newValue: any>
+    @within RemoteProperty
+    @readonly
+    @tag Signal
+    @tag RemoteProperty Instance
 
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value 
-	of `player` specifically in the remote property is set to a new one. The signal is passed the player 
-	as the first argument, and the new specific value of `player` set in the remote property, as the second argument. 
+    A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired whenever the value 
+    of `player` specifically in the remote property is set to a new one. The signal is passed the player 
+    as the first argument, and the new specific value of `player` set in the remote property, as the second argument. 
 ]=]
 
 --[=[ 
-	@prop RemoteProperty Type 
-	@within RemoteProperty
-	@readonly
+    @prop RemoteProperty Type 
+    @within RemoteProperty
+    @readonly
 
-	An exported Luau type of a remote property.
+    An exported Luau type of a remote property.
 ]=]
 
 --[=[
-	@interface Middleware
-	@within RemoteProperty
-	.clientSet { (client: Player, value: any) -> any }?,
+    @interface Middleware
+    @within RemoteProperty
+    .clientSet { (client: Player, value: any) -> any }?,
 
-	`clientSet` must be an array of callbacks, if specified.
+    `clientSet` must be an array of callbacks, if specified.
 
-	### clientSet
+    ### clientSet
 
-	Callbacks in `clientSet` are called whenever the client tries to set the value of the remote property
-	*for them selves specifically*.
+    Callbacks in `clientSet` are called whenever the client tries to set the value of the remote property
+    *for themselves specifically*.
 
-	The first and *only* argument passed to each callback is just the client. 
+    The first and *only* argument passed to each callback is just the client. 
 
-	```lua
-	local clientSetCallbacks = {
-		function (client)
-			print(client:IsA("Player")) --> true 
-		end
-	}
-	---
-	```
+    ```lua
+    local clientSetCallbacks = {
+        function (client)
+            print(client:IsA("Player")) --> true 
+        end
+    }
+    ---
+    ```
 
-	:::warning Yielding not allowed
-	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
-	:::
+    :::warning Yielding is not allowed
+    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    :::
 
-	:::tip
-	A callback can return a non-nil value, which will then be set as the value for the client in the remote property.
-	This is useful in cases where you want to have more control over what values the client can set for them in the remote
-	property.
-	
-	For e.g:
+    :::tip
+    A callback can return a non-nil value, which will then be set as the value for the client in the remote property.
+    This is useful in cases where you want to have more control over what values the client can set for them in the remote
+    property.
+    
+    For e.g:
 
-	```lua
-	-- Server
-	local Workspace = game:GetService("Workspace")
-	
-	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
-		clientSet = {function() return "rickrolled" end}
-	})
+    ```lua
+    -- Server
+    local Workspace = game:GetService("Workspace")
+    
+    local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
+        clientSet = {function() return "rickrolled" end}
+    })
 
-	local TestNetwork = Network.Server.new("Test")
-	TestNetwork:append("property", TestRemoteProperty)
-	TestNetwork:dispatch(Workspace)
+    local TestNetwork = Network.Server.new("Test")
+    TestNetwork:append("property", TestRemoteProperty)
+    TestNetwork:dispatch(Workspace)
 
-	-- Client
-	local Workspace = game:GetService("Workspace")
+    -- Client
+    local Workspace = game:GetService("Workspace")
 
-	local TestNetwork = network.client.fromParent("Test", Workspace):expect()
-	TestNetwork.property:set(1)
-	print(TestNetwork.updated:Wait()) --> "rickrolled" (This ought to print 1, but our middleware returned a custom value!)
-	```
+    local TestNetwork = network.client.fromParent("Test", Workspace):expect()
+    TestNetwork.property:set(1)
+    print(TestNetwork.updated:Wait()) --> "rickrolled" (This ought to print 1, but our middleware returned a custom value!)
+    ```
 
-	Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
-	back to the client. This is by design - as it isn't really ideal to disregard all returned values for just 1. 
-	
-	For e.g:
+    Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
+    back to the client. This is by design - as it isn't ideal to disregard all returned values for just 1. 
+    
+    For e.g:
 
-	```lua
-	-- Server
-	local Workspace = game:GetService("Workspace")
-	
-	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
-		clientSet = {
-			function() return "rickrolled" end,
-			function() return "oof" end,
-			function() return "hello" end
-		}
-	})
+    ```lua
+    -- Server
+    local Workspace = game:GetService("Workspace")
+    
+    local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
+        clientSet = {
+            function() return "rickrolled" end,
+            function() return "oof" end,
+            function() return "hello" end
+        }
+    })
 
-	local TestNetwork = Network.Server.new("Test")
-	TestNetwork:append("property", TestRemoteProperty)
-	TestNetwork:dispatch(Workspace)
+    local TestNetwork = Network.Server.new("Test")
+    TestNetwork:append("property", TestRemoteProperty)
+    TestNetwork:dispatch(Workspace)
 
-	-- Client
-	local Workspace = game:GetService("Workspace")
+    -- Client
+    local Workspace = game:GetService("Workspace")
 
-	local TestNetwork = network.client.fromParent("Test", Workspace):expect()
-	TestNetwork.property:set(1)
-	print(TestNetwork.updated:Wait()) --> {"oofed", "rickrolled", "hello"} 
-	```
-	:::
+    local TestNetwork = network.client.fromParent("Test", Workspace):expect()
+    TestNetwork.property:set(1)
+    print(TestNetwork.updated:Wait()) --> {"oofed", "rickrolled", "hello"} 
+    ```
+    :::
 ]=]
 
 local Players = game:GetService("Players")
@@ -166,10 +166,10 @@ local function getDefaultMiddleware()
 end
 
 --[=[
-	@return RemoteProperty
-	@param middleware Middleware?
+    @return RemoteProperty
+    @param middleware Middleware?
 
-	Creates and returns a new remote property with the value of `initialValue`.
+    Creates and returns a new remote property with the value of `initialValue`.
 ]=]
 
 function RemoteProperty.new(initialValue: any, middleware: Middleware?)
@@ -196,7 +196,7 @@ function RemoteProperty.new(initialValue: any, middleware: Middleware?)
 end
 
 --[=[
-	Returns a boolean indicating if `self` is a remote property or not.
+    Returns a boolean indicating if `self` is a remote property or not.
 ]=]
 
 function RemoteProperty.is(self: any): boolean
@@ -204,9 +204,9 @@ function RemoteProperty.is(self: any): boolean
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Returns the current value set for the remote property.
+    Returns the current value set for the remote property.
 ]=]
 
 function RemoteProperty.__index:get(): any
@@ -214,9 +214,9 @@ function RemoteProperty.__index:get(): any
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Calls [RemoteProperty:setForClient] for all clients in `clients`.
+    Calls [RemoteProperty:setForClient] for all clients in `clients`.
 ]=]
 
 function RemoteProperty.__index:setForClients(clients: { Player }, value: any)
@@ -226,17 +226,17 @@ function RemoteProperty.__index:setForClients(clients: { Player }, value: any)
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Sets the value of the remote property for `client` *specifically*, to `value`. 
-		
-	:::note
-	- [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	apply, as remote functions are internally used to render `value` accessible to the respective clients.
+    Sets the value of the remote property for `client` *specifically*, to `value`. 
+        
+    :::note
+    - [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
+    apply, as remote functions are internally used to render `value` accessible to the respective clients.
 
-	- Setting the value for `client` to `nil` will **not** remove the client's value -- call [RemoteProperty:removeForClient]
-	to do that.
-	:::
+    - Setting the value for `client` to `nil` will **not** remove the client's value -- call [RemoteProperty:removeForClient]
+    to do that.
+    :::
 ]=]
 
 function RemoteProperty.__index:setForClient(client: Player, value: any)
@@ -247,9 +247,9 @@ function RemoteProperty.__index:setForClient(client: Player, value: any)
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Removes the value stored for `client` *specifically* in the the remote property.
+    Removes the value stored for `client` *specifically* in the remote property.
 ]=]
 
 function RemoteProperty.__index:removeForClient(client: Player)
@@ -268,9 +268,9 @@ function RemoteProperty.__index:removeForClient(client: Player)
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Calls [RemoteProperty:removeForClient] for all clients in the `clients` table.
+    Calls [RemoteProperty:removeForClient] for all clients in the `clients` table.
 ]=]
 
 function RemoteProperty.__index:removeForClients(clients: { Player })
@@ -280,10 +280,10 @@ function RemoteProperty.__index:removeForClients(clients: { Player })
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Returns a boolean indicating if there is a specific value stored for `client` 
-	in the remote property.
+    Returns a boolean indicating if there is a specific value stored for `client` 
+    in the remote property.
 ]=]
 
 function RemoteProperty.__index:hasClientValueSet(client: Player): boolean
@@ -293,9 +293,9 @@ function RemoteProperty.__index:hasClientValueSet(client: Player): boolean
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Returns the value stored *specifically* for `client` in the remote property. 
+    Returns the value stored *specifically* for `client` in the remote property. 
 ]=]
 
 function RemoteProperty.__index:getForClient(client: Player): any
@@ -306,14 +306,14 @@ function RemoteProperty.__index:getForClient(client: Player): any
 end
 
 --[=[
-	@tag RemoteProperty instance
+    @tag RemoteProperty instance
 
-	Sets the value of the remote property to `value`.
+    Sets the value of the remote property to `value`.
 
-	:::note
-	[Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
-	apply, as remote functions are internally used to render `value` accessible to the respective clients.
-	:::
+    :::note
+    [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
+    apply, as remote functions are internally used to render `value` accessible to the respective clients.
+    :::
 ]=]
 
 function RemoteProperty.__index:set(value: any)
@@ -321,9 +321,9 @@ function RemoteProperty.__index:set(value: any)
 end
 
 --[=[
-	@tag RemoteProperty instance
-	
-	Destroys the remote property and renders it unusable.
+    @tag RemoteProperty instance
+    
+    Destroys the remote property and renders it unusable.
 ]=]
 
 function RemoteProperty.__index:destroy()
@@ -331,7 +331,7 @@ function RemoteProperty.__index:destroy()
 end
 
 --[=[
-	@private
+    @private
 ]=]
 
 function RemoteProperty.__index:dispatch(name: string, parent: Instance)

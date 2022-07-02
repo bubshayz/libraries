@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # Installation
 
-My open sourced Roblox modules can be installed via [Wally](https://wally.run/) *only*.
+My open-sourced Roblox modules can be installed via [Wally](https://wally.run/) *only*.
 
 ## Wally Setup
 
-Once Wally is installed, run `wally init` on your project directory, and then add the various open sourced modules that you need, 
+Once Wally is installed, run `wally init` on your project directory, and then add the various open-sourced modules that you need, 
 as wally dependencies. For e.g, the following may be a `wally.toml` file for a project that includes a `number` wally package:
 
 ```toml
@@ -22,7 +22,7 @@ realm = "shared"
 numberUtil = "bubshayz/numberUtil@1.0.9"
 ```
 
-Now, to install these dependencies, run `wally install` within your project. Wally will  then create a package folder in your directory with the installed dependencies. Then use [Rojo](https://rojo.space/) to sync in the package folder to Studio.
+Now, to install these dependencies, run `wally install` within your project. Wally will then create a package folder in your directory with the installed dependencies. Then use [Rojo](https://rojo.space/) to sync in the package folder to Studio.
 
 ## Usage Example
 

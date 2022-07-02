@@ -132,7 +132,7 @@ function windLines.setConfig(newConfig: types.WindLinesConfig)
 	ConfigInterface(newConfig)
 
 	-- Copy over the new config to the current config as directly setting it will
-	-- cause an error since windLines is table.freezed:
+	-- cause an error since windLines is read only:
 	for key, value in newConfig do
 		windLines._config[key] = value
 	end

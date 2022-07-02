@@ -1,31 +1,31 @@
 --[=[
-	@class ClientRemoteProperty
+    @class ClientRemoteProperty
 
-	The clientside counterpart of [RemoteProperty]. A client remote property 
-	in layman's terms is just an object connected to a serverside remote property.
+    The clientside counterpart of [RemoteProperty]. A client remote property 
+    in layman's terms is just an object connected to a serverside remote property.
 ]=]
 
 --[=[ 
-	@prop updated Signal <newValue: any>
-	@within ClientRemoteProperty
-	@readonly
-	@tag Signal
-	@tag ClientRemoteProperty instance
+    @prop updated Signal <newValue: any>
+    @within ClientRemoteProperty
+    @readonly
+    @tag Signal
+    @tag ClientRemoteProperty instance
 
-	A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired, whenever the value 
-	of the serverside remote property (to which this client remote property is connected to) is updated.
-	
-	Incase if the client has a specific value set for them in the serverside remote property, then this signal
-	will only fire if *that* value has updated.
+    A [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired, whenever the value 
+    of the serverside remote property (to which this client remote property is connected) is updated.
+    
+    Incase the client has a specific value set for them in the serverside remote property, then this signal
+    will only fire if *that* value has been updated.
 ]=]
 
 --[=[ 
-	@prop ClientRemoteProperty Type 
-	@within ClientRemoteProperty
-	
-	@readonly
+    @prop ClientRemoteProperty Type 
+    @within ClientRemoteProperty
+    
+    @readonly
 
-	An exported Luau type of a client remote property object.
+    An exported Luau type of a client remote property object.
 ]=]
 
 local packages = script.Parent.Parent.Parent
@@ -45,7 +45,7 @@ export type ClientRemoteProperty = typeof(setmetatable(
 ))
 
 --[=[
-	@private
+    @private
 ]=]
 
 function ClientRemoteProperty.new(remoteFunction: RemoteFunction): ClientRemoteProperty
@@ -62,7 +62,7 @@ function ClientRemoteProperty.new(remoteFunction: RemoteFunction): ClientRemoteP
 end
 
 --[=[
-	Returns a boolean indicating if `self` is a client remote property or not.
+    Returns a boolean indicating if `self` is a client remote property or not.
 ]=]
 
 function ClientRemoteProperty.is(self: any): boolean
@@ -70,11 +70,11 @@ function ClientRemoteProperty.is(self: any): boolean
 end
 
 --[=[
-	@tag ClientRemoteProperty instance
+    @tag ClientRemoteProperty instance
 
-	Returns the value of the client stored in the serverside remote property (to which the client remote property is connected to).
-	If there is no value stored specifically for the client, then the serverside remote property's current value will be returned
-	instead.
+    Returns the value of the client stored in the serverside remote property (to which the client remote property is connected to).
+    If there is no value stored specifically for the client, then the serverside remote property's current value will be returned
+    instead.
 ]=]
 
 function ClientRemoteProperty.__index:get(): any
@@ -86,9 +86,9 @@ function ClientRemoteProperty.__index:set(value)
 end
 
 --[=[
-	@tag ClientRemoteProperty instance
+    @tag ClientRemoteProperty instance
 
-	Destroys the client remote property and renders it unusable.
+    Destroys the client remote property and renders it unusable.
 ]=]
 
 function ClientRemoteProperty.__index:destroy()
@@ -104,7 +104,7 @@ function ClientRemoteProperty.__index:_init()
 
 	local newValue = self._remoteFunction:InvokeServer()
 
-	-- Incase a new value was set while we were retrieving the initial value, don't
+	-- In case a new value was set while we were retrieving the initial value, don't
 	-- update the value of the property to avoid unexpected behavior!
 	if self:get() == nil then
 		self._property:set(newValue)
