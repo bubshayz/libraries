@@ -107,8 +107,8 @@ print(MyEnumList.t.deep.lo) --&gt; nil, but won&#x27;t error..
 print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
 ``` 
 :::"><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/EnumList"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/EnumList" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/EnumList" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.530f85dc.css">
-<link rel="preload" href="/libraries/assets/js/runtime~main.27471c3c.js" as="script">
-<link rel="preload" href="/libraries/assets/js/main.2982105e.js" as="script">
+<link rel="preload" href="/libraries/assets/js/runtime~main.2c0b0b0d.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.748db6be.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -181,24 +181,39 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"My"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
 <span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">--> "My"</span>
 </code></pre>
-</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="new"><code style="text-decoration:none">new</code><a class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/EnumList/init.lua#L114"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.</code><code class="green_DgR4">new</code><code>(</code><div class="inset_uKQm"><div><code>name<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>enums<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="green_DgR4">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="green_DgR4">}</code><code class="purple_ieR2">}</code></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/EnumList">EnumList</a></code></div><div>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="new"><code style="text-decoration:none">new</code><a class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/EnumList/init.lua#L122"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.</code><code class="green_DgR4">new</code><code>(</code><div class="inset_uKQm"><div><code>name<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>enums<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="green_DgR4">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="green_DgR4">}</code><code class="purple_ieR2">}</code></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/EnumList">EnumList</a></code></div><div>
 <p>
   A constructor method which creates a new enum list out of <code>enumItems</code>,
   with the name of <code>name</code>.
 </p>
-<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Enums"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>test <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Enums"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>test <span class="token operator">=</span> <span class="token punctuation">{</span>bo <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>test<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>test<span class="token punctuation">.</span>bo<span class="token punctuation">)</span> <span class="token comment">--> 123</span>
 </code></pre>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="is"><code style="text-decoration:none">is</code><a class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/EnumList/init.lua#L137"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.</code><code class="green_DgR4">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
+<div class="admonition admonition-tip alert alert--success">
+  <div class="admonition-heading">
+    <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+          <path d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path>
+        </svg></span>tip</h5>
+  </div>
+  <div class="admonition-content">
+    <p>After an enum list is created, all of it's enums are transformed into a <a href="/libraries/api/CustomEnum">CustomEnum</a> object. For e.g:</p>
+    <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"Enums"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>test <span class="token operator">=</span> <span class="token punctuation">{</span>bo <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>CustomEnum<span class="token punctuation">.</span><span class="token function">is</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>test<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> true</span>
+<span class="token function">print</span><span class="token punctuation">(</span>MyEnumList<span class="token punctuation">.</span>test<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">--> "test"</span>
+</code></pre>
+  </div>
+</div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="is"><code style="text-decoration:none">is</code><a class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/EnumList/init.lua#L139"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->.</code><code class="green_DgR4">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
 <p>A method which returns a boolean indicating if <code>self</code> is a enumlist or not.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getEnums"><code style="text-decoration:none">getEnums</code><a class="hash-link" href="#getEnums" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/EnumList/init.lua#L148"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->:</code><code class="green_DgR4">getEnums</code><code>(</code><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/CustomEnum">CustomEnum</a></code><code class="purple_ieR2">}</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getEnums"><code style="text-decoration:none">getEnums</code><a class="hash-link" href="#getEnums" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#ff5252;color:#ff5252">EnumList instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/EnumList/init.lua#L150"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>EnumList<!-- -->:</code><code class="green_DgR4">getEnums</code><code>(</code><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/CustomEnum">CustomEnum</a></code><code class="purple_ieR2">}</code></div><div>
 <p>Returns the enums of the enum list.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
         {
             &quot;name&quot;: &quot;new&quot;,
-            &quot;desc&quot;: &quot;A constructor method which creates a new enum list out of `enumItems`, \nwith the name of `name`.\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = 123})\n\nprint(MyEnumList.test) --&gt; 123\n```&quot;,
+            &quot;desc&quot;: &quot;A constructor method which creates a new enum list out of `enumItems`, \nwith the name of `name`.\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = {bo = 123}})\n\nprint(MyEnumList.test.bo) --&gt; 123\n```\n\n:::tip\nAfter an enum list is created, all of it&#x27;s enums are transformed into a [CustomEnum] object. For e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = {bo = 123}})\n\nprint(CustomEnum.is(MyEnumList.test)) --&gt; true\nprint(MyEnumList.test.name) --&gt; \&quot;test\&quot;\n```\n:::&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;name&quot;,
@@ -219,7 +234,7 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 114,
+                &quot;line&quot;: 122,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         },
@@ -241,7 +256,7 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 137,
+                &quot;line&quot;: 139,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         },
@@ -260,7 +275,7 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
                 &quot;EnumList instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 148,
+                &quot;line&quot;: 150,
                 &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
             }
         }
@@ -295,7 +310,7 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
         &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#EnumList" class="table-of-contents__link toc-highlight">EnumList</a></li><li><a href="#name" class="table-of-contents__link toc-highlight">name</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#getEnums" class="table-of-contents__link toc-highlight">:getEnums</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/libraries/assets/js/runtime~main.27471c3c.js"></script>
-<script src="/libraries/assets/js/main.2982105e.js"></script>
+<script src="/libraries/assets/js/runtime~main.2c0b0b0d.js"></script>
+<script src="/libraries/assets/js/main.748db6be.js"></script>
 </body>
 </html>
