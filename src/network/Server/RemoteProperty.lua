@@ -41,7 +41,7 @@
 	@within RemoteProperty
 	.clientSet { (client: Player, value: any) -> any }?,
 
-	`clientSet` must be an array of callbacks (if specified).
+	`clientSet` must be an array of callbacks, if specified.
 
 	### clientSet
 
@@ -58,6 +58,10 @@
 	}
 	---
 	```
+
+	:::warning Yielding not allowed
+	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+	:::
 
 	:::tip
 	A callback can return a non-nil value, which will then be set as the value for the client in the remote property.
@@ -94,6 +98,7 @@
 	```lua
 	-- Server
 	local Workspace = game:GetService("Workspace")
+	
 	local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
 		clientSet = {
 			function() return "rickrolled" end,
@@ -108,6 +113,7 @@
 
 	-- Client
 	local Workspace = game:GetService("Workspace")
+
 	local TestNetwork = network.client.fromParent("Test", Workspace):expect()
 	TestNetwork.property:set(1)
 	print(TestNetwork.updated:Wait()) --> {"oofed", "rickrolled", "hello"} 

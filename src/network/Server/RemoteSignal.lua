@@ -27,7 +27,7 @@
 	@within RemoteSignal
 	.serverEvent { (client: Player, args: {any}) -> any }?,
 
-	`serverEvent` must be array of callbacks (if specified).
+	`serverEvent` must be array of callbacks, if specified.
 
 	### `serverEvent` 
 
@@ -43,6 +43,10 @@
 	}
 	---
 	```
+
+	:::warning Yielding not allowed
+	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+	:::
 
 	:::tip 
 	- If any of the callbacks return an **explicit** false value, then the remote signal
@@ -65,6 +69,8 @@
 	TestNetwork:dispatch(Workspace)
 
 	-- Client
+	local Workspace = game:GetService("Workspace")
+	
 	local testNetwork = network.client.fromParent("Test", Workspace)
 	print(testNetwork.signal:fire()) 
 	```
@@ -77,7 +83,12 @@
 
 	local TestNetwork = network.Server.new("Test")
 	local TestRemoteSignal = network.Server.RemoteSignal.new({
-		clientServer = {function(arguments) arguments[2] = 1 arguments[3] = "test" end}
+		clientServer = {
+			function(arguments) 
+				arguments[2] = 1 
+				arguments[3] = "test"
+			end
+		}
 	})
 
 	TestRemoteSignal:connect(function(client, a, b)
