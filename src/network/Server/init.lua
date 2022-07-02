@@ -32,8 +32,8 @@
 --[=[
 	@interface Middleware
 	@within NetworkServer
-	.methodCallInbound { (methodName: string, args: {any} ) -> boolean}?
-	.methodCallOutbound {(methodName: string, args: {any}) -> any}?
+	.methodCallInbound { (methodName: string, args: {any}) -> boolean}?
+	.methodCallOutbound {(methodName: string, args: {any}, methodResponse: any) -> any}?
 
 	Both `methodCallInbound` and `methodCallOutbound` must be array of callbacks, if specified. 
 
@@ -105,7 +105,7 @@
 	:::
 
 	:::tip 
-	A third argument i.e `response` is passed to each callback as well, which is just the response of the method called. For e.g:
+	A third argument i.e `methodResponse` is passed to each callback as well, which is just the response of the method called. For e.g:
 
 	```lua
 	-- Server:
@@ -114,8 +114,8 @@
 	local middleware = {
 		methodCallOutbound = {
 			{
-				function (methodName, arguments, response)
-					print(response) --> "this"
+				function (methodName, arguments, methodResponse)
+					print(methodResponse) --> "this"
 					return "oops modified"
 				end
 			}
@@ -144,8 +144,8 @@
 
 	local middleware = {
 		{
-			function (methodName, arguments, response)
-				print(response) --> "this"
+			function (methodName, arguments, methodResponse)
+				print(methodResponse) --> "this"
 				return 50
 			end
 		}
@@ -232,7 +232,7 @@ local NetworkServer = {
 }
 
 type Middleware = {
-	methodCallOutbound: { (methodName: string, args: { any }) -> any }?,
+	methodCallOutbound: { (methodName: string, args: { any }, methodResponse: any) -> any }?,
 	methodCallInbound: { (methodName: string, args: { any }) -> boolean }?,
 }
 
