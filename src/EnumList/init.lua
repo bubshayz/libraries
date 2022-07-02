@@ -91,13 +91,10 @@ local EnumList = {
 	_prototype = {},
 }
 
-export type EnumList = typeof(setmetatable(
-	{} :: {
-		name: string,
-		_enums: { [string]: { [string]: any } },
-	},
-	EnumList
-))
+export type EnumList = typeof(setmetatable({} :: {
+	name: string,
+	_enums: { [string]: { [string]: any } },
+}, EnumList))
 
 --[=[
 	@return EnumList
@@ -106,21 +103,26 @@ export type EnumList = typeof(setmetatable(
 	with the name of `name`.
 
 	```lua
-	local MyEnumList = EnumList.new("Enums", {test = 123})
+	local MyEnumList = EnumList.new("Enums", {test = {bo = 123}})
 
-	print(MyEnumList.test) --> 123
+	print(MyEnumList.test.bo) --> 123
 	```
+
+	:::tip
+	After an enum list is created, all of it's enums are transformed into a [CustomEnum] object. For e.g:
+
+	```lua
+	local MyEnumList = EnumList.new("Enums", {test = {bo = 123}})
+
+	print(CustomEnum.is(MyEnumList.test)) --> true
+	print(MyEnumList.test.name) --> "test"
+	```
+	:::
 ]=]
 
 function EnumList.new(name: string, enums: { [string]: { [string]: any } }): EnumList
-	assert(
-		typeof(name) == "string",
-		INVALID_ARGUMENT_TYPE:format(1, "EnumList.new", "string", typeof(name))
-	)
-	assert(
-		typeof(enums) == "table",
-		INVALID_ARGUMENT_TYPE:format(2, "EnumList.new", "table", typeof(enums))
-	)
+	assert(typeof(name) == "string", INVALID_ARGUMENT_TYPE:format(1, "EnumList.new", "string", typeof(name)))
+	assert(typeof(enums) == "table", INVALID_ARGUMENT_TYPE:format(2, "EnumList.new", "table", typeof(enums)))
 
 	local self = setmetatable({
 		name = name,
