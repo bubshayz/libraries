@@ -190,7 +190,8 @@ end
 	@return SignalConnection
 
 	Connects `callback` to the remote signal so that it is called whenever the client
-	fires the remote signal, and `callback` will be passed arguments sent by the client.
+	fires the remote signal. Additionally, `callback` will be passed all the arguments sent 
+	by the client.
 ]=]
 
 function RemoteSignal.__index:connect(callback: (...any) -> ()): any

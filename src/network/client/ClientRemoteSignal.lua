@@ -116,6 +116,14 @@ end
 	Yields the thread until the serverside remote signal (to which the client 
 	remote signal is connected to) dispatches some data to this client 
 	remote signal.
+
+	```lua`
+	-- Server
+	remoteSignal:fireAllClients("Hi")
+
+	-- Client
+	print(clientRemoteSignal:wait()) --> "Hi"
+	```
 ]=]
 
 function ClientRemoteSignal.__index:wait(): any

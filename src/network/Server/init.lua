@@ -2,7 +2,7 @@
 	@class NetworkServer
 	@server
 
-	The server counterpart of the Network module.
+	The server counterpart of the [network] module.
 ]=]
 
 --[=[ 
@@ -57,7 +57,7 @@
 	:::warning Yielding not allowed
 	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
 	:::
-	
+
 	:::tip 
 	- If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
 	called. This is useful as you can implement for e.g, implementing rate limits!
@@ -324,7 +324,8 @@ end
 	```
 
 	:::tip
-	You can also append a [RemoteSignal] and a [RemoteProperty] as well!
+	You can also append a [RemoteSignal] and a [RemoteProperty] as well, they'll be represented as a [ClientRemoteSignal] and a [ClientRemoteProperty]
+	to the client respectively!
 	:::	
 
 	:::note
