@@ -1,30 +1,17 @@
-local tableUtil = {}
+local Players = game:GetService("Players")
 
-function tableUtil.deepCopy(tabl)
-	local deepCopiedTable = {}
+local tracker = { _players = {} }
 
-	for key, value in tabl do
-		deepCopiedTable[key] = if typeof(value) == "table" then tableUtil.deepCopy(value) else value
-	end
-
-	return deepCopiedTable
+function tracker.getTrackingPlayers(): { Player }
+	return tracker._players
 end
 
-function tableUtil.reconcileDeep(tabl, template)
-	local reconciled = tableUtil.deepCopy(tabl)
+Players.PlayerAdded:Connect(function(player)
+	table.insert(tracker._players, player)
+end)
 
-	for key, value in template do
-		local tablValue = tabl[key]
+Players.PlayerRemoving:Connect(function(player)
+	table.remove(tracker._players, table.find(tracker._players, player))
+end)
 
-		if typeof(tablValue) == "table" then
-			tablValue = tableUtil.reconcileDeep(tablValue, template[key])
-		end
-
-		reconciled[key] = tablValue
-			or if typeof(value) == "table" then tableUtil.deepCopy(value) else value
-	end
-
-	return reconciled
-end
-
-return tableUtil
+return tracker
