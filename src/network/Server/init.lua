@@ -2,7 +2,7 @@
 	@class NetworkServer
 	@server
 
-	The server counterpart of the Network module.
+	The server counterpart of the [network] module.
 ]=]
 
 --[=[ 
@@ -35,7 +35,7 @@
 	.methodCallInbound { (methodName: string, args: {any} ) -> boolean}?
 	.methodCallOutbound {(methodName: string, args: {any}) -> any}?
 
-	Both `methodCallInbound` and `methodCallOutbound` must be array of callbacks (if specified). 
+	Both `methodCallInbound` and `methodCallOutbound` must be array of callbacks, if specified. 
 
 	### `methodCallInbound` 
 
@@ -53,6 +53,10 @@
 	}
 	---
 	```
+
+	:::warning Yielding not allowed
+	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+	:::
 
 	:::tip 
 	- If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
@@ -95,6 +99,10 @@
 	}
 	---
 	```
+
+	:::warning Yielding not allowed
+	Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+	:::
 
 	:::tip 
 	A third argument i.e `response` is passed to each callback as well, which is just the response of the method called. For e.g:
@@ -316,7 +324,8 @@ end
 	```
 
 	:::tip
-	You can also append a [RemoteSignal] and a [RemoteProperty] as well!
+	You can also append a [RemoteSignal] and a [RemoteProperty] as well, they'll be represented as a [ClientRemoteSignal] and a [ClientRemoteProperty]
+	to the client respectively!
 	:::	
 
 	:::note
@@ -384,10 +393,7 @@ function NetworkServer.__index:_setupRemoteObject(
 	end)
 end
 
-function NetworkServer.__index:_setup(
-	key: string,
-	value: RemoteProperty.RemoteProperty | RemoteSignal.RemoteSignal | any
-)
+function NetworkServer.__index:_setup(key: string, value: any)
 	if RemoteSignal.is(value) or RemoteProperty.is(value) then
 		self:_setupRemoteObject(key, value)
 		return

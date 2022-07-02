@@ -2,7 +2,7 @@
 	@class networkClient
 	@client
 
-	The client counterpart of the Network module.
+	The client counterpart of the [network] module.
 ]=]
 
 --[=[ 
