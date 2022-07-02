@@ -3,7 +3,7 @@ name = "bubshayz/network"
 description = "An advanced network module for easy server-client communication."
 authors = ["bubshayz"]
 license = "MIT"
-version = "1.8.0"
+version = "1.9.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
