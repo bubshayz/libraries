@@ -9,22 +9,22 @@ consisting of arrays, e.g:
 
 ```lua
 local matrix = {
-	{1, 1, 2},
-	{1, 1, 1},
-	{3, 3, 3},
+    {1, 1, 2},
+    {1, 1, 1},
+    {3, 3, 3},
 }
 ```"><meta data-rh="true" property="og:description" content="A utility module for working with matrixes. A matrix is simply an array 
 consisting of arrays, e.g:
 
 ```lua
 local matrix = {
-	{1, 1, 2},
-	{1, 1, 1},
-	{3, 3, 3},
+    {1, 1, 2},
+    {1, 1, 1},
+    {3, 3, 3},
 }
 ```"><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/matrixUtil"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/matrixUtil" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/matrixUtil" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.530f85dc.css">
-<link rel="preload" href="/libraries/assets/js/runtime~main.41090cd4.js" as="script">
-<link rel="preload" href="/libraries/assets/js/main.b9ac5189.js" as="script">
+<link rel="preload" href="/libraries/assets/js/runtime~main.d2b0f804.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.e7519918.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -34,20 +34,20 @@ local matrix = {
   consisting of arrays, e.g:
 </p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> matrix <span class="token operator">=</span> <span class="token punctuation">{</span>
-	<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 </code></pre>
 </div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getMatchingRowsValue"><code style="text-decoration:none">getMatchingRowsValue</code><a class="hash-link" href="#getMatchingRowsValue" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/matrixUtil/init.lua#L46"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>matrixUtil<!-- -->.</code><code class="green_DgR4">getMatchingRowsValue</code><code>(</code><div class="inset_uKQm"><div><code>matrix<!-- -->: </code><code class="purple_ieR2">{</code><code class="green_DgR4">{</code><code class="blue_P4bS">any</code><code class="green_DgR4">}</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>depth<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code class="blue_P4bS">any</code></div><div>
 <p>
-  Searches <code>matrix</code> row wise, and returns a value in a row which matches with
+  Searches <code>matrix</code> row-wise, and returns a value in a row that matches with
   the rest of the values of that row. E.g:
 </p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> matrix <span class="token operator">=</span> <span class="token punctuation">{</span>
-	<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
-	<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+    <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token function">print</span><span class="token punctuation">(</span>matrixUtil<span class="token punctuation">.</span><span class="token function">getMatchingRowsValue</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 1 (The first row is equally matched (all 1s))</span>
@@ -57,9 +57,9 @@ local matrix = {
   method should check each row. For e.g:
 </p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> matrix <span class="token operator">=</span> <span class="token punctuation">{</span>
-	<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
-	<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+    <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+    <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
 <span class="token punctuation">}</span>
 
 <span class="token function">print</span><span class="token punctuation">(</span>matrixUtil<span class="token punctuation">.</span><span class="token function">getMatchingRowsValue</span><span class="token punctuation">(</span>matrix<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 1  (The last row's first 3 values (1s) are equally matched)</span>
@@ -67,14 +67,14 @@ local matrix = {
 </code></pre>
 </div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getMatchingDiagonalColumnsValue"><code style="text-decoration:none">getMatchingDiagonalColumnsValue</code><a class="hash-link" href="#getMatchingDiagonalColumnsValue" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/matrixUtil/init.lua#L100"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>matrixUtil<!-- -->.</code><code class="green_DgR4">getMatchingDiagonalColumnsValue</code><code>(</code><div class="inset_uKQm"><div><code>matrix<!-- -->: </code><code class="purple_ieR2">{</code><code class="green_DgR4">{</code><code class="blue_P4bS">any</code><code class="green_DgR4">}</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>depth<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code class="blue_P4bS">any</code></div><div>
 <p>
-  Searches <code>matrix</code> diagonally, and returns a value which matches with the
+  Searches <code>matrix</code> diagonally, and returns a value that matches with the
   rest of the values of the arrays in <code>matrix</code>.
 </p>
 <p>E.g:</p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> matrix <span class="token operator">=</span> <span class="token punctuation">{</span>
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token function">print</span><span class="token punctuation">(</span>matrixUtil<span class="token punctuation">.</span><span class="token function">getMatchingDiagonalColumnsValue</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 1 (A column has matching values diagonally (just 5s))</span>
@@ -84,23 +84,23 @@ local matrix = {
   method should search <code>matrix</code> diagonally. For e.g:
 </p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> matrix <span class="token operator">=</span> <span class="token punctuation">{</span>
-	<span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token function">print</span><span class="token punctuation">(</span>matrix<span class="token punctuation">.</span><span class="token function">getMatchingDiagonalColumnsValue</span><span class="token punctuation">(</span>matrix<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 2 (A column has FIRST 3 matching values diagonally (just 2s))</span>
 </code></pre>
 </div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getMatchingColumnsValue"><code style="text-decoration:none">getMatchingColumnsValue</code><a class="hash-link" href="#getMatchingColumnsValue" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/matrixUtil/init.lua#L167"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>matrixUtil<!-- -->.</code><code class="green_DgR4">getMatchingColumnsValue</code><code>(</code><div class="inset_uKQm"><div><code>matrix<!-- -->: </code><code class="purple_ieR2">{</code><code class="green_DgR4">{</code><code class="blue_P4bS">any</code><code class="green_DgR4">}</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>depth<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code class="blue_P4bS">any</code></div><div>
 <p>
-  Searches <code>matrix</code> column wise and returns a value of a column which matches
+  Searches <code>matrix</code> column-wise and returns a value of a column that matches
   with the rest of the values of that column. E.g:
 </p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> matrix <span class="token operator">=</span> <span class="token punctuation">{</span>
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token function">print</span><span class="token punctuation">(</span>matrixUtil<span class="token punctuation">.</span><span class="token function">getMatchingColumnsValue</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 5 (A column has ALL equally matching values (just 5s))</span>
@@ -110,9 +110,9 @@ local matrix = {
   method should check each column. For e.g:
 </p>
 <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> matrix <span class="token operator">=</span> <span class="token punctuation">{</span>
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-	<span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span>
 
 <span class="token function">print</span><span class="token punctuation">(</span>matrixUtil<span class="token punctuation">.</span><span class="token function">getMatchingColumnsValue</span><span class="token punctuation">(</span>matrix<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">--> 5 (A column has FIRST 2 matching values (just 5s))</span>
@@ -121,7 +121,7 @@ local matrix = {
     &quot;functions&quot;: [
         {
             &quot;name&quot;: &quot;getMatchingRowsValue&quot;,
-            &quot;desc&quot;: &quot;Searches `matrix` row wise, and returns a value in a row which matches with\nthe rest of the values of that row. E.g:\n\n```lua\nlocal matrix = {\n\t{1, 1, 1},\n\t{5, 5, 2}, \n\t{0, 0, 2},\n}\n\nprint(matrixUtil.getMatchingRowsValue(matrix)) --&gt; 1 (The first row is equally matched (all 1s))\n```\n\nAdditionally, you can specify `depth` if you want to control how far the \nmethod should check each row. For e.g: \n\n```lua\nlocal matrix = {\n\t{1, 2, 3, 4}, \n\t{5, 6, 7, 8}, \n\t{1, 1, 1, 0}, \n}\n\nprint(matrixUtil.getMatchingRowsValue(matrix, 3)) --&gt; 1  (The last row&#x27;s first 3 values (1s) are equally matched)\nprint(matrixUtil.getMatchingRowsValue(matrix, 4)) --&gt; nil  (No row&#x27;s first 4 values are equally matched)\n```&quot;,
+            &quot;desc&quot;: &quot;Searches `matrix` row-wise, and returns a value in a row that matches with\nthe rest of the values of that row. E.g:\n\n```lua\nlocal matrix = {\n    {1, 1, 1},\n    {5, 5, 2}, \n    {0, 0, 2},\n}\n\nprint(matrixUtil.getMatchingRowsValue(matrix)) --&gt; 1 (The first row is equally matched (all 1s))\n```\n\nAdditionally, you can specify `depth` if you want to control how far the \nmethod should check each row. For e.g: \n\n```lua\nlocal matrix = {\n    {1, 2, 3, 4}, \n    {5, 6, 7, 8}, \n    {1, 1, 1, 0}, \n}\n\nprint(matrixUtil.getMatchingRowsValue(matrix, 3)) --&gt; 1  (The last row&#x27;s first 3 values (1s) are equally matched)\nprint(matrixUtil.getMatchingRowsValue(matrix, 4)) --&gt; nil  (No row&#x27;s first 4 values are equally matched)\n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;matrix&quot;,
@@ -148,7 +148,7 @@ local matrix = {
         },
         {
             &quot;name&quot;: &quot;getMatchingDiagonalColumnsValue&quot;,
-            &quot;desc&quot;: &quot;Searches `matrix` diagonally, and returns a value which matches with the \nrest of the values of the arrays in `matrix`. \n\nE.g:\n\n```lua\nlocal matrix = {\n\t{5, 0, 0},\n\t{0, 5, 0},\n\t{0, 0, 5},\n}\n\nprint(matrixUtil.getMatchingDiagonalColumnsValue(matrix)) --&gt; 1 (A column has matching values diagonally (just 5s))\n```\n\nAdditionally, you can specify `depth` if you want to control how far the \nmethod should search `matrix` diagonally. For e.g: \n\n```lua\nlocal matrix = {\n\t{2, 0, 0, 0},\n\t{0, 2, 0, 0},\n\t{0, 0, 2, 0},\n\t{0, 0, 0, 0},\n}\n\nprint(matrix.getMatchingDiagonalColumnsValue(matrix, 3)) --&gt; 2 (A column has FIRST 3 matching values diagonally (just 2s))\n```&quot;,
+            &quot;desc&quot;: &quot;Searches `matrix` diagonally, and returns a value that matches with the \nrest of the values of the arrays in `matrix`. \n\nE.g:\n\n```lua\nlocal matrix = {\n    {5, 0, 0},\n    {0, 5, 0},\n    {0, 0, 5},\n}\n\nprint(matrixUtil.getMatchingDiagonalColumnsValue(matrix)) --&gt; 1 (A column has matching values diagonally (just 5s))\n```\n\nAdditionally, you can specify `depth` if you want to control how far the \nmethod should search `matrix` diagonally. For e.g: \n\n```lua\nlocal matrix = {\n    {2, 0, 0, 0},\n    {0, 2, 0, 0},\n    {0, 0, 2, 0},\n    {0, 0, 0, 0},\n}\n\nprint(matrix.getMatchingDiagonalColumnsValue(matrix, 3)) --&gt; 2 (A column has FIRST 3 matching values diagonally (just 2s))\n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;matrix&quot;,
@@ -175,7 +175,7 @@ local matrix = {
         },
         {
             &quot;name&quot;: &quot;getMatchingColumnsValue&quot;,
-            &quot;desc&quot;: &quot;Searches `matrix` column wise and returns a value of a column which matches \nwith the rest of the values of that column. E.g:\n\n```lua\nlocal matrix = {\n\t{5, 0, 0},\n\t{5, 1, 0},\n\t{5, 0, 1},\n}\n\nprint(matrixUtil.getMatchingColumnsValue(matrix)) --&gt; 5 (A column has ALL equally matching values (just 5s))\n```\n\nAdditionally, you can specify `depth` if you want to control how far the \nmethod should check each column. For e.g: \n\n```lua\nlocal matrix = {\n\t{5, 0, 0},\n\t{5, 0, 0},\n\t{2, 1, 1},\n}\n\nprint(matrixUtil.getMatchingColumnsValue(matrix, 2)) --&gt; 5 (A column has FIRST 2 matching values (just 5s))\n```&quot;,
+            &quot;desc&quot;: &quot;Searches `matrix` column-wise and returns a value of a column that matches \nwith the rest of the values of that column. E.g:\n\n```lua\nlocal matrix = {\n    {5, 0, 0},\n    {5, 1, 0},\n    {5, 0, 1},\n}\n\nprint(matrixUtil.getMatchingColumnsValue(matrix)) --&gt; 5 (A column has ALL equally matching values (just 5s))\n```\n\nAdditionally, you can specify `depth` if you want to control how far the \nmethod should check each column. For e.g: \n\n```lua\nlocal matrix = {\n    {5, 0, 0},\n    {5, 0, 0},\n    {2, 1, 1},\n}\n\nprint(matrixUtil.getMatchingColumnsValue(matrix, 2)) --&gt; 5 (A column has FIRST 2 matching values (just 5s))\n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;matrix&quot;,
@@ -204,13 +204,13 @@ local matrix = {
     &quot;properties&quot;: [],
     &quot;types&quot;: [],
     &quot;name&quot;: &quot;matrixUtil&quot;,
-    &quot;desc&quot;: &quot;A utility module for working with matrixes. A matrix is simply an array \nconsisting of arrays, e.g:\n\n```lua\nlocal matrix = {\n\t{1, 1, 2},\n\t{1, 1, 1},\n\t{3, 3, 3},\n}\n```&quot;,
+    &quot;desc&quot;: &quot;A utility module for working with matrixes. A matrix is simply an array \nconsisting of arrays, e.g:\n\n```lua\nlocal matrix = {\n    {1, 1, 2},\n    {1, 1, 1},\n    {3, 3, 3},\n}\n```&quot;,
     &quot;source&quot;: {
         &quot;line&quot;: 15,
         &quot;path&quot;: &quot;src/matrixUtil/init.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#getMatchingColumnsValue" class="table-of-contents__link toc-highlight">.getMatchingColumnsValue</a></li><li><a href="#getMatchingDiagonalColumnsValue" class="table-of-contents__link toc-highlight">.getMatchingDiagonalColumnsValue</a></li><li><a href="#getMatchingRowsValue" class="table-of-contents__link toc-highlight">.getMatchingRowsValue</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/libraries/assets/js/runtime~main.41090cd4.js"></script>
-<script src="/libraries/assets/js/main.b9ac5189.js"></script>
+<script src="/libraries/assets/js/runtime~main.d2b0f804.js"></script>
+<script src="/libraries/assets/js/main.e7519918.js"></script>
 </body>
 </html>

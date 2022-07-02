@@ -7,8 +7,8 @@
 <title data-rh="true">ClientRemoteProperty | libraries</title><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://bubshayz.github.io/libraries/api/ClientRemoteProperty"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="ClientRemoteProperty | libraries"><meta data-rh="true" name="description" content="The clientside counterpart of [RemoteProperty]. A client remote property 
 in layman&#x27;s terms is just an object connected to a serverside remote property."><meta data-rh="true" property="og:description" content="The clientside counterpart of [RemoteProperty]. A client remote property 
 in layman&#x27;s terms is just an object connected to a serverside remote property."><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/ClientRemoteProperty"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/ClientRemoteProperty" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/ClientRemoteProperty" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.530f85dc.css">
-<link rel="preload" href="/libraries/assets/js/runtime~main.41090cd4.js" as="script">
-<link rel="preload" href="/libraries/assets/js/main.b9ac5189.js" as="script">
+<link rel="preload" href="/libraries/assets/js/runtime~main.d2b0f804.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.e7519918.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -20,11 +20,11 @@ in layman&#x27;s terms is just an object connected to a serverside remote proper
 </div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="updated"><code style="text-decoration:none">updated</code><a class="hash-link" href="#updated" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><span class="docTag__6UZ" style="border-color:#2b8ab6;color:#2b8ab6">Signal</span><span class="docTag__6UZ" style="border-color:#ff793f;color:#ff793f">ClientRemoteProperty instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/client/ClientRemoteProperty.lua#L21"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>ClientRemoteProperty<!-- -->.<!-- -->updated<!-- -->:<!-- --> </code> <code class="blue_P4bS">Signal</code><code class="op_lSLc">&lt;</code><code>newValue<!-- -->: </code><code class="blue_P4bS">any</code><code class="op_lSLc">&gt;</code></div><div>
 <p>
   A <a href="https://sleitnick.github.io/RbxUtil/api/Signal/" target="_blank">signal</a> which is fired, whenever the value
-  of the serverside remote property (to which this client remote property is connected to) is updated.
+  of the serverside remote property (to which this client remote property is connected) is updated.
 </p>
 <p>
-  Incase if the client has a specific value set for them in the serverside remote property, then this signal
-  will only fire if <em>that</em> value has updated.
+  Incase the client has a specific value set for them in the serverside remote property, then this signal
+  will only fire if <em>that</em> value has been updated.
 </p>
 </div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ClientRemoteProperty"><code style="text-decoration:none">ClientRemoteProperty</code><a class="hash-link" href="#ClientRemoteProperty" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/client/ClientRemoteProperty.lua#L30"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>ClientRemoteProperty<!-- -->.<!-- -->ClientRemoteProperty<!-- -->:<!-- --> </code> <code class="blue_P4bS">Type</code></div><div>
 <p>An exported Luau type of a client remote property object.</p>
@@ -122,7 +122,7 @@ in layman&#x27;s terms is just an object connected to a serverside remote proper
     &quot;properties&quot;: [
         {
             &quot;name&quot;: &quot;updated&quot;,
-            &quot;desc&quot;: &quot; \n\nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired, whenever the value \nof the serverside remote property (to which this client remote property is connected to) is updated.\n\nIncase if the client has a specific value set for them in the serverside remote property, then this signal\nwill only fire if *that* value has updated.&quot;,
+            &quot;desc&quot;: &quot; \n\nA [signal](https://sleitnick.github.io/RbxUtil/api/Signal/) which is fired, whenever the value \nof the serverside remote property (to which this client remote property is connected) is updated.\n\nIncase the client has a specific value set for them in the serverside remote property, then this signal\nwill only fire if *that* value has been updated.&quot;,
             &quot;lua_type&quot;: &quot;Signal &lt;newValue: any&gt;&quot;,
             &quot;tags&quot;: [
                 &quot;Signal&quot;,
@@ -153,7 +153,7 @@ in layman&#x27;s terms is just an object connected to a serverside remote proper
         &quot;path&quot;: &quot;src/network/client/ClientRemoteProperty.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#ClientRemoteProperty" class="table-of-contents__link toc-highlight">ClientRemoteProperty</a></li><li><a href="#updated" class="table-of-contents__link toc-highlight">updated</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#destroy" class="table-of-contents__link toc-highlight">:destroy</a></li><li><a href="#get" class="table-of-contents__link toc-highlight">:get</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/libraries/assets/js/runtime~main.41090cd4.js"></script>
-<script src="/libraries/assets/js/main.b9ac5189.js"></script>
+<script src="/libraries/assets/js/runtime~main.d2b0f804.js"></script>
+<script src="/libraries/assets/js/main.e7519918.js"></script>
 </body>
 </html>
