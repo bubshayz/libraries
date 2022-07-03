@@ -136,21 +136,45 @@ end
     This method will struggle to format numbers larger than `10^68` approximately. 
 
     ```lua
-    print(numberUtil.format(10^70)) --> 10 (this is wrong)
-    print(numberUtil.format(10^68)) --> 100c (this is correct)
+    print(numberUtil.suffix(10^70)) --> 10 (this is wrong)
+    print(numberUtil.suffix(10^68)) --> 100c (this is correct)
     ```
     :::
 
     ```lua
-    print(numberUtil.format(1650)) --> "1.65K"
+    print(numberUtil.suffix(1650)) --> "1.65K"
     ```
 ]=]
 
-function numberUtil.format(number: number): string
+function numberUtil.suffix(number: number): string
 	local formattedNumberSuffix = math.floor(math.log(number, 1e3))
 
 	return ("%.2f"):format(number / math.pow(10, formattedNumberSuffix * 3)):gsub("%.?0+$", "")
 		.. (NUMBER_SUFFIXES[formattedNumberSuffix] or "")
+end
+
+--[=[
+    Returns a string which is just `number` formatted to the HMS (Hour, Minutes, Seconds) format.
+
+    ```lua
+    print(numberUtil.formatToHMS(21600)) --> 06:00:00
+    ```
+]=]
+
+function numberUtil.formatToHMS(number: number): string
+	return string.format("%02i:%02i:%02i", number / 60 ^ 2, number / 60 % 60, number % 60)
+end
+
+--[=[
+    Returns a string which is just `number` formatted to the MS (Minutes, Seconds) format.
+
+    ```lua
+    print(numberUtil.formatToHMS(21600)) --> 10:00
+    ```
+]=]
+
+function numberUtil.formatToMS(number: number): string
+	return string.format("%02i:%02i", number / 60 % 60, number % 60)
 end
 
 --[=[
