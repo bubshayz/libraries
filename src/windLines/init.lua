@@ -127,7 +127,7 @@ end
 
 function windLines.setConfig(newConfig: types.WindLinesConfig)
 	assert(not windLines.isStarted(), "Cannot configure windLines now as windLines is started!")
-	ConfigInterface(newConfig)
+	assert(ConfigInterface(newConfig))
 
 	-- Copy over the new config to the current config as directly setting it will
 	-- cause an error since windLines is read only:
