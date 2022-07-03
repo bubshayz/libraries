@@ -1,3 +1,8 @@
+## 2022-07-03
+
+- Improve error checking within `windLines` module.
+- Improve documentation.
+
 ## 2022-07-02
 
 - Fix middleware related bugs within the `network` module.
