@@ -48,7 +48,7 @@
     Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
     :::
 
-    :::tip 
+    :::tip More control
     - If any of the callbacks return an **explicit** false value, then the remote signal
     will not be fired. For e.g:
 

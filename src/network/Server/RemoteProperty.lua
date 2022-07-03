@@ -63,7 +63,7 @@
     Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
     :::
 
-    :::tip
+    :::tip More control
     A callback can return a non-nil value, which will then be set as the value for the client in the remote property.
     This is useful in cases where you want to have more control over what values the client can set for them in the remote
     property.
@@ -230,7 +230,7 @@ end
 
     Sets the value of the remote property for `client` *specifically*, to `value`. 
         
-    :::note
+    :::note Precaution!
     - [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
     apply, as remote functions are internally used to render `value` accessible to the respective clients.
 
@@ -310,7 +310,7 @@ end
 
     Sets the value of the remote property to `value`.
 
-    :::note
+    :::note Precaution!
     [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
     apply, as remote functions are internally used to render `value` accessible to the respective clients.
     :::

@@ -58,7 +58,7 @@
     Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
     :::
 
-    :::tip 
+    :::tip More control
     - If any of the callbacks return an **explicit** false value, then the method which the client tried to call, will *not* be
     called. This is useful as you can implement for e.g, implementing rate limits!
 
@@ -104,7 +104,7 @@
     Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
     :::
 
-    :::tip 
+    :::tip Additional `methodResponse` argument
     A third argument i.e `methodResponse` is passed to each callback as well, which is just the response of the method called. For e.g:
 
     ```lua
@@ -165,7 +165,7 @@
     ```
 
     Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
-    back to the client. This is by design - as it isn't ideal to disregard all returned values for just 1.
+    back to the client. This is by design, as it isn't ideal to disregard all returned values for just 1.
     
     For e.g: 
     
@@ -255,8 +255,8 @@ end
 
     Creates and returns a new network object of the name i.e `name`. 
     
-    :::note
-    The network object will initially not be available to the client, you need to call [NetworkServer:dispatch] 
+    :::note Precaution!
+    The network object will initially not be accessible to the client. You need to call [NetworkServer:dispatch] 
     to render the network object accessible to the client!
     :::
 ]=]
@@ -293,7 +293,7 @@ end
     Returns a boolean indicating if the network object is dispatched to the 
     client or not. 
 
-    :::note
+    :::note Precaution!
     This method will always return false if the network object is destroyed.
     :::
 ]=]
@@ -323,12 +323,12 @@ end
     print(testNetwork.key) --> "the value!"
     ```
 
-    :::tip
+    :::tip More support
     You can also append a [RemoteSignal] and a [RemoteProperty] as well, they'll be represented as a [ClientRemoteSignal] and a [ClientRemoteProperty]
     to the client respectively!
     ::: 
 
-    :::note
+    :::note Precaution!
     [Argument limitations](https://create.roblox.com/docs/scripting/events/argument-limitations-for-bindables-and-remotes)
     apply, as remote functions are internally used the key-value pairs accessible to the clients.
     :::
