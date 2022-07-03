@@ -120,7 +120,7 @@ end
 
 	Sets the current config of windLines to `newConfig`, so that this new config will be used for wind line effects.
 
-	:::warning
+	:::warning Cannot configure once started 
 	You cannot configure windLines once it is started, so always make sure to call this method **before** you start windLines!
 	:::
 ]=]
@@ -141,9 +141,9 @@ end
 --[=[
 	Starts up the wind lines effect.
 
-	:::tip
+	:::tip Custom behavior 
 	If the player is standing under a roof, then the wind lines effect will be stopped for realism purposes and this
-	behavior cannot be toggled. However, you can adjust this behavior through [windLines:SetConfig] through the 
+	behavior cannot be toggled. However, you can adjust this behavior through [windLines.setConfig] through the 
 	[RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams) member, since ray casting 
 	is used in determining if the player is standing under a roof. 
 

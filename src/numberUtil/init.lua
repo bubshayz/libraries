@@ -132,7 +132,7 @@ end
 --[=[
     Return a string as the formatted version of `number`. 
 
-    :::warning
+    :::warning Cannot format extremely large numbers
     This method will struggle to format numbers larger than `10^68` approximately. 
 
     ```lua

@@ -248,7 +248,7 @@ end
 --[=[
     Sets the network owner of `instance` to `networkOwner` *safely*.
 
-    :::tip
+    :::tip Safe to call
     This method should be preferred over directly setting the network owner of `instance` 
     via [SetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#SetNetworkOwner), as
     it won't error in cases where the network ownership API cannot be used on `instance`.
@@ -266,10 +266,10 @@ end
 --[=[
     Returns the network owner of `instance` *safely*.
     
-    :::tip
+    :::tip Safe to call
     This method should be preferred over directly getting the network owner of `instance` 
     via [GetNetworkOwner](https://create.roblox.com/docs/reference/engine/classes/BasePart#GetNetworkOwner), as
-    it will safely return `nil` in cases where the network ownership API cannot be used on `instance`.
+    it will safely return `nil` (instead of erroring) in cases where the network ownership API cannot be used on `instance`!
     ::: 
 ]=]
 

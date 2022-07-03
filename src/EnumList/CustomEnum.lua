@@ -21,6 +21,7 @@
 --[=[ 
 	@prop name string
 	@within CustomEnum
+	@tag CustomEnum Instance
 	@readonly
 
 	The name of the custom enum.
@@ -35,13 +36,10 @@ local INVALID_ENUM_MEMBER = '"%s" is not a valid EnumItem of Enum "%s"!'
 
 local CustomEnum = { _prototype = {} }
 
-export type CustomEnum = typeof(setmetatable(
-	{} :: {
-		name: string,
-		_enumItems: { [string]: any },
-	},
-	CustomEnum
-))
+export type CustomEnum = typeof(setmetatable({} :: {
+	name: string,
+	_enumItems: { [string]: any },
+}, CustomEnum))
 
 --[=[
 	@private

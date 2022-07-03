@@ -32,8 +32,8 @@
     ```
     :::
 
-    :::warning
-    EnumLists don't provide support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), 
+    :::warning No deep chain error handling 
+    EnumLists don't provide any error handling support for deep chained enums (they're *not* idiomatic, so you shouldn't be having deep chained enums anyways), 
     for e.g:
 
     ```lua
@@ -108,7 +108,7 @@ export type EnumList = typeof(setmetatable({} :: {
     print(MyEnumList.test.bo) --> 123
     ```
 
-    :::tip
+    :::tip Automatic transformation
     After an enum list is created, all of its enums are transformed into an [CustomEnum] object. For e.g:
 
     ```lua
