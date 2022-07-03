@@ -19,8 +19,8 @@ A utility module for working with numbers.
 print(numberUtil.e) --&gt; 2.7182818284590
 print(numberUtil.nan(3)) --&gt; false
 ```"><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/numberUtil"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/numberUtil" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/numberUtil" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.530f85dc.css">
-<link rel="preload" href="/libraries/assets/js/runtime~main.6583bac3.js" as="script">
-<link rel="preload" href="/libraries/assets/js/main.e8f6eaf8.js" as="script">
+<link rel="preload" href="/libraries/assets/js/runtime~main.17c5e84c.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.ed1e1267.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -62,7 +62,7 @@ print(numberUtil.nan(3)) --&gt; false
   <div class="admonition-heading">
     <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
           <path d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path>
-        </svg></span>warning</h5>
+        </svg></span>Cannot format extremely large numbers</h5>
   </div>
   <div class="admonition-content">
     <p>This method will struggle to format numbers larger than <code>10^68</code> approximately.</p>
@@ -233,7 +233,7 @@ print(numberUtil.nan(3)) --&gt; false
         },
         {
             &quot;name&quot;: &quot;format&quot;,
-            &quot;desc&quot;: &quot;Return a string as the formatted version of `number`. \n\n:::warning\nThis method will struggle to format numbers larger than `10^68` approximately. \n\n```lua\nprint(numberUtil.format(10^70)) --&gt; 10 (this is wrong)\nprint(numberUtil.format(10^68)) --&gt; 100c (this is correct)\n```\n:::\n\n```lua\nprint(numberUtil.format(1650)) --&gt; \&quot;1.65K\&quot;\n```&quot;,
+            &quot;desc&quot;: &quot;Return a string as the formatted version of `number`. \n\n:::warning Cannot format extremely large numbers\nThis method will struggle to format numbers larger than `10^68` approximately. \n\n```lua\nprint(numberUtil.format(10^70)) --&gt; 10 (this is wrong)\nprint(numberUtil.format(10^68)) --&gt; 100c (this is correct)\n```\n:::\n\n```lua\nprint(numberUtil.format(1650)) --&gt; \&quot;1.65K\&quot;\n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;number&quot;,
@@ -508,7 +508,7 @@ print(numberUtil.nan(3)) --&gt; false
         &quot;path&quot;: &quot;src/numberUtil/init.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#e" class="table-of-contents__link toc-highlight">e</a></li><li><a href="#g" class="table-of-contents__link toc-highlight">g</a></li><li><a href="#phi" class="table-of-contents__link toc-highlight">phi</a></li><li><a href="#tau" class="table-of-contents__link toc-highlight">tau</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#average" class="table-of-contents__link toc-highlight">.average</a></li><li><a href="#clampTo" class="table-of-contents__link toc-highlight">.clampTo</a></li><li><a href="#close" class="table-of-contents__link toc-highlight">.close</a></li><li><a href="#factorial" class="table-of-contents__link toc-highlight">.factorial</a></li><li><a href="#factors" class="table-of-contents__link toc-highlight">.factors</a></li><li><a href="#format" class="table-of-contents__link toc-highlight">.format</a></li><li><a href="#inverseLerp" class="table-of-contents__link toc-highlight">.inverseLerp</a></li><li><a href="#lerp" class="table-of-contents__link toc-highlight">.lerp</a></li><li><a href="#map" class="table-of-contents__link toc-highlight">.map</a></li><li><a href="#nan" class="table-of-contents__link toc-highlight">.nan</a></li><li><a href="#quadraticLerp" class="table-of-contents__link toc-highlight">.quadraticLerp</a></li><li><a href="#root" class="table-of-contents__link toc-highlight">.root</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/libraries/assets/js/runtime~main.6583bac3.js"></script>
-<script src="/libraries/assets/js/main.e8f6eaf8.js"></script>
+<script src="/libraries/assets/js/runtime~main.17c5e84c.js"></script>
+<script src="/libraries/assets/js/main.ed1e1267.js"></script>
 </body>
 </html>

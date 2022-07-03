@@ -36,8 +36,8 @@ end
 ```
 :::
 
-:::warning
-EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), 
+:::warning No deep chain error handling 
+EnumLists don&#x27;t provide any error handling support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), 
 for e.g:
 
 ```lua
@@ -87,8 +87,8 @@ end
 ```
 :::
 
-:::warning
-EnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), 
+:::warning No deep chain error handling 
+EnumLists don&#x27;t provide any error handling support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), 
 for e.g:
 
 ```lua
@@ -107,8 +107,8 @@ print(MyEnumList.t.deep.lo) --&gt; nil, but won&#x27;t error..
 print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
 ``` 
 :::"><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/EnumList"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/EnumList" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/EnumList" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.530f85dc.css">
-<link rel="preload" href="/libraries/assets/js/runtime~main.6583bac3.js" as="script">
-<link rel="preload" href="/libraries/assets/js/main.e8f6eaf8.js" as="script">
+<link rel="preload" href="/libraries/assets/js/runtime~main.17c5e84c.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.ed1e1267.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -149,11 +149,11 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
   <div class="admonition-heading">
     <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
           <path d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path>
-        </svg></span>warning</h5>
+        </svg></span>No deep chain error handling</h5>
   </div>
   <div class="admonition-content">
     <p>
-      EnumLists don't provide support for deep chained enums (they're <em>not</em> idiomatic, so you shouldn't be having deep chained enums anyways),
+      EnumLists don't provide any error handling support for deep chained enums (they're <em>not</em> idiomatic, so you shouldn't be having deep chained enums anyways),
       for e.g:
     </p>
     <pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> MyEnumList <span class="token operator">=</span> EnumList<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"MyEnumList"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
@@ -194,7 +194,7 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
   <div class="admonition-heading">
     <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
           <path d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path>
-        </svg></span>tip</h5>
+        </svg></span>Automatic transformation</h5>
   </div>
   <div class="admonition-content">
     <p>After an enum list is created, all of its enums are transformed into an <a href="/libraries/api/CustomEnum">CustomEnum</a> object. For e.g:</p>
@@ -213,7 +213,7 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
     &quot;functions&quot;: [
         {
             &quot;name&quot;: &quot;new&quot;,
-            &quot;desc&quot;: &quot;A constructor method that creates a new enum list out of `enumItems`, \nwith the name of `name`.\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = {bo = 123}})\n\nprint(MyEnumList.test.bo) --&gt; 123\n```\n\n:::tip\nAfter an enum list is created, all of its enums are transformed into an [CustomEnum] object. For e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = {bo = 123}})\n\nprint(CustomEnum.is(MyEnumList.test)) --&gt; true\nprint(MyEnumList.test.name) --&gt; \&quot;test\&quot;\n```\n:::&quot;,
+            &quot;desc&quot;: &quot;A constructor method that creates a new enum list out of `enumItems`, \nwith the name of `name`.\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = {bo = 123}})\n\nprint(MyEnumList.test.bo) --&gt; 123\n```\n\n:::tip Automatic transformation\nAfter an enum list is created, all of its enums are transformed into an [CustomEnum] object. For e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;Enums\&quot;, {test = {bo = 123}})\n\nprint(CustomEnum.is(MyEnumList.test)) --&gt; true\nprint(MyEnumList.test.name) --&gt; \&quot;test\&quot;\n```\n:::&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;name&quot;,
@@ -304,13 +304,13 @@ print(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)
     ],
     &quot;types&quot;: [],
     &quot;name&quot;: &quot;EnumList&quot;,
-    &quot;desc&quot;: &quot; \n\nA class for creating enum lists. An enum list in layman&#x27;s terms is simply an object\nused to store *custom* enums inside.\n \n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n    phoneNumber = {\n        babaBoey = 123,\n    }\n})\n\nprint(MyEnumList.phoneNumber.babaBoey) --&gt; 123\n```\n\n:::tip Generalization iteration!\n\nEnumLists are iterable, for e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n    test = {alphabet = \&quot;A\&quot;}\n})\n\nfor enumName, enum in MyEnumList do\n    print(enumName, enum.alphabet)\nend\n\n--&gt; \&quot;test\&quot; \&quot;A\&quot;\n```\n:::\n\n:::warning\nEnumLists don&#x27;t provide support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), \nfor e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;MyEnumList\&quot;, {\n    t = {\n        deep = {\n            moreDeep = {\n                b = 5\n            }\n        }\n    }\n})\n\nprint(MyEnumList.t.deep.moreDeep.lol) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.t.deep.lo) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)\n``` \n:::&quot;,
+    &quot;desc&quot;: &quot; \n\nA class for creating enum lists. An enum list in layman&#x27;s terms is simply an object\nused to store *custom* enums inside.\n \n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n    phoneNumber = {\n        babaBoey = 123,\n    }\n})\n\nprint(MyEnumList.phoneNumber.babaBoey) --&gt; 123\n```\n\n:::tip Generalization iteration!\n\nEnumLists are iterable, for e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;EnumList\&quot;, {\n    test = {alphabet = \&quot;A\&quot;}\n})\n\nfor enumName, enum in MyEnumList do\n    print(enumName, enum.alphabet)\nend\n\n--&gt; \&quot;test\&quot; \&quot;A\&quot;\n```\n:::\n\n:::warning No deep chain error handling \nEnumLists don&#x27;t provide any error handling support for deep chained enums (they&#x27;re *not* idiomatic, so you shouldn&#x27;t be having deep chained enums anyways), \nfor e.g:\n\n```lua\nlocal MyEnumList = EnumList.new(\&quot;MyEnumList\&quot;, {\n    t = {\n        deep = {\n            moreDeep = {\n                b = 5\n            }\n        }\n    }\n})\n\nprint(MyEnumList.t.deep.moreDeep.lol) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.t.deep.lo) --&gt; nil, but won&#x27;t error..\nprint(MyEnumList.t.b) --&gt; will error (as it is not a deep chain!)\n``` \n:::&quot;,
     &quot;source&quot;: {
         &quot;line&quot;: 56,
         &quot;path&quot;: &quot;src/EnumList/init.lua&quot;
     }
 }</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#EnumList" class="table-of-contents__link toc-highlight">EnumList</a></li><li><a href="#name" class="table-of-contents__link toc-highlight">name</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#getEnums" class="table-of-contents__link toc-highlight">:getEnums</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/libraries/assets/js/runtime~main.6583bac3.js"></script>
-<script src="/libraries/assets/js/main.e8f6eaf8.js"></script>
+<script src="/libraries/assets/js/runtime~main.17c5e84c.js"></script>
+<script src="/libraries/assets/js/main.ed1e1267.js"></script>
 </body>
 </html>
