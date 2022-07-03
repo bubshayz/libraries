@@ -127,9 +127,7 @@ end
 
 function windLines.setConfig(newConfig: types.WindLinesConfig)
 	assert(not windLines.isStarted(), "Cannot configure windLines now as windLines is started!")
-	assert(next(newConfig), "Config table must not be empty!")
-
-	ConfigInterface(newConfig)
+	assert(ConfigInterface(newConfig))
 
 	-- Copy over the new config to the current config as directly setting it will
 	-- cause an error since windLines is read only:
@@ -175,15 +173,15 @@ function windLines.start()
 	end)
 
 	windLines._janitor:Add(function()
-		local function UpdateQueueFinished()
+		local function updateQueueFinished()
 			heartbeatUpdateConnection:Disconnect()
 			windLines._updateQueueFinished:DisconnectAll()
 		end
 
 		if #windLines._updateQueue == 0 then
-			UpdateQueueFinished()
+			updateQueueFinished()
 		else
-			windLines._updateQueueFinished:Connect(UpdateQueueFinished)
+			windLines._updateQueueFinished:Connect(updateQueueFinished)
 		end
 	end)
 end
