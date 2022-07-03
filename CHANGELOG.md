@@ -2,6 +2,9 @@
 
 - Improve error checking within `windLines` module.
 - Improve documentation.
+- Rename `numberUtil.format` to `numberUtil.suffix`.
+- Added `numberUtil.formatToHMS`.
+- Added `numberUtil.formatToMS`.
 
 ## 2022-07-02
 
