@@ -12,9 +12,6 @@ favicon = "/icon.ico"
 style = "dark"
 copyright = "Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus"
 
-[[classOrder]]
-section = "EnumList"
-classes = ["EnumList", "CustomEnum"]
 
 [[classOrder]]
 section = "network"
