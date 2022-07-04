@@ -56,7 +56,7 @@
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local TestNetwork = network.Server.new("Test")
+    local testNetwork = network.Server.new("Test")
     local TestRemoteSignal = network.Server.RemoteSignal.new({
         clientServer = {function() return false end}
     })
@@ -65,8 +65,8 @@
         print("Fired") --> never prints
     end)
 
-    TestNetwork:append("signal", TestRemoteSignal)
-    TestNetwork:dispatch(Workspace)
+    testNetwork:append("signal", TestRemoteSignal)
+    testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")
@@ -81,7 +81,7 @@
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local TestNetwork = network.Server.new("Test")
+    local testNetwork = network.Server.new("Test")
     local TestRemoteSignal = network.Server.RemoteSignal.new({
         clientServer = {
             function(arguments) 
@@ -95,8 +95,8 @@
         print(a, b) --> 1, "test" (a and b ought to be 24, but they were modified through the middleware)
     end)
 
-    TestNetwork:append("signal", TestRemoteSignal)
-    TestNetwork:dispatch(Workspace)
+    testNetwork:append("signal", TestRemoteSignal)
+    testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")

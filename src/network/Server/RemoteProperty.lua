@@ -78,16 +78,16 @@
         clientSet = {function() return "rickrolled" end}
     })
 
-    local TestNetwork = Network.Server.new("Test")
-    TestNetwork:append("property", TestRemoteProperty)
-    TestNetwork:dispatch(Workspace)
+    local testNetwork = Network.Server.new("Test")
+    testNetwork:append("property", TestRemoteProperty)
+    testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")
 
-    local TestNetwork = network.client.fromParent("Test", Workspace):expect()
-    TestNetwork.property:set(1)
-    print(TestNetwork.updated:Wait()) --> "rickrolled" (This ought to print 1, but our middleware returned a custom value!)
+    local testNetwork = network.client.fromParent("Test", Workspace):expect()
+    testNetwork.property:set(1)
+    print(testNetwork.updated:Wait()) --> "rickrolled" (This ought to print 1, but our middleware returned a custom value!)
     ```
 
     Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
@@ -107,16 +107,16 @@
         }
     })
 
-    local TestNetwork = Network.Server.new("Test")
-    TestNetwork:append("property", TestRemoteProperty)
-    TestNetwork:dispatch(Workspace)
+    local testNetwork = Network.Server.new("Test")
+    testNetwork:append("property", TestRemoteProperty)
+    testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")
 
-    local TestNetwork = network.client.fromParent("Test", Workspace):expect()
-    TestNetwork.property:set(1)
-    print(TestNetwork.updated:Wait()) --> {"oofed", "rickrolled", "hello"} 
+    local testNetwork = network.client.fromParent("Test", Workspace):expect()
+    testNetwork.property:set(1)
+    print(testNetwork.updated:Wait()) --> {"oofed", "rickrolled", "hello"} 
     ```
     :::
 ]=]

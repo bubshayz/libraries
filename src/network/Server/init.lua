@@ -68,13 +68,13 @@
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local TestNetwork = Network.Server.new("Test", {methodCallInbound = {
+    local testNetwork = Network.Server.new("Test", {methodCallInbound = {
         function(_, arguments) arguments[2] = "test" end
     }})
-    TestNetwork:append("method", function(player, a)
+    testNetwork:append("method", function(player, a)
         print(a) --> "test" (a ought to be 1, but the middleware modified it!)
     end)
-    TestNetwork:dispatch(Workspace)
+    testNetwork:dispatch(Workspace)
 
     -- Client
     local testNetwork = network.client.fromParent("Test", Workspace)
@@ -151,11 +151,11 @@
         }
     }
 
-    local TestNetwork = network.Server.new("test", middleware)
-    TestNetwork:append("SomeMethod", function()
+    local testNetwork = network.Server.new("test", middleware)
+    testNetwork:append("SomeMethod", function()
         return "this"
     end)
-    TestNetwork:dispatch(Workspace)
+    testNetwork:dispatch(Workspace)
 
     -- Client:
     local Workspace = game:GetService("Workspace")
@@ -189,11 +189,11 @@
         }
     }
 
-    local TestNetwork = network.server.new("test", middleware)
-    TestNetwork:append("someMethod", function()
+    local testNetwork = network.server.new("test", middleware)
+    testNetwork:append("someMethod", function()
         return "this"
     end)
-    TestNetwork:dispatch(Workspace)
+    testNetwork:dispatch(Workspace)
 
     -- Client:
     local Workspace = game:GetService("Workspace")
@@ -314,9 +314,9 @@ end
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local TestNetwork = Network.Server.new("test")
-    TestNetwork:append("key", "the value!")
-    TestNetwork:dispatch(Workspace)
+    local testNetwork = Network.Server.new("test")
+    testNetwork:append("key", "the value!")
+    testNetwork:dispatch(Workspace)
 
     -- Client
     local testNetwork = Network.client.fromParent("test", Workspace):expect()

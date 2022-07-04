@@ -127,13 +127,13 @@ end
 
 	local network = require(ReplicatedStorage.Packages.network) 
 
-	local TestNetwork = Network.Server.new("Test")
-	TestNetwork:append("method", function(player)
+	local testNetwork = Network.Server.new("Test")
+	testNetwork:append("method", function(player)
 		return ("hi, %s!"):format(player.Name)
 	end)
 
 	-- Dispatch the network to workspace:
-	TestNetwork:dispatch(workspace) 
+	testNetwork:dispatch(workspace) 
 
 	-- Client
 	-- Get the network of name "Test", dispatched to workspace

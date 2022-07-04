@@ -8,11 +8,11 @@
 	local Workspace = game:GetService("Workspace")
 
 	-- Server
-	local TestNetwork = Network.Server.new("Test")
-	TestNetwork:append("method", function(player)
+	local testNetwork = Network.Server.new("Test")
+	testNetwork:append("method", function(player)
 		return ("hi, %s!"):format(player.Name)
 	end)
-	TestNetwork:dispatch(Workspace)
+	testNetwork:dispatch(Workspace)
 
 	-- Client
 	local Workspace = game:GetService("Workspace")
