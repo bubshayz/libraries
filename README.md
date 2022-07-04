@@ -1,6 +1,5 @@
 | Module | Dependency | Realm |
 | -- | -- | -- |
-| [EnumList](https://bubshayz.github.io/libraries/api/EnumList) | `EnumList = "bubshayz/enumlist@1.2.2"` | `shared` |
 | [Property](https://bubshayz.github.io/libraries/api/Property) | `Property = "bubshayz/property@1.1.2` | `shared` |
 | [Queue](https://bubshayz.github.io/libraries/api/Queue) | `Queue = "bubshayz/queue@1.1.3"` | `shared` |
 | [network](https://bubshayz.github.io/libraries/api/Network) | `Network = "bubshayz/network@2.0.0"` | `shared` |
