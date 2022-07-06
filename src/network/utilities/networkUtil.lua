@@ -9,6 +9,11 @@ local function runCallbackNoYield(callback, ...)
 	end)
 
 	local didRunSafely = coroutine.status(thread) == "dead"
+
+	if not didRunSafely then
+		coroutine.close(thread)
+	end
+
 	return didRunSafely, callbackResponse
 end
 
@@ -18,10 +23,7 @@ function networkUtil.safeInvokeClient(remoteFunction: RemoteFunction, player: Pl
 	end)
 end
 
-function networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-	callbacks: { () -> any },
-	...: any
-): { any }
+function networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(callbacks: { () -> any }, ...: any): { any }
 	local accumulatedResponses = {}
 
 	for _, callback in callbacks do

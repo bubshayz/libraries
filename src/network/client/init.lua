@@ -43,7 +43,7 @@ local function getAbstractOfNetworkFolder(networkFolder): { [string]: any }
 			continue
 		end
 
-		if descendant:GetAttribute("ValueType") == "function" then
+		if descendant:GetAttribute("valueType") == "function" then
 			abstract[descendant.Name] = function(...)
 				local args = { ... }
 				local index = table.find(args, abstract)

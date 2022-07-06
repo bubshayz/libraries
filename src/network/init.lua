@@ -1,14 +1,13 @@
 --[=[
 	@class network
 
-	An advanced network module for easy server-client communication. The module consists of 
-	[NetworkServer] and a [NetworkClient] module.
+	An advanced network module for easy server-client communication. 
 
 	```lua
 	local Workspace = game:GetService("Workspace")
 
 	-- Server
-	local testNetwork = Network.Server.new("Test")
+	local testNetwork = Network.Server.new("TestNetwork")
 	testNetwork:append("method", function(player)
 		return ("hi, %s!"):format(player.Name)
 	end)
@@ -17,7 +16,7 @@
 	-- Client
 	local Workspace = game:GetService("Workspace")
 
-	local testNetwork = network.client.fromParent("Test", Workspace)
+	local testNetwork = network.client.fromParent("TestNetwork", Workspace):expect()
 	print(testNetwork.method()) --> "hi, bubshayz!"
 	```
 ]=]
@@ -26,16 +25,12 @@
 	@prop Server NetworkServer
 	@within network
 	@readonly
-
-	A reference to the [NetworkServer] module.
 ]=]
 
 --[=[ 
 	@prop client networkClient
 	@within network
 	@readonly
-
-	A reference to the [networkClient] module.
 ]=]
 
 return {
