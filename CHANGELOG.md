@@ -1,3 +1,11 @@
+## 2022-07-07
+
+### Changed
+
+- Change `remoteProperty.fireForClients` to `remoteProperty.fireClients`.
+- Internal code refactor for `network`.
+- Documentation improvements for `network`.
+
 ## 2022-07-03
 
 ### Added
