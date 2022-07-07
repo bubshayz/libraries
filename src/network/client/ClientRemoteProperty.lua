@@ -85,11 +85,6 @@ end
 	@tag ClientRemoteProperty instance
 	
 	Invokes the serverside remote property (to which this client remote propert is connected to), to set the value for the client to `value`.
-
-	:::note
-	The serverside remote property might have a specific middleware (`clientSet`) which may alter this process, so there is no guarantee
-	that the value set by the client will actually be respected by the server. 
-	:::
 ]=]
 
 function ClientRemoteProperty.__index:set(value: any)

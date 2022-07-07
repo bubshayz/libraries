@@ -1,5 +1,9 @@
 ## 2022-07-07
 
+### Added
+
+- Added `ReemoteSignal.fireAllClientsExcept`.
+
 ### Changed
 
 - Change `RemoteSignal.fireForClients` to `RemoteSignal.fireClients`.

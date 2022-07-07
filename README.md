@@ -2,7 +2,7 @@
 | -- | -- | -- |
 | [Property](https://bubshayz.github.io/libraries/api/Property) | `Property = "bubshayz/property@1.1.2` | `shared` |
 | [Queue](https://bubshayz.github.io/libraries/api/Queue) | `Queue = "bubshayz/queue@1.1.3"` | `shared` |
-| [network](https://bubshayz.github.io/libraries/api/Network) | `Network = "bubshayz/network@3.0.0"` | `shared` |
+| [network](https://bubshayz.github.io/libraries/api/Network) | `Network = "bubshayz/network@3.1.0"` | `shared` |
 | [windLines](https://bubshayz.github.io/libraries/api/windLines) | `windLines = "bubshayz/windlines@1.2.2"` | `shared` |
 | [matrixUtil](https://bubshayz.github.io/libraries/api/matrixUtil) | `matrixUtil = "bubshayz/matrixutil@1.0.8"` | `shared` |
 | [instanceUtil](https://bubshayz.github.io/libraries/api/InstanceUtil) | `InstanceUtil = "bubshayz/instanceutil@1.1.0"` | `shared` |
