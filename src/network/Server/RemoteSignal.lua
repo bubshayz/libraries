@@ -120,6 +120,7 @@ local Janitor = require(packages.Janitor)
 local t = require(packages.t)
 local tableUtil = require(utilities.tableUtil)
 local networkUtil = require(utilities.networkUtil)
+local tracker = require(utilities.tracker)
 
 local MIDDLEWARE_TEMPLATE = { serverEvent = {} }
 
@@ -214,7 +215,7 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [RemoteSignal:fireClient] on every player in the game.
+    Calls [RemoteSignal:fireClient] for every player in the game.
 ]=]
 
 function RemoteSignal.__index:fireAllClients(...: any)
@@ -224,11 +225,27 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [RemoteSignal:fireClient] on every player in the `clients` table only.
+    Calls [RemoteSignal:fireClient] for every player in the `clients` table only.
 ]=]
 
 function RemoteSignal.__index:fireClients(clients: { Player }, ...: any)
 	for _, client in clients do
+		self._remoteEvent:FireClient(client, ...)
+	end
+end
+
+--[=[
+    @tag RemoteSignal instance
+
+    Calls [RemoteSignal:fireClient] for every player in the game, except for `client`.
+]=]
+
+function RemoteSignal.__index:fireAllClientsExcept(client: Player, ...: any)
+	for _, player in tracker.getTrackingPlayers() do
+		if player == client then
+			continue
+		end
+
 		self._remoteEvent:FireClient(client, ...)
 	end
 end
