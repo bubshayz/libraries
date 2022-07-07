@@ -20,6 +20,8 @@
 
     .Disconnect () -> () 
     .Connected boolean
+
+    For more information, see [SignalConnection](https://sleitnick.github.io/RbxUtil/api/Signal/#SignalConnection).
 ]=]
 
 --[=[
@@ -45,7 +47,8 @@
     ```
 
     :::warning Yielding is not allowed
-    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    Middleware callbacks aren't allowed to yield. If they do so, their thread will be closed and an error will be outputted, but
+    other callbacks will not be affected.
     :::
 
     :::tip More control
@@ -56,23 +59,23 @@
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.Server.new("Test")
-    local TestRemoteSignal = network.Server.RemoteSignal.new({
+    local testNetwork = network.Server.new("TestNetwork")
+    local testRemoteSignal = network.Server.RemoteSignal.new({
         clientServer = {function() return false end}
     })
 
-    TestRemoteSignal:connect(function()
+    testRemoteSignal:connect(function()
         print("Fired") --> never prints
     end)
 
-    testNetwork:append("signal", TestRemoteSignal)
+    testNetwork:append("signal", testRemoteSignal)
     testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")
     
-    local testNetwork = network.client.fromParent("Test", Workspace)
-    print(testNetwork.signal:fire()) 
+    local testNetwork = network.client.fromParent("TestNetwork", Workspace)
+    print(testNetwork.signal:fireServer()) 
     ```
 
     - Additionally, you can modify the `arguments` table, for e.g:
@@ -81,8 +84,8 @@
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.Server.new("Test")
-    local TestRemoteSignal = network.Server.RemoteSignal.new({
+    local testNetwork = network.Server.new("TestNetwork")
+    local testRemoteSignal = network.Server.RemoteSignal.new({
         clientServer = {
             function(arguments) 
                 arguments[2] = 1 
@@ -91,18 +94,18 @@
         }
     })
 
-    TestRemoteSignal:connect(function(client, a, b)
+    testRemoteSignal:connect(function(client, a, b)
         print(a, b) --> 1, "test" (a and b ought to be 24, but they were modified through the middleware)
     end)
 
-    testNetwork:append("signal", TestRemoteSignal)
+    testNetwork:append("signal", testRemoteSignal)
     testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.client.fromParent("Test", Workspace)
-    print(testNetwork.signal:fire(24, 24)) 
+    local testNetwork = network.client.fromParent("Test", Workspace):expect()
+    print(testNetwork.signal:fireServer(24, 24)) 
     ```
     :::
 ]=]
@@ -211,7 +214,7 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [remoteSignal:fireClient] on every player in the game.
+    Calls [RemoteSignal:fireClient] on every player in the game.
 ]=]
 
 function RemoteSignal.__index:fireAllClients(...: any)
@@ -221,10 +224,10 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [remoteSignal:fireClient] on every player in the `clients` table only.
+    Calls [RemoteSignal:fireClient] on every player in the `clients` table only.
 ]=]
 
-function RemoteSignal.__index:fireForClients(clients: { Player }, ...: any)
+function RemoteSignal.__index:fireClients(clients: { Player }, ...: any)
 	for _, client in clients do
 		self._remoteEvent:FireClient(client, ...)
 	end

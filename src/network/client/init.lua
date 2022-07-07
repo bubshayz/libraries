@@ -9,16 +9,12 @@
 	@prop ClientRemoteProperty ClientRemoteProperty
 	@within networkClient
 	@readonly
-
-	A reference to the [ClientRemoteProperty] module.
 ]=]
 
 --[=[ 
 	@prop ClientRemoteSignal ClientRemoteSignal
 	@within networkClient
 	@readonly
-
-	A reference to the [ClientRemoteSignal] module.
 ]=]
 
 local packages = script.Parent.Parent
@@ -43,7 +39,7 @@ local function getAbstractOfNetworkFolder(networkFolder): { [string]: any }
 			continue
 		end
 
-		if descendant:GetAttribute("ValueType") == "function" then
+		if descendant:GetAttribute("valueType") == "function" then
 			abstract[descendant.Name] = function(...)
 				local args = { ... }
 				local index = table.find(args, abstract)

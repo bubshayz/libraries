@@ -4,13 +4,14 @@
 	The clientside counterpart of [RemoteSignal]. A client remote signal in 
 	layman's terms is just an object connected to a serverside remote signal.
 ]=]
-
 --[=[
-	@interface SignalConnection 
-	@within ClientRemoteSignal	
+    @interface SignalConnection 
+    @within ClientRemoteSignal    
 
-	.Disconnect () -> () 
-	.Connected boolean
+    .Disconnect () -> () 
+    .Connected boolean
+
+    For more information, see [SignalConnection](https://sleitnick.github.io/RbxUtil/api/Signal/#SignalConnection).
 ]=]
 
 --[=[ 
@@ -117,7 +118,7 @@ end
 	remote signal is connected to) dispatches some data to this client 
 	remote signal.
 
-	```lua`
+	```lua
 	-- Server
 	remoteSignal:fireAllClients("Hi")
 

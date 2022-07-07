@@ -33,7 +33,7 @@
     @within RemoteProperty
     @readonly
 
-    An exported Luau type of a remote property.
+    An exported Luau type of remote property.
 ]=]
 
 --[=[
@@ -60,9 +60,10 @@
     ```
 
     :::warning Yielding is not allowed
-    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    Middleware callbacks aren't allowed to yield. If they do so, their thread will be closed and an error will be outputted, but
+    other callbacks will not be affected.
     :::
-
+    
     :::tip More control
     A callback can return a non-nil value, which will then be set as the value for the client in the remote property.
     This is useful in cases where you want to have more control over what values the client can set for them in the remote
@@ -74,18 +75,18 @@
     -- Server
     local Workspace = game:GetService("Workspace")
     
-    local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
+    local testRemoteProperty = Network.Server.RemoteProperty.new(50, {
         clientSet = {function() return "rickrolled" end}
     })
 
-    local testNetwork = Network.Server.new("Test")
-    testNetwork:append("property", TestRemoteProperty)
+    local testNetwork = Network.Server.new("TestNetwork")
+    testNetwork:append("property", testRemoteProperty)
     testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.client.fromParent("Test", Workspace):expect()
+    local testNetwork = network.client.fromParent("TestNetwork", Workspace):expect()
     testNetwork.property:set(1)
     print(testNetwork.updated:Wait()) --> "rickrolled" (This ought to print 1, but our middleware returned a custom value!)
     ```
@@ -99,7 +100,7 @@
     -- Server
     local Workspace = game:GetService("Workspace")
     
-    local TestRemoteProperty = Network.Server.RemoteProperty.new(50, {
+    local testRemoteProperty = Network.Server.RemoteProperty.new(50, {
         clientSet = {
             function() return "rickrolled" end,
             function() return "oof" end,
@@ -107,14 +108,14 @@
         }
     })
 
-    local testNetwork = Network.Server.new("Test")
-    testNetwork:append("property", TestRemoteProperty)
+    local testNetwork = Network.Server.new("TestNetwork")
+    testNetwork:append("property", testRemoteProperty)
     testNetwork:dispatch(Workspace)
 
     -- Client
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.client.fromParent("Test", Workspace):expect()
+    local testNetwork = network.client.fromParent("TestNetwork", Workspace):expect()
     testNetwork.property:set(1)
     print(testNetwork.updated:Wait()) --> {"oofed", "rickrolled", "hello"} 
     ```

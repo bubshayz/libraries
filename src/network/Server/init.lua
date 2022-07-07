@@ -9,16 +9,12 @@
     @prop RemoteProperty RemoteProperty
     @within NetworkServer
     @readonly
-
-    A reference to the [RemoteProperty] module.
 ]=]
 
 --[=[ 
     @prop RemoteProperty RemoteSignal
     @within NetworkServer
     @readonly
-
-    A reference to the [RemoteSignal] module.
 ]=]
 
 --[=[ 
@@ -26,7 +22,7 @@
     @within NetworkServer
     @readonly
 
-    An exported Luau type of a network object.
+    An exported Luau type of network.
 ]=]
 
 --[=[
@@ -55,7 +51,8 @@
     ```
 
     :::warning Yielding is not allowed
-    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    Middleware callbacks aren't allowed to yield. If they do so, their thread will be closed and an error will be outputted, but
+    other callbacks will not be affected.
     :::
 
     :::tip More control
@@ -68,8 +65,10 @@
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = Network.Server.new("Test", {methodCallInbound = {
-        function(_, arguments) arguments[2] = "test" end
+    local testNetwork = Network.Server.new("TestNetwork", {methodCallInbound = {
+        function(_, arguments) 
+            arguments[2] = "test"
+        end
     }})
     testNetwork:append("method", function(player, a)
         print(a) --> "test" (a ought to be 1, but the middleware modified it!)
@@ -77,7 +76,9 @@
     testNetwork:dispatch(Workspace)
 
     -- Client
-    local testNetwork = network.client.fromParent("Test", Workspace)
+    local Workspace = game:GetService("Workspace")
+
+    local testNetwork = network.client.fromParent("TestNetwork", Workspace):expect()
     estNetwork.method(1) 
     ```
     :::
@@ -101,9 +102,10 @@
     ```
 
     :::warning Yielding is not allowed
-    Middleware callbacks aren't allowed to yield, if they do so, an error will be outputted!
+    Middleware callbacks aren't allowed to yield. If they do so, their thread will be closed and an error will be outputted, but
+    other callbacks will not be affected.
     :::
-
+    
     :::tip Additional `methodResponse` argument
     A third argument i.e `methodResponse` is passed to each callback as well, which is just the response of the method called. For e.g:
 
@@ -122,17 +124,17 @@
         }
     }
 
-    local Network = network.Server.new("test", middleware)
-    Network:append("SomeMethod", function()
+    local testNetwork = network.Server.new("TestNetwork", middleware)
+    testNetwork:append("someMethod", function()
         return "this"
     end)
-    Network:dispatch(Workspace)
+    testNetwork:dispatch(Workspace)
 
     -- Client:
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.client.fromParent("test", Workspace):expect()
-    print(testNetwork.SomeMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
+    local testNetwork = network.client.fromParent("testNetwork", Workspace):expect()
+    print(testNetwork.someMethod()) --> "oops modified" (ought to be "this" instead but modified by a middleware!)
     ```
 
     Additionally, these callbacks can return a value that overrides the actual result of the method (which will be sent
@@ -151,8 +153,8 @@
         }
     }
 
-    local testNetwork = network.Server.new("test", middleware)
-    testNetwork:append("SomeMethod", function()
+    local testNetwork = network.Server.new("TestNetwork", middleware)
+    testNetwork:append("someMethod", function()
         return "this"
     end)
     testNetwork:dispatch(Workspace)
@@ -160,8 +162,8 @@
     -- Client:
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.fromParent("test", Workspace):expect()
-    print(testNetwork.SomeMethod()) --> 50 
+    local testNetwork = network.fromParent("TestNetwork", Workspace):expect()
+    print(testNetwork.someMethod()) --> 50 
     ```
 
     Additionally, if more than 1 callback returns a value, then all those returned values will be packed into an array and *then* sent
@@ -189,7 +191,7 @@
         }
     }
 
-    local testNetwork = network.server.new("test", middleware)
+    local testNetwork = network.server.new("TestNetwork", middleware)
     testNetwork:append("someMethod", function()
         return "this"
     end)
@@ -198,7 +200,7 @@
     -- Client:
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = network.client.fromParent("test", Workspace):expect()
+    local testNetwork = network.client.fromParent("TestNetwork", Workspace):expect()
     print(testNetwork.someMethod()) --> {1, 2, 3} 
     ```
     :::
@@ -314,12 +316,12 @@ end
     -- Server
     local Workspace = game:GetService("Workspace")
 
-    local testNetwork = Network.Server.new("test")
+    local testNetwork = Network.Server.new("TestNetwork")
     testNetwork:append("key", "the value!")
     testNetwork:dispatch(Workspace)
 
     -- Client
-    local testNetwork = Network.client.fromParent("test", Workspace):expect()
+    local testNetwork = Network.client.fromParent("TestNetwork", Workspace):expect()
     print(testNetwork.key) --> "the value!"
     ```
 
@@ -401,7 +403,7 @@ function NetworkServer.__index:_setup(key: string, value: any)
 
 	local remoteFunction = Instance.new("RemoteFunction")
 	remoteFunction.Name = key
-	remoteFunction:SetAttribute("ValueType", typeof(value))
+	remoteFunction:SetAttribute("valueType", typeof(value))
 	remoteFunction.Parent = self._networkFolder
 
 	function remoteFunction.OnServerInvoke(...)
@@ -409,11 +411,7 @@ function NetworkServer.__index:_setup(key: string, value: any)
 
 		if typeof(value) == "function" then
 			local methodCallInboundMiddlewareAccumulatedResponses =
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-					self._middleware.methodCallInbound,
-					key,
-					args
-				)
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.methodCallInbound, key, args)
 
 			-- If there is an explicit false value included in the accumulated
 			-- the response of all inbound method callbacks, then that means we should
