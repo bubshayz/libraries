@@ -9,16 +9,12 @@
     @prop RemoteProperty RemoteProperty
     @within NetworkServer
     @readonly
-
-    A reference to the [RemoteProperty] module.
 ]=]
 
 --[=[ 
     @prop RemoteProperty RemoteSignal
     @within NetworkServer
     @readonly
-
-    A reference to the [RemoteSignal] module.
 ]=]
 
 --[=[ 
@@ -415,11 +411,7 @@ function NetworkServer.__index:_setup(key: string, value: any)
 
 		if typeof(value) == "function" then
 			local methodCallInboundMiddlewareAccumulatedResponses =
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-					self._middleware.methodCallInbound,
-					key,
-					args
-				)
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.methodCallInbound, key, args)
 
 			-- If there is an explicit false value included in the accumulated
 			-- the response of all inbound method callbacks, then that means we should
