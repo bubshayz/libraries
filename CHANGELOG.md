@@ -2,7 +2,7 @@
 
 ### Changed
 
-- Change `remoteProperty.fireForClients` to `remoteProperty.fireClients`.
+- Change `RemoteProperty.fireForClients` to `RemoteProperty.fireClients`.
 - Internal code refactor for `network`.
 - Documentation improvements for `network`.
 
