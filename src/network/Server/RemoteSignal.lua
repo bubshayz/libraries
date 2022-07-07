@@ -214,7 +214,7 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [remoteSignal:fireClient] on every player in the game.
+    Calls [RemoteSignal:fireClient] on every player in the game.
 ]=]
 
 function RemoteSignal.__index:fireAllClients(...: any)
@@ -224,7 +224,7 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [remoteSignal:fireClient] on every player in the `clients` table only.
+    Calls [RemoteSignal:fireClient] on every player in the `clients` table only.
 ]=]
 
 function RemoteSignal.__index:fireClients(clients: { Player }, ...: any)
