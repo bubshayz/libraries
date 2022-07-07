@@ -9,16 +9,12 @@
 	@prop ClientRemoteProperty ClientRemoteProperty
 	@within networkClient
 	@readonly
-
-	A reference to the [ClientRemoteProperty] module.
 ]=]
 
 --[=[ 
 	@prop ClientRemoteSignal ClientRemoteSignal
 	@within networkClient
 	@readonly
-
-	A reference to the [ClientRemoteSignal] module.
 ]=]
 
 local packages = script.Parent.Parent
