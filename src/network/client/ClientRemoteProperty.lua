@@ -121,14 +121,4 @@ function ClientRemoteProperty:__tostring()
 	return ("[ClientRemoteProperty]: (%s)"):format(self._remoteFunction.Name)
 end
 
-export type clientRemoteProperty = typeof(setmetatable(
-	{} :: {
-		updated: any,
-		_property: any,
-		_janitor: any,
-		_remoteFunction: RemoteFunction,
-	},
-	ClientRemoteProperty
-))
-
 return table.freeze(ClientRemoteProperty)
