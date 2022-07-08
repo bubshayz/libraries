@@ -80,8 +80,8 @@ end
 	connection returned is  disconnected immediately upon `callback` being called.
 ]=]
 
-function ClientRemoteSignal.__index:connectOnce(callback: (...any) -> ()): RBXScriptConnection
-	return self._remoteEvent.OnClientEvent:ConnectOnce(callback)
+function ClientRemoteSignal.__index:once(callback: (...any) -> ()): RBXScriptConnection
+	return self._remoteEvent.OnClientEvent:Once(callback)
 end
 
 --[=[

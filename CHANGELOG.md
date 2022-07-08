@@ -2,8 +2,8 @@
 
 ### Added
 
-- Added `RemoteSignal:connectOnce`.
-- Added `ClientRemoteSignal:connectOnce`.
+- Added `RemoteSignal:once`.
+- Added `ClientRemoteSignal:once`.
 
 ### Changed
 

@@ -207,8 +207,8 @@ end
 	connection returned is  disconnected immediately upon `callback` being called.
 ]=]
 
-function RemoteSignal.__index:connectOnce(callback: (...any) -> ()): RBXScriptConnection
-	return self._remoteEvent.OnServerEvent:ConnectOnce(callback)
+function RemoteSignal.__index:once(callback: (...any) -> ()): RBXScriptConnection
+	return self._remoteEvent.OnServerEvent:Once(callback)
 end
 
 --[=[
