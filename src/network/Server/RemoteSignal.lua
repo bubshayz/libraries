@@ -201,6 +201,17 @@ function RemoteSignal.__index:connect(callback: (...any) -> ()): RBXScriptConnec
 end
 
 --[=[
+	@tag RemoteSignal instance
+
+	Works almost exactly the same as [RemoteSignal:connect], except the 
+	connection returned is  disconnected immediately upon `callback` being called.
+]=]
+
+function RemoteSignal.__index:connectOnce(callback: (...any) -> ()): RBXScriptConnection
+	return self._remoteEvent.OnServerEvent:ConnectOnce(callback)
+end
+
+--[=[
     @tag RemoteSignal instance
 
     Connects `callback` to the remote signal so that it is called whenever the remote signal
@@ -238,13 +249,8 @@ end
 function RemoteSignal.__index:wait(): ...any
 	local yieldedThread = coroutine.running()
 
-	task.defer(function()
-		-- TODO: Use ConnectOnce for better behavior, when it releases.
-		local remoteSignalConnection
-		remoteSignalConnection = self:connect(function(...)
-			remoteSignalConnection:Disconnect()
-			task.spawn(yieldedThread, ...)
-		end)
+	self:connectOnce(function(...)
+		task.spawn(yieldedThread, ...)
 	end)
 
 	return coroutine.yield()

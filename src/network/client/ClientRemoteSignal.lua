@@ -76,6 +76,17 @@ end
 --[=[
 	@tag ClientRemoteSignal instance
 
+	Works almost exactly the same as [ClientRemoteSignal:connect], except the 
+	connection returned is  disconnected immediately upon `callback` being called.
+]=]
+
+function ClientRemoteSignal.__index:connectOnce(callback: (...any) -> ()): RBXScriptConnection
+	return self._remoteEvent.OnClientEvent:ConnectOnce(callback)
+end
+
+--[=[
+	@tag ClientRemoteSignal instance
+
 	Fires `...` arguments to the serverside remote signal (to which the client
 	remote signal is connected to).
 ]=]
