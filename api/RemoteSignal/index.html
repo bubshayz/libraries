@@ -9,8 +9,8 @@ to a client (who can listen to this data through a client remote signal) and
 listens to data dispatched to itself by a client (through a client remote signal)."><meta data-rh="true" property="og:description" content="A remote signal in layman&#x27;s terms is simply an object which dispatches data
 to a client (who can listen to this data through a client remote signal) and 
 listens to data dispatched to itself by a client (through a client remote signal)."><link data-rh="true" rel="icon" href="/libraries/icon.ico"><link data-rh="true" rel="canonical" href="https://bubshayz.github.io/libraries/api/RemoteSignal"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/RemoteSignal" hreflang="en"><link data-rh="true" rel="alternate" href="https://bubshayz.github.io/libraries/api/RemoteSignal" hreflang="x-default"><link rel="stylesheet" href="/libraries/assets/css/styles.530f85dc.css">
-<link rel="preload" href="/libraries/assets/js/runtime~main.dec826ca.js" as="script">
-<link rel="preload" href="/libraries/assets/js/main.7c5c0ba1.js" as="script">
+<link rel="preload" href="/libraries/assets/js/runtime~main.3fc8f4b4.js" as="script">
+<link rel="preload" href="/libraries/assets/js/main.83be6684.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function e(e){document.documentElement.setAttribute("data-theme",e)}var t=function(){var e=null;try{e=localStorage.getItem("theme")}catch(e){}return e}();null!==t?e(t):window.matchMedia("(prefers-color-scheme: dark)").matches?e("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,e("light"))}()</script><div id="__docusaurus">
@@ -20,9 +20,7 @@ listens to data dispatched to itself by a client (through a client remote signal
   to a client (who can listen to this data through a client remote signal) and
   listens to data dispatched to itself by a client (through a client remote signal).
 </p>
-</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="types">Types<a class="hash-link" href="#types" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SignalConnection"><code style="text-decoration:none">SignalConnection</code><a class="hash-link" href="#SignalConnection" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L26"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>SignalConnection<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>Disconnect<!-- -->: </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code></div><div><code>Connected<!-- -->: </code><code class="blue_P4bS">boolean</code></div></div><code>}</code></div><div>
-<p>For more information, see <a href="https://sleitnick.github.io/RbxUtil/api/Signal/#SignalConnection" target="_blank">SignalConnection</a>.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Middleware"><code style="text-decoration:none">Middleware</code><a class="hash-link" href="#Middleware" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L112"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>Middleware<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>serverEvent<!-- -->: </code><code class="purple_ieR2">{</code><code class="green_DgR4">(</code><div class="inset_uKQm"><code>client<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code>args<!-- -->: </code><code class="yellow_QJap">{</code><code class="blue_P4bS">any</code><code class="yellow_QJap">}</code></div><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code class="blue_P4bS">?,</code></div></div><code>}</code></div><div>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="types">Types<a class="hash-link" href="#types" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Middleware"><code style="text-decoration:none">Middleware</code><a class="hash-link" href="#Middleware" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L102"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>Middleware<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>serverEvent<!-- -->: </code><code class="purple_ieR2">{</code><code class="green_DgR4">(</code><div class="inset_uKQm"><code>client<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code>args<!-- -->: </code><code class="yellow_QJap">{</code><code class="blue_P4bS">any</code><code class="yellow_QJap">}</code></div><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code class="blue_P4bS">?,</code></div></div><code>}</code></div><div>
 <p><code>serverEvent</code> must be array of callbacks, if specified.</p>
 <h3><code>serverEvent</code></h3>
 <p>Callbacks in <code>serverEvent</code> are called whenever the client fires off the remote signal.</p>
@@ -114,32 +112,69 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
 </div>
 </div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a class="hash-link" href="#properties" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="RemoteSignal"><code style="text-decoration:none">RemoteSignal</code><a class="hash-link" href="#RemoteSignal" title="Direct link to heading">​</a></h3><span class="badge_Ba2I" style="color:#e74c3c"><span class="badgeTooltip_cWXP">This item is read only and cannot be modified.</span><span class="badgeToolTipTail_H9D_"><svg xmlns="http://www.w3.org/2000/svg" height="300px" width="300px" fill="#e74c3c" x="0px" y="0px" viewBox="0 0 96 96"><path d="M70.354,15.662h-7.496H25.566c-3.282,0-5.19-0.776-5.728-1.169v-1.456c0.538-0.393,2.445-1.168,5.728-1.168h46.479V8H25.566  c-4.776,0-9.594,1.468-9.594,4.747v61.458C15.972,86.645,20.328,88,37.495,88h42.535V15.662H70.354z"></path></svg> <!-- -->Read Only</span></span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L16"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->.<!-- -->RemoteSignal<!-- -->:<!-- --> </code> <code class="blue_P4bS">Type</code></div><div>
 <p>An exported Luau type of remote signal.</p>
-</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="new"><code style="text-decoration:none">new</code><a class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L152"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->.</code><code class="green_DgR4">new</code><code>(</code><code>middleware<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/RemoteSignal#Middleware">Middleware?</a></code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/RemoteSignal">RemoteSignal</a></code></div><div>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a class="hash-link" href="#functions" title="Direct link to heading">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="new"><code style="text-decoration:none">new</code><a class="hash-link" href="#new" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L140"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->.</code><code class="green_DgR4">new</code><code>(</code><code>middleware<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/RemoteSignal#Middleware">Middleware?</a></code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/RemoteSignal">RemoteSignal</a></code></div><div>
 <p>Creates and returns a new remote signal.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="is"><code style="text-decoration:none">is</code><a class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L175"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->.</code><code class="green_DgR4">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="is"><code style="text-decoration:none">is</code><a class="hash-link" href="#is" title="Direct link to heading">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L162"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->.</code><code class="green_DgR4">is</code><code>(</code><code>self<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
 <p>Returns a boolean indicating if <code>self</code> is a remote signal or not.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="connectOnce"><code style="text-decoration:none">connectOnce</code><a class="hash-link" href="#connectOnce" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L187"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">connectOnce</code><code>(</code><code>callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">...any</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/RemoteSignal#SignalConnection">SignalConnection</a></code></div><div>
-<p>
-  Works almost the same as <a href="/libraries/api/RemoteSignal#connectOnce">RemoteSignal:connectOnce</a>, except the connection returned
-  is disconnected automatically once <code>callback</code> is called.
-</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="connect"><code style="text-decoration:none">connect</code><a class="hash-link" href="#connect" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L200"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">connect</code><code>(</code><code>callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">...any</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/libraries/api/RemoteSignal#SignalConnection">SignalConnection</a></code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="connect"><code style="text-decoration:none">connect</code><a class="hash-link" href="#connect" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L184"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">connect</code><code>(</code><code>callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">...any</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/RBXScriptConnection" target="_blank" rel="noopener noreferrer">RBXScriptConnection<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
 <p>
   Connects <code>callback</code> to the remote signal so that it is called whenever the client
-  fires the remote signal. Additionally, <code>callback</code> will be passed to all the arguments sent
+  fires the remote signal. Additionally, <code>callback</code> will be passed all the arguments sent
   by the client.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireClient"><code style="text-decoration:none">fireClient</code><a class="hash-link" href="#fireClient" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L210"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireClient</code><code>(</code><div class="inset_uKQm"><div><code>client<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<pre class="language-lua"><code class="language-lua"><span class="token comment">-- Server</span>
+remoteSignal<span class="token punctuation">:</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span> <span class="token comment">--> 3</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+
+<span class="token comment">-- Client</span>
+clientRemoteSignal<span class="token punctuation">:</span><span class="token function">fireServer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="wait"><code style="text-decoration:none">wait</code><a class="hash-link" href="#wait" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L220"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">wait</code><code>(</code><code>) → </code><code class="blue_P4bS">...any</code></div><div>
+<p>
+  Connects <code>callback</code> to the remote signal so that it is called whenever the remote signal
+  is fired off by the client <em>successfully</em>. Additionally, <code>callback</code> will be passed all the arguments sent
+  by the client.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token comment">-- Server</span>
+remoteSignal<span class="token punctuation">:</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>client<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span> <span class="token comment">--> 3</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+
+<span class="token comment">-- Client</span>
+clientRemoteSignal<span class="token punctuation">:</span><span class="token function">fireServer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="wait"><code style="text-decoration:none">wait</code><a class="hash-link" href="#wait" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L237"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">wait</code><code>(</code><code>) → </code><code class="blue_P4bS">...any</code></div><div>
+<p>
+  Yields the current thread until the remote signal is <em>successfully</em> fired off by the client.
+  The yielded thread is resumed once the client fires some data to the server <em>successfully</em>,
+  with the arguments sent by the client.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token comment">-- Server</span>
+<span class="token keyword">local</span> client<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b <span class="token operator">=</span> remoteSignal<span class="token punctuation">:</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span> <span class="token comment">--> 3</span>
+
+<span class="token comment">-- Client</span>
+clientRemoteSignal<span class="token punctuation">:</span><span class="token function">fireServer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireClient"><code style="text-decoration:none">fireClient</code><a class="hash-link" href="#fireClient" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L258"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireClient</code><code>(</code><div class="inset_uKQm"><div><code>client<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Fires the arguments <code>...</code> to <code>client</code>.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireAllClients"><code style="text-decoration:none">fireAllClients</code><a class="hash-link" href="#fireAllClients" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L220"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireAllClients</code><code>(</code><code>...<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code>(</code><code>)</code></div><div>
-<p>Calls <a href="/libraries/api/RemoteSignal#fireClient">RemoteSignal:fireClient</a> for every player in the game.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireClients"><code style="text-decoration:none">fireClients</code><a class="hash-link" href="#fireClients" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L230"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireClients</code><code>(</code><div class="inset_uKQm"><div><code>clients<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple_ieR2">}</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
-<p>Calls <a href="/libraries/api/RemoteSignal#fireClient">RemoteSignal:fireClient</a> for every player in the <code>clients</code> table only.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireAllClientsExcept"><code style="text-decoration:none">fireAllClientsExcept</code><a class="hash-link" href="#fireAllClientsExcept" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L242"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireAllClientsExcept</code><code>(</code><div class="inset_uKQm"><div><code>client<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
-<p>Calls <a href="/libraries/api/RemoteSignal#fireClient">RemoteSignal:fireClient</a> for every player in the game, except for <code>client</code>.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="disconnectAll"><code style="text-decoration:none">disconnectAll</code><a class="hash-link" href="#disconnectAll" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L258"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">disconnectAll</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
-<p>Disconnects all connections connected via <a href="/libraries/api/RemoteSignal#connect">RemoteSignal:connect</a> or <a href="/libraries/api/RemoteSignal#connectOnce">RemoteSignal:connectOnce</a>.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="destroy"><code style="text-decoration:none">destroy</code><a class="hash-link" href="#destroy" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L268"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireAllClients"><code style="text-decoration:none">fireAllClients</code><a class="hash-link" href="#fireAllClients" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L269"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireAllClients</code><code>(</code><code>...<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Calls <a href="/libraries/api/RemoteSignal#fireClient">RemoteSignal:fireClient</a> for every player in the game, also
+  passing in the arguments <code>...</code>.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireClients"><code style="text-decoration:none">fireClients</code><a class="hash-link" href="#fireClients" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L280"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireClients</code><code>(</code><div class="inset_uKQm"><div><code>clients<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple_ieR2">}</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Calls <a href="/libraries/api/RemoteSignal#fireClient">RemoteSignal:fireClient</a> for every player in the <code>clients</code> table only, also
+  passing in the arguments <code>...</code>.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fireAllClientsExcept"><code style="text-decoration:none">fireAllClientsExcept</code><a class="hash-link" href="#fireAllClientsExcept" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L293"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">fireAllClientsExcept</code><code>(</code><div class="inset_uKQm"><div><code>client<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Player" target="_blank" rel="noopener noreferrer">Player<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Calls <a href="/libraries/api/RemoteSignal#fireClient">RemoteSignal:fireClient</a> for every player in the game, except for <code>client</code>, also
+  passing in the arguments <code>...</code>.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="destroy"><code style="text-decoration:none">destroy</code><a class="hash-link" href="#destroy" title="Direct link to heading">​</a></h3><span class="docTag__6UZ" style="border-color:#218c74;color:#218c74">RemoteSignal instance</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/bubshayz/libraries/blob/main/src/network/Server/RemoteSignal.lua#L309"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>RemoteSignal<!-- -->:</code><code class="green_DgR4">destroy</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Destroys the remote signal and renders it unusable.</p>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
@@ -161,7 +196,7 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 152,
+                &quot;line&quot;: 140,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -183,38 +218,13 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 175,
-                &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
-            }
-        },
-        {
-            &quot;name&quot;: &quot;connectOnce&quot;,
-            &quot;desc&quot;: &quot;Works almost the same as [RemoteSignal:connectOnce], except the connection returned \nis disconnected automatically once `callback` is called.&quot;,
-            &quot;params&quot;: [
-                {
-                    &quot;name&quot;: &quot;callback&quot;,
-                    &quot;desc&quot;: &quot;&quot;,
-                    &quot;lua_type&quot;: &quot;(...any) -&gt; ()&quot;
-                }
-            ],
-            &quot;returns&quot;: [
-                {
-                    &quot;desc&quot;: &quot;&quot;,
-                    &quot;lua_type&quot;: &quot;SignalConnection&quot;
-                }
-            ],
-            &quot;function_type&quot;: &quot;method&quot;,
-            &quot;tags&quot;: [
-                &quot;RemoteSignal instance&quot;
-            ],
-            &quot;source&quot;: {
-                &quot;line&quot;: 187,
+                &quot;line&quot;: 162,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
         {
             &quot;name&quot;: &quot;connect&quot;,
-            &quot;desc&quot;: &quot;Connects `callback` to the remote signal so that it is called whenever the client\nfires the remote signal. Additionally, `callback` will be passed to all the arguments sent \nby the client.&quot;,
+            &quot;desc&quot;: &quot;Connects `callback` to the remote signal so that it is called whenever the client\nfires the remote signal. Additionally, `callback` will be passed all the arguments sent \nby the client.\n\n```lua\n-- Server\nremoteSignal:connect(function(client, a, b)\n    print(a + b) --&gt; 3\nend)\n\n-- Client\nclientRemoteSignal:fireServer(1, 2)\n```&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;callback&quot;,
@@ -225,7 +235,7 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
             &quot;returns&quot;: [
                 {
                     &quot;desc&quot;: &quot;&quot;,
-                    &quot;lua_type&quot;: &quot;SignalConnection&quot;
+                    &quot;lua_type&quot;: &quot;RBXScriptConnection\r\n&quot;
                 }
             ],
             &quot;function_type&quot;: &quot;method&quot;,
@@ -233,7 +243,45 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
                 &quot;RemoteSignal instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 200,
+                &quot;line&quot;: 184,
+                &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;wait&quot;,
+            &quot;desc&quot;: &quot;Connects `callback` to the remote signal so that it is called whenever the remote signal\nis fired off by the client *successfully*. Additionally, `callback` will be passed all the arguments sent \nby the client.\n\n```lua\n-- Server\nremoteSignal:connect(function(client, a, b)\n    print(a + b) --&gt; 3\nend)\n\n-- Client\nclientRemoteSignal:fireServer(1, 2)\n```&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;...any\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 220,
+                &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;wait&quot;,
+            &quot;desc&quot;: &quot;Yields the current thread until the remote signal is *successfully* fired off by the client. \nThe yielded thread is resumed once the client fires some data to the server *successfully*, \nwith the arguments sent by the client.\n\n```lua\n-- Server\nlocal client, a, b = remoteSignal:wait()\nprint(a + b) --&gt; 3\n\n-- Client\nclientRemoteSignal:fireServer(1, 2)\n```&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;...any\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;tags&quot;: [
+                &quot;RemoteSignal instance&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 237,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -258,13 +306,13 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
                 &quot;RemoteSignal instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 210,
+                &quot;line&quot;: 258,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
         {
             &quot;name&quot;: &quot;fireAllClients&quot;,
-            &quot;desc&quot;: &quot;Calls [RemoteSignal:fireClient] for every player in the game.&quot;,
+            &quot;desc&quot;: &quot;Calls [RemoteSignal:fireClient] for every player in the game, also \npassing in the arguments `...`.&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;...&quot;,
@@ -278,13 +326,13 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
                 &quot;RemoteSignal instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 220,
+                &quot;line&quot;: 269,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
         {
             &quot;name&quot;: &quot;fireClients&quot;,
-            &quot;desc&quot;: &quot;Calls [RemoteSignal:fireClient] for every player in the `clients` table only.&quot;,
+            &quot;desc&quot;: &quot;Calls [RemoteSignal:fireClient] for every player in the `clients` table only, also \npassing in the arguments `...`.&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;clients&quot;,
@@ -303,13 +351,13 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
                 &quot;RemoteSignal instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 230,
+                &quot;line&quot;: 280,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
         {
             &quot;name&quot;: &quot;fireAllClientsExcept&quot;,
-            &quot;desc&quot;: &quot;Calls [RemoteSignal:fireClient] for every player in the game, except for `client`.&quot;,
+            &quot;desc&quot;: &quot;Calls [RemoteSignal:fireClient] for every player in the game, except for `client`, also \npassing in the arguments `...`.&quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;client&quot;,
@@ -328,21 +376,7 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
                 &quot;RemoteSignal instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 242,
-                &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
-            }
-        },
-        {
-            &quot;name&quot;: &quot;disconnectAll&quot;,
-            &quot;desc&quot;: &quot;Disconnects all connections connected via [RemoteSignal:connect] or [RemoteSignal:connectOnce].&quot;,
-            &quot;params&quot;: [],
-            &quot;returns&quot;: [],
-            &quot;function_type&quot;: &quot;method&quot;,
-            &quot;tags&quot;: [
-                &quot;RemoteSignal instance&quot;
-            ],
-            &quot;source&quot;: {
-                &quot;line&quot;: 258,
+                &quot;line&quot;: 293,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -356,7 +390,7 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
                 &quot;RemoteSignal instance&quot;
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 268,
+                &quot;line&quot;: 309,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         },
@@ -379,7 +413,7 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
             &quot;function_type&quot;: &quot;method&quot;,
             &quot;private&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 276,
+                &quot;line&quot;: 317,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         }
@@ -398,26 +432,6 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
     ],
     &quot;types&quot;: [
         {
-            &quot;name&quot;: &quot;SignalConnection&quot;,
-            &quot;desc&quot;: &quot;For more information, see [SignalConnection](https://sleitnick.github.io/RbxUtil/api/Signal/#SignalConnection).&quot;,
-            &quot;fields&quot;: [
-                {
-                    &quot;name&quot;: &quot;Disconnect&quot;,
-                    &quot;lua_type&quot;: &quot;() -&gt; ()&quot;,
-                    &quot;desc&quot;: &quot;&quot;
-                },
-                {
-                    &quot;name&quot;: &quot;Connected&quot;,
-                    &quot;lua_type&quot;: &quot;boolean&quot;,
-                    &quot;desc&quot;: &quot;&quot;
-                }
-            ],
-            &quot;source&quot;: {
-                &quot;line&quot;: 26,
-                &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
-            }
-        },
-        {
             &quot;name&quot;: &quot;Middleware&quot;,
             &quot;desc&quot;: &quot;`serverEvent` must be array of callbacks, if specified.\n\n### `serverEvent` \n\nCallbacks in `serverEvent` are called whenever the client fires off the remote signal.\n\nThe first and *only* argument passed to each callback is just an array of arguments sent by the client. \n\n```lua\nlocal serverEventCallbacks = {\n    function (arguments)\n        print(client:IsA(\&quot;Player\&quot;)) --&gt; true (First argument is always the client!)\n    end\n}\n---\n```\n\n:::warning Yielding is not allowed\nMiddleware callbacks aren&#x27;t allowed to yield. If they do so, their thread will be closed and an error will be outputted, but\nother callbacks will not be affected.\n:::\n\n:::tip More control\n- If any of the callbacks return an **explicit** false value, then the remote signal\nwill not be fired. For e.g:\n\n```lua\n-- Server\nlocal Workspace = game:GetService(\&quot;Workspace\&quot;)\n\nlocal testNetwork = network.Server.new(\&quot;TestNetwork\&quot;)\nlocal testRemoteSignal = network.Server.RemoteSignal.new({\n    clientServer = {function() return false end}\n})\n\ntestRemoteSignal:connect(function()\n    print(\&quot;Fired\&quot;) --&gt; never prints\nend)\n\ntestNetwork:append(\&quot;signal\&quot;, testRemoteSignal)\ntestNetwork:dispatch(Workspace)\n\n-- Client\nlocal Workspace = game:GetService(\&quot;Workspace\&quot;)\n\nlocal testNetwork = network.client.fromParent(\&quot;TestNetwork\&quot;, Workspace)\nprint(testNetwork.signal:fireServer()) \n```\n\n- Additionally, you can modify the `arguments` table, for e.g:\n\n```lua\n-- Server\nlocal Workspace = game:GetService(\&quot;Workspace\&quot;)\n\nlocal testNetwork = network.Server.new(\&quot;TestNetwork\&quot;)\nlocal testRemoteSignal = network.Server.RemoteSignal.new({\n    clientServer = {\n        function(arguments) \n            arguments[2] = 1 \n            arguments[3] = \&quot;test\&quot;\n        end\n    }\n})\n\ntestRemoteSignal:connect(function(client, a, b)\n    print(a, b) --&gt; 1, \&quot;test\&quot; (a and b ought to be 24, but they were modified through the middleware)\nend)\n\ntestNetwork:append(\&quot;signal\&quot;, testRemoteSignal)\ntestNetwork:dispatch(Workspace)\n\n-- Client\nlocal Workspace = game:GetService(\&quot;Workspace\&quot;)\n\nlocal testNetwork = network.client.fromParent(\&quot;Test\&quot;, Workspace):expect()\nprint(testNetwork.signal:fireServer(24, 24)) \n```\n:::&quot;,
             &quot;fields&quot;: [
@@ -428,7 +442,7 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
                 }
             ],
             &quot;source&quot;: {
-                &quot;line&quot;: 112,
+                &quot;line&quot;: 102,
                 &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
             }
         }
@@ -439,8 +453,8 @@ testNetwork<span class="token punctuation">:</span><span class="token function">
         &quot;line&quot;: 8,
         &quot;path&quot;: &quot;src/network/Server/RemoteSignal.lua&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#Middleware" class="table-of-contents__link toc-highlight">Middleware</a></li><li><a href="#SignalConnection" class="table-of-contents__link toc-highlight">SignalConnection</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#RemoteSignal" class="table-of-contents__link toc-highlight">RemoteSignal</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#connect" class="table-of-contents__link toc-highlight">:connect</a></li><li><a href="#connectOnce" class="table-of-contents__link toc-highlight">:connectOnce</a></li><li><a href="#destroy" class="table-of-contents__link toc-highlight">:destroy</a></li><li><a href="#disconnectAll" class="table-of-contents__link toc-highlight">:disconnectAll</a></li><li><a href="#fireAllClients" class="table-of-contents__link toc-highlight">:fireAllClients</a></li><li><a href="#fireAllClientsExcept" class="table-of-contents__link toc-highlight">:fireAllClientsExcept</a></li><li><a href="#fireClient" class="table-of-contents__link toc-highlight">:fireClient</a></li><li><a href="#fireClients" class="table-of-contents__link toc-highlight">:fireClients</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
-<script src="/libraries/assets/js/runtime~main.dec826ca.js"></script>
-<script src="/libraries/assets/js/main.7c5c0ba1.js"></script>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#Middleware" class="table-of-contents__link toc-highlight">Middleware</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#RemoteSignal" class="table-of-contents__link toc-highlight">RemoteSignal</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#connect" class="table-of-contents__link toc-highlight">:connect</a></li><li><a href="#destroy" class="table-of-contents__link toc-highlight">:destroy</a></li><li><a href="#fireAllClients" class="table-of-contents__link toc-highlight">:fireAllClients</a></li><li><a href="#fireAllClientsExcept" class="table-of-contents__link toc-highlight">:fireAllClientsExcept</a></li><li><a href="#fireClient" class="table-of-contents__link toc-highlight">:fireClient</a></li><li><a href="#fireClients" class="table-of-contents__link toc-highlight">:fireClients</a></li><li><a href="#wait" class="table-of-contents__link toc-highlight">:wait</a></li><li><a href="#wait" class="table-of-contents__link toc-highlight">:wait</a></li><li><a href="#is" class="table-of-contents__link toc-highlight">.is</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+<script src="/libraries/assets/js/runtime~main.3fc8f4b4.js"></script>
+<script src="/libraries/assets/js/main.83be6684.js"></script>
 </body>
 </html>
