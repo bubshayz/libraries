@@ -9,9 +9,10 @@
 - Removed `RemoteSignal:disonnectAll` and `ClientRemoteSignal:disonnectAll`.
 - Removed `RemoteSignal:connectOnce` and `ClientRemoteSignal:connectOnce`.
 - Fix bug with `ClientRemoteSignal:connect` and `ClientRemoteSignal:wait` not receiving the dispatched events properly in some edge cases.
-- `RemoteSignal:connect` and `ClientRemoteSignal:connect` now return an `RBXScriptConnectionObject`. 
-- Internal code refactor and improvements.
-- Documentation improvements.
+- `RemoteSignal:connect` and `ClientRemoteSignal:connect` now return an `RBXScriptConnection`. 
+- Internal code refactor and improvements for `network`.
+- Documentation improvements for `network`.
+- Improved `windlines`.
 
 ## 2022-07-07
 
