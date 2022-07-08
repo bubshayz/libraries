@@ -127,7 +127,7 @@ local Players = game:GetService("Players")
 local networkFolder = script.Parent.Parent
 local packages = networkFolder.Parent
 
-local SharedConstants = require(networkFolder.SharedConstants)
+local sharedEnums = require(networkFolder.sharedEnums)
 local Janitor = require(packages.Janitor)
 local Signal = require(packages.Signal)
 local Property = require(packages.Property)
@@ -153,9 +153,9 @@ export type RemoteProperty = typeof(setmetatable(
 	{} :: {
 		updated: any,
 		clientValueUpdated: any,
-		_property: Property.Property,
+		_property: any,
 		_valueDispatcherRemoteFunction: RemoteFunction,
-		_clientProperties: { [Player]: Property.Property },
+		_clientProperties: { [Player]: any },
 		_janitor: any,
 		_middeware: Middleware,
 	},
@@ -176,7 +176,7 @@ end
 function RemoteProperty.new(initialValue: any, middleware: Middleware?)
 	assert(t.optional(t.table)(middleware))
 
-	if middleware then
+	if middleware ~= nil then
 		assert(MiddlewareInterface(middleware))
 	end
 
@@ -336,11 +336,10 @@ end
 ]=]
 
 function RemoteProperty.__index:dispatch(name: string, parent: Instance)
-	local valueDispatcherRemoteFunction = Instance.new("RemoteFunction")
+	local valueDispatcherRemoteFunction = self._valueDispatcherRemoteFunction
+	valueDispatcherRemoteFunction:SetAttribute(sharedEnums.Attribute.boundToRemoteProperty, true)
 	valueDispatcherRemoteFunction.Name = name
-	valueDispatcherRemoteFunction:SetAttribute(SharedConstants.attribute.boundToRemoteProperty, true)
 	valueDispatcherRemoteFunction.Parent = parent
-	self._valueDispatcherRemoteFunction = valueDispatcherRemoteFunction
 
 	self._janitor:Add(function()
 		valueDispatcherRemoteFunction.OnServerInvoke = nil
@@ -377,12 +376,12 @@ function RemoteProperty.__index:dispatch(name: string, parent: Instance)
 				continue
 			end
 
-			networkUtil.safeInvokeClient(self._valueDispatcherRemoteFunction, client, newValue)
+			networkUtil.safeInvokeClient(valueDispatcherRemoteFunction, client, newValue)
 		end
 	end)
 end
 
-function RemoteProperty.__index:_getClientProperty(client: Player): Property.Property
+function RemoteProperty.__index:_getClientProperty(client)
 	if self._clientProperties[client] then
 		return self._clientProperties[client]
 	end
@@ -403,6 +402,7 @@ function RemoteProperty.__index:_getClientProperty(client: Player): Property.Pro
 end
 
 function RemoteProperty.__index:_init()
+	self._valueDispatcherRemoteFunction = self._janitor:Add(Instance.new("RemoteFunction"))
 	self._janitor:Add(self.clientValueUpdated)
 	self._janitor:Add(self._property, "destroy")
 	self._janitor:Add(function()

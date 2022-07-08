@@ -1,5 +1,5 @@
 return table.freeze({
-	attribute = {
+	Attribute = {
 		networkFolder = "IsNetworkFolder",
 		boundToRemoteProperty = "IsBoundToRemoteProperty",
 		boundToRemoteSignal = "IsBoundToRemoteSignal",
