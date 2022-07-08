@@ -1,3 +1,14 @@
+## Unreleased
+
+### Added
+
+- Added `RemoteSignal:connectOnce`.
+- Added `ClientRemoteSignal:connectOnce`.
+
+### Changed
+
+- Internal code improvements.
+
 ## 2022-07-08
 
 ### Added
