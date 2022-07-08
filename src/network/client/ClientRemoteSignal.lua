@@ -4,15 +4,6 @@
 	The clientside counterpart of [RemoteSignal]. A client remote signal in 
 	layman's terms is just an object connected to a serverside remote signal.
 ]=]
---[=[
-    @interface SignalConnection 
-    @within ClientRemoteSignal    
-
-    .Disconnect () -> () 
-    .Connected boolean
-
-    For more information, see [SignalConnection](https://sleitnick.github.io/RbxUtil/api/Signal/#SignalConnection).
-]=]
 
 --[=[ 
 	@prop ClientRemoteSignal Type 
@@ -25,7 +16,6 @@
 
 local packages = script.Parent.Parent.Parent
 
-local Signal = require(packages.Signal)
 local Janitor = require(packages.Janitor)
 
 local ClientRemoteSignal = { __index = {} }
@@ -33,7 +23,6 @@ local ClientRemoteSignal = { __index = {} }
 export type ClientRemoteSignal = typeof(setmetatable(
 	{} :: {
 		_remoteEvent: RemoteEvent,
-		_signal: any,
 		_janitor: any,
 	},
 	ClientRemoteSignal
@@ -46,7 +35,6 @@ export type ClientRemoteSignal = typeof(setmetatable(
 function ClientRemoteSignal.new(remoteEvent: RemoteEvent)
 	local self = setmetatable({
 		_remoteEvent = remoteEvent,
-		_signal = Signal.new(),
 		_janitor = Janitor.new(),
 	}, ClientRemoteSignal)
 
@@ -63,40 +51,26 @@ function ClientRemoteSignal.is(self: any): boolean
 end
 
 --[=[
-	@return SignalConnection
 	@tag ClientRemoteSignal instance
 
 	Connects `callback` to the client remote signal so that it is called whenever 
 	the serverside remote signal (to which the client remote signal is connected to) 
-	dispatches some data to the client remote signal. The connected callback is called 
-	with the data dispatched to the client remote signal.
+	dispatches some data to the client. Additionally, `callback` will be passed all the arguments 
+	sent by the server.
 ]=]
 
-function ClientRemoteSignal.__index:connect(callback: (...any) -> ()): any
-	return self._signal:Connect(callback)
-end
+function ClientRemoteSignal.__index:connect(callback: (...any) -> ()): RBXScriptConnection
+	local onClientEventConnection
+	onClientEventConnection = self._remoteEvent.OnClientEvent:Connect(function(...)
+		-- https://devforum.roblox.com/t/beta-deferred-lua-event-handling/1240569
+		if not onClientEventConnection.Connected then
+			return
+		end
 
---[=[
-	@return SignalConnection
-	@tag ClientRemoteSignal instance
+		callback(...)
+	end)
 
-	Works almost exactly the same as [ClientRemoteSignal:connect], except the 
-	connection returned is  disconnected immediately upon `callback` being called.
-]=]
-
-function ClientRemoteSignal.__index:connectOnce(callback: (...any) -> ()): any
-	return self._signal:ConnectOnce(callback)
-end
-
---[=[
-	@tag ClientRemoteSignal instance
-
-	Disconnects all connections connected via [ClientRemoteSignal:connect] 
-	or [ClientRemoteSignal:connectOnce].
-]=]
-
-function ClientRemoteSignal.__index:disconnectAll()
-	self._signal:DisconnectAll()
+	return onClientEventConnection
 end
 
 --[=[
@@ -114,9 +88,10 @@ end
 	@tag ClientRemoteSignal instance
 	@tag yields
 
-	Yields the thread until the serverside remote signal (to which the client 
-	remote signal is connected to) dispatches some data to this client 
-	remote signal.
+	Yields the current thread until the serverside remote signal (to which the client 
+	remote signal is connected to) dispatches some data to the client. The yielded thread 
+	is resumed once the server fires some data to the client, with the arguments sent by the 
+	server.
 
 	```lua
 	-- Server
@@ -127,8 +102,8 @@ end
 	```
 ]=]
 
-function ClientRemoteSignal.__index:wait(): any
-	return self._signal:Wait()
+function ClientRemoteSignal.__index:wait(): ...any
+	return self._remoteEvent.OnClientEvent:Wait()
 end
 
 --[=[
@@ -145,11 +120,6 @@ function ClientRemoteSignal.__index:_init()
 	self._janitor:Add(function()
 		setmetatable(self, nil)
 	end)
-
-	self._janitor:Add(self._signal)
-	self._janitor:Add(self._remoteEvent.OnClientEvent:Connect(function(...)
-		self._signal:Fire(...)
-	end))
 end
 
 function ClientRemoteSignal:__tostring()

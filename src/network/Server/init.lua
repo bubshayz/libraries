@@ -209,7 +209,7 @@
 local packages = script.Parent.Parent
 local utilities = script.Parent.utilities
 
-local SharedConstants = require(script.Parent.SharedConstants)
+local sharedEnums = require(script.Parent.sharedEnums)
 local RemoteSignal = require(script.RemoteSignal)
 local RemoteProperty = require(script.RemoteProperty)
 local tableUtil = require(utilities.tableUtil)
@@ -267,7 +267,7 @@ function NetworkServer.new(name: string, middleware: Middleware?): NetworkServer
 	assert(t.string(name))
 	assert(t.optional(t.table)(middleware))
 
-	if middleware then
+	if middleware ~= nil then
 		assert(MiddlewareInterface(middleware))
 	end
 
@@ -458,7 +458,7 @@ end
 function NetworkServer.__index:_setupNetworkFolder()
 	local networkFolder = self._janitor:Add(Instance.new("Folder"))
 	networkFolder.Name = self._name
-	networkFolder:SetAttribute(SharedConstants.attribute.networkFolder, true)
+	networkFolder:SetAttribute(sharedEnums.Attribute.networkFolder, true)
 	self._networkFolder = networkFolder
 end
 

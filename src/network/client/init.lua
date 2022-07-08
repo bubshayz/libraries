@@ -20,7 +20,7 @@
 local packages = script.Parent.Parent
 
 local Promise = require(packages.Promise)
-local SharedConstants = require(script.Parent.SharedConstants)
+local sharedEnums = require(script.Parent.sharedEnums)
 
 local networkClient = {
 	ClientRemoteProperty = require(script.ClientRemoteProperty),
@@ -31,10 +31,10 @@ local function getAbstractOfNetworkFolder(networkFolder): { [string]: any }
 	local abstract = {}
 
 	for _, descendant in networkFolder:GetChildren() do
-		if descendant:GetAttribute(SharedConstants.attribute.boundToRemoteSignal) then
+		if descendant:GetAttribute(sharedEnums.Attribute.boundToRemoteSignal) then
 			abstract[descendant.Name] = networkClient.ClientRemoteSignal.new(descendant)
 			continue
-		elseif descendant:GetAttribute(SharedConstants.attribute.boundToRemoteProperty) then
+		elseif descendant:GetAttribute(sharedEnums.Attribute.boundToRemoteProperty) then
 			abstract[descendant.Name] = networkClient.ClientRemoteProperty.new(descendant)
 			continue
 		end
@@ -62,7 +62,7 @@ local function getNetworkFoldersFromParent(parent: Instance): { Folder }
 	local networkFolders = {}
 
 	for _, networkFolder in parent:GetChildren() do
-		if not networkFolder:GetAttribute(SharedConstants.attribute.networkFolder) then
+		if not networkFolder:GetAttribute(sharedEnums.Attribute.networkFolder) then
 			continue
 		end
 

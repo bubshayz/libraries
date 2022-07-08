@@ -15,16 +15,6 @@
 ]=]
 
 --[=[
-    @interface SignalConnection 
-    @within RemoteSignal    
-
-    .Disconnect () -> () 
-    .Connected boolean
-
-    For more information, see [SignalConnection](https://sleitnick.github.io/RbxUtil/api/Signal/#SignalConnection).
-]=]
-
---[=[
     @interface Middleware
     @within RemoteSignal
     .serverEvent { (client: Player, args: {any}) -> any }?,
@@ -114,8 +104,7 @@ local networkFolder = script.Parent.Parent
 local packages = networkFolder.Parent
 local utilities = networkFolder.utilities
 
-local SharedConstants = require(networkFolder.SharedConstants)
-local Signal = require(packages.Signal)
+local sharedEnums = require(networkFolder.sharedEnums)
 local Janitor = require(packages.Janitor)
 local t = require(packages.t)
 local tableUtil = require(utilities.tableUtil)
@@ -135,7 +124,6 @@ local RemoteSignal = { __index = {} }
 type Middleware = { serverEvent: { serverEvent: { () -> boolean } } }
 export type RemoteSignal = typeof(setmetatable(
 	{} :: {
-		_signal: any,
 		_janitor: any,
 		_remoteEvent: RemoteEvent,
 		_middleware: Middleware,
@@ -153,14 +141,13 @@ export type RemoteSignal = typeof(setmetatable(
 function RemoteSignal.new(middleware: Middleware?)
 	assert(t.optional(t.table)(middleware))
 
-	if middleware then
+	if middleware ~= nil then
 		assert(MiddlewareInterface(middleware))
 	end
 
 	middleware = tableUtil.reconcileDeep(middleware or getDefaultMiddleware(), MIDDLEWARE_TEMPLATE)
 
 	local self = setmetatable({
-		_signal = Signal.new(),
 		_janitor = Janitor.new(),
 		_middleware = middleware,
 	}, RemoteSignal)
@@ -179,27 +166,88 @@ end
 
 --[=[
     @tag RemoteSignal instance
-    @return SignalConnection
 
-    Works almost the same as [RemoteSignal:connectOnce], except the connection returned 
-    is disconnected automatically once `callback` is called.
+    Connects `callback` to the remote signal so that it is called whenever the client
+    fires the remote signal. Additionally, `callback` will be passed all the arguments sent 
+    by the client.
+
+    ```lua
+    -- Server
+    remoteSignal:connect(function(client, a, b)
+        print(a + b) --> 3
+    end)
+
+    -- Client
+    clientRemoteSignal:fireServer(1, 2)
+    ```
 ]=]
 
-function RemoteSignal.__index:connectOnce(callback: (...any) -> ()): any
-	return self._signal:ConnectOnce(callback)
+function RemoteSignal.__index:connect(callback: (...any) -> ()): RBXScriptConnection
+	local onServerEventConnection
+	onServerEventConnection = self._remoteEvent.OnServerEvent:Connect(function(...)
+		-- https://devforum.roblox.com/t/beta-deferred-lua-event-handling/1240569
+		if not onServerEventConnection.Connected then
+			return
+		end
+
+		if not self:_shouldInvocate(...) then
+			return
+		end
+
+		callback(...)
+	end)
+
+	return onServerEventConnection
 end
 
 --[=[
     @tag RemoteSignal instance
-    @return SignalConnection
 
-    Connects `callback` to the remote signal so that it is called whenever the client
-    fires the remote signal. Additionally, `callback` will be passed to all the arguments sent 
+    Connects `callback` to the remote signal so that it is called whenever the remote signal
+    is fired off by the client *successfully*. Additionally, `callback` will be passed all the arguments sent 
     by the client.
+
+    ```lua
+    -- Server
+    remoteSignal:connect(function(client, a, b)
+        print(a + b) --> 3
+    end)
+
+    -- Client
+    clientRemoteSignal:fireServer(1, 2)
+    ```
 ]=]
 
-function RemoteSignal.__index:connect(callback: (...any) -> ()): any
-	return self._signal:Connect(callback)
+--[=[
+    @tag RemoteSignal instance
+
+    Yields the current thread until the remote signal is *successfully* fired off by the client. 
+    The yielded thread is resumed once the client fires some data to the server *successfully*, 
+    with the arguments sent by the client.
+
+    ```lua
+    -- Server
+    local client, a, b = remoteSignal:wait()
+    print(a + b) --> 3
+
+    -- Client
+    clientRemoteSignal:fireServer(1, 2)
+    ```
+]=]
+
+function RemoteSignal.__index:wait(): ...any
+	local yieldedThread = coroutine.running()
+
+	task.defer(function()
+		-- TODO: Use ConnectOnce for better behavior, when it releases.
+		local remoteSignalConnection
+		remoteSignalConnection = self:connect(function(...)
+			remoteSignalConnection:Disconnect()
+			task.spawn(yieldedThread, ...)
+		end)
+	end)
+
+	return coroutine.yield()
 end
 
 --[=[
@@ -215,7 +263,8 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [RemoteSignal:fireClient] for every player in the game.
+    Calls [RemoteSignal:fireClient] for every player in the game, also 
+    passing in the arguments `...`.
 ]=]
 
 function RemoteSignal.__index:fireAllClients(...: any)
@@ -225,7 +274,8 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [RemoteSignal:fireClient] for every player in the `clients` table only.
+    Calls [RemoteSignal:fireClient] for every player in the `clients` table only, also 
+    passing in the arguments `...`.
 ]=]
 
 function RemoteSignal.__index:fireClients(clients: { Player }, ...: any)
@@ -237,7 +287,8 @@ end
 --[=[
     @tag RemoteSignal instance
 
-    Calls [RemoteSignal:fireClient] for every player in the game, except for `client`.
+    Calls [RemoteSignal:fireClient] for every player in the game, except for `client`, also 
+    passing in the arguments `...`.
 ]=]
 
 function RemoteSignal.__index:fireAllClientsExcept(client: Player, ...: any)
@@ -248,16 +299,6 @@ function RemoteSignal.__index:fireAllClientsExcept(client: Player, ...: any)
 
 		self._remoteEvent:FireClient(client, ...)
 	end
-end
-
---[=[
-    @tag RemoteSignal instance
-
-    Disconnects all connections connected via [RemoteSignal:connect] or [RemoteSignal:connectOnce].
-]=]
-
-function RemoteSignal.__index:disconnectAll()
-	self._signal:DisconnectAll()
 end
 
 --[=[
@@ -275,34 +316,28 @@ end
 ]=]
 
 function RemoteSignal.__index:dispatch(name: string, parent: Instance)
-	local remoteEvent = self._janitor:Add(Instance.new("RemoteEvent"))
-	remoteEvent.Name = name
-	remoteEvent:SetAttribute(SharedConstants.attribute.boundToRemoteSignal, true)
-	remoteEvent.Parent = parent
+	self._remoteEvent.Name = name
+	self._remoteEvent:SetAttribute(sharedEnums.Attribute.boundToRemoteSignal, true)
+	self._remoteEvent.Parent = parent
+end
 
-	remoteEvent.OnServerEvent:Connect(function(...)
-		local args = { ... }
+function RemoteSignal.__index:_shouldInvocate(...)
+	local args = { ... }
 
-		-- If there is an explicit false value included in the accumulated
-		-- response of all serverEvent callbacks, then that means we should
-		-- avoid this client's request to fire off the remote signal:
-		if
-			table.find(
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.serverEvent, args),
-				false
-			)
-		then
-			return
-		end
+	-- If there is an explicit false value included in the accumulated
+	-- response of all serverEvent callbacks, then that means we should
+	-- avoid this client's request to fire off the remote signal:
+	if
+		table.find(networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.serverEvent, args), false)
+	then
+		return false
+	end
 
-		self._signal:Fire(table.unpack(args))
-	end)
-
-	self._remoteEvent = remoteEvent
+	return true
 end
 
 function RemoteSignal.__index:_init()
-	self._janitor:Add(self._signal)
+	self._remoteEvent = self._janitor:Add(Instance.new("RemoteEvent"))
 	self._janitor:Add(function()
 		setmetatable(self, nil)
 	end)
