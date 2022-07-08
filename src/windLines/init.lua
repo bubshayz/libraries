@@ -70,13 +70,13 @@ local types = require(script.types)
 
 local WIND_POSITION_OFFSET = Vector3.new(0, 0.1, 0)
 local CAMERA_CEILING_Y_VECTOR = Vector3.new(0, 1000, 0)
-local DEFAULT_CONFIG = {
+
+local DefaultConfig = {
 	lifetime = 3,
 	direction = Vector3.xAxis,
 	speed = 6,
 	spawnRate = 25,
 }
-
 local ConfigInterface = t.strictInterface({
 	lifetime = t.integer,
 	direction = t.Vector3,
@@ -88,7 +88,6 @@ local ConfigInterface = t.strictInterface({
 local camera = Workspace.CurrentCamera
 local isStarted = false
 local isEffectStarted = false
-local heartbeatUpdateConnection
 
 local windLines = {
 	effectStarted = Signal.new(),
@@ -127,10 +126,9 @@ end
 
 function windLines.setConfig(newConfig: types.WindLinesConfig)
 	assert(not windLines.isStarted(), "Cannot configure windLines now as windLines is started!")
+	assert(t.table(newConfig))
 	assert(ConfigInterface(newConfig))
 
-	-- Copy over the new config to the current config as directly setting it will
-	-- cause an error since windLines is read only:
 	for key, value in newConfig do
 		windLines._config[key] = value
 	end
@@ -162,17 +160,15 @@ end
 ]=]
 
 function windLines.start()
-	assert(not windLines.isStarted(), "Cannot start wind lines effect again as it is already started!")
+	assert(not windLines.isStarted(), "windlines is already started!")
 
 	isStarted = true
-	windLines._startHeartbeatUpdate()
+	local heartbeatUpdateConnection = windLines._startHeartbeatUpdate()
 
 	windLines._janitor:Add(function()
 		isStarted = false
 		isEffectStarted = false
-	end)
 
-	windLines._janitor:Add(function()
 		local function updateQueueFinished()
 			heartbeatUpdateConnection:Disconnect()
 			windLines._updateQueueFinished:DisconnectAll()
@@ -191,7 +187,7 @@ end
 ]=]
 
 function windLines.stop()
-	assert(windLines.isStarted(), "Cannot stop wind lines effect as it is not started!")
+	assert(windLines.isStarted(), "windlines is not started!")
 
 	windLines._janitor:Cleanup()
 end
@@ -201,7 +197,7 @@ function windLines._startHeartbeatUpdate()
 	local config = windLines._config
 	local spawnRate = 1 / config.spawnRate
 
-	heartbeatUpdateConnection = RunService.Heartbeat:Connect(function()
+	return RunService.Heartbeat:Connect(function()
 		local clockNow = os.clock()
 		local isCameraUnderPart = Workspace:Raycast(
 			camera.CFrame.Position,
@@ -255,6 +251,6 @@ function windLines._startHeartbeatUpdate()
 	end)
 end
 
-windLines.setConfig(DEFAULT_CONFIG)
+windLines.setConfig(DefaultConfig)
 
 return table.freeze(windLines)
