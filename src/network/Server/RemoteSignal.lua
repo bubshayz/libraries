@@ -183,21 +183,30 @@ end
 ]=]
 
 function RemoteSignal.__index:connect(callback: (...any) -> ()): RBXScriptConnection
-	local onServerEventConnection
-	onServerEventConnection = self._remoteEvent.OnServerEvent:Connect(function(...)
-		-- https://devforum.roblox.com/t/beta-deferred-lua-event-handling/1240569
-		if not onServerEventConnection.Connected then
-			return
-		end
-
+	return self._remoteEvent.OnServerEvent:Connect(function(...)
 		if not self:_shouldInvocate(...) then
 			return
 		end
 
 		callback(...)
 	end)
+end
 
-	return onServerEventConnection
+--[=[
+	@tag RemoteSignal instance
+
+	Works almost exactly the same as [RemoteSignal:connect], except the 
+	connection returned is  disconnected immediately upon `callback` being called.
+]=]
+
+function RemoteSignal.__index:once(callback: (...any) -> ()): RBXScriptConnection
+	return self._remoteEvent.OnServerEvent:Once(function(...)
+		if not self:_shouldInvocate(...) then
+			return
+		end
+
+		callback(...)
+	end)
 end
 
 --[=[
@@ -238,13 +247,8 @@ end
 function RemoteSignal.__index:wait(): ...any
 	local yieldedThread = coroutine.running()
 
-	task.defer(function()
-		-- TODO: Use ConnectOnce for better behavior, when it releases.
-		local remoteSignalConnection
-		remoteSignalConnection = self:connect(function(...)
-			remoteSignalConnection:Disconnect()
-			task.spawn(yieldedThread, ...)
-		end)
+	self:once(function(...)
+		task.spawn(yieldedThread, ...)
 	end)
 
 	return coroutine.yield()

@@ -60,17 +60,18 @@ end
 ]=]
 
 function ClientRemoteSignal.__index:connect(callback: (...any) -> ()): RBXScriptConnection
-	local onClientEventConnection
-	onClientEventConnection = self._janitor:Add(self._remoteEvent.OnClientEvent:Connect(function(...)
-		-- https://devforum.roblox.com/t/beta-deferred-lua-event-handling/1240569
-		if not onClientEventConnection.Connected then
-			return
-		end
+	return self._janitor:Add(self._remoteEvent.OnClientEvent:Connect(callback))
+end
 
-		callback(...)
-	end))
+--[=[
+	@tag ClientRemoteSignal instance
 
-	return onClientEventConnection
+	Works almost exactly the same as [ClientRemoteSignal:connect], except the 
+	connection returned is  disconnected immediately upon `callback` being called.
+]=]
+
+function ClientRemoteSignal.__index:once(callback: (...any) -> ()): RBXScriptConnection
+	return self._janitor:Add(self._remoteEvent.OnClientEvent:Once(callback))
 end
 
 --[=[
