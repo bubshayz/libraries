@@ -149,7 +149,7 @@ end
     ```lua
     local property = Property.new()
 
-    property:Set(5)
+    property:set(5)
     print(property:get()) --> 5
     ```
 ]=]
