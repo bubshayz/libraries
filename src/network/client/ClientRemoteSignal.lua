@@ -81,7 +81,9 @@ end
 ]=]
 
 function ClientRemoteSignal.__index:once(callback: (...any) -> ()): RBXScriptConnection
-	return self._remoteEvent.OnClientEvent:Once(callback)
+	return self._janitor:Add(self._remoteEvent.OnClientEvent:Once(function(...)
+		callback(...)
+	end))
 end
 
 --[=[

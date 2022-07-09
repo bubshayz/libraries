@@ -208,7 +208,13 @@ end
 ]=]
 
 function RemoteSignal.__index:once(callback: (...any) -> ()): RBXScriptConnection
-	return self._remoteEvent.OnServerEvent:Once(callback)
+	return self._remoteEvent.OnServerEvent:Once(function(...)
+		if not self:_shouldInvocate(...) then
+			return
+		end
+
+		callback(...)
+	end)
 end
 
 --[=[
@@ -249,7 +255,7 @@ end
 function RemoteSignal.__index:wait(): ...any
 	local yieldedThread = coroutine.running()
 
-	self:connectOnce(function(...)
+	self:once(function(...)
 		task.spawn(yieldedThread, ...)
 	end)
 
