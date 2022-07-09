@@ -183,21 +183,13 @@ end
 ]=]
 
 function RemoteSignal.__index:connect(callback: (...any) -> ()): RBXScriptConnection
-	local onServerEventConnection
-	onServerEventConnection = self._remoteEvent.OnServerEvent:Connect(function(...)
-		-- https://devforum.roblox.com/t/beta-deferred-lua-event-handling/1240569
-		if not onServerEventConnection.Connected then
-			return
-		end
-
+	return self._remoteEvent.OnServerEvent:Connect(function(...)
 		if not self:_shouldInvocate(...) then
 			return
 		end
 
 		callback(...)
 	end)
-
-	return onServerEventConnection
 end
 
 --[=[

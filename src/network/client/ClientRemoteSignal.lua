@@ -60,17 +60,7 @@ end
 ]=]
 
 function ClientRemoteSignal.__index:connect(callback: (...any) -> ()): RBXScriptConnection
-	local onClientEventConnection
-	onClientEventConnection = self._janitor:Add(self._remoteEvent.OnClientEvent:Connect(function(...)
-		-- https://devforum.roblox.com/t/beta-deferred-lua-event-handling/1240569
-		if not onClientEventConnection.Connected then
-			return
-		end
-
-		callback(...)
-	end))
-
-	return onClientEventConnection
+	return self._janitor:Add(self._remoteEvent.OnClientEvent:Connect(callback))
 end
 
 --[=[
@@ -81,9 +71,7 @@ end
 ]=]
 
 function ClientRemoteSignal.__index:once(callback: (...any) -> ()): RBXScriptConnection
-	return self._janitor:Add(self._remoteEvent.OnClientEvent:Once(function(...)
-		callback(...)
-	end))
+	return self._janitor:Add(self._remoteEvent.OnClientEvent:Once(callback))
 end
 
 --[=[
