@@ -1,4 +1,10 @@
-## Unreleased
+## 2022-07-11
+
+### Changed
+
+- Fixed configuration settings within `windLines`.
+
+## 2022-07-9
 
 ### Added
 
