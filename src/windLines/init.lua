@@ -3,11 +3,12 @@
 --[=[
 	@interface WindLinesConfig  
 	@within windLines	
-	.lifetime number -- The life time of wind lines.
-	.direction Vector3 -- The direction of wind lines.
-	.speed number -- The speed at which wind lines move.
-	.spawnRate number -- The rate at which wind lines are created.
-	.raycastParams RaycastParams -- A `RaycastParams` object, to be used in determining if the player is under a roof or not.
+	.lifetime number? -- The life time of wind lines.
+	.direction Vector3? -- The direction of wind lines.
+	.speed number? -- The speed at which wind lines move.
+	.spawnRate number? -- The rate at which wind lines are created.
+	.raycastParams RaycastParams? -- A `RaycastParams` object, to be used in determining if the player is under a roof or not.
+
 	This is a config template, none of these members are required in the config table when configuring windLines through [windLines.SetConfig], however
 	the config table must not be empty!
 ]=]
@@ -76,13 +77,14 @@ local DefaultConfig = {
 	direction = Vector3.xAxis,
 	speed = 6,
 	spawnRate = 25,
+	raycastParams = RaycastParams.new(),
 }
 local ConfigInterface = t.strictInterface({
-	lifetime = t.integer,
-	direction = t.Vector3,
-	speed = t.integer,
-	spawnRate = t.integer,
-	raycastParams = t.RaycastParams,
+	lifetime = t.optional(t.integer),
+	direction = t.optional(t.Vector3),
+	speed = t.optional(t.integer),
+	spawnRate = t.optional(t.integer),
+	raycastParams = t.optional(t.RaycastParams),
 })
 
 local camera = Workspace.CurrentCamera
