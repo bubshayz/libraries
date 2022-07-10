@@ -1,3 +1,7 @@
+# libraries
+
+libraries is a collection of my open Roblox sourced modules. All of them can be *only* be installed through [Wally](https://wally.run), a package manager for Roblox. See [installation](https://bubshayz.github.io/libraries/docs/intro/) for more info.
+
 | Module | Dependency | Realm |
 | -- | -- | -- |
 | [Property](https://bubshayz.github.io/libraries/api/Property) | `Property = "bubshayz/property@1.1.2` | `shared` |
