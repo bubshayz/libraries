@@ -51,7 +51,7 @@ function matrixUtil.getMatchingRowsValue(matrix: { { any } }, depth: number?): a
 		depth = depth or #matrix[row]
 		local goalRowValue = matrix[row][1]
 
-		for index = 1, depth do
+		for index = 1, depth :: number do
 			local currentRowValue = matrix[row][index]
 
 			if currentRowValue ~= goalRowValue then
@@ -106,7 +106,7 @@ function matrixUtil.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: 
 	-- matrix:
 	local goalColumnValue = matrix[1][1]
 
-	for index = 1, depth do
+	for index = 1, depth :: number do
 		local currentColumnValue = matrix[index][index]
 
 		if currentColumnValue ~= goalColumnValue then
@@ -122,7 +122,7 @@ function matrixUtil.getMatchingDiagonalColumnsValue(matrix: { { any } }, depth: 
 	-- from a column that matches with the rest of the diagonal columns in the matrix:
 	goalColumnValue = matrix[1][#matrix[1]]
 
-	for index = 1, depth do
+	for index = 1, depth :: number do
 		local currentColumnValue = matrix[index][#matrix[index] - (index - 1)]
 
 		if currentColumnValue ~= goalColumnValue then
@@ -170,10 +170,10 @@ function matrixUtil.getMatchingColumnsValue(matrix: { { any } }, depth: number?)
 
 	-- Search the matrix column wise and return a value from a
 	-- column in the matrix which matches with the rest of the columns:
-	for index = 1, depth do
+	for index = 1, depth :: number do
 		local goalColumnValue = matrix[1][index]
 
-		for row = 1, depth do
+		for row = 1, depth :: number do
 			local currentColumnValue = matrix[row][index]
 
 			if currentColumnValue ~= goalColumnValue then

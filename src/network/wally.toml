@@ -3,13 +3,13 @@ name = "bubshayz/network"
 description = "An advanced network module for easy server-client communication."
 authors = ["bubshayz"]
 license = "MIT"
-version = "4.2.0"
+version = "4.3.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
 [dependencies]
 Signal = "sleitnick/signal@1.2.0"
-Property = "bubshayz/property@1.1.2"
+Property = "bubshayz/property@1.2.0"
 Promise = "evaera/promise@4"
 Janitor = "howmanysmall/janitor@1.14.1"
 t = "osyrisrblx/t@3.0.0"

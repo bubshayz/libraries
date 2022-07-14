@@ -67,7 +67,6 @@ local Signal = require(script.Parent.Signal)
 local WindLine = require(script.WindLine)
 local Janitor = require(script.Parent.Janitor)
 local t = require(script.Parent.t)
-local types = require(script.types)
 
 local WIND_POSITION_OFFSET = Vector3.new(0, 0.1, 0)
 local CAMERA_CEILING_Y_VECTOR = Vector3.new(0, 1000, 0)
@@ -100,6 +99,13 @@ local windLines = {
 	_config = {},
 }
 
+type WindLinesConfig = {
+	lifetime: number?,
+	direction: number?,
+	speed: number?,
+	spawnRate: number?,
+	raycastParams: RaycastParams?,
+}
 --[=[
 	Returns a boolean indicating if the wind lines **effect** is started.
 ]=]
@@ -126,12 +132,12 @@ end
 	:::
 ]=]
 
-function windLines.setConfig(newConfig: types.WindLinesConfig)
+function windLines.setConfig(newConfig: WindLinesConfig)
 	assert(not windLines.isStarted(), "Cannot configure windLines now as windLines is started!")
 	assert(t.table(newConfig))
 	assert(ConfigInterface(newConfig))
 
-	for key, value in newConfig do
+	for key, value in newConfig :: { [string]: any } do
 		windLines._config[key] = value
 	end
 end

@@ -2,7 +2,7 @@ local PhysicsService = game:GetService("PhysicsService")
 local Workspace = game:GetService("Workspace")
 
 local DEFAULT_PHYSICS_COLLISION_GROUP = "Default"
-local DEFAULT_INSTANCE_PHYSICAL_PROPERTIES = PhysicalProperties.new(1)
+local DEFAULT_INSTANCE_PHYSICAL_PROPERTIES = PhysicalProperties.new(Enum.Material.Plastic)
 local VOXEL_GRID_RESOLUTION = 4
 local DEFAULT_DEPTH = 0.01
 
@@ -236,7 +236,7 @@ function instanceUtil.getInstanceFloorMaterial(
 		return Enum.Material.Water
 	end
 
-	local groundInstanceMaterial = instanceUtil._getGroundInstanceMaterial(instance, raycastParams, depth)
+	local groundInstanceMaterial = instanceUtil._getGroundInstanceMaterial(instance, raycastParams, depth :: number)
 
 	if groundInstanceMaterial then
 		return groundInstanceMaterial
@@ -273,7 +273,7 @@ end
     ::: 
 ]=]
 
-function instanceUtil.getInstanceNetworkOwner(instance: BasePart): Player?
+function instanceUtil.getInstanceNetworkOwner(instance: BasePart): Instance?
 	if instance:IsGrounded() then
 		return nil
 	end
@@ -282,7 +282,7 @@ function instanceUtil.getInstanceNetworkOwner(instance: BasePart): Player?
 end
 
 function instanceUtil._getGroundInstanceMaterial(
-	instance: Instance,
+	instance: BasePart,
 	raycastParams: RaycastParams?,
 	depth: number
 ): EnumItem?
@@ -291,11 +291,8 @@ function instanceUtil._getGroundInstanceMaterial(
 
 	for index, cornerPosition in corners.top do
 		local bottomCornerPosition = corners.bottom[index]
-		local ray = Workspace:Raycast(
-			cornerPosition,
-			(bottomCornerPosition - cornerPosition) - depthVector,
-			raycastParams
-		)
+		local ray =
+			Workspace:Raycast(cornerPosition, (bottomCornerPosition - cornerPosition) - depthVector, raycastParams)
 
 		if ray then
 			return ray.Material
