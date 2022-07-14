@@ -6,3 +6,4 @@ package.json
 stylua.toml
 .moonwave
 aftman.toml
+sourcemap.json
