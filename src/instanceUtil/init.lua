@@ -2,7 +2,7 @@ local PhysicsService = game:GetService("PhysicsService")
 local Workspace = game:GetService("Workspace")
 
 local DEFAULT_PHYSICS_COLLISION_GROUP = "Default"
-local DEFAULT_INSTANCE_PHYSICAL_PROPERTIES = PhysicalProperties.new(Enum.Material.Plastic)
+local DEFAULT_INSTANCE_PHYSICAL_PROPERTIES = PhysicalProperties.new(1)
 local VOXEL_GRID_RESOLUTION = 4
 local DEFAULT_DEPTH = 0.01
 
@@ -230,7 +230,9 @@ function instanceUtil.getInstanceFloorMaterial(
 	raycastParams: RaycastParams?,
 	depth: number?
 ): EnumItem
-	depth = depth or DEFAULT_DEPTH
+	if depth == nil then
+		depth = DEFAULT_DEPTH
+	end
 
 	if instanceUtil._isInstanceInWater(instance) then
 		return Enum.Material.Water

@@ -38,6 +38,11 @@ local Signal = require(script.Parent.Signal)
 
 local Property = { __index = {} }
 
+export type Property = typeof(setmetatable({} :: {
+	updated: any,
+	_value: any,
+}, Property))
+
 --[=[
     @return Property
 
@@ -45,7 +50,7 @@ local Property = { __index = {} }
     of the property.
 ]=]
 
-function Property.new(initialValue: any): Property
+function Property.new(initialValue: any)
 	return setmetatable({
 		updated = Signal.new(),
 		_value = initialValue,
@@ -172,10 +177,5 @@ end
 function Property:__tostring()
 	return ("[Property]: (%s)"):format(tostring(self._value))
 end
-
-export type Property = typeof(setmetatable({} :: {
-	updated: any,
-	_value: any,
-}, Property))
 
 return table.freeze(Property)

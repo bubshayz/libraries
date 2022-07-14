@@ -385,7 +385,7 @@ function NetworkServer.__index:_setupRemoteObject(
 	value:dispatch(key, self._networkFolder)
 
 	self._janitor:Add(function()
-		-- Destroy the remote property or remote signal if it already isn't
+		-- Destroy the remote property/remote signal if it already isn't
 		-- destroyed yet, to avoid memory leaks:
 		if not RemoteProperty.is(value) or not RemoteSignal.is(value) then
 			return

@@ -58,7 +58,7 @@ export type Queue = typeof(setmetatable({} :: {
     A constructor method that creates a new queue object.
 ]=]
 
-function Queue.new(): Queue
+function Queue.new()
 	return setmetatable({
 		progressed = Signal.new(),
 		_promises = {},

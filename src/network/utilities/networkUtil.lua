@@ -34,11 +34,11 @@ function networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(callbacks: { 
 		table.insert(accumulatedResponses, callbackResponse)
 	end
 
-	return accumulatedResponses
+	return table.freeze(accumulatedResponses)
 end
 
 function networkUtil.truncateAccumulatedResponses(accumulatedResponses: { any }): any
 	return if #accumulatedResponses > 1 then accumulatedResponses else accumulatedResponses[1]
 end
 
-return networkUtil
+return table.freeze(networkUtil)
