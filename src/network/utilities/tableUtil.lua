@@ -1,6 +1,6 @@
 local tableUtil = {}
 
-function tableUtil.deepCopy(tabl)
+function tableUtil.deepCopy(tabl: { [any]: any }): { [any]: any }
 	local deepCopiedTable = {}
 
 	for key, value in tabl do
@@ -10,7 +10,7 @@ function tableUtil.deepCopy(tabl)
 	return deepCopiedTable
 end
 
-function tableUtil.reconcileDeep(tabl, template)
+function tableUtil.reconcileDeep(tabl: { [any]: any }, template: { [any]: any }): { [any]: any }
 	local reconciled = tableUtil.deepCopy(tabl)
 
 	for key, value in template do
@@ -20,11 +20,10 @@ function tableUtil.reconcileDeep(tabl, template)
 			tablValue = tableUtil.reconcileDeep(tablValue, template[key])
 		end
 
-		reconciled[key] = tablValue
-			or if typeof(value) == "table" then tableUtil.deepCopy(value) else value
+		reconciled[key] = tablValue or if typeof(value) == "table" then tableUtil.deepCopy(value) else value
 	end
 
 	return reconciled
 end
 
-return tableUtil
+return table.freeze(tableUtil)

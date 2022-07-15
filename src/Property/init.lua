@@ -38,6 +38,11 @@ local Signal = require(script.Parent.Signal)
 
 local Property = { __index = {} }
 
+export type Property = typeof(setmetatable({} :: {
+	updated: any,
+	_value: any,
+}, Property))
+
 --[=[
     @return Property
 
@@ -95,7 +100,7 @@ end
 --[=[
     @tag Property Instance
 
-    Works the same as [Property:set] except that tables aren't checked for equality, e.g:
+    Works the same as [Property:set] except that tables aren't checked for equality, for e.g:
 
     ```lua
     local property = Property.new()
@@ -172,10 +177,5 @@ end
 function Property:__tostring()
 	return ("[Property]: (%s)"):format(tostring(self._value))
 end
-
-export type Property = typeof(setmetatable({} :: {
-	updated: any,
-	_value: any,
-}, Property))
 
 return table.freeze(Property)

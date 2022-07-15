@@ -14,4 +14,4 @@ Players.PlayerRemoving:Connect(function(player)
 	table.remove(tracker._players, table.find(tracker._players, player))
 end)
 
-return tracker
+return table.freeze(tracker)

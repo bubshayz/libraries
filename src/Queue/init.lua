@@ -136,7 +136,7 @@ end
     :::tip
     The promise returned will be canceled if [Queue:emptyQueue] is called, but 
     you can also manually  just cancel the promise to effectively remove the 
-    added callback from the queue, e.g:
+    added callback from the queue, for e.g:
 
     ```lua
     local queue = Queue.new()

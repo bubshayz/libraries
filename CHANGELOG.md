@@ -1,3 +1,9 @@
+## 2022-07-14
+
+### Changed
+
+- Improved Luau types within most libraries.
+
 ## 2022-07-11
 
 ### Changed

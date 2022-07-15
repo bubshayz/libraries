@@ -129,7 +129,10 @@ end
     ```
 ]=]
 
-function instanceUtil.setInstancePhysicalProperties(instance: Instance, physicalProperties: PhysicalProperties)
+function instanceUtil.setInstancePhysicalProperties(
+	instance: Instance,
+	physicalProperties: PhysicalProperties
+)
 	if instance:IsA("BasePart") then
 		instance.CustomPhysicalProperties = physicalProperties
 	else
@@ -184,7 +187,9 @@ end
     Returns a read-only dictionary of all corners of `instance`, top and bottom.
 ]=]
 
-function instanceUtil.getInstanceCorners(instance: BasePart): { top: { Vector3 }, bottom: { Vector3 } }
+function instanceUtil.getInstanceCorners(
+	instance: BasePart
+): { top: { Vector3 }, bottom: { Vector3 } }
 	local size = instance.Size
 
 	local frontFaceCenter = (instance.CFrame + instance.CFrame.LookVector * size.Z / 2)
@@ -230,13 +235,16 @@ function instanceUtil.getInstanceFloorMaterial(
 	raycastParams: RaycastParams?,
 	depth: number?
 ): EnumItem
-	depth = depth or DEFAULT_DEPTH
+	if depth == nil then
+		depth = DEFAULT_DEPTH
+	end
 
 	if instanceUtil._isInstanceInWater(instance) then
 		return Enum.Material.Water
 	end
 
-	local groundInstanceMaterial = instanceUtil._getGroundInstanceMaterial(instance, raycastParams, depth)
+	local groundInstanceMaterial =
+		instanceUtil._getGroundInstanceMaterial(instance, raycastParams, depth :: number)
 
 	if groundInstanceMaterial then
 		return groundInstanceMaterial
@@ -273,7 +281,7 @@ end
     ::: 
 ]=]
 
-function instanceUtil.getInstanceNetworkOwner(instance: BasePart): Player?
+function instanceUtil.getInstanceNetworkOwner(instance: BasePart): Instance?
 	if instance:IsGrounded() then
 		return nil
 	end
@@ -282,7 +290,7 @@ function instanceUtil.getInstanceNetworkOwner(instance: BasePart): Player?
 end
 
 function instanceUtil._getGroundInstanceMaterial(
-	instance: Instance,
+	instance: BasePart,
 	raycastParams: RaycastParams?,
 	depth: number
 ): EnumItem?
@@ -309,7 +317,8 @@ function instanceUtil._isInstanceInWater(instance: BasePart): boolean
 	local halfSize = instance.Size / 2
 
 	return Workspace.Terrain:ReadVoxels(
-		Region3.new(instance.Position - halfSize, instance.Position + halfSize):ExpandToGrid(VOXEL_GRID_RESOLUTION),
+		Region3.new(instance.Position - halfSize, instance.Position + halfSize)
+			:ExpandToGrid(VOXEL_GRID_RESOLUTION),
 		VOXEL_GRID_RESOLUTION
 	)[1][1][1] == Enum.Material.Water
 end

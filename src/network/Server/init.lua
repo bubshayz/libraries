@@ -2,7 +2,7 @@
     @class NetworkServer
     @server
 
-    The server counterpart of the [network] module.
+    The server counterpart of [network].
 ]=]
 
 --[=[ 
@@ -106,7 +106,7 @@
     other callbacks will not be affected.
     :::
     
-    :::tip Additional `methodResponse` argument
+    :::tip 
     A third argument i.e `methodResponse` is passed to each callback as well, which is just the response of the method called. For e.g:
 
     ```lua
@@ -344,7 +344,10 @@ end
 ]=]
 
 function NetworkServer.__index:append(key: string, value: any)
-	assert(not self:isDispatched(), "Cannot append key value pair as network object is dispatched to the client!")
+	assert(
+		not self:isDispatched(),
+		"Cannot append key value pair as network object is dispatched to the client!"
+	)
 	assert(t.string(key))
 
 	self:_setup(key, value)
@@ -385,7 +388,7 @@ function NetworkServer.__index:_setupRemoteObject(
 	value:dispatch(key, self._networkFolder)
 
 	self._janitor:Add(function()
-		-- Destroy the remote property or remote signal if it already isn't
+		-- Destroy the remote property/remote signal if it already isn't
 		-- destroyed yet, to avoid memory leaks:
 		if not RemoteProperty.is(value) or not RemoteSignal.is(value) then
 			return
@@ -411,7 +414,11 @@ function NetworkServer.__index:_setup(key: string, value: any)
 
 		if typeof(value) == "function" then
 			local methodCallInboundMiddlewareAccumulatedResponses =
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.methodCallInbound, key, args)
+				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+					self._middleware.methodCallInbound,
+					key,
+					args
+				)
 
 			-- If there is an explicit false value included in the accumulated
 			-- the response of all inbound method callbacks, then that means we should
@@ -424,14 +431,15 @@ function NetworkServer.__index:_setup(key: string, value: any)
 			end
 
 			local methodResponse = value(table.unpack(args))
-			local methodCallOutboundMiddlewareAccumulatedResponses = networkUtil.truncateAccumulatedResponses(
-				networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
-					self._middleware.methodCallOutbound,
-					key,
-					args,
-					methodResponse
+			local methodCallOutboundMiddlewareAccumulatedResponses =
+				networkUtil.truncateAccumulatedResponses(
+					networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+						self._middleware.methodCallOutbound,
+						key,
+						args,
+						methodResponse
+					)
 				)
-			)
 
 			return if methodCallOutboundMiddlewareAccumulatedResponses ~= nil
 				then methodCallOutboundMiddlewareAccumulatedResponses
