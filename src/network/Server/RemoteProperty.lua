@@ -173,7 +173,7 @@ end
     Creates and returns a new remote property with the value of `initialValue`.
 ]=]
 
-function RemoteProperty.new(initialValue: any, middleware: Middleware?)
+function RemoteProperty.new(initialValue: any, middleware: Middleware?): RemoteProperty
 	assert(t.optional(t.table)(middleware))
 
 	if middleware ~= nil then

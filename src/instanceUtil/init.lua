@@ -129,7 +129,10 @@ end
     ```
 ]=]
 
-function instanceUtil.setInstancePhysicalProperties(instance: Instance, physicalProperties: PhysicalProperties)
+function instanceUtil.setInstancePhysicalProperties(
+	instance: Instance,
+	physicalProperties: PhysicalProperties
+)
 	if instance:IsA("BasePart") then
 		instance.CustomPhysicalProperties = physicalProperties
 	else
@@ -184,7 +187,9 @@ end
     Returns a read-only dictionary of all corners of `instance`, top and bottom.
 ]=]
 
-function instanceUtil.getInstanceCorners(instance: BasePart): { top: { Vector3 }, bottom: { Vector3 } }
+function instanceUtil.getInstanceCorners(
+	instance: BasePart
+): { top: { Vector3 }, bottom: { Vector3 } }
 	local size = instance.Size
 
 	local frontFaceCenter = (instance.CFrame + instance.CFrame.LookVector * size.Z / 2)
@@ -238,7 +243,8 @@ function instanceUtil.getInstanceFloorMaterial(
 		return Enum.Material.Water
 	end
 
-	local groundInstanceMaterial = instanceUtil._getGroundInstanceMaterial(instance, raycastParams, depth :: number)
+	local groundInstanceMaterial =
+		instanceUtil._getGroundInstanceMaterial(instance, raycastParams, depth :: number)
 
 	if groundInstanceMaterial then
 		return groundInstanceMaterial
@@ -293,8 +299,11 @@ function instanceUtil._getGroundInstanceMaterial(
 
 	for index, cornerPosition in corners.top do
 		local bottomCornerPosition = corners.bottom[index]
-		local ray =
-			Workspace:Raycast(cornerPosition, (bottomCornerPosition - cornerPosition) - depthVector, raycastParams)
+		local ray = Workspace:Raycast(
+			cornerPosition,
+			(bottomCornerPosition - cornerPosition) - depthVector,
+			raycastParams
+		)
 
 		if ray then
 			return ray.Material
@@ -308,7 +317,8 @@ function instanceUtil._isInstanceInWater(instance: BasePart): boolean
 	local halfSize = instance.Size / 2
 
 	return Workspace.Terrain:ReadVoxels(
-		Region3.new(instance.Position - halfSize, instance.Position + halfSize):ExpandToGrid(VOXEL_GRID_RESOLUTION),
+		Region3.new(instance.Position - halfSize, instance.Position + halfSize)
+			:ExpandToGrid(VOXEL_GRID_RESOLUTION),
 		VOXEL_GRID_RESOLUTION
 	)[1][1][1] == Enum.Material.Water
 end

@@ -113,7 +113,8 @@ local tracker = require(utilities.tracker)
 
 local MIDDLEWARE_TEMPLATE = { serverEvent = {} }
 
-local MiddlewareInterface = t.optional(t.strictInterface({ serverEvent = t.optional(t.array(t.callback)) }))
+local MiddlewareInterface =
+	t.optional(t.strictInterface({ serverEvent = t.optional(t.array(t.callback)) }))
 
 local function getDefaultMiddleware()
 	return tableUtil.deepCopy(MIDDLEWARE_TEMPLATE)
@@ -138,7 +139,7 @@ export type RemoteSignal = typeof(setmetatable(
     Creates and returns a new remote signal.
 ]=]
 
-function RemoteSignal.new(middleware: Middleware?)
+function RemoteSignal.new(middleware: Middleware?): RemoteSignal
 	assert(t.optional(t.table)(middleware))
 
 	if middleware ~= nil then
@@ -332,7 +333,13 @@ function RemoteSignal.__index:_shouldInvocate(...)
 	-- response of all serverEvent callbacks, then that means we should
 	-- avoid this client's request to fire off the remote signal:
 	if
-		table.find(networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(self._middleware.serverEvent, args), false)
+		table.find(
+			networkUtil.getAccumulatedResponseFromMiddlewareCallbacks(
+				self._middleware.serverEvent,
+				args
+			),
+			false
+		)
 	then
 		return false
 	end

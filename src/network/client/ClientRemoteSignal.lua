@@ -32,7 +32,7 @@ export type ClientRemoteSignal = typeof(setmetatable(
 	@private
 ]=]
 
-function ClientRemoteSignal.new(remoteEvent: RemoteEvent)
+function ClientRemoteSignal.new(remoteEvent: RemoteEvent): ClientRemoteSignal
 	local self = setmetatable({
 		_remoteEvent = remoteEvent,
 		_janitor = Janitor.new(),

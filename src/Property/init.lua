@@ -50,7 +50,7 @@ export type Property = typeof(setmetatable({} :: {
     of the property.
 ]=]
 
-function Property.new(initialValue: any)
+function Property.new(initialValue: any): Property
 	return setmetatable({
 		updated = Signal.new(),
 		_value = initialValue,
