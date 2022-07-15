@@ -12,7 +12,6 @@ favicon = "/icon.ico"
 style = "dark"
 copyright = "Copyright © 2022 bubshayz. Built with Moonwave and Docusaurus"
 
-
 [[classOrder]]
 section = "network"
 classes = ["network", "NetworkServer", "RemoteProperty", "RemoteSignal",  "networkClient", "ClientRemoteProperty", "ClientRemoteSignal"]
@@ -23,7 +22,7 @@ description = "Speed up your development progress by using already battle tested
 
 [[home.features]]
 title = "Better Productivity"
-description = "Each module is actively maintained - you don't have to worry about any lack of updates or bug fixes, instead focus on writing code peacefully and increase productivity!"
+description = "Each module is actively maintained, so focus on writing code and releasing projects quicker!"
 
 [[home.features]]
 title = "Reusuability & Efficiency"

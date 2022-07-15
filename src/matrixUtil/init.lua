@@ -2,7 +2,7 @@
     @class matrixUtil
 
     A utility module for working with matrixes. A matrix is simply an array 
-    consisting of arrays, e.g:
+    consisting of arrays, for e.g:
 
     ```lua
     local matrix = {

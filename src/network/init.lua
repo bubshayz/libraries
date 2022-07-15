@@ -1,7 +1,7 @@
 --[=[
 	@class network
 
-	An advanced network module for easy server-client communication. 
+	A simple yet incredibly useful network module which simplifies and extends server-client communication.
 
 	```lua
 	local Workspace = game:GetService("Workspace")

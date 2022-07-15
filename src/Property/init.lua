@@ -100,7 +100,7 @@ end
 --[=[
     @tag Property Instance
 
-    Works the same as [Property:set] except that tables aren't checked for equality, e.g:
+    Works the same as [Property:set] except that tables aren't checked for equality, for e.g:
 
     ```lua
     local property = Property.new()
