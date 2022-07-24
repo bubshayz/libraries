@@ -10,7 +10,7 @@ libraries is a collection of my open Roblox sourced modules. All of them can be 
 | [windLines](https://bubshayz.github.io/libraries/api/windLines) | `windLines = "bubshayz/windlines@1.4.0"` | `shared` |
 | [matrixUtil](https://bubshayz.github.io/libraries/api/matrixUtil) | `matrixUtil = "bubshayz/matrixutil@1.2.0"` | `shared` |
 | [instanceUtil](https://bubshayz.github.io/libraries/api/InstanceUtil) | `InstanceUtil = "bubshayz/instanceutil@1.2.0"` | `shared` |
-| [numberUtil](https://bubshayz.github.io/libraries/api/numberUtil) | `numberUtil = "bubshayz/numberutil@1.2.0"` | `shared` |
+| [numberUtil](https://bubshayz.github.io/libraries/api/numberUtil) | `numberUtil = "bubshayz/numberutil@1.2.1"` | `shared` |
 
 ## License notice
 
