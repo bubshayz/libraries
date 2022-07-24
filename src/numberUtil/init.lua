@@ -144,9 +144,15 @@ end
     ```lua
     print(numberUtil.suffix(1650)) --> "1.65K"
     ```
+
+    Additionally, if `number` is lower than `1`, then this method will just return `number` (stringified).
 ]=]
 
 function numberUtil.suffix(number: number): string
+	if number < 1 then
+		return tostring(number)
+	end
+
 	local formattedNumberSuffix = math.floor(math.log(number, 1e3))
 
 	return ("%.2f"):format(number / math.pow(10, formattedNumberSuffix * 3)):gsub("%.?0+$", "")
@@ -185,7 +191,13 @@ end
     ```
 ]=]
 
-function numberUtil.map(number: number, inMin: number, inMax: number, outMin: number, outMax: number): number
+function numberUtil.map(
+	number: number,
+	inMin: number,
+	inMax: number,
+	outMin: number,
+	outMax: number
+): number
 	return outMin + ((outMax - outMin) * ((number - inMin) / (inMax - inMin)))
 end
 
